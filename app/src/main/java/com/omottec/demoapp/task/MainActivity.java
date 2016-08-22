@@ -1,5 +1,6 @@
 package com.omottec.demoapp.task;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -99,11 +100,22 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv:
-                startWelcomeActivity();
+                startExternalActivity();
+//                startWelcomeActivity();
                 break;
             case R.id.tv1:
                 startSelf();
                 break;
         }
+    }
+
+    private void startExternalActivity() {
+//        Intent intent = new Intent("com.omottec.demoapp1.action.MAIN");
+        Intent intent = new Intent("com.omottec.demoapp1.action.WELCOM");
+
+//        Intent intent = new Intent();
+//        ComponentName componentName = new ComponentName("com.omottec.demoapp1", "com.omottec.demoapp1.task.MainActivity");
+//        intent.setComponent(componentName);
+        startActivity(intent);
     }
 }
