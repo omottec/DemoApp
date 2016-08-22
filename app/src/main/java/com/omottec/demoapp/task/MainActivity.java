@@ -93,6 +93,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void startWelcomeActivity() {
         Intent intent = new Intent(this, WelcomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -100,8 +101,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv:
-                startExternalActivity();
-//                startWelcomeActivity();
+//                startExternalActivity();
+                startWelcomeActivity();
                 break;
             case R.id.tv1:
                 startSelf();
@@ -110,8 +111,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void startExternalActivity() {
-//        Intent intent = new Intent("com.omottec.demoapp1.action.MAIN");
-        Intent intent = new Intent("com.omottec.demoapp1.action.WELCOM");
+        Intent intent = new Intent("com.omottec.demoapp1.action.MAIN");
+//        Intent intent = new Intent("com.omottec.demoapp1.action.WELCOM");
 
 //        Intent intent = new Intent();
 //        ComponentName componentName = new ComponentName("com.omottec.demoapp1", "com.omottec.demoapp1.task.MainActivity");
