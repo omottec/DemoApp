@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import com.omottec.demoapp.fragment.BuildConfigFragment;
 import com.omottec.demoapp.fragment.MemoryFragment;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
+import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.fragment.SimpleFragment;
 import com.omottec.demoapp.fragment.SmartBarFragment;
 
@@ -16,6 +17,8 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new MultiProcessFragment();
+
+
+        return new ScaleTypeFragment();
     }
 }
