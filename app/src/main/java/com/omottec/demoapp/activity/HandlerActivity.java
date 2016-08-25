@@ -15,7 +15,7 @@ import com.omottec.demoapp.R;
  * Created by qinbingbing on 4/30/16.
  */
 public class HandlerActivity extends FragmentActivity {
-    public static final String TAG = "HandlerActivity";
+    public static final String TAG = "s";
     private Handler mUiHandler;
     private HandlerThread mHandlerThread = new HandlerThread(TAG);
     private Handler mHandler;
