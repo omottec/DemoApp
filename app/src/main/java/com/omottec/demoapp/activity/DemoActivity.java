@@ -2,6 +2,7 @@ package com.omottec.demoapp.activity;
 
 import android.support.v4.app.Fragment;
 
+import com.omottec.demoapp.fragment.PropertyAnimMoveViewFragment;
 import com.omottec.demoapp.fragment.ScrollerImageViewFragment;
 import com.omottec.demoapp.fragment.ScrollerTextViewFragment;
 
@@ -15,6 +16,6 @@ public class DemoActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
 
 
-        return new ScrollerTextViewFragment();
+        return new PropertyAnimMoveViewFragment();
     }
 }
