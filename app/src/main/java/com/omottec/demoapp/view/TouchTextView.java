@@ -38,7 +38,7 @@ public class TouchTextView extends TextView {
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(Tag.TOUCH, "TouchTextView.onTouchEvent "
                 + TouchUtils.getTouchEventAction(event));
-        return super.onTouchEvent(event);
-//        return true;
+//        return super.onTouchEvent(event);
+        return true;
     }
 }

@@ -13,6 +13,7 @@ import com.omottec.demoapp.utils.TouchUtils;
  * Created by qinbingbing on 8/25/16.
  */
 public class TouchRelativeLayout extends RelativeLayout {
+    private int mCount;
 
     public TouchRelativeLayout(Context context) {
         super(context);
@@ -45,7 +46,8 @@ public class TouchRelativeLayout extends RelativeLayout {
             case MotionEvent.ACTION_DOWN:
                 return false;
             case MotionEvent.ACTION_MOVE:
-                return true;
+                Log.d(Tag.TOUCH, "mCount:" + mCount);
+                return mCount++ % 2 == 0;
             case MotionEvent.ACTION_UP:
                 return false;
             default:
