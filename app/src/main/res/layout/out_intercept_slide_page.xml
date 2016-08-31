@@ -7,10 +7,10 @@
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <ListView
+    <com.omottec.demoapp.view.OutInterceptListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+    </com.omottec.demoapp.view.OutInterceptListView>
 </LinearLayout>

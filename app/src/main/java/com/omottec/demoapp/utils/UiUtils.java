@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 
@@ -125,5 +126,33 @@ public final class UiUtils {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    public static String getMeasureSpecMode(int measureSpec) {
+        switch (View.MeasureSpec.getMode(measureSpec)) {
+            case View.MeasureSpec.EXACTLY:
+                return "MeasureSpec.EXACTLY";
+            case View.MeasureSpec.AT_MOST:
+                return "MeasureSpec.AT_MOST";
+            case View.MeasureSpec.UNSPECIFIED:
+                return "MeasureSpec.UNSPECIFIED";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public static String getMeasureSpecModeAndSize(int measureSpec) {
+        int mode = View.MeasureSpec.getMode(measureSpec);
+        int size = View.MeasureSpec.getSize(measureSpec);
+        switch (mode) {
+            case View.MeasureSpec.EXACTLY:
+                return "MeasureSpec.EXACTLY:" + size;
+            case View.MeasureSpec.AT_MOST:
+                return "MeasureSpec.AT_MOST:" + size;
+            case View.MeasureSpec.UNSPECIFIED:
+                return "MeasureSpec.UNSPECIFIED:" + size;
+            default:
+                return "Unknown";
+        }
     }
 }

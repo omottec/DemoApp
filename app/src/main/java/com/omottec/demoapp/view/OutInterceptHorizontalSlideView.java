@@ -1,6 +1,7 @@
 package com.omottec.demoapp.view;
 
 import android.content.Context;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -10,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Scroller;
 
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.io.IoUtils;
 import com.omottec.demoapp.utils.TouchUtils;
+import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by qinbingbing on 8/30/16.
  */
-public class HorizontalSlideView extends ViewGroup {
+public class OutInterceptHorizontalSlideView extends ViewGroup {
     private int mChildWidth;
     private float mLastX;
     private float mLastY;
@@ -25,17 +28,17 @@ public class HorizontalSlideView extends ViewGroup {
     private VelocityTracker mTracker;
     private int mChildIndex;
 
-    public HorizontalSlideView(Context context) {
+    public OutInterceptHorizontalSlideView(Context context) {
         super(context);
         init();
     }
 
-    public HorizontalSlideView(Context context, AttributeSet attrs) {
+    public OutInterceptHorizontalSlideView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public HorizontalSlideView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public OutInterceptHorizontalSlideView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -47,12 +50,15 @@ public class HorizontalSlideView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d(Tag.MEASURE, "OutInterceptHorizontalSlideView.onMeasure uiThread:" + (Looper.myLooper() == Looper.getMainLooper()));
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        Log.d(Tag.MEASURE, "widthMeasureSpec:" + UiUtils.getMeasureSpecModeAndSize(widthMeasureSpec));
+        Log.d(Tag.MEASURE, "heightMeasureSpec:" + UiUtils.getMeasureSpecModeAndSize(heightMeasureSpec));
         int childCount = getChildCount();
         if (childCount == 0) {
             setMeasuredDimension(0, 0);
@@ -68,6 +74,7 @@ public class HorizontalSlideView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d(Tag.MEASURE, "OutInterceptHorizontalSlideView.onLayout uiThread:" + (Looper.myLooper() == Looper.getMainLooper()));
         int leftOffset = 0;
         int childCount = getChildCount();
         View child;
@@ -82,9 +89,18 @@ public class HorizontalSlideView extends ViewGroup {
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(Tag.SLIDE, "OutInterceptHorizontalSlideView.dispatchTouchEvent "
+                + TouchUtils.getTouchEventAction(ev));
+        boolean handled = super.dispatchTouchEvent(ev);
+        Log.d(Tag.SLIDE, "OutInterceptHorizontalSlideView.dispatchTouchEvent "
+                + TouchUtils.getTouchEventAction(ev)
+                + " " + handled);
+        return handled;
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(Tag.SLIDE, "HorizontalSlideView.onInterceptTouchEvent "
-                + TouchUtils.getTouchEventAction(ev) + "@" + ev.hashCode());
         boolean intercept = false;
         float x = ev.getX();
         float y = ev.getY();
@@ -103,21 +119,24 @@ public class HorizontalSlideView extends ViewGroup {
                 intercept = false;
                 break;
         }
-//        Log.d(Tag.SLIDE, "x:" + x
-//                + ", y:" + y
-//                + ", mLastX:" + mLastX
-//                + ", mLastY:" + mLastY
-//                + ", mLastXIntercept:" + mLastXIntercept
-//                + ", mLastYIntercept:" + mLastYIntercept);
+        Log.d(Tag.SLIDE, "x:" + x
+                + ", y:" + y
+                + ", mLastX:" + mLastX
+                + ", mLastY:" + mLastY
+                + ", mLastXIntercept:" + mLastXIntercept
+                + ", mLastYIntercept:" + mLastYIntercept);
         mLastX = mLastXIntercept = x;
         mLastY = mLastYIntercept = y;
+        Log.d(Tag.SLIDE, "OutInterceptHorizontalSlideView.onInterceptTouchEvent "
+                + TouchUtils.getTouchEventAction(ev)
+                + " " + intercept);
         return intercept;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.d(Tag.SLIDE, "HorizontalSlideView.onTouchEvent "
-                + TouchUtils.getTouchEventAction(event) + "@" + event.hashCode());
+        Log.d(Tag.SLIDE, "OutInterceptHorizontalSlideView.onTouchEvent "
+                + TouchUtils.getTouchEventAction(event));
         mTracker.addMovement(event);
         float x = event.getX();
         float y = event.getY();
@@ -177,5 +196,13 @@ public class HorizontalSlideView extends ViewGroup {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mTracker.recycle();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        Log.d(Tag.MEASURE, "OutInterceptHorizontalSlideView.onWindowFocusChanged hasWindowFocus:" + hasWindowFocus);
+        Log.d(Tag.MEASURE, "Measured: " + getMeasuredWidth() + "*" + getMeasuredHeight());
+        Log.d(Tag.MEASURE, getWidth() + "*" + getHeight());
     }
 }
