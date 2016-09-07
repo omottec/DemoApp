@@ -13,4 +13,5 @@ public final class Tag {
     public static final String TOUCH = "touch";
     public static final String SLIDE = "slide";
     public static final String MEASURE = "measure";
+    public static final String CUSTOM_VIEW = "custom_view";
 }

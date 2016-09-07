@@ -2,6 +2,7 @@ package com.omottec.demoapp.activity;
 
 import android.support.v4.app.Fragment;
 
+import com.omottec.demoapp.fragment.CircleViewFragment;
 import com.omottec.demoapp.fragment.InInterceptHorizontalSlideFragment;
 import com.omottec.demoapp.fragment.OutInterceptHorizontalSlideFragment;
 
@@ -15,6 +16,6 @@ public class DemoActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
 
 
-        return new InInterceptHorizontalSlideFragment();
+        return new CircleViewFragment();
     }
 }
