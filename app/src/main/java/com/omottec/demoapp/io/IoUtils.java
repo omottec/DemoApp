@@ -2,6 +2,7 @@ package com.omottec.demoapp.io;
 
 import android.os.Environment;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,6 +14,17 @@ import java.io.OutputStream;
  */
 public final class IoUtils {
     private IoUtils() {}
+
+    public static void close(Closeable... closeables) {
+        if (closeables == null || closeables.length == 0) return;
+        for (Closeable closeable : closeables)
+            if (closeable != null)
+                try {
+                    closeable.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+    }
 
     public static void write2ExternalStorage() {
         File externalStorageDir = Environment.getExternalStorageDirectory();
