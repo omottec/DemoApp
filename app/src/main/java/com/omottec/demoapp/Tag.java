@@ -15,4 +15,5 @@ public final class Tag {
     public static final String MEASURE = "measure";
     public static final String CUSTOM_VIEW = "custom_view";
     public static final String IPC_FILE_BUNDLE = "ipc_file_bundle";
+    public static final String IPC_MESSENGER = "ipc_messenger";
 }

@@ -51,23 +51,31 @@
 
         </activity>
 
-        <activity android:name=".ipc.DataWriteActivity">
+        <activity android:name=".ipc.fileAndBundle.DataWriteActivity">
+
+        </activity>
+
+        <activity
+            android:name=".ipc.fileAndBundle.DataReadActivity"
+            android:screenOrientation="portrait"
+            android:process=":remote">
+
+        </activity>
+
+        <activity android:name=".ipc.messenger.MessengerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ipc.DataReadActivity"
-            android:screenOrientation="portrait"
-            android:process=":remote">
 
-        </activity>
+        <service android:name=".ipc.messenger.MessengerService"
+            android:process=":remote">
+        </service>
 
         <service android:name=".service.DemoService"
             android:process=":service">
-
         </service>
     </application>
 

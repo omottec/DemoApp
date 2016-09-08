@@ -1,4 +1,4 @@
-package com.omottec.demoapp.ipc;
+package com.omottec.demoapp.ipc.fileAndBundle;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.io.IoUtils;
+import com.omottec.demoapp.ipc.Constants;
+import com.omottec.demoapp.ipc.User;
 
 import java.io.File;
 import java.io.FileInputStream;
