@@ -49,7 +49,7 @@ public class MessengerService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(Tag.IPC_MESSENGER, "MessengerService.onBind");
-        Logger.logIsUiThread(Tag.IPC_MESSENGER);
+        Logger.logThread(Tag.IPC_MESSENGER);
         return mMessenger.getBinder();
     }
 
@@ -57,13 +57,13 @@ public class MessengerService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(Tag.IPC_MESSENGER, "MessengerService.onCreate");
-        Logger.logIsUiThread(Tag.IPC_MESSENGER);
+        Logger.logThread(Tag.IPC_MESSENGER);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(Tag.IPC_MESSENGER, "MessengerService.onStartCommand");
-        Logger.logIsUiThread(Tag.IPC_MESSENGER);
+        Logger.logThread(Tag.IPC_MESSENGER);
         return super.onStartCommand(intent, flags, startId);
     }
 }

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omottec.demoapp">
 
+    <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE"/>
+
+    <uses-permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE"/>
+    
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
@@ -63,12 +67,15 @@
         </activity>
 
         <activity android:name=".ipc.messenger.MessengerActivity">
+
+        </activity>
+
+        <activity android:name=".ipc.aidl.BookManagerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
 
         <service android:name=".ipc.messenger.MessengerService"
             android:process=":remote">
@@ -76,6 +83,10 @@
 
         <service android:name=".service.DemoService"
             android:process=":service">
+        </service>
+
+        <service android:name=".ipc.aidl.BookManagerService"
+            android:process=":remote">
         </service>
     </application>
 

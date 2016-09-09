@@ -15,4 +15,6 @@ public final class Constants {
     public static final int MSG_FROM_CLIENT = 1;
 
     public static final int MSG_FROM_SERVER = 2;
+
+    public static final int MSG_BOOK_ADDED = 3;
 }

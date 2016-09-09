@@ -9,7 +9,8 @@ import android.util.Log;
 public final class Logger {
     private Logger() {}
 
-    public static void logIsUiThread(String tag) {
-        Log.d(tag, "is uiThread:" + (Looper.myLooper() == Looper.getMainLooper()));
+    public static void logThread(String tag) {
+        Log.d(tag, Thread.currentThread().getName()
+                + ", is uiThread:" + (Looper.myLooper() == Looper.getMainLooper()));
     }
 }
