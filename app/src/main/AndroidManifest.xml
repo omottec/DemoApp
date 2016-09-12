@@ -3,8 +3,12 @@
     package="com.omottec.demoapp">
 
     <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE"/>
+    <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
 
     <uses-permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE"/>
+    <uses-permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     
     <application
         android:name=".app.MyApplication"
@@ -21,6 +25,7 @@
         </activity>
 
         <activity android:name=".task.MainActivity"
+            android:screenOrientation="portrait"
             android:launchMode="singleTask">
         </activity>
 
@@ -33,7 +38,8 @@
 
         </activity>
 
-        <activity android:name=".activity.DemoActivity">
+        <activity android:name=".activity.DemoActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
@@ -47,15 +53,18 @@
 
         <activity
             android:name=".activity.LoadDexActivity"
+            android:screenOrientation="portrait"
             android:process=":loaddex">
 
         </activity>
 
-        <activity android:name=".activity.TouchActivity">
+        <activity android:name=".activity.TouchActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".ipc.fileAndBundle.DataWriteActivity">
+        <activity android:name=".ipc.fileAndBundle.DataWriteActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
@@ -66,11 +75,18 @@
 
         </activity>
 
-        <activity android:name=".ipc.messenger.MessengerActivity">
+        <activity android:name=".ipc.messenger.MessengerActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".ipc.aidl.BookManagerActivity">
+        <activity android:name=".ipc.aidl.BookManagerActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".ipc.provider.ProviderActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -86,11 +102,15 @@
         </service>
 
         <service android:name=".ipc.aidl.BookManagerService"
-            android:process=":remote">
+            android:process=":remote"
+            android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE">
         </service>
-    </application>
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <provider
+            android:authorities="com.omottec.demoapp.provider"
+            android:name=".ipc.provider.BookProvider"
+            android:process=":provider"
+            android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
+    </application>
 
 </manifest>
