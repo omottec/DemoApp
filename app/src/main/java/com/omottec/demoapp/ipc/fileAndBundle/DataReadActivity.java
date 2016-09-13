@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.io.IoUtils;
-import com.omottec.demoapp.ipc.Constants;
+import com.omottec.demoapp.Constants;
 import com.omottec.demoapp.ipc.User;
 
 import java.io.File;

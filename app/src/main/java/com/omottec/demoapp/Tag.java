@@ -19,4 +19,5 @@ public final class Tag {
     public static final String IPC_MESSENGER = "ipc_messenger";
     public static final String IPC_AIDL = "ipc_aidl";
     public static final String IPC_PROVIDER = "ipc_provider";
+    public static final String IPC_SOCKET = "ipc_socket";
 }

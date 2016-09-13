@@ -20,7 +20,7 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.aidl.Book;
 import com.omottec.demoapp.aidl.IBookManager;
 import com.omottec.demoapp.aidl.IOnBookAddedListener;
-import com.omottec.demoapp.ipc.Constants;
+import com.omottec.demoapp.Constants;
 import com.omottec.demoapp.utils.Logger;
 
 import java.util.List;

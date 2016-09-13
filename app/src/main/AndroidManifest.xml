@@ -9,6 +9,11 @@
     <uses-permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     
     <application
         android:name=".app.MyApplication"
@@ -87,6 +92,11 @@
 
         <activity android:name=".ipc.provider.ProviderActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".ipc.socket.SocketActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -106,11 +116,18 @@
             android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE">
         </service>
 
+        <service android:name=".ipc.socket.SocketService"
+            android:process=":remote"/>
+
         <provider
             android:authorities="com.omottec.demoapp.provider"
             android:name=".ipc.provider.BookProvider"
             android:process=":provider"
-            android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
+            android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
