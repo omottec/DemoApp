@@ -25,4 +25,6 @@ public final class Constants {
     public static final String CLIENT_2_SERVER = "c--->s: ";
     public static final String SERVER_2_CLIENT = "s--->c: ";
 
+    public static final int BINDER_CODE_SECURITY_CENTER = 1;
+    public static final int BINDER_CODE_COMPUTE = 2;
 }

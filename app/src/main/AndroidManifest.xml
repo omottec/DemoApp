@@ -97,6 +97,11 @@
 
         <activity android:name=".ipc.socket.SocketActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".ipc.binderPool.BinderPoolActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -119,15 +124,14 @@
         <service android:name=".ipc.socket.SocketService"
             android:process=":remote"/>
 
+        <service android:name=".ipc.binderPool.BinderPoolService"
+            android:process=":remote"/>
+
         <provider
             android:authorities="com.omottec.demoapp.provider"
             android:name=".ipc.provider.BookProvider"
             android:process=":provider"
-            android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
     </application>
 
 </manifest>
