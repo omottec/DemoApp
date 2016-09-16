@@ -50,7 +50,7 @@ public class SmartBarFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "screenHeight:" + UiUtils.getScreenSize(mActivity, false));
         Log.d(TAG, "navigationHeight:" + UiUtils.getNavigationBarHeight(mActivity));
-        Log.d(TAG, "statusBarHeight:" + UiUtils.getStatusBarHeight(mActivity));
+        Log.d(TAG, "statusBarHeight:" + UiUtils.getStatusBarHeight1(mActivity));
         Rect rect = new Rect();
         mActivity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
         mActivity.getWindow().getDecorView().getMeasuredHeight();

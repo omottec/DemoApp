@@ -1,7 +1,9 @@
 package com.omottec.demoapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -126,6 +128,13 @@ public final class UiUtils {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+//        return context.getResources().getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
+    }
+
+    public static int getStatusBarHeight1(Activity activity) {
+        Rect rect = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+        return rect.top;
     }
 
     public static String getMeasureSpecMode(int measureSpec) {

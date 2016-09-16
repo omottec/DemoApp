@@ -21,4 +21,6 @@ public final class Tag {
     public static final String IPC_PROVIDER = "ipc_provider";
     public static final String IPC_SOCKET = "ipc_socket";
     public static final String IPC_BINDER_POOL = "ipc_binder_pool";
+
+    public static final String WINDOW = "window";
 }
