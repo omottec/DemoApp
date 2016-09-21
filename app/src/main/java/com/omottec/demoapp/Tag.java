@@ -23,4 +23,6 @@ public final class Tag {
     public static final String IPC_BINDER_POOL = "ipc_binder_pool";
 
     public static final String WINDOW = "window";
+
+    public static final String ANIMATOR = "animator";
 }
