@@ -46,10 +46,7 @@
 
         <activity android:name=".activity.DemoActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".lifecycle.LifeCycleActivity1">
@@ -109,13 +106,26 @@
 
         </activity>
 
-        <activity android:name=".activity.WindowActivity">
+        <activity android:name=".activity.WindowActivity"
+            android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".activity.DialogActivity">
+        <activity android:name=".activity.DialogActivity"
+            android:screenOrientation="portrait">
 
         </activity>
+
+        <activity android:name=".activity.AnimActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.AnimActivity1"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".ipc.messenger.MessengerService"
             android:process=":remote">
