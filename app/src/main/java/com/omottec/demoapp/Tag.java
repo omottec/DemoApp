@@ -25,4 +25,6 @@ public final class Tag {
     public static final String WINDOW = "window";
 
     public static final String ANIMATOR = "animator";
+
+    public static final String JNI = "jni";
 }
