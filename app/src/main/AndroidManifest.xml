@@ -127,6 +127,9 @@
         <activity android:name=".activity.AnimActivity1"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.ShadowActivity"
+            android:screenOrientation="portrait"/>
+
         <service android:name=".ipc.messenger.MessengerService"
             android:process=":remote">
         </service>

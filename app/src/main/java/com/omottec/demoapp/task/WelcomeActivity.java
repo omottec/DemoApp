@@ -7,8 +7,10 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 
@@ -18,9 +20,10 @@ import com.omottec.demoapp.Tag;
 public class WelcomeActivity extends FragmentActivity implements View.OnClickListener {
     private static int count;
     private final int ID = count++;
-    private Handler mHandler;
+    private Handler mHandler = new Handler();
     private TextView mTv;
     private TextView mTv1;
+    private ImageView mIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class WelcomeActivity extends FragmentActivity implements View.OnClickLis
         setContentView(R.layout.two_text);
         mTv = (TextView) findViewById(R.id.tv);
         mTv1 = (TextView) findViewById(R.id.tv1);
+        mIv = (ImageView) findViewById(R.id.iv);
         mTv.setBackgroundColor(Color.BLUE);
         mTv.setText("WelcomeActivity" + ID);
         Log.d(Tag.TASK, "taskId:" + getTaskId() + "|" + this + "|onCreate|" + ID);
@@ -43,6 +47,7 @@ public class WelcomeActivity extends FragmentActivity implements View.OnClickLis
         }, 200);*/
         mTv.setOnClickListener(this);
         mTv1.setOnClickListener(this);
+
     }
 
     private void startSelf() {
@@ -102,12 +107,20 @@ public class WelcomeActivity extends FragmentActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         Log.d(Tag.TASK, "taskId:" + getTaskId() + "|" + this + "|onDestroy");
+        Glide.with(WelcomeActivity.this).load("http://goo.gl/gEgYUd").into(mIv);
+        /*mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(WelcomeActivity.this).load("http://goo.gl/gEgYUd").into(mIv);
+            }
+        }, 2000);*/
     }
 
     private void startMainActivity() {
         Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     @Override
