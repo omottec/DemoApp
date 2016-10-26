@@ -30,6 +30,9 @@ public class ShadowActivity extends FragmentActivity {
             case ShadowEntranceFragment.NORMAL_SHADOW_INSERT:
                 setContentView(R.layout.a_normal_shadow_insert);
                 break;
+            case ShadowEntranceFragment.NORMAL_SHADOW_INSERT_FLOAT:
+                setContentView(R.layout.a_normal_shadow_insert_float);
+                break;
         }
     }
 }

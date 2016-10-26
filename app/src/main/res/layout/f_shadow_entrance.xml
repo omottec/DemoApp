@@ -38,4 +38,13 @@
         android:gravity="center"
         android:text="NormalShadowInsertTv"
         android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/normal_shadow_insert_float_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="NormalShadowInsertFloatTv"
+        android:layout_marginBottom="5dp"/>
 </LinearLayout>

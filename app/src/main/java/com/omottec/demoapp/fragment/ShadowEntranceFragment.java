@@ -22,11 +22,13 @@ public class ShadowEntranceFragment extends Fragment implements View.OnClickList
     public static final int MAP_SHADOW_INSERT = 2;
     public static final int NORMAL_SHADOW_FLOAT = 3;
     public static final int NORMAL_SHADOW_INSERT = 4;
+    public static final int NORMAL_SHADOW_INSERT_FLOAT = 5;
     private View mRootView;
     private TextView mMapShadowFloatTv;
     private TextView mMapShadowInsertTv;
     private TextView mNormalShadowFloatTv;
     private TextView mNormalShadowInsertTv;
+    private TextView mNormalShadowInsertFloatTv;
 
     @Nullable
     @Override
@@ -36,10 +38,12 @@ public class ShadowEntranceFragment extends Fragment implements View.OnClickList
         mMapShadowInsertTv = (TextView) mRootView.findViewById(R.id.map_shadow_insert_tv);
         mNormalShadowFloatTv = (TextView) mRootView.findViewById(R.id.normal_shadow_float_tv);
         mNormalShadowInsertTv = (TextView) mRootView.findViewById(R.id.normal_shadow_insert_tv);
+        mNormalShadowInsertFloatTv = (TextView) mRootView.findViewById(R.id.normal_shadow_insert_float_tv);
         mMapShadowFloatTv.setOnClickListener(this);
         mMapShadowInsertTv.setOnClickListener(this);
         mNormalShadowFloatTv.setOnClickListener(this);
         mNormalShadowInsertTv.setOnClickListener(this);
+        mNormalShadowInsertFloatTv.setOnClickListener(this);
         return mRootView;
     }
 
@@ -59,6 +63,9 @@ public class ShadowEntranceFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.normal_shadow_insert_tv:
                 bundle.putInt(SHADOW_KEY, NORMAL_SHADOW_INSERT);
+                break;
+            case R.id.normal_shadow_insert_float_tv:
+                bundle.putInt(SHADOW_KEY, NORMAL_SHADOW_INSERT_FLOAT);
                 break;
         }
         intent.putExtras(bundle);
