@@ -2,27 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff3f4f5">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:orientation="vertical"
-        android:background="#ffffff">
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:gravity="center"
-            android:text="NormalShadowInsertFloat"/>
+            android:text="NormalShadowInsertFloat"
+            android:background="@mipmap/common_titlebar_bg"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@mipmap/navi_bar_shadow_normal_bg"/>
+            android:background="@mipmap/common_titlebar_shadow"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
         android:gravity="center"
         android:text="Body"/>
 </LinearLayout>
