@@ -11,6 +11,7 @@ import com.omottec.demoapp.fragment.LayoutAnimFragment;
 import com.omottec.demoapp.fragment.OutInterceptHorizontalSlideFragment;
 import com.omottec.demoapp.fragment.ShadowEntranceFragment;
 import com.omottec.demoapp.fragment.SimpleFragment;
+import com.omottec.demoapp.fragment.ViewFragment;
 
 /**
  * Created by qinbingbing on 3/31/16.
@@ -20,6 +21,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new IpFragment();
+        return new ViewFragment();
     }
 }
