@@ -10,6 +10,7 @@ import android.text.TextUtils;
  * Created by bingbing.qin on 14-9-10.
  */
 public class Stamp implements Parcelable, Cloneable{
+    public String name;
     public double horizontal;
     public double vertical;
     /** 本地存储路径 */

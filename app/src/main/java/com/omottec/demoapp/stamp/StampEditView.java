@@ -13,10 +13,8 @@ import android.widget.FrameLayout;
 import android.view.GestureDetector.*;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.utils.ImageUtils;
 import com.omottec.demoapp.utils.MathUtil;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 
 /**
@@ -305,11 +303,10 @@ public class StampEditView extends View implements TextWatcher {
      * 设置旋转图
      * @param bitmap
      */
-    public void setImageBitamp(Bitmap bitmap){
-        this.mBitmap = bitmap;
+    public void setImageBitmap(Bitmap bitmap){
+        mBitmap = bitmap;
         mBaseWidth = mBitmap.getWidth();
         mBaseHeight = mBitmap.getHeight();
-        setFocus(this, (ViewGroup) getParent());
         transformDraw();
     }
 
@@ -385,7 +382,7 @@ public class StampEditView extends View implements TextWatcher {
      */
     public void transformDraw(){
         int bitmapWidth = (int)(mBaseWidth * mScale);
-        int bitmapHeight = (int)(mBaseHeight* mScale);
+        int bitmapHeight = (int)(mBaseHeight * mScale);
         computeRect(-framePadding, -framePadding, bitmapWidth + framePadding, bitmapHeight + framePadding, mDegree);
         if (!mIsMirror) {
             //设置缩放比例
@@ -473,56 +470,10 @@ public class StampEditView extends View implements TextWatcher {
         return matrix;
     }
 
-    /**
-     * 由于无法从做了镜像的matrix反推出未做镜像的matrix
-     * 这里重新计算未做镜像的matrix
-     * diy贴纸的需求：边框做镜像，文字不做镜像
-     * @param imgScale
-     * @return
-     */
-    public Matrix getUnMirrorImageMatrix(float imgScale) {
-        Matrix matrix = new Matrix();
-        matrix.setScale(mScale, mScale);
-        matrix.postRotate(mDegree % 360, mBaseWidth * mScale / 2, mBaseHeight * mScale / 2);
-        matrix.postTranslate(offsetX + mIconSize / 2, offsetY + mIconSize / 2);
-        float[] values = new float[9];
-        matrix.getValues(values);
-        values[2]+=getLeft();
-        values[5] += getTop();
-        values[8] = values[8]/imgScale;
-        Matrix m = new Matrix();
-        m.setValues(values);
-        return m;
-    }
-
-    public Matrix getSelfMatrix() {
-        return matrix;
-    }
-
     private void close(){
         if (!isShowCloseIcon)//如果设置了关闭按钮不展示，则不可以关闭消失
             return;
         ((ViewGroup)getParent()).removeView(this);
-    }
-
-    /**
-     * 编辑完毕保存位置及缩放信息到贴纸中
-     */
-    public void saveEditInfo(int containerWidth, int containerHeight) {
-        mStamp.editScale = mScale * 1000 / containerWidth;
-        mStamp.editDegree = mDegree;
-        mStamp.editCenterPointXRatio = mCenterPoint.x / (float)containerWidth;
-        mStamp.editCenterPointYRatio = mCenterPoint.y / (float)containerHeight;
-        mStamp.editMirror = mIsMirror;
-        mStamp.mMatrixValues = new float[9];
-        //注意 最终随机贴纸缩放率应该是 photoWidth/viewWidth,由于photoWidth不确定，所以再最后一步重新计算
-        getImageMatrix(1.0f/containerWidth).getValues(mStamp.mMatrixValues);
-        mStamp.unMirrorMatrixValues = new float[9];
-        getUnMirrorImageMatrix(1.0f / containerWidth).getValues(mStamp.unMirrorMatrixValues);
-        Log.i(TAG, "saveEditInfo editScale = " + mStamp.editScale);
-        Log.i(TAG, "saveEditInfo editDegree = " + mStamp.editDegree);
-        Log.i(TAG, "saveEditInfo editCenterPointXRatio = " + mStamp.editCenterPointXRatio);
-        Log.i(TAG, "saveEditInfo editCenterPointYRatio = " + mStamp.editCenterPointYRatio);
     }
 
     private long start,end;
@@ -539,10 +490,6 @@ public class StampEditView extends View implements TextWatcher {
 //                    return true;
 //            }
 //        }
-        if(!isEditable){
-            setFocus(this, (ViewGroup) getParent());
-            return true;
-        }
         if (event.getPointerCount() == 2) {
             return mScaleDetector.onTouchEvent(event);
         } else {
@@ -830,8 +777,7 @@ public class StampEditView extends View implements TextWatcher {
     public static boolean add(ViewGroup container, Stamp stamp,
                               int containerWidth, int containerHeight){
         Log.d(TAG, "add container width = " + containerWidth + " height = " + containerHeight);
-//        Bitmap stampBitmap = UploadImageUtil.loadStampBitmap(stamp);
-        Bitmap stampBitmap = null;
+        Bitmap stampBitmap = ImageUtils.getThumbFromAsset(stamp.name, -1, 1080 * 1080);
         if(stampBitmap == null) {
             return false;
         }
@@ -842,45 +788,21 @@ public class StampEditView extends View implements TextWatcher {
 //            stampBitmap = genWatermark(stampBitmap, stamp);
 //        if (UploadImageUtil.isBirthdayStamp(stamp))
 //            stampBitmap = UploadImageUtil.genBirthdayBmp(stampBitmap, stamp);
-        stampEditView.setImageBitamp(stampBitmap);
-        if(stamp.editScale != 0) {
-            Log.i(TAG, "add editScale = " + stamp.editScale);
-            float realScale = stamp.editScale * containerWidth / 1000;
-            Log.i(TAG, "add realScale = " + realScale);
-            stampEditView.setImageScale(realScale);
-        }else {
-            float stampScale = getStampScale(containerWidth, containerHeight, stampBitmap, stamp.scale);
-            stampEditView.setImageScale(stampScale);
-        }
-        if(stamp.editDegree != 0) {
-            Log.i(TAG, "add editDegree = " + stamp.editDegree);
-            stampEditView.setImageDegree(stamp.editDegree);
-        }
-        if(stamp.editCenterPointXRatio != 0 || stamp.editCenterPointYRatio != 0) {
-            Log.i(TAG, "add editCenterPointXRatio = " + stamp.editCenterPointXRatio);
-            Log.i(TAG, "add editCenterPointYRatio = " + stamp.editCenterPointYRatio);
-            PointF centerPoint = new PointF();
-            centerPoint.x = containerWidth * stamp.editCenterPointXRatio;
-            centerPoint.y = containerHeight * stamp.editCenterPointYRatio;
-            stampEditView.setCenterPoint(centerPoint);
-        }else {
-            /**根据下发的horizontal和vertical确定贴纸的位置**/
-            // 增加了控制icon的距离
-            //v838版本之后不再增加控制icon的距离
-            float centerX = (float)(containerWidth * stamp.horizontal / 100.0f);
-            float centerY = (float)(containerHeight * stamp.vertical / 100.0f);
-            float minX = stampBitmap.getWidth() * stampEditView.getImageScale() / 2.0f/* + stampEditView.getIconSize() / 2.0f*/;
-            float maxX = containerWidth - minX;
-            float minY = stampBitmap.getHeight() * stampEditView.getImageScale() / 2.0f /*+ stampEditView.getIconSize() / 2.0f*/;
-            float maxY = containerHeight - minY;
-            centerX = Math.min(Math.max(centerX, minX), maxX);
-            centerY = Math.min(Math.max(centerY, minY), maxY);
-            stampEditView.setCenterPoint(new PointF(centerX, centerY));
-        }
-        if(stamp.editMirror) {
-//			stampEditView.setImageBitamp(ImageUtil.horizontalMirrorBmp(stampEditView.getBitmap()));
-            stampEditView.setIsMirror(true);
-        }
+        stampEditView.setImageBitmap(stampBitmap);
+        float stampScale = getStampScale(containerWidth, containerHeight, stampBitmap, stamp.scale);
+        stampEditView.setImageScale(stampScale);
+        /**根据下发的horizontal和vertical确定贴纸的位置**/
+        // 增加了控制icon的距离
+        //v838版本之后不再增加控制icon的距离
+        float centerX = (float)(containerWidth * stamp.horizontal / 100.0f);
+        float centerY = (float)(containerHeight * stamp.vertical / 100.0f);
+        float minX = stampBitmap.getWidth() * stampEditView.getImageScale() / 2.0f/* + stampEditView.getIconSize() / 2.0f*/;
+        float maxX = containerWidth - minX;
+        float minY = stampBitmap.getHeight() * stampEditView.getImageScale() / 2.0f /*+ stampEditView.getIconSize() / 2.0f*/;
+        float maxY = containerHeight - minY;
+        centerX = Math.min(Math.max(centerX, minX), maxX);
+        centerY = Math.min(Math.max(centerY, minY), maxY);
+        stampEditView.setCenterPoint(new PointF(centerX, centerY));
         if (stamp.withDiy == 1 && !TextUtils.isEmpty(stamp.editDiyStr)) {
             stampEditView.setDiyStr();
         }
@@ -888,43 +810,6 @@ public class StampEditView extends View implements TextWatcher {
             stampEditView.setDiyFont(stamp.fontPosition);
 //        stampEditView.setStampEditViewStatusListener(clearListener);
         return true;
-    }
-
-    public static void setFocus(StampEditView focus,ViewGroup container){
-        int count = container.getChildCount();
-        for (int i = 0; i <count ; i++) {
-            View child = container.getChildAt(i);
-            if (child instanceof StampEditView){
-                StampEditView view = (StampEditView) child;
-                if (view == focus){
-                    view.setEditable(true);
-                }else{
-                    view.setEditable(false);
-                }
-            }
-        }
-    }
-
-    public static void showAllStampView(ViewGroup container){
-        int count = container.getChildCount();
-        for (int i = 0; i <count ; i++) {
-            View child = container.getChildAt(i);
-            if (child instanceof StampEditView){
-                child.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-
-    public static void saveAllStampEditInfo(ViewGroup container) {
-        int count = container.getChildCount();
-        for (int i = 0; i <count ; i++) {
-            View child = container.getChildAt(i);
-            if (child instanceof StampEditView){
-                StampEditView view = (StampEditView) child;
-                view.saveEditInfo(container.getWidth(), container.getHeight());
-            }
-        }
     }
 
     /*public static Bitmap genWatermark(Bitmap src, Stamp stamp) {
@@ -942,20 +827,6 @@ public class StampEditView extends View implements TextWatcher {
             return src;
         }
     }*/
-
-    /**
-     * 使所有贴纸都不可编辑（点击也不可以）
-     * @param container
-     */
-    public static void disableAllStampView(boolean isDisabled, ViewGroup container) {
-        int count = container.getChildCount();
-        for (int i = 0; i < count; i++) {
-            View child = container.getChildAt(i);
-            if (child instanceof StampEditView) {
-                ((StampEditView) child).setDisabled(isDisabled);
-            }
-        }
-    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -1072,51 +943,6 @@ public class StampEditView extends View implements TextWatcher {
             }
         }
         return stampScale;
-    }
-
-    public static Bitmap getThumbnail(String imagePath, int maxWidth, int[] photoSize) {
-        if (TextUtils.isEmpty(imagePath)) {
-            return null;
-        }
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        Bitmap bitmap = null;
-        FileInputStream fis =null;
-        try {
-            BitmapFactory.decodeFile(imagePath, options);
-            if(photoSize != null && photoSize.length >= 2) {
-                photoSize[0] = options.outWidth;
-                photoSize[1] = options.outHeight;
-            }
-            try {
-                fis = new FileInputStream(imagePath);
-            }catch (FileNotFoundException e){
-                e.printStackTrace();
-                return null;
-            }
-
-            /*boolean isNormal = isOrientationNormal(imagePath);
-            bitmap = BitmapFactory
-                    .decodeFileDescriptor(fis.getFD(), null, generalOptions(options, maxWidth, isNormal));
-            bitmap = ImageUtil.processExifTransform(imagePath, bitmap);
-            if (bitmap != null && bitmap.getWidth() > maxWidth) {
-                int dstHeight = (int) (maxWidth * 1.0f / bitmap.getWidth() * bitmap.getHeight());
-                bitmap = Bitmap.createScaledBitmap(bitmap, maxWidth, dstHeight, true);
-                Methods.log("maxWidth=" + maxWidth + " bitmap.getWidth()=" + bitmap.getWidth() + " bitmap.getHeight()="
-                        + bitmap.getHeight());
-            }*/
-
-        } catch (OutOfMemoryError e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            try {
-                fis.close();
-            } catch (Exception e2) {
-            }
-        }
-        return bitmap;
     }
 
 }

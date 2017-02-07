@@ -22,7 +22,12 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class MyApplication extends Application {
     public static List<Activity> sLeakActivities = new ArrayList<>();
+    private static Context sAppContext;
     private boolean mIsMainProcess;
+
+    public static Context getContext() {
+        return sAppContext;
+    }
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -39,6 +44,7 @@ public class MyApplication extends Application {
         Log.d(Tag.TASK, this + " onCreate");
         Log.d(Tag.APP_PROCESS, this + " onCreate");
         Log.d(Tag.APP_PROCESS, "mIsMainProcess:" + mIsMainProcess);
+        sAppContext = this;
         /*if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
