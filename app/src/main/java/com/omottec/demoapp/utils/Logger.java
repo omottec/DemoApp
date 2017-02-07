@@ -1,6 +1,7 @@
 package com.omottec.demoapp.utils;
 
 import android.os.Looper;
+import android.os.Process;
 import android.util.Log;
 
 /**
@@ -10,7 +11,9 @@ public final class Logger {
     private Logger() {}
 
     public static void logThread(String tag) {
+
         Log.d(tag, Thread.currentThread().getName()
-                + ", is uiThread:" + (Looper.myLooper() == Looper.getMainLooper()));
+                + ", is uiThread:" + (Looper.myLooper() == Looper.getMainLooper())
+                + ", pid:" + Process.myPid());
     }
 }

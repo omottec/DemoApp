@@ -11,6 +11,7 @@ import com.omottec.demoapp.fragment.LayoutAnimFragment;
 import com.omottec.demoapp.fragment.OutInterceptHorizontalSlideFragment;
 import com.omottec.demoapp.fragment.ShadowEntranceFragment;
 import com.omottec.demoapp.fragment.SimpleFragment;
+import com.omottec.demoapp.fragment.TouchFragment;
 import com.omottec.demoapp.fragment.ViewFragment;
 
 /**
@@ -21,6 +22,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new ViewFragment();
+        return new TouchFragment();
     }
 }

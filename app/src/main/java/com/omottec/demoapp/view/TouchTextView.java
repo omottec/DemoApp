@@ -40,5 +40,6 @@ public class TouchTextView extends TextView {
                 + TouchUtils.getTouchEventAction(event));
 //        return super.onTouchEvent(event);
         return true;
+//        return false;
     }
 }
