@@ -38,8 +38,7 @@ public class BookManagerService extends Service {
 
         @Override
         public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
-            Log.d(Tag.IPC_AIDL, "onTransact");
-            Logger.logThread(Tag.IPC_AIDL);
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " onTransact");
             int permission = checkCallingOrSelfPermission("com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE");
             if (permission == PackageManager.PERMISSION_DENIED) {
                 Log.d(Tag.IPC_AIDL, "permission == PackageManager.PERMISSION_DENIED");
@@ -57,23 +56,20 @@ public class BookManagerService extends Service {
 
         @Override
         public List<Book> getBooks() throws RemoteException {
-            Log.d(Tag.IPC_AIDL, "BookManagerService.getBooks");
-            Logger.logThread(Tag.IPC_AIDL);
-            SystemClock.sleep(15000);
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.getBooks");
+            SystemClock.sleep(15 * 1000);
             return mBooks;
         }
 
         @Override
         public void addBook(Book book) throws RemoteException {
-            Log.d(Tag.IPC_AIDL, "BookManagerService.addBook");
-            Logger.logThread(Tag.IPC_AIDL);
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.addBook");
             mBooks.add(book);
         }
 
         @Override
         public void registerListener(IOnBookAddedListener listener) throws RemoteException {
-            Log.d(Tag.IPC_AIDL, "BookManagerService.registerListener");
-            Logger.logThread(Tag.IPC_AIDL);
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.registerListener");
             /*if (!mBookAddedListeners.contains(listener))
                 mBookAddedListeners.add(listener);
             else
@@ -87,8 +83,7 @@ public class BookManagerService extends Service {
 
         @Override
         public void unregisterListener(IOnBookAddedListener listener) throws RemoteException {
-            Log.d(Tag.IPC_AIDL, "BookManagerService.unregisterListener");
-            Logger.logThread(Tag.IPC_AIDL);
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.unregisterListener");
 //            boolean remove = mBookAddedListeners.remove(listener);
 //            Log.d(Tag.IPC_AIDL, "unregisterListener remove:" + remove + ", size:" + mBookAddedListeners.size());
             boolean unregister = mBookAddedListeners.unregister(listener);
@@ -100,30 +95,33 @@ public class BookManagerService extends Service {
 
     @Override
     public void onCreate() {
-        Log.d(Tag.IPC_AIDL, "BookManagerService.onCreate");
-        Logger.logThread(Tag.IPC_AIDL);
+        Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.onCreate");
         mBooks.add(new Book(1, "007"));
         mBooks.add(new Book(2, "Bourne Identity"));
-        mExecutor.scheduleWithFixedDelay(new AddBookTask(), 5000, 5000, TimeUnit.MILLISECONDS);
+        mExecutor.scheduleWithFixedDelay(new AddBookTask(), 5 * 1000, 60 * 1000, TimeUnit.MILLISECONDS);
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(Tag.IPC_AIDL, "BookManagerService.onBind");
-        Logger.logThread(Tag.IPC_AIDL);
         int permission = checkCallingOrSelfPermission("com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE");
         if (permission == PackageManager.PERMISSION_DENIED) {
             Log.d(Tag.IPC_AIDL, "permission == PackageManager.PERMISSION_DENIED");
             return null;
         }
+        Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.onBind, mBinder:" + mBinder);
         return mBinder;
     }
 
     @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.onUnbind");
+        return super.onUnbind(intent);
+    }
+
+    @Override
     public void onDestroy() {
-        Log.d(Tag.IPC_AIDL, "BookManagerService.onDestroy");
-        Logger.logThread(Tag.IPC_AIDL);
+        Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerService.onDestroy");
         mExecutor.shutdownNow();
     }
 
@@ -151,5 +149,17 @@ public class BookManagerService extends Service {
                     e.printStackTrace();
                 }*/
         }
+    }
+
+    @Override
+    public void onStart(Intent intent, int startId) {
+        super.onStart(intent, startId);
+        Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " onStart");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " onStartCommand");
+        return super.onStartCommand(intent, flags, startId);
     }
 }

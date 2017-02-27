@@ -39,7 +39,7 @@ public class BookManagerActivity extends FragmentActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Constants.MSG_BOOK_ADDED:
-                    Log.d(Tag.IPC_AIDL, "add new book:" + msg.obj);
+                    Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " handleMessage add new book:" + msg.obj);
                     break;
                 default:
                     break;
@@ -50,7 +50,7 @@ public class BookManagerActivity extends FragmentActivity {
     private IOnBookAddedListener mOnBookAddedListener = new IOnBookAddedListener.Stub() {
         @Override
         public void onBookAdded(Book book) throws RemoteException {
-            Log.d(Tag.IPC_AIDL, "BookManagerActivity.onBookAdded:" + book);
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerActivity.onBookAdded:" + book);
             mHandler.obtainMessage(Constants.MSG_BOOK_ADDED, book).sendToTarget();
         }
     };
@@ -70,9 +70,8 @@ public class BookManagerActivity extends FragmentActivity {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d(Tag.IPC_AIDL, "onServiceConnected ComponentName:" + name
+            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " onServiceConnected ComponentName:" + name
                     + ", IBinder:" + service);
-            Logger.logThread(Tag.IPC_AIDL);
             mBookManager = IBookManager.Stub.asInterface(service);
             Log.d(Tag.IPC_AIDL, "IBookManager:" + mBookManager);
             try {
@@ -119,13 +118,14 @@ public class BookManagerActivity extends FragmentActivity {
         mTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                bindService();
             }
         });
         bindService();
     }
 
     private void bindService() {
+        Log.d(Tag.IPC_AIDL, "bindService");
         Intent intent = new Intent(getApplicationContext(), BookManagerService.class);
         bindService(intent, mServiceConnection, Service.BIND_AUTO_CREATE);
     }

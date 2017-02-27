@@ -11,9 +11,17 @@ public final class Logger {
     private Logger() {}
 
     public static void logThread(String tag) {
-
-        Log.d(tag, Thread.currentThread().getName()
-                + ", is uiThread:" + (Looper.myLooper() == Looper.getMainLooper())
-                + ", pid:" + Process.myPid());
+        Log.d(tag, "pid-tid-uiThread: "
+                + Process.myPid() + "-"
+                + Process.myTid() + "-"
+                + (Looper.myLooper() == Looper.getMainLooper()));
     }
+
+    public static String getThreadInfo() {
+        return "pid-tid-uiThread: "
+                + Process.myPid() + "-"
+                + Process.myTid() + "-"
+                + (Looper.myLooper() == Looper.getMainLooper());
+    }
+
 }
