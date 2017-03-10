@@ -4,21 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.view.recycler.MultiRecyclerAdapter;
-import com.omottec.demoapp.view.recycler.SimpleRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +22,7 @@ import java.util.List;
  */
 
 public class RecyclerViewFragment extends Fragment {
+    public static final String TAG = "RecyclerViewFragment";
     private RecyclerView mRecyclerView;
     private Context mContext;
 
@@ -49,6 +44,39 @@ public class RecyclerViewFragment extends Fragment {
             list.add("item " + i);
 //        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(mContext, list));
         mRecyclerView.setAdapter(new MultiRecyclerAdapter(mContext, list));
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                switch (newState) {
+                    case RecyclerView.SCROLL_STATE_IDLE:
+                        Log.d(TAG, "onScrollStateChanged SCROLL_STATE_IDLE");
+                        break;
+                    case RecyclerView.SCROLL_STATE_DRAGGING:
+                        Log.d(TAG, "onScrollStateChanged SCROLL_STATE_DRAGGING");
+                        break;
+                    case RecyclerView.SCROLL_STATE_SETTLING:
+                        Log.d(TAG, "onScrollStateChanged SCROLL_STATE_SETTLING");
+                        break;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Log.d(TAG, "onScrolled dx:" + dx + ", dy:" + dy);
+                int childCount = mRecyclerView.getChildCount();
+                View firstChild = mRecyclerView.getChildAt(0);
+                View lastChild = mRecyclerView.getChildAt(childCount - 1);
+                int firstChildAdapterPosition = mRecyclerView.getChildAdapterPosition(firstChild);
+                int lastChildAdapterPosition = mRecyclerView.getChildAdapterPosition(lastChild);
+                Log.d(TAG, "childCount:" + childCount
+                        + ", firstChildAdapterPosition:" + firstChildAdapterPosition
+                        + ", firstChildTop:" + firstChild.getTop()
+                        + ", lastChildAdapterPosition:" + lastChildAdapterPosition
+                        + ", lastChildBottom:" + lastChild.getBottom()
+                        + ", mRecyclerViewTop:" + mRecyclerView.getTop()
+                        + ", mRecyclerViewBottom:" + mRecyclerView.getBottom());
+            }
+        });
         return mRecyclerView;
     }
 }
