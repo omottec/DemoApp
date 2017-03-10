@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.view.recycler.MultiRecyclerAdapter;
 import com.omottec.demoapp.view.recycler.SimpleRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -46,7 +47,8 @@ public class RecyclerViewFragment extends Fragment {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 200; i++)
             list.add("item " + i);
-        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(mContext, list));
+//        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(mContext, list));
+        mRecyclerView.setAdapter(new MultiRecyclerAdapter(mContext, list));
         return mRecyclerView;
     }
 }
