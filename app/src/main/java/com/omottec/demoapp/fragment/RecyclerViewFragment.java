@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.omottec.demoapp.R;
 
@@ -39,9 +40,9 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mRecyclerView = (RecyclerView) inflater.inflate(R.layout.f_recycler_view, null);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(new NormalRecyclerViewAdapter(mContext));
         return mRecyclerView;
     }
@@ -79,6 +80,14 @@ public class RecyclerViewFragment extends Fragment {
             public NormalViewHolder(View itemView) {
                 super(itemView);
                 mTv = (TextView) itemView.findViewById(android.R.id.text1);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext,
+                                "LayoutPosition:" + getLayoutPosition() + ", AdapterPosition:" + getAdapterPosition(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
     }
