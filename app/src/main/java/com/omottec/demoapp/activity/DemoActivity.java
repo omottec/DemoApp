@@ -9,6 +9,7 @@ import com.omottec.demoapp.fragment.IpFragment;
 import com.omottec.demoapp.fragment.JniFragment;
 import com.omottec.demoapp.fragment.LayoutAnimFragment;
 import com.omottec.demoapp.fragment.OutInterceptHorizontalSlideFragment;
+import com.omottec.demoapp.fragment.RecyclerViewFragment;
 import com.omottec.demoapp.fragment.ShadowEntranceFragment;
 import com.omottec.demoapp.fragment.SimpleFragment;
 import com.omottec.demoapp.fragment.TouchFragment;
@@ -22,6 +23,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new TouchFragment();
+        return new RecyclerViewFragment();
     }
 }
