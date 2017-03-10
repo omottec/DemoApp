@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.view.recycler.SimpleRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ import java.util.List;
  */
 
 public class RecyclerViewFragment extends Fragment {
-    public static final String TAG = "RecyclerViewFragment";
     private RecyclerView mRecyclerView;
     private Context mContext;
 
@@ -43,52 +43,10 @@ public class RecyclerViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        mRecyclerView.setAdapter(new NormalRecyclerViewAdapter(mContext));
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 200; i++)
+            list.add("item " + i);
+        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(mContext, list));
         return mRecyclerView;
-    }
-
-    private class NormalRecyclerViewAdapter extends Adapter<NormalRecyclerViewAdapter.NormalViewHolder> {
-        private List<String> mData = new ArrayList<>();
-        private Context mContext;
-
-        public NormalRecyclerViewAdapter(Context context) {
-            mContext = context;
-            for (int i = 0; i < 200; i++)
-                mData.add("item " + i);
-        }
-
-        @Override
-        public NormalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            Log.d(TAG, "onCreateViewHolder parent:" + parent + ", viewType:" + viewType);
-            return new NormalViewHolder(View.inflate(mContext, android.R.layout.simple_list_item_1, null));
-        }
-
-        @Override
-        public void onBindViewHolder(NormalViewHolder holder, int position) {
-            Log.d(TAG, "onBindViewHolder holder:" + holder + ", position:" + position);
-            holder.mTv.setText(mData.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
-
-        class NormalViewHolder extends RecyclerView.ViewHolder {
-            TextView mTv;
-
-            public NormalViewHolder(View itemView) {
-                super(itemView);
-                mTv = (TextView) itemView.findViewById(android.R.id.text1);
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(mContext,
-                                "LayoutPosition:" + getLayoutPosition() + ", AdapterPosition:" + getAdapterPosition(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }
     }
 }
