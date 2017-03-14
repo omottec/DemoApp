@@ -136,6 +136,10 @@
         <activity
             android:name=".view.viewpagerindicator.SampleTabsDefault"
             android:theme="@style/Theme.PageIndicatorDefaults">
+
+        </activity>
+
+        <activity android:name=".activity.NetAccessActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
