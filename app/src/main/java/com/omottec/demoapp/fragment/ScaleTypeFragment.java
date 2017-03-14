@@ -39,7 +39,7 @@ public class ScaleTypeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getResources(), R.mipmap.userguide_product_icon_fast, options);
+        BitmapFactory.decodeResource(getResources(), R.drawable.userguide_product_icon_fast, options);
         Log.d(Tag.SCALE_TYPE, "xhdpi");
         Log.d(Tag.SCALE_TYPE, options.outWidth + ":" + options.outHeight);
     }

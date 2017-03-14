@@ -12,7 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="@mipmap/navi_bar_shadow_normal_bg"/>
+        android:background="@drawable/navi_bar_shadow_normal_bg"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

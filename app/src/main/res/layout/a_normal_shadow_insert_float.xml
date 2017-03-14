@@ -13,11 +13,11 @@
             android:layout_height="44dp"
             android:gravity="center"
             android:text="NormalShadowInsertFloat"
-            android:background="@mipmap/common_titlebar_bg"/>
+            android:background="@drawable/common_titlebar_bg"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@mipmap/common_titlebar_shadow"/>
+            android:background="@drawable/common_titlebar_shadow"/>
     </LinearLayout>
 
     <TextView

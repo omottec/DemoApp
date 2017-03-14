@@ -6,6 +6,6 @@
         android:id="@+id/iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/userguide_product_icon_fast"
+        android:src="@drawable/userguide_product_icon_fast"
         android:layout_centerInParent="true"/>
 </RelativeLayout>

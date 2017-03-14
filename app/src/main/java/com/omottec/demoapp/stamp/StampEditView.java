@@ -255,9 +255,9 @@ public class StampEditView extends View implements TextWatcher {
         mPaint.setStrokeWidth(frameWidth);
         mPaint.setStyle(Style.STROKE);
 
-        controlDrawable = getContext().getResources().getDrawable(R.mipmap.publisher_stamp_scale_normal);
-        closeDrawable = getContext().getResources().getDrawable(R.mipmap.publisher_stamp_close_normal);
-        mirrorDrawable = getContext().getResources().getDrawable(R.mipmap.publisher_stamp_mirror_normal);
+        controlDrawable = getContext().getResources().getDrawable(R.drawable.publisher_stamp_scale_normal);
+        closeDrawable = getContext().getResources().getDrawable(R.drawable.publisher_stamp_close_normal);
+        mirrorDrawable = getContext().getResources().getDrawable(R.drawable.publisher_stamp_mirror_normal);
 
         mIconSize = controlDrawable.getIntrinsicWidth();
         if (mBitmap!=null){
