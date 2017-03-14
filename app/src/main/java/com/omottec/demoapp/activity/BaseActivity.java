@@ -163,4 +163,10 @@ public abstract class BaseActivity extends FragmentActivity {
         }
         super.onBackPressed();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isLoading()) dismissLoading();
+    }
 }
