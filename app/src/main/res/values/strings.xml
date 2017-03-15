@@ -8,4 +8,7 @@
     <string name="state_error">STATE_ERROR STATE_ERROR STATE_ERROR</string>
     <string name="state_loading"> STATE_LOADING STATE_LOADING STATE_LOADING</string>
     <string name="state_normal">STATE_NORMAL STATE_NORMAL STATE_NORMAL</string>
+
+    <string name="title">Title</string>
+    <string name="sub_title">SubTitle</string>
 </resources>

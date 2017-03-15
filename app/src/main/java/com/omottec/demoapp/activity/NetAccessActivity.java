@@ -3,6 +3,8 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +25,18 @@ public class NetAccessActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        mToolbar.setLogo(R.drawable.ic_launcher);
+//        mToolbar.setTitle(R.string.title);
+//        mToolbar.setSubtitle(R.string.sub_title);
+//        setSupportActionBar(mToolbar);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "navigationOnClick");
+//            }
+//        });
         mHandler = new Handler();
         mLoadingTv = (TextView) findViewById(R.id.tv_loading);
         mNormalTv = (TextView) findViewById(R.id.tv_normal);

@@ -5,11 +5,18 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 
@@ -17,30 +24,68 @@ import com.omottec.demoapp.R;
  * Created by qinbingbing on 14/03/2017.
  */
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     protected static final int STATE_LOADING = 0;
     protected static final int STATE_NORMAL = 1;
     protected static final int STATE_EMPTY = 2;
     protected static final int STATE_ERROR = 3;
-    private View mRootView;
-    private Toolbar mToolbar;
-    private FrameLayout mContainer;
-    private View mContentView;
-    private View mLoadingView;
-    private ValueAnimator mLoadingAnimator;
-    private View mErrorView;
-    private View mEmptyView;
-    private View.OnClickListener mOnClickEmptyOrErrorListener;
+    protected View mRootView;
+    protected Toolbar mToolbar;
+    protected View mToolbarLeft;
+    protected View mToolbarMid;
+    protected View mToolbarRight;
+    protected FrameLayout mContainer;
+    protected View mContentView;
+    protected View mLoadingView;
+    protected ValueAnimator mLoadingAnimator;
+    protected View mErrorView;
+    protected View mEmptyView;
+    protected View.OnClickListener mOnClickEmptyOrErrorListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRootView = View.inflate(this, R.layout.a_base, null);
         mToolbar = (Toolbar) mRootView.findViewById(R.id.tb);
+        mToolbarLeft = createToolBarLeft();
+        mToolbarMid = createToolBarMid(R.string.app_name);
+        mToolbarRight = createToolBarRight();
+        if (mToolbarLeft != null) mToolbar.addView(mToolbarLeft);
+        if (mToolbarMid != null) mToolbar.addView(mToolbarMid);
+        if (mToolbarRight != null) mToolbar.addView(mToolbarRight);
         mContainer = (FrameLayout) mRootView.findViewById(R.id.container);
         mContentView = createContentView();
         mContainer.addView(mContentView);
         setContentView(mRootView);
+    }
+
+    protected View createToolBarLeft() {
+        ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.iv_toolbar_left);
+        iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, getResources().getDisplayMetrics());
+        Toolbar.LayoutParams lp = new Toolbar.LayoutParams(size, size);
+        lp.gravity = Gravity.LEFT;
+        iv.setLayoutParams(lp);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        return iv;
+    }
+
+    protected View createToolBarMid(int titleResId) {
+        TextView tv = new TextView(this);
+        tv.setText(titleResId);
+        Toolbar.LayoutParams lp = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.gravity = Gravity.CENTER_HORIZONTAL;
+        return tv;
+    }
+
+    protected View createToolBarRight() {
+        return null;
     }
 
     protected View createLoadingView() {
