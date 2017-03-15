@@ -25,18 +25,7 @@ public class NetAccessActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        mToolbar.setLogo(R.drawable.ic_launcher);
-//        mToolbar.setTitle(R.string.title);
-//        mToolbar.setSubtitle(R.string.sub_title);
-//        setSupportActionBar(mToolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "navigationOnClick");
-//            }
-//        });
+        initToolbar();
         mHandler = new Handler();
         mLoadingTv = (TextView) findViewById(R.id.tv_loading);
         mNormalTv = (TextView) findViewById(R.id.tv_normal);
@@ -53,6 +42,25 @@ public class NetAccessActivity extends BaseActivity implements View.OnClickListe
                 setState(STATE_LOADING);
             }
         });
+    }
+
+    private void initToolbar() {
+        /*mToolbar.setLogo(R.drawable.ic_launcher);
+        mToolbar.setTitle(R.string.title);
+        mToolbar.setSubtitle(R.string.sub_title);
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "navigationOnClick");
+            }
+        });*/
+
+        mToolbar.removeAllViews();
+        View titleBar = View.inflate(this, R.layout.l_simple_title_bar, null);
+        mToolbar.addView(titleBar);
     }
 
     @Override
