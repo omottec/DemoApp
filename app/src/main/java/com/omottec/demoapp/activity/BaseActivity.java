@@ -130,12 +130,6 @@ public abstract class BaseActivity extends FragmentActivity {
         if (mErrorView != null) mErrorView.setVisibility(View.GONE);
         if (null == mLoadingView) {
             mLoadingView = createLoadingView();
-            mLoadingView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
             mContainer.addView(mLoadingView);
         }
         mLoadingView.setVisibility(View.VISIBLE);
