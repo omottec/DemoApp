@@ -27,4 +27,6 @@ public final class Tag {
     public static final String ANIMATOR = "animator";
 
     public static final String JNI = "jni";
+
+    public static final String FRAME_TAB_PAGER = "frame_tab_pager";
 }
