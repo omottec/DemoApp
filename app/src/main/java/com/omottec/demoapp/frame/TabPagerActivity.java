@@ -39,12 +39,18 @@ public class TabPagerActivity extends AppCompatActivity {
         mTl = (TabLayout) findViewById(R.id.tl);
         mVp = (ViewPager) findViewById(R.id.vp);
         List<String> fragNames = new ArrayList<>();
-        int count = 2;
+        /*int count = 2;
         for (int i = 0; i < count; i++)
-            fragNames.add("frag " + i);
+            fragNames.add("frag " + i);*/
+        fragNames.add("一一");
+        fragNames.add("二二");
+        fragNames.add("三三三三三三三三");
+//        fragNames.add("四四四四四四四四四四四四");
         mVp.setAdapter(new SimpleFragPagerAdapter(getSupportFragmentManager(), fragNames));
         mTl.setupWithViewPager(mVp);
         mTl.setTabMode(TabLayout.MODE_SCROLLABLE);
+//        mTl.setTabMode(TabLayout.MODE_FIXED);
+
         /*mRootView.post(new Runnable() {
             @Override
             public void run() {
@@ -53,18 +59,19 @@ public class TabPagerActivity extends AppCompatActivity {
             }
         });*/
 
-        mRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        /*mRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 Log.d(Tag.FRAME_TAB_PAGER, "onGlobalLayout");
                 resizeTabLayout();
             }
-        });
+        });*/
     }
 
     private void resizeTabLayout() {
-        int totalWidth = 0, childWidth = 0;
+        int totalWidth = 0, childWidth;
         View rootChild = mTl.getChildAt(0);
+        Log.d(Tag.FRAME_TAB_PAGER, "rootChild.getWidth:" + rootChild.getWidth());
         if (rootChild instanceof ViewGroup) {
             ViewGroup vg = (ViewGroup) rootChild;
             int childCount = vg.getChildCount();
@@ -76,7 +83,17 @@ public class TabPagerActivity extends AppCompatActivity {
             int screenWidth = UiUtils.getScreenSize(this, true);
             Log.d(Tag.FRAME_TAB_PAGER, "screenWidth:" + screenWidth
                     + ", totalWidth:" + totalWidth);
-            if (totalWidth < screenWidth) mTl.setTabMode(TabLayout.MODE_FIXED);
+            if (totalWidth < screenWidth) {
+                int extraWidth = (screenWidth - totalWidth) / childCount;
+                View child;
+                for (int i = 0; i < childCount; i++) {
+                    child = vg.getChildAt(i);
+                    ViewGroup.LayoutParams lp = child.getLayoutParams();
+                    lp.width = child.getWidth() + extraWidth;
+                    child.setLayoutParams(lp);
+                    child.requestLayout();
+                }
+            }
         }
     }
 
