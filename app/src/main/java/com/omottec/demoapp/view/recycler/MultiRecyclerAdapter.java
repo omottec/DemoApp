@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.omottec.demoapp.app.MyApplication;
+
 import java.util.List;
 
 /**
@@ -58,7 +60,7 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter {
         return position % 2 == 0 ? VIEW_TYPE_SIMPLE : VIEW_TYPE_MULTI;
     }
 
-    class MultiViewHolder extends RecyclerView.ViewHolder {
+    static class MultiViewHolder extends RecyclerView.ViewHolder {
         ImageView mIv;
         TextView mTv;
 
@@ -74,13 +76,13 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter {
                             .append(", AdapterPosition:").append(getAdapterPosition())
                             .append(", LayoutPosition:" + getLayoutPosition())
                             .toString();
-                    Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
 
-    class SimpleViewHolder extends RecyclerView.ViewHolder {
+    static class SimpleViewHolder extends RecyclerView.ViewHolder {
         TextView mTv;
 
         public SimpleViewHolder(View itemView) {
@@ -94,7 +96,7 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter {
                             .append(", AdapterPosition:").append(getAdapterPosition())
                             .append(", LayoutPosition:" + getLayoutPosition())
                             .toString();
-                    Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
                 }
             });
         }
