@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 import android.os.Process;
 import android.os.SystemClock;
 import android.util.Log;
@@ -24,10 +25,15 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MyApplication extends Application {
     public static List<Activity> sLeakActivities = new ArrayList<>();
     private static Context sAppContext;
+    private static Handler sUiHandler;
     private boolean mIsMainProcess;
 
     public static Context getContext() {
         return sAppContext;
+    }
+
+    public static Handler getUiHandler() {
+        return sUiHandler;
     }
 
     @Override
@@ -46,6 +52,7 @@ public class MyApplication extends Application {
         Log.d(Tag.APP_PROCESS, this + " onCreate");
         Log.d(Tag.APP_PROCESS, "mIsMainProcess:" + mIsMainProcess);
         sAppContext = this;
+        sUiHandler = new Handler();
         /*if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());

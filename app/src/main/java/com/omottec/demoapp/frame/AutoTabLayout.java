@@ -63,21 +63,19 @@ public class AutoTabLayout extends TabLayout {
                 if (totalWidth >= screenWidth) return;
             }
             Log.d(Tag.FRAME_TAB_PAGER, "screenWidth:" + screenWidth + ", totalWidth:" + totalWidth + ", childCount:" + childCount);
-            if (totalWidth < screenWidth) {
-                int extraWidth = (screenWidth - totalWidth) / childCount;
-                if (extraWidth < UiUtils.dip2px(getContext(), 2)) {
-                    Log.d(Tag.FRAME_TAB_PAGER, "extraWidth is too small return");
-                    return;
-                }
-                View child;
-                for (int i = 0; i < childCount; i++) {
-                    child = vg.getChildAt(i);
-                    ViewGroup.LayoutParams lp = child.getLayoutParams();
-                    lp.width = child.getWidth() + extraWidth;
-                    child.setLayoutParams(lp);
-                    child.requestLayout();
-                    Log.d(Tag.FRAME_TAB_PAGER, "requestLayout");
-                }
+            int extraWidth = (screenWidth - totalWidth) / childCount;
+            if (extraWidth < UiUtils.dip2px(getContext(), 2)) {
+                Log.d(Tag.FRAME_TAB_PAGER, "extraWidth is too small return");
+                return;
+            }
+            View child;
+            for (int i = 0; i < childCount; i++) {
+                child = vg.getChildAt(i);
+                ViewGroup.LayoutParams lp = child.getLayoutParams();
+                lp.width = child.getWidth() + extraWidth;
+                child.setLayoutParams(lp);
+                child.requestLayout();
+                Log.d(Tag.FRAME_TAB_PAGER, "requestLayout");
             }
         }
     }
