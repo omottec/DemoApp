@@ -13,6 +13,8 @@ import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by omottec on 16/03/2017.
+ * 当Mode为MODE_SCROLLABLE且所有Tab的宽度小于屏宽时
+ * Tab自动平分剩余的空间
  */
 
 public class AutoTabLayout extends TabLayout {
@@ -53,12 +55,13 @@ public class AutoTabLayout extends TabLayout {
             ViewGroup vg = (ViewGroup) rootChild;
             int childCount = vg.getChildCount();
             if (childCount <= 1) return;
+            int screenWidth = UiUtils.getScreenSize(getContext(), true);
             for (int i = 0; i < childCount; i++) {
                 childWidth = vg.getChildAt(i).getWidth();
                 totalWidth += childWidth;
-                Log.d(Tag.FRAME_TAB_PAGER, "child "+ i + " width: " + childWidth);
+                Log.d(Tag.FRAME_TAB_PAGER, "child "+ i + " width: " + childWidth + ", totalWidth:" + totalWidth);
+                if (totalWidth >= screenWidth) return;
             }
-            int screenWidth = UiUtils.getScreenSize(getContext(), true);
             Log.d(Tag.FRAME_TAB_PAGER, "screenWidth:" + screenWidth + ", totalWidth:" + totalWidth + ", childCount:" + childCount);
             if (totalWidth < screenWidth) {
                 int extraWidth = (screenWidth - totalWidth) / childCount;
