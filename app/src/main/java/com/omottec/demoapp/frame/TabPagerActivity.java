@@ -39,14 +39,16 @@ public class TabPagerActivity extends AppCompatActivity {
         mTl = (TabLayout) findViewById(R.id.tl);
         mVp = (ViewPager) findViewById(R.id.vp);
         List<String> fragNames = new ArrayList<>();
-        /*int count = 2;
+        int count = 8;
         for (int i = 0; i < count; i++)
-            fragNames.add("frag " + i);*/
-        fragNames.add("一一");
+            fragNames.add("frag " + i);
+        /*fragNames.add("一一");
         fragNames.add("二二");
         fragNames.add("三三三三三三三三");
-//        fragNames.add("四四四四四四四四四四四四");
+        fragNames.add("四四四四四四四四四四四四");*/
+//        mVp.setAdapter(new SimpleFragStatePagerAdapter(getSupportFragmentManager(), fragNames));
         mVp.setAdapter(new SimpleFragPagerAdapter(getSupportFragmentManager(), fragNames));
+//        mVp.setOffscreenPageLimit(2);
         mTl.setupWithViewPager(mVp);
         mTl.setTabMode(TabLayout.MODE_SCROLLABLE);
 //        mTl.setTabMode(TabLayout.MODE_FIXED);

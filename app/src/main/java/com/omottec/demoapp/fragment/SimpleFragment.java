@@ -17,6 +17,7 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 
 import java.util.Timer;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by qinbingbing on 4/19/16.
@@ -27,6 +28,8 @@ public class SimpleFragment extends Fragment {
     private View mRootView;
     private TextView mTV;
     private String mName;
+//    private boolean mHasViewCreated;
+    private AtomicBoolean mHasViewCreated = new AtomicBoolean();
 
     public static SimpleFragment newInstance(String name) {
         Bundle args = new Bundle();
@@ -61,13 +64,38 @@ public class SimpleFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d(Tag.FRAME_TAB_PAGER, "onViewCreated " + this);
+        Log.d(Tag.FRAME_TAB_PAGER, "onViewCreated " + this + ", mHasViewCreated:" + mHasViewCreated.get());
         mTV.setText(TextUtils.isEmpty(mName) ? "???" : mName);
         mTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
+        mHasViewCreated.set(true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(Tag.FRAME_TAB_PAGER, "onStart " + this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(Tag.FRAME_TAB_PAGER, "onResume " + this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(Tag.FRAME_TAB_PAGER, "onPause " + this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(Tag.FRAME_TAB_PAGER, "onStop " + this);
     }
 
     @Override

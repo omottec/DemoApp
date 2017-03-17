@@ -18,6 +18,8 @@ import com.omottec.demoapp.utils.UiUtils;
  */
 
 public class AutoTabLayout extends TabLayout {
+    public static final String TAG = "AutoTabLayout";
+    
     public AutoTabLayout(Context context) {
         super(context);
     }
@@ -30,27 +32,18 @@ public class AutoTabLayout extends TabLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    private void init() {
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-//                resizeTabWidth();
-            }
-        });
-    }
-
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.d(Tag.FRAME_TAB_PAGER, "onLayout");
+        Log.d(TAG, "onLayout");
         super.onLayout(changed, l, t, r, b);
         resizeTabWidth();
     }
 
     private void resizeTabWidth() {
-        Log.d(Tag.FRAME_TAB_PAGER, "resizeTabWidth");
+        Log.d(TAG, "resizeTabWidth");
         int totalWidth = 0, childWidth;
         View rootChild = getChildAt(0);
-        Log.d(Tag.FRAME_TAB_PAGER, "rootChild.getWidth:" + rootChild.getWidth());
+        Log.d(TAG, "rootChild.getWidth:" + rootChild.getWidth());
         if (rootChild instanceof ViewGroup) {
             ViewGroup vg = (ViewGroup) rootChild;
             int childCount = vg.getChildCount();
@@ -59,13 +52,13 @@ public class AutoTabLayout extends TabLayout {
             for (int i = 0; i < childCount; i++) {
                 childWidth = vg.getChildAt(i).getWidth();
                 totalWidth += childWidth;
-                Log.d(Tag.FRAME_TAB_PAGER, "child "+ i + " width: " + childWidth + ", totalWidth:" + totalWidth);
+                Log.d(TAG, "child "+ i + " width: " + childWidth + ", totalWidth:" + totalWidth);
                 if (totalWidth >= screenWidth) return;
             }
-            Log.d(Tag.FRAME_TAB_PAGER, "screenWidth:" + screenWidth + ", totalWidth:" + totalWidth + ", childCount:" + childCount);
+            Log.d(TAG, "screenWidth:" + screenWidth + ", totalWidth:" + totalWidth + ", childCount:" + childCount);
             int extraWidth = (screenWidth - totalWidth) / childCount;
             if (extraWidth < UiUtils.dip2px(getContext(), 2)) {
-                Log.d(Tag.FRAME_TAB_PAGER, "extraWidth is too small return");
+                Log.d(TAG, "extraWidth is too small return");
                 return;
             }
             View child;
@@ -75,7 +68,7 @@ public class AutoTabLayout extends TabLayout {
                 lp.width = child.getWidth() + extraWidth;
                 child.setLayoutParams(lp);
                 child.requestLayout();
-                Log.d(Tag.FRAME_TAB_PAGER, "requestLayout");
+                Log.d(TAG, "requestLayout");
             }
         }
     }
