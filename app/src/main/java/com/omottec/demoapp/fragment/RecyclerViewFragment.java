@@ -39,8 +39,8 @@ public class RecyclerViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mRecyclerView = (RecyclerView) inflater.inflate(R.layout.f_recycler_view, null);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        GridLayoutManager gridLayoutManager= new GridLayoutManager(mContext, 3);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+        GridLayoutManager gridLayoutManager= new GridLayoutManager(mContext, 4);
+        /*gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 switch (position % 3) {
@@ -53,7 +53,7 @@ public class RecyclerViewFragment extends Fragment {
                         return 3;
                 }
             }
-        });
+        });*/
         mRecyclerView.setLayoutManager(gridLayoutManager);
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         List<String> list = new ArrayList<>();
