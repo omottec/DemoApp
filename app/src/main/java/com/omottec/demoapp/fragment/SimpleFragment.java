@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by qinbingbing on 4/19/16.
  */
-public class SimpleFragment extends Fragment {
+public class SimpleFragment extends BaseFragment {
     public static final String TAG = "SimpleFragment";
     public static final String ARG_NAME = "arg_name";
     private View mRootView;
@@ -56,7 +56,12 @@ public class SimpleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(Tag.FRAME_TAB_PAGER, "onCreateView " + this);
-        mRootView = inflater.inflate(R.layout.full_screen_text, null);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    protected View createContentView() {
+        mRootView = View.inflate(mActivity, R.layout.full_screen_text, null);
         mTV = (TextView) mRootView.findViewById(R.id.tv);
         return mRootView;
     }

@@ -1,33 +1,27 @@
-package com.omottec.demoapp.activity;
+package com.omottec.demoapp.fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.activity.PageState;
 
 /**
- * Created by qinbingbing on 14/03/2017.
+ * Created by qinbingbing on 20/03/2017.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
-    protected View mRootView;
-    protected Toolbar mToolbar;
-    protected View mToolbarLeft;
-    protected View mToolbarMid;
-    protected View mToolbarRight;
-    protected FrameLayout mContainer;
+public abstract class BaseFragment extends Fragment {
+    protected FragmentActivity mActivity;
+    protected FrameLayout mRootFl;
     protected View mContentView;
     protected View mLoadingView;
     protected ValueAnimator mLoadingAnimator;
@@ -38,51 +32,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRootView = View.inflate(this, R.layout.a_base, null);
-        mToolbar = (Toolbar) mRootView.findViewById(R.id.tb);
-        mToolbarLeft = createToolBarLeft();
-        mToolbarMid = createToolBarMid(R.string.app_name);
-        mToolbarRight = createToolBarRight();
-        if (mToolbarLeft != null) mToolbar.addView(mToolbarLeft);
-        if (mToolbarMid != null) mToolbar.addView(mToolbarMid);
-        if (mToolbarRight != null) mToolbar.addView(mToolbarRight);
-        mContainer = (FrameLayout) mRootView.findViewById(R.id.container);
-        mContentView = createContentView();
-        mContainer.addView(mContentView);
-        setContentView(mRootView);
+        mActivity = getActivity();
     }
 
-    protected View createToolBarLeft() {
-        ImageView iv = new ImageView(this);
-        iv.setImageResource(R.drawable.iv_toolbar_left);
-        iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45, getResources().getDisplayMetrics());
-        Toolbar.LayoutParams lp = new Toolbar.LayoutParams(size, size);
-        lp.gravity = Gravity.LEFT;
-        iv.setLayoutParams(lp);
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        return iv;
-    }
-
-    protected View createToolBarMid(int titleResId) {
-        TextView tv = new TextView(this);
-        tv.setText(titleResId);
-        Toolbar.LayoutParams lp = new Toolbar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.gravity = Gravity.CENTER_HORIZONTAL;
-        return tv;
-    }
-
-    protected View createToolBarRight() {
-        return null;
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mRootFl = (FrameLayout) View.inflate(mActivity, R.layout.f_base, null);
+        if (mContentView == null) {
+            mContentView = createContentView();
+            mRootFl.addView(mContentView);
+        }
+        return mRootFl;
     }
 
     protected View createLoadingView() {
-        return View.inflate(this, R.layout.l_loading, null);
+        return View.inflate(mActivity, R.layout.l_loading, null);
     }
 
     protected ValueAnimator createLoadingAnimator() {
@@ -96,11 +61,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     protected View createErrorView() {
-        return View.inflate(this, R.layout.l_net_error, null);
+        return View.inflate(mActivity, R.layout.l_net_error, null);
     }
 
     protected View createEmptyView() {
-        return View.inflate(this, R.layout.l_empty, null);
+        return View.inflate(mActivity, R.layout.l_empty, null);
     }
 
     protected View.OnClickListener createEmptyErrorListener() {
@@ -132,7 +97,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mErrorView != null) mErrorView.setVisibility(View.GONE);
         if (mEmptyView == null) {
             mEmptyView = createEmptyView();
-            mContainer.addView(mEmptyView);
+            mRootFl.addView(mEmptyView);
         }
         if (mOnClickEmptyOrErrorListener == null
                 && (mOnClickEmptyOrErrorListener = createEmptyErrorListener()) != null)
@@ -146,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mEmptyView != null) mEmptyView.setVisibility(View.GONE);
         if (mErrorView == null) {
             mErrorView = createErrorView();
-            mContainer.addView(mErrorView);
+            mRootFl.addView(mErrorView);
         }
         if (mOnClickEmptyOrErrorListener == null
                 && (mOnClickEmptyOrErrorListener = createEmptyErrorListener()) != null)
@@ -167,7 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mErrorView != null) mErrorView.setVisibility(View.GONE);
         if (mLoadingView == null) {
             mLoadingView = createLoadingView();
-            mContainer.addView(mLoadingView);
+            mRootFl.addView(mLoadingView);
         }
         mLoadingView.setVisibility(View.VISIBLE);
         if (mLoadingAnimator == null)
@@ -188,17 +153,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (isLoading()) {
-            dismissLoading();
-            return;
-        }
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (isLoading()) dismissLoading();
     }
+
+
 }

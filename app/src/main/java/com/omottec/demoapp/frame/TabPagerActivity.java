@@ -53,7 +53,7 @@ public class TabPagerActivity extends AppCompatActivity {
         mTl.setTabMode(TabLayout.MODE_SCROLLABLE);
 //        mTl.setTabMode(TabLayout.MODE_FIXED);
 
-        /*mRootView.post(new Runnable() {
+        /*mRootFl.post(new Runnable() {
             @Override
             public void run() {
                 Log.d(Tag.FRAME_TAB_PAGER, "view post");
@@ -61,7 +61,7 @@ public class TabPagerActivity extends AppCompatActivity {
             }
         });*/
 
-        /*mRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        /*mRootFl.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 Log.d(Tag.FRAME_TAB_PAGER, "onGlobalLayout");

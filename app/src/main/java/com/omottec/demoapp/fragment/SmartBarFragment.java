@@ -61,7 +61,7 @@ public class SmartBarFragment extends Fragment {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "mRootView.getMeasuredHeight():" + mRootView.getMeasuredHeight());
+                Log.d(TAG, "mRootFl.getMeasuredHeight():" + mRootView.getMeasuredHeight());
                 Log.d(TAG, "getDecorView().getMeasuredHeight:" + mActivity.getWindow().getDecorView().getRootView().getMeasuredHeight());
             }
         }, 500);

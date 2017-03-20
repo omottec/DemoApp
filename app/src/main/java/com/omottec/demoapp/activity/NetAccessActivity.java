@@ -3,8 +3,6 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,13 +33,17 @@ public class NetAccessActivity extends BaseActivity implements View.OnClickListe
         mNormalTv.setOnClickListener(this);
         mEmptyTv.setOnClickListener(this);
         mErrorTv.setOnClickListener(this);
-        setState(STATE_LOADING);
-        setOnClickEmptyOrErrorListener(new View.OnClickListener() {
+        setState(PageState.LOADING);
+    }
+
+    @Override
+    protected View.OnClickListener createEmptyErrorListener() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setState(STATE_LOADING);
+                setState(PageState.LOADING);
             }
-        });
+        };
     }
 
     private void initToolbar() {
@@ -74,7 +76,7 @@ public class NetAccessActivity extends BaseActivity implements View.OnClickListe
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                setState(STATE_NORMAL);
+                setState(PageState.NORMAL);
             }
         }, 10 * 1000);
     }
@@ -89,16 +91,16 @@ public class NetAccessActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_loading:
-                setState(STATE_LOADING);
+                setState(PageState.LOADING);
                 break;
             case R.id.tv_normal:
-                setState(STATE_NORMAL);
+                setState(PageState.NORMAL);
                 break;
             case R.id.tv_empty:
-                setState(STATE_EMPTY);
+                setState(PageState.EMPTY);
                 break;
             case R.id.tv_error:
-                setState(STATE_ERROR);
+                setState(PageState.ERROR);
                 break;
         }
     }
