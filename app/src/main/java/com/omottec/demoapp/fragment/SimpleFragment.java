@@ -30,6 +30,7 @@ public class SimpleFragment extends BaseFragment {
     private String mName;
 //    private boolean mHasViewCreated;
     private AtomicBoolean mHasViewCreated = new AtomicBoolean();
+    private byte[] mMemoryAllocation;
 
     public static SimpleFragment newInstance(String name) {
         Bundle args = new Bundle();
@@ -77,6 +78,7 @@ public class SimpleFragment extends BaseFragment {
             }
         });
         mHasViewCreated.set(true);
+        mMemoryAllocation = new byte[10 * 1024 * 1024];
     }
 
     @Override

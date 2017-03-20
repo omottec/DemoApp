@@ -46,9 +46,9 @@ public class TabPagerActivity extends AppCompatActivity {
         fragNames.add("二二");
         fragNames.add("三三三三三三三三");
         fragNames.add("四四四四四四四四四四四四");*/
-//        mVp.setAdapter(new SimpleFragStatePagerAdapter(getSupportFragmentManager(), fragNames));
-        mVp.setAdapter(new SimpleFragPagerAdapter(getSupportFragmentManager(), fragNames));
-//        mVp.setOffscreenPageLimit(2);
+        mVp.setAdapter(new SimpleFragStatePagerAdapter(getSupportFragmentManager(), fragNames));
+//        mVp.setAdapter(new SimpleFragPagerAdapter(getSupportFragmentManager(), fragNames));
+        mVp.setOffscreenPageLimit(2);
         mTl.setupWithViewPager(mVp);
         mTl.setTabMode(TabLayout.MODE_SCROLLABLE);
 //        mTl.setTabMode(TabLayout.MODE_FIXED);

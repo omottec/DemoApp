@@ -38,6 +38,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mRootFl != null) return mRootFl;
         mRootFl = (FrameLayout) View.inflate(mActivity, R.layout.f_base, null);
         if (mContentView == null) {
             mContentView = createContentView();
