@@ -14,6 +14,7 @@ import com.omottec.demoapp.fragment.ShadowEntranceFragment;
 import com.omottec.demoapp.fragment.SimpleFragment;
 import com.omottec.demoapp.fragment.TouchFragment;
 import com.omottec.demoapp.fragment.ViewFragment;
+import com.omottec.demoapp.view.ptr.PaddingFragment;
 
 /**
  * Created by qinbingbing on 3/31/16.
@@ -23,6 +24,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new RecyclerViewFragment();
+        return new PaddingFragment();
     }
 }
