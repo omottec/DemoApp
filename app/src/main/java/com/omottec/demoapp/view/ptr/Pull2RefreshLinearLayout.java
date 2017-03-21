@@ -46,6 +46,7 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // padding
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastX = event.getX();
@@ -74,6 +75,8 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
                 return false;
         }
         return super.onTouchEvent(event);
+
+
     }
 
     private void init() {
@@ -100,14 +103,29 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
         postDelayed(new Runnable() {
             @Override
             public void run() {
-                /*Log.d(TAG, getPadding());
+                // padding
+                Log.d(TAG, getPadding());
                 setPadding(0, -ITEM_HEIGHT, 0, -ITEM_HEIGHT);
-                Log.d(TAG, getPadding());*/
+                Log.d(TAG, getPadding());
 
-                Log.d(TAG, getScroll());
+                // scroll
+                /*Log.d(TAG, getScroll());
 //                scrollBy(0, ITEM_HEIGHT);
                 scrollTo(0, -ITEM_HEIGHT);
-                Log.d(TAG, getScroll());
+                Log.d(TAG, getScroll());*/
+
+                // margin
+                /*Log.d(TAG, "mHeaderTv:" + getMargin(mHeaderTv));
+                LinearLayout.LayoutParams lp = (LayoutParams) mHeaderTv.getLayoutParams();
+                lp.topMargin = -ITEM_HEIGHT;
+                mHeaderTv.requestLayout();
+                Log.d(TAG, "mHeaderTv:" + getMargin(mHeaderTv));
+
+                Log.d(TAG, "mFooterTv:" + getMargin(mFooterTv));
+                lp = (LayoutParams) mFooterTv.getLayoutParams();
+                lp.bottomMargin = -ITEM_HEIGHT;
+                mFooterTv.requestLayout();
+                Log.d(TAG, "mFooterTv:" + getMargin(mFooterTv));*/
             }
         }, 5 * 1000);
     }
@@ -118,5 +136,10 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
 
     private String getScroll() {
         return "ScrollX:" + getScrollX();
+    }
+
+    private String getMargin(View v) {
+        LinearLayout.LayoutParams lp = (LayoutParams) v.getLayoutParams();
+        return "topMargin:" + lp.topMargin + ", bottomMargin:" + lp.bottomMargin;
     }
 }
