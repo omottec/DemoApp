@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 
@@ -107,7 +107,7 @@ public class WelcomeActivity extends FragmentActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         Log.d(Tag.TASK, "taskId:" + getTaskId() + "|" + this + "|onDestroy");
-        Glide.with(WelcomeActivity.this).load("http://goo.gl/gEgYUd").into(mIv);
+//        Glide.with(WelcomeActivity.this).load("http://goo.gl/gEgYUd").into(mIv);
         /*mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
