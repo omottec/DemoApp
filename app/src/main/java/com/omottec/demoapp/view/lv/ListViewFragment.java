@@ -85,7 +85,9 @@ public class ListViewFragment extends BaseFragment {
                 Log.d(TAG, "onScroll firstVisibleItem:" + firstVisibleItem
                         + ", visibleItemCount:" + visibleItemCount
                         + ", totalItemCount:" + totalItemCount
-                        + ", mLv.getCount:" + mLv.getCount());
+                        + ", mLv.getCount:" + mLv.getCount()
+                        + ", mLv.getFirstVisiblePosition:" + mLv.getFirstVisiblePosition()
+                        + ", mLv.getLastVisiblePosition:" + mLv.getLastVisiblePosition());
             }
         });
     }
