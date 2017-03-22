@@ -104,15 +104,15 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
             @Override
             public void run() {
                 // padding
-                Log.d(TAG, getPadding());
+                /*Log.d(TAG, getPadding());
                 setPadding(0, -ITEM_HEIGHT, 0, -ITEM_HEIGHT);
-                Log.d(TAG, getPadding());
+                Log.d(TAG, getPadding());*/
 
                 // scroll
-                /*Log.d(TAG, getScroll());
+                Log.d(TAG, getScroll());
 //                scrollBy(0, ITEM_HEIGHT);
                 scrollTo(0, -ITEM_HEIGHT);
-                Log.d(TAG, getScroll());*/
+                Log.d(TAG, getScroll());
 
                 // margin
                 /*Log.d(TAG, "mHeaderTv:" + getMargin(mHeaderTv));
@@ -141,5 +141,11 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
     private String getMargin(View v) {
         LinearLayout.LayoutParams lp = (LayoutParams) v.getLayoutParams();
         return "topMargin:" + lp.topMargin + ", bottomMargin:" + lp.bottomMargin;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        Log.d(TAG, "onScrollChanged l:" + l + ", t:" + t + ", oldl:" + oldl + ", oldt:" + oldt);
     }
 }
