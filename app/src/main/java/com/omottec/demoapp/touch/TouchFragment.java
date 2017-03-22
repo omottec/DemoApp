@@ -24,7 +24,7 @@ public class TouchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRl = (TouchRelativeLayout) inflater.inflate(R.layout.touch, null);
+        mRl = (TouchRelativeLayout) inflater.inflate(R.layout.f_touch, null);
         mTv = (TouchTextView) mRl.findViewById(R.id.touch_tv);
         return mRl;
     }
