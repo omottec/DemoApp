@@ -1,4 +1,4 @@
-package com.omottec.demoapp.view;
+package com.omottec.demoapp.touch;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -13,7 +13,7 @@ import com.omottec.demoapp.utils.TouchUtils;
  * Created by qinbingbing on 8/25/16.
  */
 public class TouchRelativeLayout extends RelativeLayout {
-    private int mCount;
+    private int mCount = 1;
 
     public TouchRelativeLayout(Context context) {
         super(context);
@@ -42,7 +42,7 @@ public class TouchRelativeLayout extends RelativeLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d(Tag.TOUCH, "TouchRelativeLayout.onInterceptTouchEvent "
                 + TouchUtils.getTouchEventAction(ev));
-        /*switch (ev.getAction()) {
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 return false;
             case MotionEvent.ACTION_MOVE:
@@ -52,9 +52,10 @@ public class TouchRelativeLayout extends RelativeLayout {
                 return false;
             default:
                 return false;
-        }*/
-        return super.onInterceptTouchEvent(ev);
+        }
+//        return super.onInterceptTouchEvent(ev);
 //        return true;
+//        return false;
     }
 
     @Override

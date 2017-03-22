@@ -1,4 +1,4 @@
-package com.omottec.demoapp.view;
+package com.omottec.demoapp.touch;
 
 import android.content.Context;
 import android.util.AttributeSet;

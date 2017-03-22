@@ -1,7 +1,6 @@
-package com.omottec.demoapp.activity;
+package com.omottec.demoapp.touch;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,6 @@ import android.view.MotionEvent;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.fragment.TouchFragment;
 import com.omottec.demoapp.utils.TouchUtils;
 
 /**

@@ -1,4 +1,4 @@
-package com.omottec.demoapp.fragment;
+package com.omottec.demoapp.touch;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.view.TouchRelativeLayout;
-import com.omottec.demoapp.view.TouchTextView;
 
 /**
  * Created by qinbingbing on 8/26/16.
