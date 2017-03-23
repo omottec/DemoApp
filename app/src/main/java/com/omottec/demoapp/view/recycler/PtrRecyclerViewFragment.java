@@ -46,8 +46,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
         mSimpleAdapter = new SimpleRecyclerAdapter(data);
-        mPtrAdapter = new PtrRecyclerAdapter(mSimpleAdapter, false, true);
-        mSimpleAdapter.setPtrAdapter(mPtrAdapter);
+        mPtrAdapter = new PtrRecyclerAdapter(mPtrRecyclerView, mSimpleAdapter, false, true);
         mRecyclerView.setAdapter(mPtrAdapter);
         mPtrAdapter.notifyDataSetChanged();
 
@@ -55,12 +54,13 @@ public class PtrRecyclerViewFragment extends BaseFragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullDownToRefresh");
+                if (mPtrAdapter.showFooter())
+                    mPtrAdapter.setShowFooter(false);
                 List<String> data = new ArrayList<String>();
                 for (int i = 0; i < 5; i++)
                     data.add(0, "item add header " + mHeaderCount);
                 mHeaderCount++;
                 mPtrRecyclerView.onRefreshComplete();
-//                mPtrAdapter.notifyDataSetChanged();
                 mSimpleAdapter.addDataAtFirst(data);
             }
 
@@ -69,8 +69,8 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                 Log.d(TAG, "onPullUpToRefresh");
                 if (mFooterCount == 2) {
                     mPtrRecyclerView.onRefreshComplete();
-                    mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                    mPtrAdapter.setShowFooter(true);
+                    if (!mPtrAdapter.showFooter())
+                        mPtrAdapter.setShowFooter(true);
                     return;
                 }
                 List<String> data = new ArrayList<String>();
@@ -78,7 +78,6 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                     data.add("item add footer " + mFooterCount);
                 mFooterCount++;
                 mPtrRecyclerView.onRefreshComplete();
-//                mPtrAdapter.notifyDataSetChanged();
                 mSimpleAdapter.addDataAtLast(data);
             }
         });

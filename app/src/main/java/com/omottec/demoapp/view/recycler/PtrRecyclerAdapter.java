@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.omottec.demoapp.R;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.app.MyApplication;
 
 /**
@@ -24,23 +24,75 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
     private boolean mShowHeader = false;
     private boolean mShowFooter = false;
     private RecyclerView.Adapter<T> mAdapter;
+    private PullToRefreshRecyclerView mPtrRecyclerView;
+    private RecyclerView.AdapterDataObserver mDataObserver;
 
-    public PtrRecyclerAdapter(RecyclerView.Adapter<T> adapter, boolean includeHeader, boolean includeFooter) {
+    public PtrRecyclerAdapter(PullToRefreshRecyclerView ptrRecyclerView, RecyclerView.Adapter<T> adapter, boolean includeHeader, final boolean includeFooter) {
+        mPtrRecyclerView = ptrRecyclerView;
         mAdapter = adapter;
+        initDataObserver();
         if (includeHeader) mHeaderViewId = android.R.layout.simple_list_item_1;
         if (includeFooter) mFooterViewId = android.R.layout.simple_list_item_1;
-
     }
 
-    public PtrRecyclerAdapter(RecyclerView.Adapter<T> adapter, int headerViewId, int footerViewId) {
+    public PtrRecyclerAdapter(PullToRefreshRecyclerView ptrRecyclerView, RecyclerView.Adapter<T> adapter, int headerViewId, int footerViewId) {
+        mPtrRecyclerView = ptrRecyclerView;
         mAdapter = adapter;
+        initDataObserver();
         mHeaderViewId = headerViewId;
         mFooterViewId = footerViewId;
+    }
+
+    private void initDataObserver() {
+        mDataObserver = new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                PtrRecyclerAdapter.this.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount) {
+                PtrRecyclerAdapter.this.notifyItemRangeChanged(
+                        showHeader() ? positionStart+1 : positionStart,
+                        itemCount);
+            }
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+                PtrRecyclerAdapter.this.notifyItemRangeChanged(
+                        showHeader() ? positionStart+1 : positionStart,
+                        itemCount,
+                        payload);
+            }
+
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                PtrRecyclerAdapter.this.notifyItemRangeInserted(
+                        showHeader() ? positionStart+1 : positionStart,
+                        itemCount);
+            }
+
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                PtrRecyclerAdapter.this.notifyItemRangeRemoved(
+                        showHeader() ? positionStart+1 : positionStart,
+                        itemCount);
+            }
+
+            @Override
+            public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+                if (itemCount == 1)
+                    PtrRecyclerAdapter.this.notifyItemMoved(
+                            showHeader() ? fromPosition+1 : fromPosition,
+                            showHeader() ? toPosition+1 : toPosition);
+            }
+        };
     }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        mAdapter.registerAdapterDataObserver(mDataObserver);
         RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
         if (lm instanceof GridLayoutManager) {
             final GridLayoutManager glm = (GridLayoutManager) lm;
@@ -55,6 +107,12 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
                 }
             });
         }
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        mAdapter.unregisterAdapterDataObserver(mDataObserver);
     }
 
     @Override
@@ -129,17 +187,20 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
     public void setShowFooter(boolean showFooter) {
         if (mFooterViewId == -1) return;
         mShowFooter = showFooter;
-        if (showFooter)
+        if (showFooter) {
+            mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
             notifyItemInserted(getItemCount()-1);
-        else
+        } else {
+            mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
             notifyItemRemoved(getItemCount()-1);
+        }
     }
 
-    private boolean showHeader() {
+    public boolean showHeader() {
         return mHeaderViewId != -1 && mShowHeader;
     }
 
-    private boolean showFooter() {
+    public boolean showFooter() {
         return mFooterViewId != -1 && mShowFooter;
     }
 }

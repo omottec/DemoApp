@@ -47,17 +47,11 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder
 
     public void addDataAtLast(List<String> data) {
         mData.addAll(data);
-//        notifyDataSetChanged();
-        mPtrAdapter.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public void addDataAtFirst(List<String> data) {
         mData.addAll(0, data);
-//        notifyDataSetChanged();
-        mPtrAdapter.notifyDataSetChanged();
-    }
-
-    public void setPtrAdapter(PtrRecyclerAdapter ptrAdapter) {
-        mPtrAdapter = ptrAdapter;
+        notifyDataSetChanged();
     }
 }
