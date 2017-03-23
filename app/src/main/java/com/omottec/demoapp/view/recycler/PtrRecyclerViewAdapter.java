@@ -72,20 +72,28 @@ public class PtrRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends R
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == VIEW_TYPE_HEADER) {
-            TextView tv = (TextView) holder.itemView;
-            tv.setText("Header");
-            tv.setTextColor(Color.BLACK);
-            tv.setBackgroundColor(Color.RED);
-            tv.setGravity(Gravity.CENTER);
+            onBindHeaderViewHolder(holder);
         } else if (holder.getItemViewType() == VIEW_TYPE_FOOTER) {
-            TextView tv = (TextView) holder.itemView;
-            tv.setText("Footer");
-            tv.setTextColor(Color.BLACK);
-            tv.setBackgroundColor(Color.BLUE);
-            tv.setGravity(Gravity.CENTER);
+            onBindFooterViewHolder(holder);
         } else {
             mAdapter.onBindViewHolder((T)holder, showHeader() ? position-1 : position);
         }
+    }
+
+    protected void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
+        TextView tv = (TextView) holder.itemView;
+        tv.setText("Header");
+        tv.setTextColor(Color.BLACK);
+        tv.setBackgroundColor(Color.RED);
+        tv.setGravity(Gravity.CENTER);
+    }
+
+    protected void onBindFooterViewHolder(RecyclerView.ViewHolder holder) {
+        TextView tv = (TextView) holder.itemView;
+        tv.setText("Footer");
+        tv.setTextColor(Color.BLACK);
+        tv.setBackgroundColor(Color.BLUE);
+        tv.setGravity(Gravity.CENTER);
     }
 
     @Override
