@@ -2,6 +2,7 @@ package com.omottec.demoapp.view.recycler;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,7 +45,8 @@ public class PtrRecyclerViewFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         for (int i = 0; i < 100; i++)
             mData.add("item " + i);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
         mAdapter = new PtrRecyclerViewAdapter(new SimpleAdapter(), true, true);
         mAdapter.setShowHeader(true);
         mRecyclerView.setAdapter(mAdapter);

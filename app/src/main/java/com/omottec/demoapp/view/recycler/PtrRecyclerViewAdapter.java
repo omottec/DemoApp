@@ -1,6 +1,7 @@
 package com.omottec.demoapp.view.recycler;
 
 import android.graphics.Color;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +36,25 @@ public class PtrRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends R
         mAdapter = adapter;
         mHeaderViewId = headerViewId;
         mFooterViewId = footerViewId;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
+        if (lm instanceof GridLayoutManager) {
+            final GridLayoutManager glm = (GridLayoutManager) lm;
+            final int spanCount = glm.getSpanCount();
+            final GridLayoutManager.SpanSizeLookup spanSizeLookup = glm.getSpanSizeLookup();
+            glm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (showHeader() && position == 0) return spanCount;
+                    if (showFooter() && position == getItemCount()-1) return spanCount;
+                    return spanSizeLookup.getSpanSize(showHeader() ? position-1 : position);
+                }
+            });
+        }
     }
 
     @Override
