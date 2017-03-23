@@ -54,8 +54,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullDownToRefresh");
-                if (mPtrAdapter.showFooter())
-                    mPtrAdapter.setShowFooter(false);
+                mPtrAdapter.setShowFooter(false);
                 List<String> data = new ArrayList<String>();
                 for (int i = 0; i < 5; i++)
                     data.add(0, "item add header " + mHeaderCount);
@@ -69,8 +68,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                 Log.d(TAG, "onPullUpToRefresh");
                 if (mFooterCount == 2) {
                     mPtrRecyclerView.onRefreshComplete();
-                    if (!mPtrAdapter.showFooter())
-                        mPtrAdapter.setShowFooter(true);
+                    mPtrAdapter.setShowFooter(true);
                     return;
                 }
                 List<String> data = new ArrayList<String>();

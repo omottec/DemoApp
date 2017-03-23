@@ -176,7 +176,7 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
     }
 
     public void setShowHeader(boolean showHeader) {
-        if (mHeaderViewId == -1) return;
+        if (mHeaderViewId == -1 || mShowHeader == showHeader) return;
         mShowHeader = showHeader;
         if (showHeader)
             notifyItemInserted(0);
@@ -185,7 +185,7 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
     }
 
     public void setShowFooter(boolean showFooter) {
-        if (mFooterViewId == -1) return;
+        if (mFooterViewId == -1 || mShowFooter == showFooter) return;
         mShowFooter = showFooter;
         if (showFooter) {
             mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
