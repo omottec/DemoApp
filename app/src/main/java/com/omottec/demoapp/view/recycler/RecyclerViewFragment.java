@@ -1,4 +1,4 @@
-package com.omottec.demoapp.fragment;
+package com.omottec.demoapp.view.recycler;
 
 import android.content.Context;
 import android.os.Bundle;

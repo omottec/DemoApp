@@ -1,0 +1,32 @@
+package com.omottec.demoapp.view.recycler;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.omottec.demoapp.app.MyApplication;
+
+/**
+ * Created by qinbingbing on 23/03/2017.
+ */
+
+public class SimpleViewHolder extends RecyclerView.ViewHolder {
+    TextView mTv;
+
+    public SimpleViewHolder(View itemView) {
+        super(itemView);
+        mTv = (TextView) itemView.findViewById(android.R.id.text1);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toast = new StringBuilder()
+                        .append("ItemViewType:").append(getItemViewType())
+                        .append(", AdapterPosition:").append(getAdapterPosition())
+                        .append(", LayoutPosition:" + getLayoutPosition())
+                        .toString();
+                Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.omottec.demoapp.fragment.SimpleFragment;
+import com.omottec.demoapp.fragment.SimpleTextFragment;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class SimpleFragStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return SimpleFragment.newInstance(mNames.get(position));
+        return SimpleTextFragment.newInstance(mNames.get(position));
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by qinbingbing on 10/03/2017.
  */
 
-public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAdapter.SimpleViewHolder> {
+public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder> {
     public static final String TAG = "SimpleRecyclerAdapter";
     private Context mContext;
     private List<String> mData;
@@ -39,22 +39,5 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
     @Override
     public int getItemCount() {
         return mData.size();
-    }
-
-    class SimpleViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTv;
-
-        public SimpleViewHolder(View itemView) {
-            super(itemView);
-            mTv = (TextView) itemView.findViewById(android.R.id.text1);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext,
-                            "AdapterPosition:" + getAdapterPosition() + ", LayoutPosition:"+ getLayoutPosition(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 }

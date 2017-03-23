@@ -59,46 +59,4 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         return position % 2 == 0 ? VIEW_TYPE_SIMPLE : VIEW_TYPE_MULTI;
     }
-
-    static class MultiViewHolder extends RecyclerView.ViewHolder {
-        ImageView mIv;
-        TextView mTv;
-
-        public MultiViewHolder(View itemView) {
-            super(itemView);
-            mIv = (ImageView) itemView.findViewById(android.R.id.icon);
-            mTv = (TextView) itemView.findViewById(android.R.id.text1);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String toast = new StringBuilder()
-                            .append("ItemViewType:").append(getItemViewType())
-                            .append(", AdapterPosition:").append(getAdapterPosition())
-                            .append(", LayoutPosition:" + getLayoutPosition())
-                            .toString();
-                    Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    static class SimpleViewHolder extends RecyclerView.ViewHolder {
-        TextView mTv;
-
-        public SimpleViewHolder(View itemView) {
-            super(itemView);
-            mTv = (TextView) itemView.findViewById(android.R.id.text1);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String toast = new StringBuilder()
-                            .append("ItemViewType:").append(getItemViewType())
-                            .append(", AdapterPosition:").append(getAdapterPosition())
-                            .append(", LayoutPosition:" + getLayoutPosition())
-                            .toString();
-                    Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
 }
