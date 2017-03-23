@@ -1,5 +1,6 @@
 package com.omottec.demoapp.view.recycler;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ public class SimpleViewHolder extends RecyclerView.ViewHolder {
     public SimpleViewHolder(View itemView) {
         super(itemView);
         mTv = (TextView) itemView.findViewById(android.R.id.text1);
+        mTv.setTextColor(Color.BLACK);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

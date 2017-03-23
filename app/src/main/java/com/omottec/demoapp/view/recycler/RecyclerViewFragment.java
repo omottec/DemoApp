@@ -59,7 +59,7 @@ public class RecyclerViewFragment extends Fragment {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 200; i++)
             list.add("item " + i);
-        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(mContext, list));
+        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(list));
 //        mRecyclerView.setAdapter(new MultiRecyclerAdapter(mContext, list));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

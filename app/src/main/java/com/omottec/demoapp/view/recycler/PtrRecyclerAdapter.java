@@ -16,7 +16,7 @@ import com.omottec.demoapp.app.MyApplication;
  * Created by qinbingbing on 23/03/2017.
  */
 
-public class PtrRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
+public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
     public static final int VIEW_TYPE_HEADER = Integer.MIN_VALUE;
     public static final int VIEW_TYPE_FOOTER = Integer.MIN_VALUE + 1;
     private int mHeaderViewId = -1;
@@ -25,14 +25,14 @@ public class PtrRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends R
     private boolean mShowFooter = false;
     private RecyclerView.Adapter<T> mAdapter;
 
-    public PtrRecyclerViewAdapter(RecyclerView.Adapter<T> adapter, boolean includeHeader, boolean includeFooter) {
+    public PtrRecyclerAdapter(RecyclerView.Adapter<T> adapter, boolean includeHeader, boolean includeFooter) {
         mAdapter = adapter;
         if (includeHeader) mHeaderViewId = android.R.layout.simple_list_item_1;
         if (includeFooter) mFooterViewId = android.R.layout.simple_list_item_1;
 
     }
 
-    public PtrRecyclerViewAdapter(RecyclerView.Adapter<T> adapter, int headerViewId, int footerViewId) {
+    public PtrRecyclerAdapter(RecyclerView.Adapter<T> adapter, int headerViewId, int footerViewId) {
         mAdapter = adapter;
         mHeaderViewId = headerViewId;
         mFooterViewId = footerViewId;

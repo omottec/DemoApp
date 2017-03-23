@@ -3,11 +3,16 @@ package com.omottec.demoapp.view.recycler;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.omottec.demoapp.R;
+import com.omottec.demoapp.app.MyApplication;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,18 +21,17 @@ import java.util.List;
 
 public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder> {
     public static final String TAG = "SimpleRecyclerAdapter";
-    private Context mContext;
-    private List<String> mData;
+    private List<String> mData = new ArrayList<>();
+    private PtrRecyclerAdapter mPtrAdapter;
 
-    public SimpleRecyclerAdapter(Context context, List<String> data) {
-        mContext = context;
-        mData = data;
+    public SimpleRecyclerAdapter(List<String> data) {
+        mData.addAll(data);
     }
 
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder viewType:" + viewType);
-        return new SimpleViewHolder(View.inflate(mContext, android.R.layout.simple_list_item_1, null));
+        return new SimpleViewHolder(LayoutInflater.from(MyApplication.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false));
     }
 
     @Override
@@ -39,5 +43,21 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public void addDataAtLast(List<String> data) {
+        mData.addAll(data);
+//        notifyDataSetChanged();
+        mPtrAdapter.notifyDataSetChanged();
+    }
+
+    public void addDataAtFirst(List<String> data) {
+        mData.addAll(0, data);
+//        notifyDataSetChanged();
+        mPtrAdapter.notifyDataSetChanged();
+    }
+
+    public void setPtrAdapter(PtrRecyclerAdapter ptrAdapter) {
+        mPtrAdapter = ptrAdapter;
     }
 }

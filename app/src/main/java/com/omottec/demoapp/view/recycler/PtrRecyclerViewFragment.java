@@ -3,13 +3,9 @@ package com.omottec.demoapp.view.recycler;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.R;
@@ -27,7 +23,8 @@ public class PtrRecyclerViewFragment extends BaseFragment {
     private PullToRefreshRecyclerView mPtrRecyclerView;
     private RecyclerView mRecyclerView;
     private List<String> mData = new ArrayList<>();
-    private PtrRecyclerViewAdapter mAdapter;
+    private SimpleRecyclerAdapter mSimpleAdapter;
+    private PtrRecyclerAdapter mPtrAdapter;
     private int mHeaderCount;
     private int mFooterCount;
 
@@ -43,23 +40,28 @@ public class PtrRecyclerViewFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        List<String> data = new ArrayList<>();
         for (int i = 0; i < 100; i++)
-            mData.add("item " + i);
+            data.add("item " + i);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
-        mAdapter = new PtrRecyclerViewAdapter(new SimpleAdapter(), true, true);
-        mAdapter.setShowHeader(true);
-        mRecyclerView.setAdapter(mAdapter);
+        mSimpleAdapter = new SimpleRecyclerAdapter(data);
+        mPtrAdapter = new PtrRecyclerAdapter(mSimpleAdapter, false, true);
+        mSimpleAdapter.setPtrAdapter(mPtrAdapter);
+        mRecyclerView.setAdapter(mPtrAdapter);
+        mPtrAdapter.notifyDataSetChanged();
 
         mPtrRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullDownToRefresh");
+                List<String> data = new ArrayList<String>();
                 for (int i = 0; i < 5; i++)
-                    mData.add(0, "item add header " + mHeaderCount);
+                    data.add(0, "item add header " + mHeaderCount);
                 mHeaderCount++;
                 mPtrRecyclerView.onRefreshComplete();
-                mAdapter.notifyDataSetChanged();
+//                mPtrAdapter.notifyDataSetChanged();
+                mSimpleAdapter.addDataAtFirst(data);
             }
 
             @Override
@@ -68,14 +70,16 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                 if (mFooterCount == 2) {
                     mPtrRecyclerView.onRefreshComplete();
                     mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                    mAdapter.setShowFooter(true);
+                    mPtrAdapter.setShowFooter(true);
                     return;
                 }
+                List<String> data = new ArrayList<String>();
                 for (int i = 0; i < 5; i++)
-                    mData.add("item add footer " + mFooterCount);
+                    data.add("item add footer " + mFooterCount);
                 mFooterCount++;
                 mPtrRecyclerView.onRefreshComplete();
-                mAdapter.notifyDataSetChanged();
+//                mPtrAdapter.notifyDataSetChanged();
+                mSimpleAdapter.addDataAtLast(data);
             }
         });
     }
@@ -89,25 +93,5 @@ public class PtrRecyclerViewFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
     }
-
-    private class SimpleAdapter extends RecyclerView.Adapter<SimpleViewHolder> {
-
-
-        @Override
-        public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new SimpleViewHolder(LayoutInflater.from(mActivity).inflate(android.R.layout.simple_list_item_1, parent, false));
-        }
-
-        @Override
-        public void onBindViewHolder(SimpleViewHolder holder, int position) {
-            holder.mTv.setText(mData.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
-    }
-
 
 }
