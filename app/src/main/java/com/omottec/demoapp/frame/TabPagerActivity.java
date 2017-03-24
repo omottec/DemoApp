@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.utils.UiUtils;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class TabPagerActivity extends AppCompatActivity {
     private View mRootView;
     private TabLayout mTl;
     private ViewPager mVp;
+    private SimpleFragStatePagerAdapter mStatePagerAdapter;
+//    private SimpleFragPagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +49,8 @@ public class TabPagerActivity extends AppCompatActivity {
         fragNames.add("二二");
         fragNames.add("三三三三三三三三");
         fragNames.add("四四四四四四四四四四四四");*/
-        mVp.setAdapter(new SimpleFragStatePagerAdapter(getSupportFragmentManager(), fragNames));
+        mStatePagerAdapter = new SimpleFragStatePagerAdapter(getSupportFragmentManager(), fragNames);
+        mVp.setAdapter(mStatePagerAdapter);
 //        mVp.setAdapter(new SimpleFragPagerAdapter(getSupportFragmentManager(), fragNames));
         mVp.setOffscreenPageLimit(2);
         mTl.setupWithViewPager(mVp);
@@ -68,6 +72,18 @@ public class TabPagerActivity extends AppCompatActivity {
                 resizeTabLayout();
             }
         });*/
+
+        MyApplication.getUiHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<String> fragNames = new ArrayList<String>();
+                fragNames.add("一一");
+                fragNames.add("二二");
+                fragNames.add("三三三三三三三三");
+                fragNames.add("四四四四四四四四四四四四");
+                mStatePagerAdapter.setData(fragNames);
+            }
+        }, 15 * 1000);
     }
 
     private void resizeTabLayout() {

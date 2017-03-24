@@ -72,4 +72,10 @@ public class AutoTabLayout extends TabLayout {
             }
         }
     }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        Log.d(TAG, String.format("onSizeChanged w:%d, h:%d, oldw:%d, oldh:%d", w, h, oldw, oldh));
+    }
 }
