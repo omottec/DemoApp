@@ -24,10 +24,10 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
     private boolean mShowHeader = false;
     private boolean mShowFooter = false;
     private RecyclerView.Adapter<T> mAdapter;
-    private PullToRefreshRecyclerView mPtrRecyclerView;
+    private PtrRecyclerView mPtrRecyclerView;
     private RecyclerView.AdapterDataObserver mDataObserver;
 
-    public PtrRecyclerAdapter(PullToRefreshRecyclerView ptrRecyclerView, RecyclerView.Adapter<T> adapter, boolean includeHeader, final boolean includeFooter) {
+    public PtrRecyclerAdapter(PtrRecyclerView ptrRecyclerView, RecyclerView.Adapter<T> adapter, boolean includeHeader, final boolean includeFooter) {
         mPtrRecyclerView = ptrRecyclerView;
         mAdapter = adapter;
         initDataObserver();
@@ -35,7 +35,7 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
         if (includeFooter) mFooterViewId = android.R.layout.simple_list_item_1;
     }
 
-    public PtrRecyclerAdapter(PullToRefreshRecyclerView ptrRecyclerView, RecyclerView.Adapter<T> adapter, int headerViewId, int footerViewId) {
+    public PtrRecyclerAdapter(PtrRecyclerView ptrRecyclerView, RecyclerView.Adapter<T> adapter, int headerViewId, int footerViewId) {
         mPtrRecyclerView = ptrRecyclerView;
         mAdapter = adapter;
         initDataObserver();

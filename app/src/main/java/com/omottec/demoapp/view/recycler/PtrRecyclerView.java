@@ -12,22 +12,22 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
  * Created by qinbingbing on 22/03/2017.
  */
 
-public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
+public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
     public static final String TAG = "PtrRecyclerView";
 
-    public PullToRefreshRecyclerView(Context context) {
+    public PtrRecyclerView(Context context) {
         super(context);
     }
 
-    public PullToRefreshRecyclerView(Context context, AttributeSet attrs) {
+    public PtrRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public PullToRefreshRecyclerView(Context context, Mode mode) {
+    public PtrRecyclerView(Context context, Mode mode) {
         super(context, mode);
     }
 
-    public PullToRefreshRecyclerView(Context context, Mode mode, AnimationStyle animStyle) {
+    public PtrRecyclerView(Context context, Mode mode, AnimationStyle animStyle) {
         super(context, mode, animStyle);
     }
 

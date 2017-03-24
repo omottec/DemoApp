@@ -2,11 +2,9 @@ package com.omottec.demoapp.view.recycler;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.omottec.demoapp.app.MyApplication;
 
@@ -17,29 +15,30 @@ import java.util.List;
  */
 
 public class MultiRecyclerAdapter extends RecyclerView.Adapter {
-    public static final int VIEW_TYPE_SIMPLE = 0;
-    public static final int VIEW_TYPE_MULTI = 1;
-    private Context mContext;
+    public static final String TAG = "MultiRecyclerAdapter";
+    public static final int VIEW_TYPE_TEXT = 0;
+    public static final int VIEW_TYPE_TEXT_IMAGE = 1;
     private List<String> mData;
 
-    public MultiRecyclerAdapter(Context context, List<String> data) {
-        mContext = context;
+    public MultiRecyclerAdapter(List<String> data) {
         mData = data;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d(TAG, String.format("onCreateViewHolder viewType:%d" + viewType));
         switch (viewType) {
-            case VIEW_TYPE_SIMPLE:
-                return new SimpleViewHolder(View.inflate(mContext, android.R.layout.simple_list_item_1, null));
+            case VIEW_TYPE_TEXT:
+                return new SimpleViewHolder(View.inflate(MyApplication.getContext(), android.R.layout.simple_list_item_1, null));
             default:
-            case VIEW_TYPE_MULTI:
-                return new MultiViewHolder(View.inflate(mContext, android.R.layout.activity_list_item, null));
+            case VIEW_TYPE_TEXT_IMAGE:
+                return new MultiViewHolder(View.inflate(MyApplication.getContext(), android.R.layout.activity_list_item, null));
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Log.d(TAG, String.format("onBindViewHolder position:%d", position));
         if (holder instanceof SimpleViewHolder) {
             SimpleViewHolder simpleViewHolder = (SimpleViewHolder) holder;
             simpleViewHolder.mTv.setText(mData.get(position));
@@ -52,11 +51,15 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        int itemCount = mData.size();
+        Log.d(TAG, String.format("getItemCount itemCount:%d", itemCount));
+        return itemCount;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return position % 2 == 0 ? VIEW_TYPE_SIMPLE : VIEW_TYPE_MULTI;
+        int itemViewType = position % 2 == 0 ? VIEW_TYPE_TEXT : VIEW_TYPE_TEXT_IMAGE;
+        Log.d(TAG, String.format("getItemViewType position:%d, itemViewType:%d", position, itemViewType));
+        return itemViewType;
     }
 }

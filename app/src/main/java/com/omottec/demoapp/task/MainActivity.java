@@ -1,6 +1,5 @@
 package com.omottec.demoapp.task;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.frame.TabPagerActivity;
+import com.omottec.demoapp.view.frame.TabPagerActivity;
 
 /**
  * Created by qinbingbing on 3/23/16.

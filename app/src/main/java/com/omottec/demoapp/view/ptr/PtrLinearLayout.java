@@ -19,7 +19,7 @@ import com.omottec.demoapp.utils.UiUtils;
  * Created by qinbingbing on 21/03/2017.
  */
 
-public class Pull2RefreshLinearLayout extends LinearLayout {
+public class PtrLinearLayout extends LinearLayout {
     public static final String TAG = "Pull2Refresh";
     private static final int ITEM_HEIGHT = UiUtils.dip2px(MyApplication.getContext(), 70);
     public static final int FRICTION = 2;
@@ -29,17 +29,17 @@ public class Pull2RefreshLinearLayout extends LinearLayout {
     private float mLastX, mLastY;
 
 
-    public Pull2RefreshLinearLayout(Context context) {
+    public PtrLinearLayout(Context context) {
         super(context);
         init();
     }
 
-    public Pull2RefreshLinearLayout(Context context, @Nullable AttributeSet attrs) {
+    public PtrLinearLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public Pull2RefreshLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PtrLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

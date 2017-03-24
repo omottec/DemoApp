@@ -1,4 +1,4 @@
-package com.omottec.demoapp.frame;
+package com.omottec.demoapp.view.frame;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;

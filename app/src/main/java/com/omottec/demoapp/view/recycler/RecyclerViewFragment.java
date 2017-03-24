@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.fragment.BaseFragment;
 import com.omottec.demoapp.view.recycler.MultiRecyclerAdapter;
 import com.omottec.demoapp.view.recycler.SimpleRecyclerAdapter;
 
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by qinbingbing on 10/03/2017.
  */
 
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends BaseFragment {
     public static final String TAG = "RecyclerViewFragment";
     private RecyclerView mRecyclerView;
     private Context mContext;
@@ -34,10 +35,9 @@ public class RecyclerViewFragment extends Fragment {
         mContext = getActivity();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mRecyclerView = (RecyclerView) inflater.inflate(R.layout.f_recycler_view, null);
+    protected View createContentView() {
+        mRecyclerView = (RecyclerView) View.inflate(mActivity, R.layout.f_recycler_view, null);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         GridLayoutManager gridLayoutManager= new GridLayoutManager(mContext, 4);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

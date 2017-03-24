@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-    <com.omottec.demoapp.frame.AutoTabLayout
+    <com.omottec.demoapp.view.frame.AutoTabLayout
         android:id="@+id/tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -1,4 +1,4 @@
-package com.omottec.demoapp.frame;
+package com.omottec.demoapp.view.frame;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
@@ -6,9 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
-import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.utils.UiUtils;
 
 /**

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class PtrRecyclerViewFragment extends BaseFragment {
     public static final String TAG = "PtrRecyclerViewFragment";
-    private PullToRefreshRecyclerView mPtrRecyclerView;
+    private PtrRecyclerView mPtrRecyclerView;
     private RecyclerView mRecyclerView;
     private List<String> mData = new ArrayList<>();
     private SimpleRecyclerAdapter mSimpleAdapter;
@@ -31,7 +31,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
     @Override
     protected View createContentView() {
         View view = View.inflate(mActivity, R.layout.f_ptr_recycler_view, null);
-        mPtrRecyclerView = (PullToRefreshRecyclerView) view.findViewById(R.id.ptr_recycler_view);
+        mPtrRecyclerView = (PtrRecyclerView) view.findViewById(R.id.ptr_recycler_view);
         mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         mRecyclerView = mPtrRecyclerView.getRefreshableView();
         return view;

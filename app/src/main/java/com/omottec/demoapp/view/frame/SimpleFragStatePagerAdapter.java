@@ -1,4 +1,4 @@
-package com.omottec.demoapp.frame;
+package com.omottec.demoapp.view.frame;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -22,7 +22,6 @@ import java.util.List;
 public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder> {
     public static final String TAG = "SimpleRecyclerAdapter";
     private List<String> mData = new ArrayList<>();
-    private PtrRecyclerAdapter mPtrAdapter;
 
     public SimpleRecyclerAdapter(List<String> data) {
         mData.addAll(data);
@@ -42,7 +41,16 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        int itemCount = mData.size();
+        Log.d(TAG, String.format("getItemCount itemCount:%d", itemCount));
+        return itemCount;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        int itemViewType = super.getItemViewType(position);
+        Log.d(TAG, String.format("getItemViewType position:%d, itemViewType:%d", position, itemViewType));
+        return itemViewType;
     }
 
     public void addDataAtLast(List<String> data) {

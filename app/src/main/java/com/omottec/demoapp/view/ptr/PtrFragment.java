@@ -12,8 +12,8 @@ import com.omottec.demoapp.fragment.BaseFragment;
  * Created by qinbingbing on 21/03/2017.
  */
 
-public class Pull2RefreshFragment extends BaseFragment {
-    public static final String TAG = "Pull2RefreshFragment";
+public class PtrFragment extends BaseFragment {
+    public static final String TAG = "PtrFragment";
     private LinearLayout mRootLl;
 
     @Override
