@@ -13,6 +13,9 @@ android {
         ndk {
             moduleName "jni-test"
         }
+        jackOptions {
+            enabled true
+        }
     }
 
     signingConfigs {
@@ -30,6 +33,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
