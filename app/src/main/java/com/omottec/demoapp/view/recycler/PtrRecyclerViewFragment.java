@@ -41,7 +41,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<String> data = new ArrayList<>();
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 5; i++)
             data.add("item " + i);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
