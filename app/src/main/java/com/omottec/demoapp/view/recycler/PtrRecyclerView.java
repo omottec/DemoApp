@@ -50,7 +50,6 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
                 + ", lastVisiblePosition:" + lastVisiblePosition
                 + ", lastChild.getBottom:" + lastChild.getBottom()
                 + ", getBottom:" + getBottom());
-        smoothScrollTo(0);
         return lastVisiblePosition == itemCount-1;
     }
 
