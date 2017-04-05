@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.omottec.demoapp.view.recycler.PtrRecyclerView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ptr_recycler_view"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
-
-</com.omottec.demoapp.view.recycler.PtrRecyclerView>
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Other View"
+        android:gravity="center"
+        android:background="@android:color/holo_red_light"/>
+    <com.omottec.demoapp.view.recycler.PtrRecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ptr_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+    </com.omottec.demoapp.view.recycler.PtrRecyclerView>
+</LinearLayout>

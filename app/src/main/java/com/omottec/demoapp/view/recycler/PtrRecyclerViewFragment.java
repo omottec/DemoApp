@@ -41,7 +41,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         List<String> data = new ArrayList<>();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 200; i++)
             data.add("item " + i);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
@@ -72,7 +72,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                     return;
                 }
                 List<String> data = new ArrayList<String>();
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 20; i++)
                     data.add("item add footer " + mFooterCount);
                 mFooterCount++;
                 mPtrRecyclerView.onRefreshComplete();

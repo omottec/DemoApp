@@ -49,8 +49,11 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
         Log.d(TAG, "isReadyForPullEnd itemCount:" + itemCount
                 + ", lastVisiblePosition:" + lastVisiblePosition
                 + ", lastChild.getBottom:" + lastChild.getBottom()
-                + ", getBottom:" + getBottom());
-        return lastVisiblePosition == itemCount-1;
+                + ", getBottom:" + getBottom()
+                + ", getHeight:" + getHeight());
+        return lastVisiblePosition == itemCount-1
+                && lastChild != null
+                && lastChild.getBottom() <= getHeight();
     }
 
     @Override
