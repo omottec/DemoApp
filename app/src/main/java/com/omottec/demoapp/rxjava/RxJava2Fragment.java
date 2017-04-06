@@ -25,8 +25,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by qinbingbing on 27/03/2017.
  */
 
-public class RxJavaFragment extends BaseFragment {
-    public static final String TAG = "RxJavaFragment";
+public class RxJava2Fragment extends BaseFragment {
+    public static final String TAG = "RxJava2Fragment";
 
     private TextView mTv;
 
