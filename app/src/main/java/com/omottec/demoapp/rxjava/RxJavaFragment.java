@@ -84,16 +84,21 @@ public class RxJavaFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mTv.setText(TAG);
-        /*Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
+                Log.d(TAG, "ObservableOnSubscribe#subscribe");
+                Log.d(TAG, "ObservableEmitter#onNext Hello");
                 e.onNext("Hello");
+                Log.d(TAG, "ObservableEmitter#onNext Daniel");
                 e.onNext("Daniel");
+                Log.d(TAG, "ObservableEmitter#onNext Bond");
                 e.onNext("Bond");
+                Log.d(TAG, "ObservableEmitter#onComplete");
                 e.onComplete();
             }
         });
-        observable.subscribe(mObserver);*/
+        observable.subscribe(mObserver);
 
 //        Flowable.just("Hello world").subscribe(System.out::println);
 
@@ -115,11 +120,11 @@ public class RxJavaFragment extends BaseFragment {
                 .map(v -> v * v)
                 .blockingSubscribe(System.out::println);*/
 
-        Flowable.range(1, 10)
+        /*Flowable.range(1, 10)
                 .flatMap(v ->
                         Flowable.just(v)
                                 .subscribeOn(Schedulers.computation())
                                 .map(w -> w * w))
-                .blockingSubscribe(System.out::println);
+                .blockingSubscribe(System.out::println);*/
     }
 }
