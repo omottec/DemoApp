@@ -17,7 +17,7 @@ import java.util.SortedMap;
 
 public class GoodDbOpenHelper extends AbsDbOpenHelper {
     public static final String DB_NAME = "good";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
 
     public GoodDbOpenHelper(Context context) {
         super(context, DB_NAME, DB_VERSION);
@@ -29,6 +29,7 @@ public class GoodDbOpenHelper extends AbsDbOpenHelper {
 
     @Override
     protected void onCreateAllUpgrades(SortedMap<Integer, DbUpgrade> allUpgrades) {
+        allUpgrades.put(1, new GoodDbV1Upgrade());
     }
 
     @Override

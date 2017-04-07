@@ -28,8 +28,8 @@ public class MyDbOpenHelper extends AbsDbOpenHelper {
 
     @Override
     protected void onCreateAllUpgrades(SortedMap<Integer, DbUpgrade> allUpgrades) {
-        allUpgrades.put(1, new MyDbV1Update());
-        allUpgrades.put(2, new MyDbV2Update());
+        allUpgrades.put(1, new MyDbV1Upgrade());
+        allUpgrades.put(2, new MyDbV2Upgrade());
     }
 
     @Override

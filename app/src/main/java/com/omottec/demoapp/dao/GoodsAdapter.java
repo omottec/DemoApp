@@ -66,7 +66,7 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.GoodViewHold
     public void onBindViewHolder(GoodViewHolder holder, int position) {
         Good good = dataset.get(position);
         holder.text.setText(good.getName());
-//        holder.desc.setText(good.getComment());
+        holder.desc.setText(good.getDesc());
     }
 
     @Override

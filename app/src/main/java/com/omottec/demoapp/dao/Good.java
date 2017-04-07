@@ -12,13 +12,14 @@ import org.greenrobot.greendao.annotation.Generated;
 public class Good {
     @Id
     private Long id;
-
     private String name;
+    private String desc;
 
-    @Generated(hash = 1035299221)
-    public Good(Long id, String name) {
+    @Generated(hash = 337051043)
+    public Good(Long id, String name, String desc) {
         this.id = id;
         this.name = name;
+        this.desc = desc;
     }
 
     @Generated(hash = 2016981037)
@@ -39,5 +40,13 @@ public class Good {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

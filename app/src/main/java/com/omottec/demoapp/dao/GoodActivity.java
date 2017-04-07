@@ -113,11 +113,11 @@ public class GoodActivity extends BaseActivity {
         editText.setText("");
 
         final DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
-        String comment = "Added on " + df.format(new Date());
+        String desc = "Added on " + df.format(new Date());
 
         Good good = new Good();
         good.setName(nameText);
-//        good.setComment(desc);
+        good.setDesc(desc);
         goodDao.insert(good);
         Log.d("DaoExample", "Inserted new good, ID: " + good.getId());
 
