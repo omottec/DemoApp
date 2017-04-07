@@ -18,15 +18,15 @@ public class Note {
     private String text;
     private String comment;
 
+    @Generated(hash = 1272611929)
+    public Note() {
+    }
+
     @Generated(hash = 1038952471)
     public Note(Long id, @NotNull String text, String comment) {
         this.id = id;
         this.text = text;
         this.comment = comment;
-    }
-
-    @Generated(hash = 1272611929)
-    public Note() {
     }
 
     public Long getId() {
