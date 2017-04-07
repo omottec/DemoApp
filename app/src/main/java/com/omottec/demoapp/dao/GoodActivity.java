@@ -27,14 +27,14 @@ import java.util.List;
  * Created by qinbingbing on 07/04/2017.
  */
 
-public class UserActivity extends BaseActivity {
+public class GoodActivity extends BaseActivity {
     private View mContentView;
     private EditText editText;
     private View addNoteButton;
 
-    private UserDao userDao;
-    private Query<User> notesQuery;
-    private UsersAdapter usersAdapter;
+    private GoodDao goodDao;
+    private Query<Good> goodQuery;
+    private GoodsAdapter goodsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,23 +42,23 @@ public class UserActivity extends BaseActivity {
         setUpViews();
 
         // get the note DAO
-        DaoSession daoSession = DaoSessionHolder.getInstance().getMyDaoSession();
-        userDao = daoSession.getUserDao();
+        DaoSession daoSession = DaoSessionHolder.getInstance().getGoodDaoSession();
+        goodDao = daoSession.getGoodDao();
 
         // query all notes, sorted a-z by their text
-        notesQuery = userDao.queryBuilder().orderAsc(UserDao.Properties.Name).build();
+        goodQuery = goodDao.queryBuilder().orderAsc(GoodDao.Properties.Name).build();
         updateUsers();
     }
 
     @Override
     protected View createContentView() {
-        mContentView = View.inflate(this, R.layout.a_user, null);
+        mContentView = View.inflate(this, R.layout.a_good, null);
         return mContentView;
     }
 
     private void updateUsers() {
-        List<User> users = notesQuery.list();
-        usersAdapter.setUsers(users);
+        List<Good> goods = goodQuery.list();
+        goodsAdapter.setUsers(goods);
     }
 
     protected void setUpViews() {
@@ -67,8 +67,8 @@ public class UserActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        usersAdapter = new UsersAdapter(userClickListener);
-        recyclerView.setAdapter(usersAdapter);
+        goodsAdapter = new GoodsAdapter(goodClickListener);
+        recyclerView.setAdapter(goodsAdapter);
 
         addNoteButton = findViewById(R.id.buttonAdd);
         //noinspection ConstantConditions
@@ -115,23 +115,23 @@ public class UserActivity extends BaseActivity {
         final DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
         String comment = "Added on " + df.format(new Date());
 
-        User user = new User();
-        user.setName(nameText);
-//        user.setComment(desc);
-        userDao.insert(user);
-        Log.d("DaoExample", "Inserted new user, ID: " + user.getId());
+        Good good = new Good();
+        good.setName(nameText);
+//        good.setComment(desc);
+        goodDao.insert(good);
+        Log.d("DaoExample", "Inserted new good, ID: " + good.getId());
 
         updateUsers();
     }
 
-    UsersAdapter.UserClickListener userClickListener = new UsersAdapter.UserClickListener() {
+    GoodsAdapter.GoodClickListener goodClickListener = new GoodsAdapter.GoodClickListener() {
         @Override
         public void onUserClick(int position) {
-            User user = usersAdapter.getUser(position);
-            Long noteId = user.getId();
+            Good good = goodsAdapter.getGood(position);
+            Long goodId = good.getId();
 
-            userDao.deleteByKey(noteId);
-            Log.d("DaoExample", "Deleted user, ID: " + noteId);
+            goodDao.deleteByKey(goodId);
+            Log.d("DaoExample", "Deleted good, ID: " + goodId);
 
             updateUsers();
         }

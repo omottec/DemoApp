@@ -28,8 +28,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
         public NoteViewHolder(View itemView, final NoteClickListener clickListener) {
             super(itemView);
-            text = (TextView) itemView.findViewById(R.id.textViewUserText);
-            comment = (TextView) itemView.findViewById(R.id.textViewUserDesc);
+            text = (TextView) itemView.findViewById(R.id.textViewGoodText);
+            comment = (TextView) itemView.findViewById(R.id.textViewGoodDesc);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -12,21 +12,21 @@ import com.omottec.demoapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
+public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.GoodViewHolder> {
 
-    private UserClickListener clickListener;
-    private List<User> dataset;
+    private GoodClickListener clickListener;
+    private List<Good> dataset;
 
-    public interface UserClickListener {
+    public interface GoodClickListener {
         void onUserClick(int position);
     }
 
-    static class UserViewHolder extends RecyclerView.ViewHolder {
+    static class GoodViewHolder extends RecyclerView.ViewHolder {
 
         public TextView text;
         public TextView desc;
 
-        public UserViewHolder(View itemView, final UserClickListener clickListener) {
+        public GoodViewHolder(View itemView, final GoodClickListener clickListener) {
             super(itemView);
             text = (TextView) itemView.findViewById(R.id.textViewGoodText);
             desc = (TextView) itemView.findViewById(R.id.textViewGoodDesc);
@@ -41,32 +41,32 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         }
     }
 
-    public UsersAdapter(UserClickListener clickListener) {
+    public GoodsAdapter(GoodClickListener clickListener) {
         this.clickListener = clickListener;
-        this.dataset = new ArrayList<User>();
+        this.dataset = new ArrayList<Good>();
     }
 
-    public void setUsers(@NonNull List<User> users) {
-        dataset = users;
+    public void setUsers(@NonNull List<Good> goods) {
+        dataset = goods;
         notifyDataSetChanged();
     }
 
-    public User getUser(int position) {
+    public Good getGood(int position) {
         return dataset.get(position);
     }
 
     @Override
-    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_note, parent, false);
-        return new UserViewHolder(view, clickListener);
+        return new GoodViewHolder(view, clickListener);
     }
 
     @Override
-    public void onBindViewHolder(UserViewHolder holder, int position) {
-        User user = dataset.get(position);
-        holder.text.setText(user.getName());
-//        holder.desc.setText(user.getComment());
+    public void onBindViewHolder(GoodViewHolder holder, int position) {
+        Good good = dataset.get(position);
+        holder.text.setText(good.getName());
+//        holder.desc.setText(good.getComment());
     }
 
     @Override

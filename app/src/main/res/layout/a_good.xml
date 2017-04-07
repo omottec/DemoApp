@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/buttonAdd"
-        android:hint="@string/enter_new_user"
+        android:hint="@string/enter_new_good"
         android:imeOptions="actionDone"
         android:inputType="text"/>
 

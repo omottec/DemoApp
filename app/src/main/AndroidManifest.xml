@@ -160,6 +160,10 @@
 
         </activity>
 
+        <activity android:name=".dao.GoodActivity">
+
+        </activity>
+
         <activity android:name=".dao.DaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

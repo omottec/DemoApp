@@ -15,14 +15,17 @@ public class DaoActivity extends BaseActivity implements View.OnClickListener {
     private View mContentView;
     private TextView mUserTv;
     private TextView mNoteTv;
+    private TextView mGoodTv;
 
     @Override
     protected View createContentView() {
         mContentView = View.inflate(this, R.layout.a_dao, null);
         mUserTv = (TextView) mContentView.findViewById(R.id.tv_user);
         mNoteTv = (TextView) mContentView.findViewById(R.id.tv_note);
+        mGoodTv = (TextView) mContentView.findViewById(R.id.tv_good);
         mUserTv.setOnClickListener(this);
         mNoteTv.setOnClickListener(this);
+        mGoodTv.setOnClickListener(this);
         return mContentView;
     }
 
@@ -35,6 +38,9 @@ public class DaoActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.tv_note:
                 intent = new Intent(this, NoteActivity.class);
+                break;
+            case R.id.tv_good:
+                intent = new Intent(this, GoodActivity.class);
                 break;
         }
         startActivity(intent);

@@ -12,11 +12,16 @@ import org.greenrobot.greendao.database.Database;
 
 public class DaoSessionHolder {
     private DaoSession myDaoSession;
+    private DaoSession goodDaoSession;
 
     private DaoSessionHolder() {
         MyDbOpenHelper myDbOpenHelper = new MyDbOpenHelper(MyApplication.getContext());
-        Database db = myDbOpenHelper.getWritableDb();
-        myDaoSession = new DaoMaster(db).newSession();
+        Database myDb = myDbOpenHelper.getWritableDb();
+        myDaoSession = new DaoMaster(myDb).newSession();
+
+        GoodDbOpenHelper goodDbOpenHelper = new GoodDbOpenHelper(MyApplication.getContext());
+        Database goodDb = goodDbOpenHelper.getWritableDb();
+        goodDaoSession = new DaoMaster(goodDb).newSession();
     }
 
     private static class InstanceHolder {
@@ -29,5 +34,9 @@ public class DaoSessionHolder {
 
     public DaoSession getMyDaoSession() {
         return myDaoSession;
+    }
+
+    public DaoSession getGoodDaoSession() {
+        return goodDaoSession;
     }
 }

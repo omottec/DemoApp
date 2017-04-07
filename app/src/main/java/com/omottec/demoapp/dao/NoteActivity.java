@@ -74,7 +74,7 @@ public class NoteActivity extends BaseActivity {
         //noinspection ConstantConditions
         addNoteButton.setEnabled(false);
 
-        editText = (EditText) findViewById(R.id.editTextUser);
+        editText = (EditText) findViewById(R.id.editTextGood);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override

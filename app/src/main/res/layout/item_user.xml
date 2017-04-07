@@ -9,14 +9,14 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewUserText"
+        android:id="@+id/textViewGoodText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         tools:text="User Text" />
 
     <TextView
-        android:id="@+id/textViewUserDesc"
+        android:id="@+id/textViewGoodDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp"

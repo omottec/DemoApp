@@ -9,7 +9,7 @@
         android:id="@+id/tv_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="UserDao"
+        android:text="my.db UserDao"
         android:gravity="center"
         android:padding="10dp"
         android:background="@android:color/holo_green_light"/>
@@ -17,8 +17,16 @@
         android:id="@+id/tv_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NoteDao"
+        android:text="my.db NoteDao"
         android:gravity="center"
         android:padding="10dp"
         android:background="@android:color/holo_red_light"/>
+    <TextView
+        android:id="@+id/tv_good"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="good.db GoodDao"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@android:color/holo_blue_light"/>
 </LinearLayout>
