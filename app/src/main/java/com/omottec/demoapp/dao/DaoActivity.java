@@ -32,7 +32,6 @@ public class DaoActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_user:
                 intent = new Intent(this, UserActivity.class);
-                startActivity(intent);
                 break;
             case R.id.tv_note:
                 intent = new Intent(this, NoteActivity.class);

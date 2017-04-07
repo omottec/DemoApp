@@ -52,7 +52,7 @@ public class UserActivity extends BaseActivity {
 
     @Override
     protected View createContentView() {
-        mContentView = View.inflate(this, R.layout.a_note, null);
+        mContentView = View.inflate(this, R.layout.a_user, null);
         return mContentView;
     }
 
@@ -62,7 +62,7 @@ public class UserActivity extends BaseActivity {
     }
 
     protected void setUpViews() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewNotes);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewUsers);
         //noinspection ConstantConditions
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,7 +74,7 @@ public class UserActivity extends BaseActivity {
         //noinspection ConstantConditions
         addNoteButton.setEnabled(false);
 
-        editText = (EditText) findViewById(R.id.editTextNote);
+        editText = (EditText) findViewById(R.id.editTextUser);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override

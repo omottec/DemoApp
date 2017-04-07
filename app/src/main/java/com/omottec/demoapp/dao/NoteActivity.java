@@ -62,7 +62,7 @@ public class NoteActivity extends BaseActivity {
     }
 
     protected void setUpViews() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewNotes);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewUsers);
         //noinspection ConstantConditions
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,7 +74,7 @@ public class NoteActivity extends BaseActivity {
         //noinspection ConstantConditions
         addNoteButton.setEnabled(false);
 
-        editText = (EditText) findViewById(R.id.editTextNote);
+        editText = (EditText) findViewById(R.id.editTextUser);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
