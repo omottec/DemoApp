@@ -3,7 +3,6 @@ package com.omottec.demoapp.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.omottec.demoapp.dao.Note;
 import com.omottec.demoapp.dao.NoteDao;
 import com.omottec.demoapp.dao.UserDao;
 
