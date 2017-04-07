@@ -10,16 +10,16 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.fragment.AnimatorFragment;
 import com.omottec.demoapp.fragment.BaseFragment;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
+//import org.reactivestreams.Subscriber;
+//import org.reactivestreams.Subscription;
 
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+//import io.reactivex.Flowable;
+//import io.reactivex.Observable;
+//import io.reactivex.ObservableEmitter;
+//import io.reactivex.ObservableOnSubscribe;
+//import io.reactivex.Observer;
+//import io.reactivex.disposables.Disposable;
+//import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by qinbingbing on 27/03/2017.
@@ -30,7 +30,7 @@ public class RxJava2Fragment extends BaseFragment {
 
     private TextView mTv;
 
-    private Observer<String> mObserver = new Observer<String>() {
+    /*private Observer<String> mObserver = new Observer<String>() {
         @Override
         public void onSubscribe(Disposable d) {
             Log.d(TAG, "Observer onSubscribe");
@@ -72,7 +72,7 @@ public class RxJava2Fragment extends BaseFragment {
         public void onComplete() {
             Log.d(TAG, "Subscriber onComplete");
         }
-    };
+    };*/
 
     @Override
     protected View createContentView() {
@@ -84,7 +84,7 @@ public class RxJava2Fragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mTv.setText(TAG);
-        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+        /*Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
                 Log.d(TAG, "ObservableOnSubscribe#subscribe");
@@ -98,7 +98,7 @@ public class RxJava2Fragment extends BaseFragment {
                 e.onComplete();
             }
         });
-        observable.subscribe(mObserver);
+        observable.subscribe(mObserver);*/
 
 //        Flowable.just("Hello world").subscribe(System.out::println);
 
