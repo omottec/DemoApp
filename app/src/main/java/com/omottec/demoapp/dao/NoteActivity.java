@@ -18,10 +18,15 @@ import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.db.DaoSessionHolder;
 
 import org.greenrobot.greendao.query.Query;
+import org.greenrobot.greendao.rx.RxDao;
+import org.greenrobot.greendao.rx.RxQuery;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by qinbingbing on 07/04/2017.
@@ -32,8 +37,8 @@ public class NoteActivity extends BaseActivity {
     private EditText editText;
     private View addNoteButton;
 
-    private NoteDao noteDao;
-    private Query<Note> notesQuery;
+    private RxDao noteDao;
+    private RxQuery<Note> notesQuery;
     private NotesAdapter notesAdapter;
 
     @Override
@@ -43,10 +48,10 @@ public class NoteActivity extends BaseActivity {
 
         // get the note DAO
         DaoSession daoSession = DaoSessionHolder.getInstance().getMyDaoSession();
-        noteDao = daoSession.getNoteDao();
+        noteDao = daoSession.getNoteDao().rx();
 
         // query all notes, sorted a-z by their text
-        notesQuery = noteDao.queryBuilder().orderAsc(NoteDao.Properties.Text).build();
+        notesQuery = daoSession.getNoteDao().queryBuilder().orderAsc(NoteDao.Properties.Text).rx();
         updateNotes();
     }
 
@@ -57,8 +62,10 @@ public class NoteActivity extends BaseActivity {
     }
 
     private void updateNotes() {
-        List<Note> notes = notesQuery.list();
-        notesAdapter.setUsers(notes);
+        notesQuery
+                .list()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(notes -> notesAdapter.setUsers(notes));
     }
 
     protected void setUpViews() {
@@ -120,10 +127,15 @@ public class NoteActivity extends BaseActivity {
         note.setComment(comment);
 //        note.setDate(new Date());
         note.setType(NoteType.TEXT);
-        noteDao.insert(note);
-        Log.d("DaoExample", "Inserted new note, ID: " + note.getId());
-
-        updateNotes();
+        noteDao.insert(note)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Note>() {
+                    @Override
+                    public void call(Note note) {
+                        Log.d("DaoExample", "Inserted new note, ID: " + note.getId());
+                        updateNotes();
+                    }
+                });
     }
 
     NotesAdapter.NoteClickListener noteClickListener = new NotesAdapter.NoteClickListener() {
@@ -132,10 +144,12 @@ public class NoteActivity extends BaseActivity {
             Note note = notesAdapter.getNote(position);
             Long noteId = note.getId();
 
-            noteDao.deleteByKey(noteId);
-            Log.d("DaoExample", "Deleted note, ID: " + noteId);
-
-            updateNotes();
+            noteDao.deleteByKey(noteId)
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aVoid -> {
+                        Log.d("DaoExample", "Deleted note, ID: " + noteId);
+                        updateNotes();
+                    });
         }
     };
 }
