@@ -16,7 +16,7 @@ import java.util.SortedMap;
 
 public class MyDbOpenHelper extends AbsDbOpenHelper {
     public static final String DB_NAME = "my";
-    public static final int DB_VERSION = 3;
+    public static final int DB_VERSION = 4;
 
     public MyDbOpenHelper(Context context) {
         super(context, DB_NAME, DB_VERSION);
@@ -30,6 +30,7 @@ public class MyDbOpenHelper extends AbsDbOpenHelper {
     protected void onCreateAllUpgrades(SortedMap<Integer, DbUpgrade> allUpgrades) {
         allUpgrades.put(1, new MyDbV1Upgrade());
         allUpgrades.put(2, new MyDbV2Upgrade());
+        allUpgrades.put(3, new MyDbV3Upgrade());
     }
 
     @Override

@@ -119,7 +119,7 @@ public class NoteActivity extends BaseActivity {
         note.setText(noteText);
         note.setComment(comment);
 //        note.setDate(new Date());
-//        note.setType(NoteType.TEXT);
+        note.setType(NoteType.TEXT);
         noteDao.insert(note);
         Log.d("DaoExample", "Inserted new note, ID: " + note.getId());
 

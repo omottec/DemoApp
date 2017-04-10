@@ -1,5 +1,6 @@
 package com.omottec.demoapp.dao;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
@@ -17,15 +18,19 @@ public class Note {
     private String text;
     private String comment;
 
+    @Convert(converter = NoteTypeConverter.class, columnType = String.class)
+    private NoteType type;
+
     @Generated(hash = 1272611929)
     public Note() {
     }
 
-    @Generated(hash = 1038952471)
-    public Note(Long id, @NotNull String text, String comment) {
+    @Generated(hash = 1668423019)
+    public Note(Long id, @NotNull String text, String comment, NoteType type) {
         this.id = id;
         this.text = text;
         this.comment = comment;
+        this.type = type;
     }
 
     public Long getId() {
@@ -50,5 +55,13 @@ public class Note {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public NoteType getType() {
+        return this.type;
+    }
+
+    public void setType(NoteType type) {
+        this.type = type;
     }
 }
