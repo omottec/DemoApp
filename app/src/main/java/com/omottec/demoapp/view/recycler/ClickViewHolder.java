@@ -14,11 +14,13 @@ public class ClickViewHolder extends RecyclerView.ViewHolder {
 
     public ClickViewHolder(View itemView, OnItemClickListener onItemClickListener, OnItemLongClickListener onItemLongClickListener) {
         super(itemView);
-        itemView.setOnClickListener(v -> {
-            onItemClickListener.onItemClick(v.getParent(), v, getAdapterPosition(), getLayoutPosition());
-        });
-        itemView.setOnLongClickListener(v -> {
-            return onItemLongClickListener.onItemLongClick(v.getParent(), v, getAdapterPosition(), getLayoutPosition());
-        });
+        if (onItemClickListener != null)
+            itemView.setOnClickListener(v -> {
+                onItemClickListener.onItemClick(ClickViewHolder.this, v);
+            });
+        if (onItemLongClickListener != null)
+            itemView.setOnLongClickListener(v -> {
+                return onItemLongClickListener.onItemLongClick(ClickViewHolder.this, v);
+            });
     }
 }

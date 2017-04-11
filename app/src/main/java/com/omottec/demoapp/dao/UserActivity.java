@@ -129,8 +129,8 @@ public class UserActivity extends BaseActivity {
 
     OnItemClickListener userClickListener = new OnItemClickListener() {
         @Override
-        public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
-            User user = usersAdapter.getUser(adapterPosition);
+        public void onItemClick(RecyclerView.ViewHolder holder, View view) {
+            User user = usersAdapter.getUser(holder.getAdapterPosition());
             Long noteId = user.getId();
 
             userDao.deleteByKey(noteId);

@@ -22,15 +22,15 @@ public abstract class ClickRecyclerAdapter<VH extends ClickViewHolder> extends R
     }
 
     @Override
-    public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
+    public void onItemClick(RecyclerView.ViewHolder holder, View view) {
         if (mOnItemClickListener != null)
-            mOnItemClickListener.onItemClick(parent, view, adapterPosition, layoutPosition);
+            mOnItemClickListener.onItemClick(holder, view);
     }
 
     @Override
-    public boolean onItemLongClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
+    public boolean onItemLongClick(RecyclerView.ViewHolder holder, View view) {
         if (mOnItemLongClickListener != null)
-            return mOnItemLongClickListener.onItemLongClick(parent, view, adapterPosition, layoutPosition);
+            return mOnItemLongClickListener.onItemLongClick(holder, view);
         return false;
     }
 }

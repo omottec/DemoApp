@@ -141,8 +141,8 @@ public class NoteActivity extends BaseActivity {
 
     OnItemClickListener noteClickListener = new OnItemClickListener() {
         @Override
-        public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
-            Note note = notesAdapter.getNote(adapterPosition);
+        public void onItemClick(RecyclerView.ViewHolder holder, View view) {
+            Note note = notesAdapter.getNote(holder.getAdapterPosition());
             Long noteId = note.getId();
 
             noteDao.deleteByKey(noteId)

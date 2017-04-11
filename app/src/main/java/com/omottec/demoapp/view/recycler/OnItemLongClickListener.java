@@ -1,5 +1,6 @@
 package com.omottec.demoapp.view.recycler;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewParent;
 
@@ -8,5 +9,5 @@ import android.view.ViewParent;
  */
 
 public interface OnItemLongClickListener {
-    boolean onItemLongClick(ViewParent parent, View view, int adapterPosition, int layoutPosition);
+    boolean onItemLongClick(RecyclerView.ViewHolder holder, View view);
 }

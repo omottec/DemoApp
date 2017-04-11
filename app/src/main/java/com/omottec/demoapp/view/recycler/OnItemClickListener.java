@@ -1,6 +1,7 @@
 package com.omottec.demoapp.view.recycler;
 
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.AdapterView;
@@ -10,5 +11,5 @@ import android.widget.AdapterView;
  */
 
 public interface OnItemClickListener {
-    void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition);
+    void onItemClick(RecyclerView.ViewHolder holder, View view);
 }

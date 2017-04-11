@@ -143,8 +143,8 @@ public class GoodActivity extends BaseActivity {
     };*/
     OnItemClickListener goodClickListener = new OnItemClickListener() {
         @Override
-        public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
-            Good good = goodsAdapter.getGood(adapterPosition);
+        public void onItemClick(RecyclerView.ViewHolder holder, View view) {
+            Good good = goodsAdapter.getGood(holder.getAdapterPosition());
             Long goodId = good.getId();
 
             goodDao.deleteByKey(goodId);
