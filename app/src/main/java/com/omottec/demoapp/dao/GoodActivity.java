@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.db.DaoSessionHolder;
+import com.omottec.demoapp.view.recycler.OnItemClickListener;
 
 import org.greenrobot.greendao.query.Query;
 
@@ -34,6 +36,7 @@ public class GoodActivity extends BaseActivity {
 
     private GoodDao goodDao;
     private Query<Good> goodQuery;
+//    private GoodsAdapter goodsAdapter;
     private GoodsAdapter goodsAdapter;
 
     @Override
@@ -58,7 +61,7 @@ public class GoodActivity extends BaseActivity {
 
     private void updateUsers() {
         List<Good> goods = goodQuery.list();
-        goodsAdapter.setUsers(goods);
+        goodsAdapter.setGoods(goods);
     }
 
     protected void setUpViews() {
@@ -67,7 +70,9 @@ public class GoodActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        goodsAdapter = new GoodsAdapter(goodClickListener);
+//        goodsAdapter = new GoodsAdapter(goodClickListener);
+        goodsAdapter = new GoodsAdapter();
+        goodsAdapter.setOnItemClickListener(goodClickListener);
         recyclerView.setAdapter(goodsAdapter);
 
         addNoteButton = findViewById(R.id.buttonAdd);
@@ -124,10 +129,22 @@ public class GoodActivity extends BaseActivity {
         updateUsers();
     }
 
-    GoodsAdapter.GoodClickListener goodClickListener = new GoodsAdapter.GoodClickListener() {
+    /*GoodsAdapter.GoodClickListener goodClickListener = new GoodsAdapter.GoodClickListener() {
         @Override
         public void onUserClick(int position) {
             Good good = goodsAdapter.getGood(position);
+            Long goodId = good.getId();
+
+            goodDao.deleteByKey(goodId);
+            Log.d("DaoExample", "Deleted good, ID: " + goodId);
+
+            updateUsers();
+        }
+    };*/
+    OnItemClickListener goodClickListener = new OnItemClickListener() {
+        @Override
+        public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
+            Good good = goodsAdapter.getGood(adapterPosition);
             Long goodId = good.getId();
 
             goodDao.deleteByKey(goodId);

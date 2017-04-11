@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,14 +17,13 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.db.DaoSessionHolder;
+import com.omottec.demoapp.view.recycler.OnItemClickListener;
 
-import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.rx.RxDao;
 import org.greenrobot.greendao.rx.RxQuery;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -65,7 +65,7 @@ public class NoteActivity extends BaseActivity {
         notesQuery
                 .list()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(notes -> notesAdapter.setUsers(notes));
+                .subscribe(notes -> notesAdapter.setNotes(notes));
     }
 
     protected void setUpViews() {
@@ -74,7 +74,8 @@ public class NoteActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        notesAdapter = new NotesAdapter(noteClickListener);
+        notesAdapter = new NotesAdapter();
+        notesAdapter.setOnItemClickListener(noteClickListener);
         recyclerView.setAdapter(notesAdapter);
 
         addNoteButton = findViewById(R.id.buttonAdd);
@@ -138,10 +139,10 @@ public class NoteActivity extends BaseActivity {
                 });
     }
 
-    NotesAdapter.NoteClickListener noteClickListener = new NotesAdapter.NoteClickListener() {
+    OnItemClickListener noteClickListener = new OnItemClickListener() {
         @Override
-        public void onNoteClick(int position) {
-            Note note = notesAdapter.getNote(position);
+        public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
+            Note note = notesAdapter.getNote(adapterPosition);
             Long noteId = note.getId();
 
             noteDao.deleteByKey(noteId)

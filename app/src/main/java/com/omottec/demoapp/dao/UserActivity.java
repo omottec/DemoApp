@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewParent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.db.DaoSessionHolder;
+import com.omottec.demoapp.view.recycler.OnItemClickListener;
 
 import org.greenrobot.greendao.query.Query;
 
@@ -67,7 +69,8 @@ public class UserActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        usersAdapter = new UsersAdapter(userClickListener);
+        usersAdapter = new UsersAdapter();
+        usersAdapter.setOnItemClickListener(userClickListener);
         recyclerView.setAdapter(usersAdapter);
 
         addNoteButton = findViewById(R.id.buttonAdd);
@@ -124,10 +127,10 @@ public class UserActivity extends BaseActivity {
         updateUsers();
     }
 
-    UsersAdapter.UserClickListener userClickListener = new UsersAdapter.UserClickListener() {
+    OnItemClickListener userClickListener = new OnItemClickListener() {
         @Override
-        public void onUserClick(int position) {
-            User user = usersAdapter.getUser(position);
+        public void onItemClick(ViewParent parent, View view, int adapterPosition, int layoutPosition) {
+            User user = usersAdapter.getUser(adapterPosition);
             Long noteId = user.getId();
 
             userDao.deleteByKey(noteId);

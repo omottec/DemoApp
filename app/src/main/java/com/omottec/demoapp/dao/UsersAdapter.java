@@ -1,48 +1,37 @@
 package com.omottec.demoapp.dao;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.view.recycler.ClickRecyclerAdapter;
+import com.omottec.demoapp.view.recycler.ClickViewHolder;
+import com.omottec.demoapp.view.recycler.OnItemClickListener;
+import com.omottec.demoapp.view.recycler.OnItemLongClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
+public class UsersAdapter extends ClickRecyclerAdapter<UsersAdapter.UserViewHolder> {
 
-    private UserClickListener clickListener;
     private List<User> dataset;
 
-    public interface UserClickListener {
-        void onUserClick(int position);
-    }
-
-    static class UserViewHolder extends RecyclerView.ViewHolder {
+    static class UserViewHolder extends ClickViewHolder {
 
         public TextView text;
         public TextView desc;
 
-        public UserViewHolder(View itemView, final UserClickListener clickListener) {
-            super(itemView);
+        public UserViewHolder(View itemView, OnItemClickListener onItemClickListener, OnItemLongClickListener onItemLongClickListener) {
+            super(itemView, onItemClickListener, onItemLongClickListener);
             text = (TextView) itemView.findViewById(R.id.textViewGoodText);
             desc = (TextView) itemView.findViewById(R.id.textViewGoodDesc);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (clickListener != null) {
-                        clickListener.onUserClick(getAdapterPosition());
-                    }
-                }
-            });
         }
     }
 
-    public UsersAdapter(UserClickListener clickListener) {
-        this.clickListener = clickListener;
+    public UsersAdapter() {
         this.dataset = new ArrayList<User>();
     }
 
@@ -59,7 +48,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_note, parent, false);
-        return new UserViewHolder(view, clickListener);
+        return new UserViewHolder(view, this, this);
     }
 
     @Override
