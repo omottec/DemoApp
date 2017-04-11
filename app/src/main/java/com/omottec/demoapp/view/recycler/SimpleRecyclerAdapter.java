@@ -19,7 +19,7 @@ import java.util.List;
  * Created by qinbingbing on 10/03/2017.
  */
 
-public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder> {
+public class SimpleRecyclerAdapter extends ClickRecyclerAdapter<SimpleViewHolder> {
     public static final String TAG = "SimpleRecyclerAdapter";
     private List<String> mData = new ArrayList<>();
 
@@ -30,7 +30,10 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleViewHolder
     @Override
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder viewType:" + viewType);
-        return new SimpleViewHolder(LayoutInflater.from(MyApplication.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false));
+        return new SimpleViewHolder(
+                LayoutInflater.from(MyApplication.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false),
+                this,
+                this);
     }
 
     @Override

@@ -47,7 +47,10 @@
 
         <activity android:name=".activity.DemoActivity"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".lifecycle.LifeCycleActivity1">
@@ -165,10 +168,7 @@
         </activity>
 
         <activity android:name=".dao.DaoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <service android:name=".ipc.messenger.MessengerService"

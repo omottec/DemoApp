@@ -12,11 +12,11 @@ import com.omottec.demoapp.app.MyApplication;
  * Created by qinbingbing on 23/03/2017.
  */
 
-public class SimpleViewHolder extends RecyclerView.ViewHolder {
+public class SimpleViewHolder extends ClickViewHolder {
     TextView mTv;
 
     public SimpleViewHolder(View itemView) {
-        super(itemView);
+        super(itemView, null, null);
         mTv = (TextView) itemView.findViewById(android.R.id.text1);
         mTv.setTextColor(Color.BLACK);
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -30,5 +30,11 @@ public class SimpleViewHolder extends RecyclerView.ViewHolder {
                 Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public SimpleViewHolder(View itemView, OnItemClickListener onItemClickListener, OnItemLongClickListener onItemLongClickListener) {
+        super(itemView, onItemClickListener, onItemLongClickListener);
+        mTv = (TextView) itemView.findViewById(android.R.id.text1);
+        mTv.setTextColor(Color.BLACK);
     }
 }

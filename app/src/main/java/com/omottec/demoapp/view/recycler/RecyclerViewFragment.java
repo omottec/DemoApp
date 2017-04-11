@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.SimpleArrayMap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.fragment.BaseFragment;
 import com.omottec.demoapp.view.recycler.MultiRecyclerAdapter;
 import com.omottec.demoapp.view.recycler.SimpleRecyclerAdapter;
@@ -28,6 +31,7 @@ public class RecyclerViewFragment extends BaseFragment {
     public static final String TAG = "RecyclerViewFragment";
     private RecyclerView mRecyclerView;
     private Context mContext;
+    private SimpleRecyclerAdapter mRecyclerAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +63,16 @@ public class RecyclerViewFragment extends BaseFragment {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 200; i++)
             list.add("item " + i);
-        mRecyclerView.setAdapter(new SimpleRecyclerAdapter(list));
+        mRecyclerAdapter = new SimpleRecyclerAdapter(list);
+        mRecyclerAdapter.setOnItemClickListener((holder, view) -> {
+            String toast = new StringBuilder()
+                    .append("ItemViewType:").append(holder.getItemViewType())
+                    .append(", AdapterPosition:").append(holder.getAdapterPosition())
+                    .append(", LayoutPosition:" + holder.getLayoutPosition())
+                    .toString();
+            Toast.makeText(MyApplication.getContext(), toast, Toast.LENGTH_SHORT).show();
+        });
+        mRecyclerView.setAdapter(mRecyclerAdapter);
 //        mRecyclerView.setAdapter(new MultiRecyclerAdapter(mContext, list));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

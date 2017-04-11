@@ -3,9 +3,6 @@ package com.omottec.demoapp.view.recycler;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.omottec.demoapp.view.recycler.OnItemClickListener;
-import com.omottec.demoapp.view.recycler.OnItemLongClickListener;
-
 /**
  * Created by qinbingbing on 11/04/2017.
  */
