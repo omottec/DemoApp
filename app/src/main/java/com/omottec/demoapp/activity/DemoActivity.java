@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.rxjava.RxJava2Fragment;
+import com.omottec.demoapp.view.recycler.PtrRecyclerViewFragment;
 import com.omottec.demoapp.view.recycler.RecyclerViewFragment;
 
 /**
@@ -13,6 +14,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new RecyclerViewFragment();
+        return new PtrRecyclerViewFragment();
     }
 }

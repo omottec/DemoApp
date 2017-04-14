@@ -1,5 +1,6 @@
 package com.omottec.demoapp.utils;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 
 /**
@@ -18,6 +19,20 @@ public final class TouchUtils {
                 return "MotionEvent.ACTION_CANCEL@" + event.hashCode() + " eventTime:" + event.getEventTime();
             default:
                 return "MotionEvent.OTHER@" + event.hashCode() + " eventTime:" + event.getEventTime();
+        }
+    }
+
+
+    public static String getRecyclerScrollState(int state) {
+        switch (state) {
+            case RecyclerView.SCROLL_STATE_SETTLING:
+                return "SCROLL_STATE_SETTLING";
+            case RecyclerView.SCROLL_STATE_DRAGGING:
+                return "SCROLL_STATE_DRAGGING";
+            case RecyclerView.SCROLL_STATE_IDLE:
+                return "SCROLL_STATE_IDLE";
+            default:
+                return "SCROLL_STATE_UNKNOWN";
         }
     }
 

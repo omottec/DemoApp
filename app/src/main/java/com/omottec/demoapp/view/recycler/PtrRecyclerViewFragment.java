@@ -10,6 +10,7 @@ import android.view.View;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.fragment.BaseFragment;
+import com.omottec.demoapp.utils.TouchUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,18 @@ public class PtrRecyclerViewFragment extends BaseFragment {
         mSimpleAdapter = new SimpleRecyclerAdapter(data);
         mPtrAdapter = new PtrRecyclerAdapter(mPtrRecyclerView, mSimpleAdapter, false, true);
         mRecyclerView.setAdapter(mPtrAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                Log.d(TAG, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState)
+                        + ", isReadyForPullStart:" + mPtrRecyclerView.isReadyForPullStart());
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Log.d(TAG, "onScrolled isReadyForPullStart:" + mPtrRecyclerView.isReadyForPullStart());
+            }
+        });
         mPtrAdapter.notifyDataSetChanged();
 
         mPtrRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
