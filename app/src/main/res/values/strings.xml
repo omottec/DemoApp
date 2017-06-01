@@ -17,4 +17,5 @@
     <string name="enter_new_good">Enter new good</string>
     <string name="add">Add</string>
     <string name="click_to_remove">Click to remove it</string>
+    <string name="money_format">&#165;%1$.2f/%2$s</string>
 </resources>

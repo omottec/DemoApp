@@ -112,6 +112,16 @@ public final class UiUtils {
         return (int) (pxValue / scale + 0.5f);
     }
 
+    public static int sp2px(Context context, float spValue) {
+        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * scaledDensity + 0.5);
+    }
+
+    public static int px2sp(Context context, float pxValue) {
+        float scaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / scaledDensity + 0.5);
+    }
+
     /**
      * 获取状态栏的高度
      *
