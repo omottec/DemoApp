@@ -3,13 +3,16 @@ package com.omottec.demoapp.task;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
 /**
@@ -18,6 +21,7 @@ import com.omottec.demoapp.view.frame.TabPagerActivity;
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     private static int count;
     private static final int ID = count++;
+    private long mLastBackPressTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,5 +128,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void startTabPagerActivity() {
         Intent intent = new Intent(this, TabPagerActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        long elapsedRealtime = SystemClock.elapsedRealtime();
+        if (elapsedRealtime - mLastBackPressTime < 2000) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(MyApplication.getContext(), "再按一次退出~", Toast.LENGTH_SHORT).show();
+            mLastBackPressTime = elapsedRealtime;
+        }
     }
 }
