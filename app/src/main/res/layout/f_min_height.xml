@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_fixed_height"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:gravity="center"
+        android:text="爆品专区"
+        android:textColor="#FF0189BF"
+        android:textSize="18sp"
+        android:background="@android:color/holo_red_light"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="25dp"
+        android:gravity="center"
+        android:layout_toRightOf="@id/tv_fixed_height"
+        android:layout_marginLeft="1dp"
+        android:text="爆品专区"
+        android:textColor="#FF0189BF"
+        android:textSize="28sp"
+        android:background="@android:color/holo_red_light"/>
+</RelativeLayout>
