@@ -11,5 +11,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textColor="#ff0000"
-        android:text="I am a TextView"/>
+        android:text="I am a TextView"
+        android:textSize="15sp"/>
 </LinearLayout>

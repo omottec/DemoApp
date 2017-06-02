@@ -1,11 +1,13 @@
 package com.omottec.demoapp.text;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +33,12 @@ public class TextFragment extends Fragment {
         String str = getContext().getString(R.string.money_format, 200f, "份");
         int i = str.indexOf("/");
         SpannableString spannableString = new SpannableString(str);
-        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 20)), 0, i,
+        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 30)), 0, i,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 10)), i, str.length(),
+        spannableString.setSpan(new ForegroundColorSpan(Color.GREEN), i, str.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 10)), i, str.length(),
+//                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mTv.setText(spannableString);
         return mRootView;
     }
