@@ -15,6 +15,7 @@
  *******************************************************************************/
 package com.handmark.pulltorefresh.library;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -945,6 +946,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 * 
 	 * @param value - New Scroll value
 	 */
+	@TargetApi(11)
 	protected final void setHeaderScroll(int value) {
 		if (DEBUG) {
 			Log.d(LOG_TAG, "setHeaderScroll: " + value);

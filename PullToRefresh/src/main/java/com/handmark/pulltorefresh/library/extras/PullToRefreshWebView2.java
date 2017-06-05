@@ -17,6 +17,8 @@ package com.handmark.pulltorefresh.library.extras;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.webkit.WebView;
@@ -81,6 +83,7 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
 	private final AtomicBoolean mIsReadyForPullDown = new AtomicBoolean(false);
 	private final AtomicBoolean mIsReadyForPullUp = new AtomicBoolean(false);
 
+	@SuppressLint("AddJavascriptInterface")
 	@Override
 	protected WebView createRefreshableView(Context context, AttributeSet attrs) {
 		WebView webView = super.createRefreshableView(context, attrs);
@@ -121,10 +124,12 @@ public class PullToRefreshWebView2 extends PullToRefreshWebView {
 	 */
 	final class JsValueCallback {
 
+		@android.webkit.JavascriptInterface
 		public void isReadyForPullUpResponse(boolean response) {
 			mIsReadyForPullUp.set(response);
 		}
 
+		@android.webkit.JavascriptInterface
 		public void isReadyForPullDownResponse(boolean response) {
 			mIsReadyForPullDown.set(response);
 		}
