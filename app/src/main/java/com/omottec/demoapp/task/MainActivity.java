@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.activity.DemoActivity;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
@@ -107,7 +108,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.tv:
 //                startExternalActivity();
 //                startWelcomeActivity();
-                startTabPagerActivity();
+//                startTabPagerActivity();
+                startDemoActivity();
                 break;
             case R.id.tv1:
                 startSelf();
@@ -127,6 +129,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void startTabPagerActivity() {
         Intent intent = new Intent(this, TabPagerActivity.class);
+        startActivity(intent);
+    }
+
+    private void startDemoActivity() {
+        Intent intent = new Intent(this, DemoActivity.class);
         startActivity(intent);
     }
 

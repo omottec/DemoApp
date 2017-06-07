@@ -33,7 +33,10 @@
         <activity android:name=".task.MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".activity.LeakActivity">
@@ -47,10 +50,7 @@
 
         <activity android:name=".activity.DemoActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".lifecycle.LifeCycleActivity1">
@@ -195,6 +195,12 @@
             android:name=".ipc.provider.BookProvider"
             android:process=":provider"
             android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
+
+        <receiver android:name=".push.PushReceiver">
+            <intent-filter>
+                <action android:name="com.omottec.demoapp.intent.action_PUSH_MSG"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
