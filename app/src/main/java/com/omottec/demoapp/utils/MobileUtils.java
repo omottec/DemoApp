@@ -1,7 +1,6 @@
 package com.omottec.demoapp.utils;
 
 import android.content.Context;
-import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 
 /**
