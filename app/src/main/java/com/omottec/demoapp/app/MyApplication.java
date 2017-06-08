@@ -9,6 +9,7 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.utils.AppUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -63,6 +64,7 @@ public class MyApplication extends Application {
             return;
         }
         LeakCanary.install(this);
+        Fresco.initialize(this);
     }
 
     @Override

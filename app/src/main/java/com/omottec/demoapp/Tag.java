@@ -31,4 +31,6 @@ public final class Tag {
     public static final String FRAME_TAB_PAGER = "frame_tab_pager";
 
     public static final String PUSH = "push";
+
+    public static final String SPLASH = "splash";
 }
