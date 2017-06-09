@@ -102,9 +102,13 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected View createContentView() {
         mContentView = View.inflate(this, R.layout.a_splash, null);
+        return mContentView;
+    }
+
+    @Override
+    protected void onViewCreated(View view) {
         mSplashIv = (ImageView) mContentView.findViewById(R.id.iv_splash);
         mSplashSdv = (SimpleDraweeView) mContentView.findViewById(R.id.sdv_splash);
         mSplashSdv.setScaleType(ImageView.ScaleType.FIT_XY);
-        return mContentView;
     }
 }

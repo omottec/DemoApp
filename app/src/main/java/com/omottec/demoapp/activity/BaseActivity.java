@@ -50,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContentView = createContentView();
         mContainer.addView(mContentView);
         setContentView(mRootView);
+        onViewCreated(mRootView);
     }
 
     protected View createToolBarLeft() {
@@ -108,6 +109,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract View createContentView();
+
+    protected void onViewCreated(View view) {}
 
     protected void setState(PageState state) {
         switch (state) {
