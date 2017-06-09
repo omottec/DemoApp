@@ -7,12 +7,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.facebook.common.references.CloseableReference;
+import com.facebook.common.executors.UiThreadImmediateExecutorService;
+import com.facebook.datasource.BaseDataSubscriber;
 import com.facebook.datasource.DataSource;
+import com.facebook.datasource.DataSubscriber;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
-import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
@@ -39,29 +40,56 @@ public class SplashActivity extends BaseActivity {
         if (mJump2Main) {
             jump2MainActivity();
         } else {
-//            mSplashIv.setImageResource(R.drawable.splash);
-//            mSplashSdv.setImageURI(IMG_URI);
+            // 使用占位图和直接加载图片
+            /*GenericDraweeHierarchyBuilder builder =
+                    new GenericDraweeHierarchyBuilder(getResources());
+            GenericDraweeHierarchy hierarchy = builder
+                    .setPlaceholderImage(R.drawable.splash)
+                    .build();
+            mSplashSdv.setHierarchy(hierarchy);
+            mSplashSdv.setImageURI(IMG_URI);
+            MyApplication.getUiHandler().postDelayed(() -> jump2MainActivity(), 2 * 1000);*/
+
+            /**
+             * 有缓存使用缓存，延迟2s跳主页
+             * 无缓存使用默认图，下载，立即跳主页
+             */
             ImagePipeline imagePipeline = Fresco.getImagePipeline();
+            Uri uri = Uri.parse(IMG_URI);
             ImageRequest imageRequest = ImageRequest.fromUri(IMG_URI);
-            DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(imageRequest, this);
-            try {
-                CloseableReference<CloseableImage> imageReference = dataSource.getResult();
-                if (imageReference != null) {
-                    try {
-                        CloseableImage closeableImage = imageReference.get();
-                        Logger.d(Tag.SPLASH, closeableImage.toString());
-                    } finally {
-                        CloseableReference.closeSafely(imageReference);
+            DataSource<Boolean> inDiskCacheSource = imagePipeline.isInDiskCache(uri);
+            DataSubscriber<Boolean> subscriber = new BaseDataSubscriber<Boolean>() {
+                @Override
+                protected void onNewResultImpl(DataSource<Boolean> dataSource) {
+                    Logger.d(Tag.SPLASH, "onNewResultImpl");
+                    if (!dataSource.isFinished()) {
+                        mSplashSdv.setImageResource(R.drawable.splash);
+                        imagePipeline.prefetchToDiskCache(imageRequest, this);
+                        jump2MainActivity();
+                        return;
                     }
-                } else {
-                    Logger.d(Tag.SPLASH, "prefetchToDiskCache");
-                    imagePipeline.prefetchToDiskCache(imageRequest, this);
+                    boolean isInCache = dataSource.getResult();
+                    Logger.d(Tag.SPLASH, "isInCache:" + isInCache);
+                    if (isInCache) {
+                        mSplashSdv.setImageURI(uri);
+                        MyApplication.getUiHandler().postDelayed(() -> jump2MainActivity(), 2 * 1000);
+                    } else {
+                        mSplashSdv.setImageResource(R.drawable.splash);
+                        imagePipeline.prefetchToDiskCache(imageRequest, this);
+                        jump2MainActivity();
+                    }
+
                 }
 
-            } finally {
-                dataSource.close();
-            }
-            MyApplication.getUiHandler().postDelayed(() -> jump2MainActivity(), 2 * 1000);
+                @Override
+                protected void onFailureImpl(DataSource<Boolean> dataSource) {
+                    Logger.d(Tag.SPLASH, "onFailureImpl");
+                    mSplashSdv.setImageResource(R.drawable.splash);
+                    imagePipeline.prefetchToDiskCache(imageRequest, this);
+                    jump2MainActivity();
+                }
+            };
+            inDiskCacheSource.subscribe(subscriber, UiThreadImmediateExecutorService.getInstance());
         }
     }
 
@@ -76,6 +104,7 @@ public class SplashActivity extends BaseActivity {
         mContentView = View.inflate(this, R.layout.a_splash, null);
         mSplashIv = (ImageView) mContentView.findViewById(R.id.iv_splash);
         mSplashSdv = (SimpleDraweeView) mContentView.findViewById(R.id.sdv_splash);
+        mSplashSdv.setScaleType(ImageView.ScaleType.FIT_XY);
         return mContentView;
     }
 }
