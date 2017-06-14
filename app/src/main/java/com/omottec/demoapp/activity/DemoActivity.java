@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.fragment.MobileInfoFragment;
+import com.omottec.demoapp.fragment.NinePatchFragment;
 import com.omottec.demoapp.push.SendPushFragment;
 import com.omottec.demoapp.rxjava.RxJava2Fragment;
 import com.omottec.demoapp.text.TextFragment;
@@ -17,6 +18,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new MobileInfoFragment();
+        return new NinePatchFragment();
     }
 }
