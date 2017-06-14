@@ -33,4 +33,6 @@ public final class Tag {
     public static final String PUSH = "push";
 
     public static final String SPLASH = "splash";
+
+    public static final String REF = "ref";
 }
