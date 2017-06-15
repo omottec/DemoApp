@@ -46,8 +46,25 @@ public class RefGcFragment extends Fragment {
             Log.d(Tag.REF, "gc " + i);
             System.gc();
             SystemClock.sleep(100);
+            Reference<? extends ReferentObject> polledReferent;
+            while ((polledReferent = mReferenceQueue.poll()) != null) {
+                Log.d(Tag.REF, "polledReferent:" + polledReferent + ", polledReferent.get:" + polledReferent.get());
+            }
+        }
+        Log.d(Tag.REF, "-------------------------------------");
+        ReferenceQueue<ReferentObject> refQueue = new ReferenceQueue<>();
+        ReferentObject strongRef = new ReferentObject();
+        SoftReference<ReferentObject> softRef = new SoftReference<>(new ReferentObject(), refQueue);
+        WeakReference<ReferentObject> weakRef = new WeakReference<>(new ReferentObject(), refQueue);
+        Log.d(Tag.REF, "strongRef:" + strongRef);
+        Log.d(Tag.REF, "softRef:" + softRef + ", softRef.get:" + softRef.get());
+        Log.d(Tag.REF, "weakRef:" + weakRef + ", weakRef.get:" + weakRef.get());
+        for (int i = 0; i < 5; i++) {
+            Log.d(Tag.REF, "gc " + i);
+            System.gc();
+            SystemClock.sleep(200);
             Reference<? extends ReferentObject> polledRef;
-            while ((polledRef = mReferenceQueue.poll()) != null) {
+            while ((polledRef = refQueue.poll()) != null) {
                 Log.d(Tag.REF, "polledRef:" + polledRef + ", polledRef.get:" + polledRef.get());
             }
         }
