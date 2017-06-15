@@ -1,4 +1,4 @@
-package com.omottec.demoapp.activity;
+package com.omottec.demoapp.memory;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,15 +16,16 @@ import java.util.concurrent.TimeUnit;
  * Created by qinbingbing on 3/31/16.
  */
 public class LeakActivity extends FragmentActivity {
-    private byte[] largeObj = new byte[10 * 1024 * 1024];
+    private byte[] mLargeObj = new byte[10 * 1024 * 1024];
     private StrongRefHandler mHandler;
-    private TextView mTV;
+    private TextView mTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.full_screen_text);
-        mTV = (TextView) findViewById(R.id.tv);
+        mTv = (TextView) findViewById(R.id.tv);
+        mTv.setText("LeakActivity");
 //        new LeakThread().start();
 //        new StaticThread().start();
 //        new StaticStrongRefThread(this).start();
@@ -36,7 +37,7 @@ public class LeakActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacksAndMessages(null);
+//        mHandler.removeCallbacksAndMessages(null);
     }
 
     class LeakThread extends Thread {

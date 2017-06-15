@@ -14,6 +14,7 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.activity.DemoActivity;
 import com.omottec.demoapp.app.MyApplication;
+import com.omottec.demoapp.memory.LeakActivity;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
 /**
@@ -109,7 +110,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                startExternalActivity();
 //                startWelcomeActivity();
 //                startTabPagerActivity();
-                startDemoActivity();
+//                startDemoActivity();
+                startLeakActivity();
                 break;
             case R.id.tv1:
                 startSelf();
@@ -134,6 +136,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void startDemoActivity() {
         Intent intent = new Intent(this, DemoActivity.class);
+        startActivity(intent);
+    }
+
+    private void startLeakActivity() {
+        Intent intent = new Intent(this, LeakActivity.class);
         startActivity(intent);
     }
 
