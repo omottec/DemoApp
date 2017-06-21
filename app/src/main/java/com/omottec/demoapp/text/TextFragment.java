@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,16 @@ public class TextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.full_screen_text, null);
         mTv = (TextView) mRootView.findViewById(R.id.tv);
+        return mRootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        setPriceAndUnit();
+        setPriceAndLine();
+    }
+
+    private void setPriceAndUnit() {
         String str = getContext().getString(R.string.money_format, 200f, "份");
         int i = str.indexOf("/");
         SpannableString spannableString = new SpannableString(str);
@@ -40,6 +51,12 @@ public class TextFragment extends Fragment {
 //        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 10)), i, str.length(),
 //                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mTv.setText(spannableString);
-        return mRootView;
+    }
+
+    private void setPriceAndLine() {
+        String originalPriceText = getContext().getString(R.string.money_format, 200f, "份");
+        SpannableString spannableString = new SpannableString(originalPriceText);
+        spannableString.setSpan(new StrikethroughSpan(), 0, originalPriceText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTv.setText(spannableString);
     }
 }
