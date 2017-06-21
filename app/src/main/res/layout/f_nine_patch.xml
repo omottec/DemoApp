@@ -19,25 +19,23 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="8dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:textSize="12sp"
             android:text="5折"
-            android:background="@drawable/bg_tag"/>
+            android:background="@drawable/bg_tag_nine"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="8dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:textSize="12sp"
             android:text="5折"
-            android:background="@drawable/bg_tag"/>
+            android:background="@drawable/bg_tag_nine_small"/>
     </LinearLayout>
 
     <LinearLayout
@@ -56,25 +54,25 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="8dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:text="特价"
             android:textSize="12sp"
-            android:background="@drawable/bg_tag"/>
+            android:background="@drawable/bg_tag_nine"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="8dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:text="特价"
             android:textSize="12sp"
-            android:background="@drawable/bg_tag"/>
+            android:background="@drawable/bg_tag_nine_small"/>
     </LinearLayout>
 
     <LinearLayout
@@ -93,25 +91,25 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="8dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:text="满100减20"
             android:textSize="12sp"
-            android:background="@drawable/bg_tag"/>
+            android:background="@drawable/bg_tag_nine"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="19dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingRight="8dp"
             android:layout_marginLeft="5dp"
             android:gravity="center"
             android:text="满100减20"
             android:textSize="12sp"
-            android:background="@drawable/bg_tag"/>
+            android:background="@drawable/bg_tag_nine_small"/>
     </LinearLayout>
 
 </LinearLayout>
