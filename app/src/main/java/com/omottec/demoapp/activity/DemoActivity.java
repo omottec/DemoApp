@@ -14,6 +14,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new GsonFragment();
+        return new NinePatchFragment();
     }
 }
