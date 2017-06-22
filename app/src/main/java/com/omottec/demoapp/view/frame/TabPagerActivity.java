@@ -51,7 +51,7 @@ public class TabPagerActivity extends AppCompatActivity {
         mStatePagerAdapter = new SimpleFragStatePagerAdapter(getSupportFragmentManager(), fragNames);
         mVp.setAdapter(mStatePagerAdapter);
 //        mVp.setAdapter(new SimpleFragPagerAdapter(getSupportFragmentManager(), fragNames));
-        mVp.setOffscreenPageLimit(2);
+        mVp.setOffscreenPageLimit(3);
         mTl.setupWithViewPager(mVp);
         mTl.setTabMode(TabLayout.MODE_SCROLLABLE);
 //        mTl.setTabMode(TabLayout.MODE_FIXED);
@@ -72,7 +72,7 @@ public class TabPagerActivity extends AppCompatActivity {
             }
         });*/
 
-        MyApplication.getUiHandler().postDelayed(new Runnable() {
+        /*MyApplication.getUiHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 List<String> fragNames = new ArrayList<String>();
@@ -82,7 +82,7 @@ public class TabPagerActivity extends AppCompatActivity {
                 fragNames.add("四四四四四四四四四四四四");
                 mStatePagerAdapter.setData(fragNames);
             }
-        }, 15 * 1000);
+        }, 15 * 1000);*/
     }
 
     private void resizeTabLayout() {
