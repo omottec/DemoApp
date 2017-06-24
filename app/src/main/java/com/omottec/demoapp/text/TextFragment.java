@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.method.ScrollingMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
@@ -25,12 +26,14 @@ import com.omottec.demoapp.utils.UiUtils;
 public class TextFragment extends Fragment {
     private View mRootView;
     private TextView mTv;
+    private TextView mTv1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.full_screen_text, null);
+        mRootView = inflater.inflate(R.layout.f_text, null);
         mTv = (TextView) mRootView.findViewById(R.id.tv);
+        mTv1 = (TextView) mRootView.findViewById(R.id.tv1);
         return mRootView;
     }
 
@@ -38,6 +41,13 @@ public class TextFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 //        setPriceAndUnit();
         setPriceAndLine();
+        String text = "1. 掌鱼生鲜更新，更好更快一一掌鱼生鲜更新，更好更快一一掌鱼生鲜更新，更好更快一一\n" +
+                "2. 掌鱼生鲜更新，更好更快二二掌鱼生鲜更新，更好更快二二掌鱼生鲜更新，更好更快二二\n" +
+                "3. 掌鱼生鲜更新，更好更快三三掌鱼生鲜更新，更好更快三三掌鱼生鲜更新，更好更快三三\n" +
+                "4. 掌鱼生鲜更新，更好更快四四掌鱼生鲜更新，更好更快四四掌鱼生鲜更新，更好更快四四\n" +
+                "5. 掌鱼生鲜更新，更好更快五五掌鱼生鲜更新，更好更快五五掌鱼生鲜更新，更好更快五五";
+        mTv1.setMovementMethod(ScrollingMovementMethod.getInstance());
+        mTv1.setText(text);
     }
 
     private void setPriceAndUnit() {
