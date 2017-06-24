@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.fragment.NinePatchFragment;
+import com.omottec.demoapp.fragment.WebViewFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.ref.RefGcFragment;
 import com.omottec.demoapp.text.TextFragment;
@@ -15,6 +16,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new TextFragment();
+        return new WebViewFragment();
     }
 }

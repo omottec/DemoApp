@@ -1,0 +1,29 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript">
+    function actionFromNative(){
+         document.getElementById("log_msg").innerHTML +=
+             "<br\>Native call Js";
+    }
+
+    function actionFromNativeWithParam(arg){
+         document.getElementById("log_msg").innerHTML +=
+             ("<br\>Native call Js with arg："+arg);
+    }
+
+    </script>
+</head>
+<body>
+<p>WebView与Javascript交互</p>
+<div>
+    <button onClick="window.wx.actionFromJs()">Js call Native</button>
+</div>
+<br/>
+<div>
+    <button onClick="window.wx.actionFromJsWithParam('come from Js')">Js call Native with arg</button>
+</div>
+<br/>
+<div id="log_msg">调用打印信息</div>
+</body>
+</html>
