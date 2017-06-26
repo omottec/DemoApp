@@ -65,4 +65,10 @@ public class SimpleRecyclerAdapter extends ClickRecyclerAdapter<SimpleViewHolder
         mData.addAll(0, data);
         notifyDataSetChanged();
     }
+
+    public void reset(List<String> data) {
+        mData.clear();
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
 }
