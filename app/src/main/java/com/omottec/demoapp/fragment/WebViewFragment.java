@@ -3,6 +3,7 @@ package com.omottec.demoapp.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class WebViewFragment extends Fragment implements JavascriptInterface {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("file:///android_asset/wx.html");
         mWebView.addJavascriptInterface(this, "wx");
+
+        mTv.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         mBtn.setOnClickListener(v -> {
             mWebView.loadUrl("javascript:actionFromNative()");

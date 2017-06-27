@@ -17,6 +17,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new MajorDetailFragment();
+        return new WebViewFragment();
     }
 }
