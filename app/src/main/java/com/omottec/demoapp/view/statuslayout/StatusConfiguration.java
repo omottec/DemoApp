@@ -4,6 +4,8 @@ import android.app.Notification;
 import android.content.Context;
 import android.view.ViewStub;
 
+import com.omottec.demoapp.R;
+
 /**
  * Created by qinbingbing on 30/06/2017.
  */
@@ -18,10 +20,22 @@ public final class StatusConfiguration {
 
     private StatusConfiguration(Builder builder) {
         mContext = builder.mContext;
-        mLoadingResId = builder.mLoadingResId;
+        mLoadingResId = builder.mLoadingResId != 0 ? builder.mLoadingResId : R.layout.l_loading;
         mContentResId = builder.mContentResId;
-        mNetErrVs = builder.mNetErrVs;
-        mEmptyVs = builder.mEmptyVs;
+        if (builder.mNetErrVs != null) {
+            mNetErrVs = builder.mNetErrVs;
+        } else {
+            ViewStub viewStub = new ViewStub(mContext);
+            viewStub.setLayoutResource(R.layout.l_net_error);
+            mNetErrVs = builder.mNetErrVs = viewStub;
+        }
+        if (builder.mEmptyVs != null) {
+            mEmptyVs = builder.mEmptyVs;
+        } else {
+            ViewStub viewStub = new ViewStub(mContext);
+            viewStub.setLayoutResource(R.layout.l_empty);
+            mEmptyVs = builder.mEmptyVs = viewStub;
+        }
         mOnRetryListener = builder.mOnRetryListener;
     }
 
@@ -65,7 +79,7 @@ public final class StatusConfiguration {
         }
 
         public StatusConfiguration build() {
-            return null;
+            return new StatusConfiguration(this);
         }
     }
 }
