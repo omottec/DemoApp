@@ -11,6 +11,6 @@ import rx.Observable;
  */
 
 public interface IGeoCoding {
-    @GET("/geocoding")
+    @GET("geocoding")
     Observable<GeoCoding> getGeoCoding(@Query("a") String a);
 }

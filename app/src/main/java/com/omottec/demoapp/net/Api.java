@@ -14,8 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public final class Api {
     private Api() {
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://gc.ditu.aliyun.com")
-                .client(new OkHttpClient())
+                .baseUrl("http://gc.ditu.aliyun.com/")
+//                .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

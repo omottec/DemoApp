@@ -2,6 +2,7 @@ package com.omottec.demoapp.fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,12 +15,18 @@ import android.widget.FrameLayout;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.activity.PageState;
+import com.trello.rxlifecycle.FragmentEvent;
+import com.trello.rxlifecycle.RxLifecycle;
+import com.trello.rxlifecycle.components.FragmentLifecycleProvider;
+
+import rx.Observable;
+import rx.subjects.BehaviorSubject;
 
 /**
  * Created by qinbingbing on 20/03/2017.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements FragmentLifecycleProvider {
     protected FragmentActivity mActivity;
     protected FrameLayout mRootFl;
     protected View mContentView;
@@ -32,6 +39,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLifecycleSubject.onNext(FragmentEvent.CREATE);
         mActivity = getActivity();
     }
 
@@ -151,11 +159,87 @@ public abstract class BaseFragment extends Fragment {
                 && mLoadingAnimator.isRunning();
     }
 
+    private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
+
+    @Override
+    public Observable<FragmentEvent> lifecycle() {
+        return mLifecycleSubject.asObservable();
+    }
+
+    @Override
+    public <T> Observable.Transformer<? super T, ? extends T> bindUntilEvent(FragmentEvent event) {
+        return RxLifecycle.bindUntilFragmentEvent(mLifecycleSubject, event);
+    }
+
+    @Override
+    public <T> Observable.Transformer<? super T, ? extends T> bindToLifecycle() {
+        return RxLifecycle.bindFragment(mLifecycleSubject);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mLifecycleSubject.onNext(FragmentEvent.ATTACH);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mLifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mLifecycleSubject.onNext(FragmentEvent.START);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mLifecycleSubject.onNext(FragmentEvent.RESUME);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mLifecycleSubject.onNext(FragmentEvent.PAUSE);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mLifecycleSubject.onNext(FragmentEvent.STOP);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mLifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (isLoading()) dismissLoading();
+        mLifecycleSubject.onNext(FragmentEvent.DESTROY);
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mLifecycleSubject.onNext(FragmentEvent.DETACH);
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        onUserVisibleHint(isVisibleToUser);
+    }
+
+    /**
+     * 用于ViewPager切换Fragment的时候，提示当前可见还是隐藏
+     * @param isVisibleToUser 是否对用户可见
+     */
+    protected void onUserVisibleHint(boolean isVisibleToUser) {
+    }
 }
