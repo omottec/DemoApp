@@ -1,6 +1,7 @@
 package com.omottec.demoapp.view.statuslayout;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -46,10 +47,11 @@ public class MultiPartStatusFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mRedSl = (StatusLayout) view.findViewById(R.id.sl_red);
         mBlueSl = (StatusLayout) view.findViewById(R.id.sl_blue);
-        mRedTv = (TextView) view.findViewById(R.id.tv_red);
-        mBlueTv = (TextView) view.findViewById(R.id.tv_blue);
         mRedSl.init(new StatusConfiguration.Builder(getActivity()).contentView(R.layout.l_status_content_red).build());
         mBlueSl.init(new StatusConfiguration.Builder(getActivity()).contentView(R.layout.l_status_content_blue).build());
+        mRedTv = (TextView) view.findViewById(R.id.tv_red);
+        mBlueTv = (TextView) view.findViewById(R.id.tv_blue);
+
         mRedSl.showLoading();
         Api.getInstance()
                 .get(IGeoCoding.class)
@@ -66,6 +68,7 @@ public class MultiPartStatusFragment extends BaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         Logger.d(TAG, "onError red");
+                        mRedSl.showNetErr();
                     }
 
                     @Override
@@ -77,7 +80,7 @@ public class MultiPartStatusFragment extends BaseFragment {
                     }
                 });
 
-        /*mBlueSl.showLoading();
+        mBlueSl.showLoading();
         Api.getInstance()
                 .get(IGeoCoding.class)
                 .getGeoCoding("上海")
@@ -92,6 +95,7 @@ public class MultiPartStatusFragment extends BaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         Logger.d(TAG, "onError blue");
+                        mRedSl.showNetErr();
                     }
 
                     @Override
@@ -101,9 +105,10 @@ public class MultiPartStatusFragment extends BaseFragment {
                                 + ", lon:" + geoCoding.lon);
                         mBlueSl.showContent();
                     }
-                });*/
+                });
 
-        /*OkHttpClient okHttpClient = new OkHttpClient();
+        /*mRedSl.showLoading();
+        OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url("http://gc.ditu.aliyun.com/geocoding?a=%E5%8C%97%E4%BA%AC").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -113,7 +118,11 @@ public class MultiPartStatusFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Logger.d(TAG, "onResponse:" + response.toString());
+                Logger.d(TAG, "onResponse");
+                getActivity().runOnUiThread(() -> {
+                    mRedTv.setText(response.toString());
+                    mRedSl.showContent();
+                });
             }
         });*/
     }
