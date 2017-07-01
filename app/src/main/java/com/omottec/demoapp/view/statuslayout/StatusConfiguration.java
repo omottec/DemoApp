@@ -20,7 +20,7 @@ public final class StatusConfiguration {
 
     private StatusConfiguration(Builder builder) {
         mContext = builder.mContext;
-        mLoadingResId = builder.mLoadingResId != 0 ? builder.mLoadingResId : R.layout.l_loading;
+        mLoadingResId = builder.mLoadingResId != 0 ? builder.mLoadingResId : R.layout.l_loading_progressbar;
         mContentResId = builder.mContentResId;
         if (builder.mNetErrVs != null) {
             mNetErrVs = builder.mNetErrVs;

@@ -17,6 +17,7 @@ import com.trello.rxlifecycle.FragmentEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,15 +48,87 @@ public class MultiPartStatusFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mRedSl = (StatusLayout) view.findViewById(R.id.sl_red);
         mBlueSl = (StatusLayout) view.findViewById(R.id.sl_blue);
-        mRedSl.init(new StatusConfiguration.Builder(getActivity()).contentView(R.layout.l_status_content_red).build());
-        mBlueSl.init(new StatusConfiguration.Builder(getActivity()).contentView(R.layout.l_status_content_blue).build());
+        StatusConfiguration redConfiguration = new StatusConfiguration.Builder(getActivity())
+                .contentView(R.layout.l_status_content_red)
+                .onRetryListener(v -> {
+                    accessNetForRedSl();
+                })
+                .build();
+        mRedSl.init(redConfiguration);
+        StatusConfiguration blueConfiguration = new StatusConfiguration.Builder(getActivity())
+                .contentView(R.layout.l_status_content_blue)
+                .onRetryListener(v -> {
+                    accessNetForBlueSl();
+                })
+                .build();
+        mBlueSl.init(blueConfiguration);
         mRedTv = (TextView) view.findViewById(R.id.tv_red);
         mBlueTv = (TextView) view.findViewById(R.id.tv_blue);
 
+        accessNetForRedSl();
+
+        accessNetForBlueSl();
+
+//        accessNetForRedSlByOkhttp();
+    }
+
+    private void accessNetForRedSlByOkhttp() {
+        mRedSl.showLoading();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url("http://gc.ditu.aliyun.com/geocoding?a=%E5%8C%97%E4%BA%AC").build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Logger.d(TAG, "onFailure");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Logger.d(TAG, "onResponse");
+                getActivity().runOnUiThread(() -> {
+                    mRedTv.setText(response.toString());
+                    mRedSl.showContent();
+                });
+            }
+        });
+    }
+
+    private void accessNetForBlueSl() {
+        mBlueSl.showLoading();
+        Api.getInstance()
+                .get(IGeoCoding.class)
+                .getGeoCoding("上海")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<GeoCoding>() {
+                    @Override
+                    public void onCompleted() {
+                        Logger.d(TAG, "onCompleted blue");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Logger.d(TAG, "onError blue");
+                        mBlueSl.showNetErr();
+                    }
+
+                    @Override
+                    public void onNext(GeoCoding geoCoding) {
+                        Logger.d(TAG, "onNext blue:" + geoCoding);
+                        mBlueTv.setText("lat:" + geoCoding.lat
+                                + ", lon:" + geoCoding.lon);
+                        mBlueSl.showContent();
+                        throw new IllegalStateException();
+                    }
+                });
+    }
+
+    private void accessNetForRedSl() {
         mRedSl.showLoading();
         Api.getInstance()
                 .get(IGeoCoding.class)
                 .getGeoCoding("北京")
+                .delay(2000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .compose(this.<GeoCoding>bindUntilEvent(FragmentEvent.DESTROY))
@@ -79,51 +152,5 @@ public class MultiPartStatusFragment extends BaseFragment {
                         mRedSl.showContent();
                     }
                 });
-
-        mBlueSl.showLoading();
-        Api.getInstance()
-                .get(IGeoCoding.class)
-                .getGeoCoding("上海")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<GeoCoding>() {
-                    @Override
-                    public void onCompleted() {
-                        Logger.d(TAG, "onCompleted blue");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Logger.d(TAG, "onError blue");
-                        mRedSl.showNetErr();
-                    }
-
-                    @Override
-                    public void onNext(GeoCoding geoCoding) {
-                        Logger.d(TAG, "onNext blue:" + geoCoding);
-                        mBlueTv.setText("lat:" + geoCoding.lat
-                                + ", lon:" + geoCoding.lon);
-                        mBlueSl.showContent();
-                    }
-                });
-
-        /*mRedSl.showLoading();
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("http://gc.ditu.aliyun.com/geocoding?a=%E5%8C%97%E4%BA%AC").build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Logger.d(TAG, "onFailure");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Logger.d(TAG, "onResponse");
-                getActivity().runOnUiThread(() -> {
-                    mRedTv.setText(response.toString());
-                    mRedSl.showContent();
-                });
-            }
-        });*/
     }
 }
