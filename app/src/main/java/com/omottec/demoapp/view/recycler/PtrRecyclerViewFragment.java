@@ -49,7 +49,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
         mSimpleAdapter = new SimpleRecyclerAdapter(data);
         mPtrAdapter = new PtrRecyclerAdapter(mPtrRecyclerView, mSimpleAdapter, false, true);
         mRecyclerView.setAdapter(mPtrAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 Log.d(TAG, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState)
@@ -60,10 +60,18 @@ public class PtrRecyclerViewFragment extends BaseFragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 Log.d(TAG, "onScrolled isReadyForPullStart:" + mPtrRecyclerView.isReadyForPullStart());
             }
-        });
-        mPtrAdapter.notifyDataSetChanged();
+        });*/
 
-        mPtrRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
+//        mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        /*mPtrRecyclerView._setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+
+            }
+        });*/
+
+
+        mPtrRecyclerView._setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<RecyclerView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullDownToRefresh");
@@ -79,19 +87,21 @@ public class PtrRecyclerViewFragment extends BaseFragment {
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullUpToRefresh");
-                if (mFooterCount == 2) {
+                if (mFooterCount == 30) {
                     mPtrRecyclerView.onRefreshComplete();
                     mPtrAdapter.setShowFooter(true);
                     return;
                 }
                 List<String> data = new ArrayList<String>();
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 30; i++)
                     data.add("item add footer " + mFooterCount);
                 mFooterCount++;
                 mPtrRecyclerView.onRefreshComplete();
                 mSimpleAdapter.addDataAtLast(data);
             }
         });
+        mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
+        mPtrAdapter.notifyDataSetChanged();
     }
 
     @Override

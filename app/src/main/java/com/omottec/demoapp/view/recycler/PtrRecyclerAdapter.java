@@ -3,6 +3,7 @@ package com.omottec.demoapp.view.recycler;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.omottec.demoapp.app.MyApplication;
  */
 
 public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
+    public static final String TAG = "PtrRecyclerAdapter";
     public static final int VIEW_TYPE_HEADER = Integer.MIN_VALUE;
     public static final int VIEW_TYPE_FOOTER = Integer.MIN_VALUE + 1;
     private int mHeaderViewId = -1;
@@ -48,6 +50,12 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
             @Override
             public void onChanged() {
                 PtrRecyclerAdapter.this.notifyDataSetChanged();
+                /*MyApplication.getUiHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PtrRecyclerAdapter.this.notifyDataSetChanged();
+                    }
+                });*/
             }
 
             @Override
@@ -55,6 +63,15 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
                 PtrRecyclerAdapter.this.notifyItemRangeChanged(
                         showHeader() ? positionStart+1 : positionStart,
                         itemCount);
+                /*MyApplication.getUiHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PtrRecyclerAdapter.this.notifyItemRangeChanged(
+                                showHeader() ? positionStart+1 : positionStart,
+                                itemCount);
+                    }
+                });*/
+
             }
 
             @Override
@@ -63,6 +80,15 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
                         showHeader() ? positionStart+1 : positionStart,
                         itemCount,
                         payload);
+                /*MyApplication.getUiHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PtrRecyclerAdapter.this.notifyItemRangeChanged(
+                                showHeader() ? positionStart+1 : positionStart,
+                                itemCount,
+                                payload);
+                    }
+                });*/
             }
 
             @Override
@@ -70,6 +96,14 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
                 PtrRecyclerAdapter.this.notifyItemRangeInserted(
                         showHeader() ? positionStart+1 : positionStart,
                         itemCount);
+                /*MyApplication.getUiHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PtrRecyclerAdapter.this.notifyItemRangeInserted(
+                                showHeader() ? positionStart+1 : positionStart,
+                                itemCount);
+                    }
+                });*/
             }
 
             @Override
@@ -77,14 +111,31 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
                 PtrRecyclerAdapter.this.notifyItemRangeRemoved(
                         showHeader() ? positionStart+1 : positionStart,
                         itemCount);
+                /*MyApplication.getUiHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PtrRecyclerAdapter.this.notifyItemRangeRemoved(
+                                showHeader() ? positionStart+1 : positionStart,
+                                itemCount);
+                    }
+                });*/
             }
 
             @Override
             public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-                if (itemCount == 1)
+                if (itemCount == 1) {
                     PtrRecyclerAdapter.this.notifyItemMoved(
                             showHeader() ? fromPosition+1 : fromPosition,
                             showHeader() ? toPosition+1 : toPosition);
+                    /*MyApplication.getUiHandler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            PtrRecyclerAdapter.this.notifyItemMoved(
+                                    showHeader() ? fromPosition+1 : fromPosition,
+                                    showHeader() ? toPosition+1 : toPosition);
+                        }
+                    });*/
+                }
             }
         };
     }
@@ -156,6 +207,7 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "PtrRecyclerAdapter.getItemCount");
         int itemCount = mAdapter.getItemCount();
         if (showHeader()) itemCount++;
         if (showFooter()) itemCount++;

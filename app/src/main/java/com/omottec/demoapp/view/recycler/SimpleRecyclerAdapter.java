@@ -57,8 +57,10 @@ public class SimpleRecyclerAdapter extends ClickRecyclerAdapter<SimpleViewHolder
     }
 
     public void addDataAtLast(List<String> data) {
+        int oldSize = mData.size();
         mData.addAll(data);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(oldSize, data.size());
+//        notifyDataSetChanged();
     }
 
     public void addDataAtFirst(List<String> data) {
