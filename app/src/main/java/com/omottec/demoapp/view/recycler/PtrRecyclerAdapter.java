@@ -153,10 +153,31 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
                 @Override
                 public int getSpanSize(int position) {
                     if (showHeader() && position == 0) return spanCount;
+                    if (showFooter() && position == mAdapter.getItemCount()) return spanCount;
+                    return spanSizeLookup.getSpanSize(showHeader() ? position-1 : position);
+
+//                    return position % 2 == 0 ? 1 : 2;
+
+                    /*switch (getItemViewType(position)) {
+                        case VIEW_TYPE_HEADER:
+                            return spanCount;
+                        case VIEW_TYPE_FOOTER:
+                            return spanCount;
+                        default:
+                            return spanSizeLookup.getSpanSize(showHeader() ? position-1 : position);
+                    }*/
+                }
+            });
+            /*GridLayoutManager newGlm = new GridLayoutManager(recyclerView.getContext(), spanCount);
+            newGlm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (showHeader() && position == 0) return spanCount;
                     if (showFooter() && position == getItemCount()-1) return spanCount;
                     return spanSizeLookup.getSpanSize(showHeader() ? position-1 : position);
                 }
             });
+            recyclerView.setLayoutManager(newGlm);*/
         }
     }
 
@@ -209,15 +230,19 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
     public int getItemCount() {
         Log.d(TAG, "PtrRecyclerAdapter.getItemCount");
         int itemCount = mAdapter.getItemCount();
-        if (showHeader()) itemCount++;
-        if (showFooter()) itemCount++;
+        if (showHeader()) {
+            itemCount++;
+        }
+        if (showFooter()) {
+            itemCount++;
+        }
         return itemCount;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (showHeader() && position == 0) return VIEW_TYPE_HEADER;
-        if (showFooter() && position == getItemCount()-1) return VIEW_TYPE_FOOTER;
+        if (showFooter() && position == mAdapter.getItemCount()) return VIEW_TYPE_FOOTER;
         return mAdapter.getItemViewType(showHeader() ? position-1 : position);
     }
 
@@ -240,11 +265,15 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
         if (mFooterViewId == -1 || mShowFooter == showFooter) return;
         mShowFooter = showFooter;
         if (showFooter) {
-            mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-            notifyItemInserted(getItemCount()-1);
+            if (mPtrRecyclerView.getMode() == PullToRefreshBase.Mode.BOTH)
+                mPtrRecyclerView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+            else
+                mPtrRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
+//            notifyDataSetChanged();
+            notifyItemInserted(mAdapter.getItemCount());
         } else {
             mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
-            notifyItemRemoved(getItemCount()-1);
+            notifyItemRemoved(mAdapter.getItemCount());
         }
     }
 

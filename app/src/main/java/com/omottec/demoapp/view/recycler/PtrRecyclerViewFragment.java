@@ -3,14 +3,17 @@ package com.omottec.demoapp.view.recycler;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.fragment.BaseFragment;
 import com.omottec.demoapp.utils.TouchUtils;
+import com.omottec.demoapp.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,16 @@ public class PtrRecyclerViewFragment extends BaseFragment {
         mSimpleAdapter = new SimpleRecyclerAdapter(data);
         mPtrAdapter = new PtrRecyclerAdapter(mPtrRecyclerView, mSimpleAdapter, false, true);
         mRecyclerView.setAdapter(mPtrAdapter);
+        /*GridLayoutManager glm = new GridLayoutManager(mActivity, 2);
+        glm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (mPtrAdapter.showHeader() && position == 0) return 2;
+                if (mPtrAdapter.showFooter() && position == mPtrAdapter.getItemCount()-1) return 2;
+                return 1;
+            }
+        });
+        mRecyclerView.setLayoutManager(glm);*/
         /*mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -76,12 +89,18 @@ public class PtrRecyclerViewFragment extends BaseFragment {
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullDownToRefresh");
                 mPtrAdapter.setShowFooter(false);
-                List<String> data = new ArrayList<String>();
+                /*List<String> data = new ArrayList<String>();
                 for (int i = 0; i < 5; i++)
                     data.add(0, "item add header " + mHeaderCount);
                 mHeaderCount++;
                 mPtrRecyclerView.onRefreshComplete();
-                mSimpleAdapter.addDataAtFirst(data);
+                mSimpleAdapter.addDataAtFirst(data);*/
+                List<String> data = new ArrayList<>();
+                for (int i = 0; i < 200; i++)
+                    data.add("item " + i);
+                mPtrRecyclerView.onRefreshComplete();
+                mSimpleAdapter.reset(data);
+                mFooterCount = 0;
             }
 
             @Override
@@ -98,6 +117,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                 mFooterCount++;
                 mPtrRecyclerView.onRefreshComplete();
                 mSimpleAdapter.addDataAtLast(data);
+                mPtrRecyclerView.getRefreshableView().scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
             }
         });
         mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);

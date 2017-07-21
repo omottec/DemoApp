@@ -56,18 +56,18 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
     @Override
     protected RecyclerView createRefreshableView(Context context, AttributeSet attrs) {
         RecyclerView recyclerView = new RecyclerView(context);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 Log.d(TAG, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState)
-                        /*+ ", isReadyForPullEnd:" + isReadyForPullEnd()*/);
+                        + ", isReadyForPullEnd:" + isReadyForPullEnd());
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                         break;
                     case RecyclerView.SCROLL_STATE_SETTLING:
-                        /*boolean readyForPullEnd = isReadyForPullEnd();
+                        boolean readyForPullEnd = isReadyForPullEnd();
                         if (readyForPullEnd && mOnRefreshListener2 != null)
-                            mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);*/
+                            mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);
                         break;
                     case RecyclerView.SCROLL_STATE_IDLE:
 
@@ -89,7 +89,7 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
                         mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);
                 }
             }
-        });
+        });*/
         return recyclerView;
     }
 
