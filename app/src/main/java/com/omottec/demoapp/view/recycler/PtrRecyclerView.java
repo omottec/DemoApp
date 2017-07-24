@@ -58,21 +58,16 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
     @Override
     protected RecyclerView createRefreshableView(Context context, AttributeSet attrs) {
         RecyclerView recyclerView = new RecyclerView(context);
-        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                Log.d(TAG, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState)
-                        + ", isReadyForPullEnd:" + isReadyForPullEnd());
+                Log.d(TAG, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState));
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                         break;
                     case RecyclerView.SCROLL_STATE_SETTLING:
-                        boolean readyForPullEnd = isReadyForPullEnd();
-                        if (readyForPullEnd && mOnRefreshListener2 != null)
-                            mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);
                         break;
                     case RecyclerView.SCROLL_STATE_IDLE:
-
                         break;
                 }
             }
@@ -91,7 +86,7 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
                         mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);
                 }
             }
-        });*/
+        });
         return recyclerView;
     }
 
@@ -103,8 +98,7 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
 //            int childCount = llm.getChildCount();
             int itemCount = llm.getItemCount();
             int lastVisibleItemPosition = llm.findLastVisibleItemPosition();
-            Log.d(TAG, "isReadyForPullEnd childCount:" + 0
-                    + ", itemCount:" + itemCount
+            Log.d(TAG, "isReadyForPullEnd itemCount:" + itemCount
                     + ", lastVisibleItemPosition:" + lastVisibleItemPosition);
             return lastVisibleItemPosition >= itemCount - 10;
         } else {
@@ -142,11 +136,10 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
                     + ", getTop:" + getTop());
             return firstVisiblePosition == 0 && firstChild.getTop() == 0;
         }
-//        return false;
     }
 
     public void _onRefreshComplete() {
-        scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
+        getRefreshableView().scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
         super.onRefreshComplete();
     }
 }

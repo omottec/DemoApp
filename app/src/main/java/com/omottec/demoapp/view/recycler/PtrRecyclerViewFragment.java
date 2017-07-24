@@ -1,6 +1,7 @@
 package com.omottec.demoapp.view.recycler;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.omottec.demoapp.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by qinbingbing on 22/03/2017.
@@ -48,7 +50,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
         for (int i = 0; i < 200; i++)
             data.add("item " + i);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 3));
         mSimpleAdapter = new SimpleRecyclerAdapter(data);
         mPtrAdapter = new PtrRecyclerAdapter(mPtrRecyclerView, mSimpleAdapter, false, true);
         mRecyclerView.setAdapter(mPtrAdapter);
@@ -115,9 +117,9 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                 for (int i = 0; i < 30; i++)
                     data.add("item add footer " + mFooterCount);
                 mFooterCount++;
-                mPtrRecyclerView._onRefreshComplete();
+//                SystemClock.sleep(200 + new Random().nextInt(200));
                 mSimpleAdapter.addDataAtLast(data);
-                mPtrRecyclerView.getRefreshableView().scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
+                mPtrRecyclerView._onRefreshComplete();
             }
         });
         mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
