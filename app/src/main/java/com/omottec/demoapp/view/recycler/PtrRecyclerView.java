@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.utils.TouchUtils;
+import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by qinbingbing on 22/03/2017.
@@ -141,5 +143,10 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
             return firstVisiblePosition == 0 && firstChild.getTop() == 0;
         }
 //        return false;
+    }
+
+    public void _onRefreshComplete() {
+        scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
+        super.onRefreshComplete();
     }
 }

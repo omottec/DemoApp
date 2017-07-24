@@ -107,7 +107,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
                 Log.d(TAG, "onPullUpToRefresh");
                 if (mFooterCount == 30) {
-                    mPtrRecyclerView.onRefreshComplete();
+                    mPtrRecyclerView._onRefreshComplete();
                     mPtrAdapter.setShowFooter(true);
                     return;
                 }
@@ -115,7 +115,7 @@ public class PtrRecyclerViewFragment extends BaseFragment {
                 for (int i = 0; i < 30; i++)
                     data.add("item add footer " + mFooterCount);
                 mFooterCount++;
-                mPtrRecyclerView.onRefreshComplete();
+                mPtrRecyclerView._onRefreshComplete();
                 mSimpleAdapter.addDataAtLast(data);
                 mPtrRecyclerView.getRefreshableView().scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
             }
