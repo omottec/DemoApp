@@ -11,6 +11,7 @@ import android.view.View;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.fragment.BaseFragment;
+import com.omottec.demoapp.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by qinbingbing on 22/03/2017.
+ * <br/>load time cost 25978 for pre_load_count 10
+ * <br/>load time cost 54127 for no pre load
+ * <br/>load time cost 25633 for pre_load_count 5
  */
 
 public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener2<RecyclerView> {
@@ -36,6 +40,7 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
     private PicRecyclerAdapter mPicAdapter;
     private volatile int mOffset;
     private int mTotal = PAGE_SIZE * 30;
+    private long mFirstLoadTime = SystemClock.elapsedRealtime();
 
     @Override
     protected View createContentView() {
@@ -77,7 +82,8 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
             data.add(new PicRecyclerAdapter.PicItem(url, "Item " + (mOffset + i)));
         }
         Observable.just(data)
-                .delay(100 + new Random().nextInt(100), TimeUnit.MILLISECONDS)
+//                .delay(100 + new Random().nextInt(100), TimeUnit.MILLISECONDS)
+                .delay(200, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<PicRecyclerAdapter.PicItem>>() {
@@ -104,6 +110,7 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
 //                        mPtrRecyclerView.onRefreshComplete();
                         if (mOffset >= mTotal) {
                             mPtrAdapter.setShowFooter(true);
+                            Logger.d(TAG, "load time cost " + (SystemClock.elapsedRealtime() - mFirstLoadTime));
                         }
                     }
                 });

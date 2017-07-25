@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
     public static final String TAG = "PtrRecyclerView";
 
-    public static final int PRE_FETCH_COUNT = 10;
+    public static final int PRE_FETCH_COUNT = 5;
 
     private OnRefreshListener2<RecyclerView> mOnRefreshListener2;
 
