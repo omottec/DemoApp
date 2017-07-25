@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 
 /**
@@ -18,7 +19,6 @@ import com.omottec.demoapp.app.MyApplication;
  */
 
 public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter {
-    public static final String TAG = "PtrRecyclerAdapter";
     public static final int VIEW_TYPE_HEADER = Integer.MIN_VALUE;
     public static final int VIEW_TYPE_FOOTER = Integer.MIN_VALUE + 1;
     private int mHeaderViewId = -1;
@@ -229,15 +229,15 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "PtrRecyclerAdapter.getItemCount");
+//        Log.d(Tag.PTR_RECYCLER, "PtrRecyclerAdapter.getItemCount");
         int itemCount = mAdapter.getItemCount();
-        /*if (showHeader()) {
+        if (showHeader()) {
             itemCount++;
         }
         if (showFooter()) {
             itemCount++;
-        }*/
-        return itemCount+1;
+        }
+        return itemCount;
     }
 
     @Override
@@ -271,12 +271,12 @@ public class PtrRecyclerAdapter<T extends RecyclerView.ViewHolder> extends Recyc
             else
                 mPtrRecyclerView.setMode(PullToRefreshBase.Mode.DISABLED);
 //            notifyDataSetChanged();
-//            notifyItemInserted(getItemCount()-1);
-            notifyItemChanged(getItemCount()-1, null);
+            notifyItemInserted(getItemCount()-1);
+//            notifyItemChanged(getItemCount()-1, null);
         } else {
             mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
-//            notifyItemRemoved(getItemCount()-1);
-            notifyItemChanged(getItemCount()-1, null);
+            notifyItemRemoved(getItemCount()-1);
+//            notifyItemChanged(getItemCount()-1, null);
         }
     }
 

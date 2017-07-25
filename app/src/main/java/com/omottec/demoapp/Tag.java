@@ -35,4 +35,6 @@ public final class Tag {
     public static final String SPLASH = "splash";
 
     public static final String REF = "ref";
+
+    public static final String PTR_RECYCLER = "ptr_recycler";
 }

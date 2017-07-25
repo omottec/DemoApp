@@ -537,7 +537,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	 */
 	public abstract Orientation getPullToRefreshScrollDirection();
 
-	final void setState(State state, final boolean... params) {
+	protected final void setState(State state, final boolean... params) {
 		mState = state;
 		if (DEBUG) {
 			Log.d(LOG_TAG, "State: " + mState.name());

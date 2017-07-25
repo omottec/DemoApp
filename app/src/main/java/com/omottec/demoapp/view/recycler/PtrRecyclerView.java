@@ -8,9 +8,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.utils.TouchUtils;
 import com.omottec.demoapp.utils.UiUtils;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by qinbingbing on 22/03/2017.
@@ -21,6 +24,8 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
 
     private OnRefreshListener2<RecyclerView> mOnRefreshListener2;
     private OnRefreshListener<RecyclerView> mOnRefreshListener;
+
+    private volatile boolean mLoadingData = false;
 
     public PtrRecyclerView(Context context) {
         super(context);
@@ -61,7 +66,7 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                Log.d(TAG, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState));
+                Log.d(Tag.PTR_RECYCLER, "onScrollStateChanged " + TouchUtils.getRecyclerScrollState(newState));
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                         break;
@@ -74,17 +79,18 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                Log.d(TAG, "onScrolled dy:" + dy);
-                if (dy > 0 && (getMode() == Mode.BOTH)) {
-                    boolean readyForPullEnd = isReadyForPullEnd();
-                    State state = getState();
-                    Log.d(TAG, "onScrolled isReadyForPullEnd:" + readyForPullEnd
-                            + ", state:" + state.name());
-                    if (readyForPullEnd
-                            && mOnRefreshListener2 != null
-                            && state == State.RESET)
-                        mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);
-                }
+                Log.d(Tag.PTR_RECYCLER, "onScrolled dy:" + dy + ", mLoadingData:" + mLoadingData);
+                if (dy <= 0
+                        || !getMode().showFooterLoadingLayout()
+                        || mOnRefreshListener2 == null
+                        || mLoadingData == true
+                        || !isReadyForPullEnd())
+                    return;
+                getFooterLayout().refreshing();
+                smoothScrollTo(getFooterSize(), null);
+                mLoadingData = true;
+                Log.d(Tag.PTR_RECYCLER, "onScrolled onPullUpToRefresh");
+                mOnRefreshListener2.onPullUpToRefresh(PtrRecyclerView.this);
             }
         });
         return recyclerView;
@@ -98,19 +104,19 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
 //            int childCount = llm.getChildCount();
             int itemCount = llm.getItemCount();
             int lastVisibleItemPosition = llm.findLastVisibleItemPosition();
-            Log.d(TAG, "isReadyForPullEnd itemCount:" + itemCount
+            Log.d(Tag.PTR_RECYCLER, "isReadyForPullEnd itemCount:" + itemCount
                     + ", lastVisibleItemPosition:" + lastVisibleItemPosition);
-            return lastVisibleItemPosition >= itemCount - 10;
+            return lastVisibleItemPosition >= itemCount - 5;
         } else {
             int itemCount = getRefreshableView().getAdapter().getItemCount();
             View lastChild = getRefreshableView().getChildAt(getRefreshableView().getChildCount() - 1);
             int lastVisiblePosition = getRefreshableView().getChildAdapterPosition(lastChild);
-            Log.d(TAG, "isReadyForPullEnd itemCount:" + itemCount
+            Log.d(Tag.PTR_RECYCLER, "isReadyForPullEnd itemCount:" + itemCount
                     + ", lastVisiblePosition:" + lastVisiblePosition
                     + ", lastChild.getBottom:" + lastChild.getBottom()
                     + ", getBottom:" + getBottom()
                     + ", getHeight:" + getHeight());
-            return lastVisiblePosition >= itemCount-10
+            return lastVisiblePosition >= itemCount-5
                     /*&& lastChild != null
                     && lastChild.getBottom() <= getHeight()*/;
         }
@@ -124,13 +130,13 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
 //            int childCount = llm.getChildCount();
 //            int itemCount = llm.getItemCount();
             int firstCompletelyVisibleItemPosition = llm.findFirstCompletelyVisibleItemPosition();
-            Log.d(TAG, "firstCompletelyVisibleItemPosition:" + firstCompletelyVisibleItemPosition);
+            Log.d(Tag.PTR_RECYCLER, "isReadyForPullStart firstCompletelyVisibleItemPosition:" + firstCompletelyVisibleItemPosition);
             return firstCompletelyVisibleItemPosition == 0;
         } else {
             int itemCount = getRefreshableView().getAdapter().getItemCount();
             View firstChild = getRefreshableView().getChildAt(0);
             int firstVisiblePosition = getRefreshableView().getChildAdapterPosition(firstChild);
-            Log.d(TAG, "isReadyForPullStart itemCount:" + itemCount
+            Log.d(Tag.PTR_RECYCLER, "isReadyForPullStart isReadyForPullStart itemCount:" + itemCount
                     + ", firstVisiblePosition:" + firstVisiblePosition
                     + ", firstChild.getTop:" + firstChild.getTop()
                     + ", getTop:" + getTop());
@@ -139,6 +145,12 @@ public class PtrRecyclerView extends PullToRefreshBase<RecyclerView> {
     }
 
     public void _onRefreshComplete() {
+        Log.d(Tag.PTR_RECYCLER, "_onRefreshComplete");
+        mLoadingData = false;
+        if (getMode().showFooterLoadingLayout()) {
+            getFooterLayout().reset();
+            smoothScrollTo(0, null);
+        }
         getRefreshableView().scrollBy(0, UiUtils.dip2px(MyApplication.getContext(), 50));
         super.onRefreshComplete();
     }
