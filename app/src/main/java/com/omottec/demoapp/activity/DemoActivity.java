@@ -21,6 +21,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new PtrPicRecyclerFragment();
+        return new WebViewFragment();
     }
 }

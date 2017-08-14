@@ -30,11 +30,7 @@ public class GsonFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        String text = "{\n" +
-                "\t\"primaryPrice\": 100,\n" +
-                "\t\"primaryPrice1\": 200,\n" +
-                "\t\"integerPrice\": 0\n" +
-                "}";
+        String text = "{\"str\":\"\",\"b\":false}";
 
         /*String text = "{\n" +
                 "\t\"primaryPrice\": 100,\n" +

@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +43,14 @@ public class WebViewFragment extends Fragment implements JavascriptInterface {
         mBtn = (Button) mRootView.findViewById(R.id.btn);
 
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("file:///android_asset/wx.html");
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
+//        mWebView.loadUrl("file:///android_asset/wx.html");
+        mWebView.loadUrl("http://www.meituan.com");
         mWebView.addJavascriptInterface(this, "wx");
 
         mTv.setMovementMethod(ScrollingMovementMethod.getInstance());
