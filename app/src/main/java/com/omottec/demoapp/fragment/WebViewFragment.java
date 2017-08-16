@@ -50,7 +50,8 @@ public class WebViewFragment extends Fragment implements JavascriptInterface {
             }
         });
 //        mWebView.loadUrl("file:///android_asset/wx.html");
-        mWebView.loadUrl("http://www.meituan.com");
+//        mWebView.loadUrl("http://www.meituan.com");
+        mWebView.loadUrl("http://consumer.mall.test.sankuai.com/fe/c/delivery.html");
         mWebView.addJavascriptInterface(this, "wx");
 
         mTv.setMovementMethod(ScrollingMovementMethod.getInstance());

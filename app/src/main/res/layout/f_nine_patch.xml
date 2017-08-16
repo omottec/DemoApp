@@ -145,4 +145,72 @@
             android:background="@drawable/bg_tag_small_nine"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="8dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="5折"
+            android:background="@drawable/bg_operation_tag"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="5折"
+            android:background="@drawable/bg_operation_tag_nine"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="8dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="特价"
+            android:background="@drawable/bg_operation_tag"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="特价"
+            android:background="@drawable/bg_operation_tag_nine"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="8dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="满500减100"
+            android:background="@drawable/bg_operation_tag"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:text="满500减100"
+            android:background="@drawable/bg_operation_tag_nine"/>
+    </LinearLayout>
 </LinearLayout>
