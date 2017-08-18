@@ -21,7 +21,7 @@ public class FrescoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f_fresco, container, false);
-        mSdv = view.findViewById(R.id.sdv);
+        mSdv = (SimpleDraweeView) view.findViewById(R.id.sdv);
         return view;
     }
 

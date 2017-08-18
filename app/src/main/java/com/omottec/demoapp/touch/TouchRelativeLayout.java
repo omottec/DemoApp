@@ -42,7 +42,7 @@ public class TouchRelativeLayout extends RelativeLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         Log.d(Tag.TOUCH, "TouchRelativeLayout.onInterceptTouchEvent "
                 + TouchUtils.getTouchEventAction(ev));
-        switch (ev.getAction()) {
+        /*switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 return false;
             case MotionEvent.ACTION_MOVE:
@@ -52,8 +52,8 @@ public class TouchRelativeLayout extends RelativeLayout {
                 return false;
             default:
                 return false;
-        }
-//        return super.onInterceptTouchEvent(ev);
+        }*/
+        return super.onInterceptTouchEvent(ev);
 //        return true;
 //        return false;
     }
@@ -62,7 +62,7 @@ public class TouchRelativeLayout extends RelativeLayout {
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(Tag.TOUCH, "TouchRelativeLayout.onTouchEvent "
                 + TouchUtils.getTouchEventAction(event));
-        return true;
-//        return super.onTouchEvent(event);
+//        return true;
+        return super.onTouchEvent(event);
     }
 }

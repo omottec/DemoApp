@@ -61,8 +61,8 @@ public class PicRecyclerAdapter extends RecyclerView.Adapter<PicRecyclerAdapter.
 
         public PicHolder(View itemView) {
             super(itemView);
-            mSdv = itemView.findViewById(R.id.sdv);
-            mTv = itemView.findViewById(R.id.tv);
+            mSdv = (SimpleDraweeView) itemView.findViewById(R.id.sdv);
+            mTv = (TextView) itemView.findViewById(R.id.tv);
         }
     }
 

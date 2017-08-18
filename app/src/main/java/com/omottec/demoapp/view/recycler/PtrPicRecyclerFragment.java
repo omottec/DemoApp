@@ -45,7 +45,7 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
     @Override
     protected View createContentView() {
         View view = View.inflate(mActivity, R.layout.f_ptr_recycler_view, null);
-        mPtrRecyclerView = view.findViewById(R.id.ptr_recycler_view);
+        mPtrRecyclerView = (PtrRecyclerView) view.findViewById(R.id.ptr_recycler_view);
         mPtrRecyclerView.setMode(PullToRefreshBase.Mode.BOTH);
         mRecyclerView = mPtrRecyclerView.getRefreshableView();
         return view;

@@ -17,7 +17,7 @@ public class SimpleViewHolder extends ClickViewHolder {
 
     public SimpleViewHolder(View itemView) {
         super(itemView, null, null);
-        mTv = itemView.findViewById(android.R.id.text1);
+        mTv = (TextView) itemView.findViewById(android.R.id.text1);
         mTv.setTextColor(Color.BLACK);
         itemView.setOnClickListener(v -> {
             String toast = new StringBuilder()
@@ -31,7 +31,7 @@ public class SimpleViewHolder extends ClickViewHolder {
 
     public SimpleViewHolder(View itemView, OnItemClickListener onItemClickListener, OnItemLongClickListener onItemLongClickListener) {
         super(itemView, onItemClickListener, onItemLongClickListener);
-        mTv = itemView.findViewById(android.R.id.text1);
+        mTv = (TextView) itemView.findViewById(android.R.id.text1);
         mTv.setTextColor(Color.BLACK);
     }
 }
