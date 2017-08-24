@@ -8,6 +8,7 @@ import com.omottec.demoapp.fragment.NinePatchFragment;
 import com.omottec.demoapp.fragment.WebViewFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.ref.RefGcFragment;
+import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.text.TextFragment;
 import com.omottec.demoapp.view.frame.MajorDetailFragment;
 import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
@@ -22,6 +23,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new FrescoFragment();
+        return new StorageFragment();
     }
 }
