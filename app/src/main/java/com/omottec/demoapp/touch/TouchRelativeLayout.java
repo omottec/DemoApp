@@ -17,31 +17,32 @@ public class TouchRelativeLayout extends RelativeLayout {
 
     public TouchRelativeLayout(Context context) {
         super(context);
-        requestDisallowInterceptTouchEvent(true);
+//        requestDisallowInterceptTouchEvent(true);
     }
 
     public TouchRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        requestDisallowInterceptTouchEvent(true);
+//        requestDisallowInterceptTouchEvent(true);
     }
 
     public TouchRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        requestDisallowInterceptTouchEvent(true);
+//        requestDisallowInterceptTouchEvent(true);
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d(Tag.TOUCH, "TouchRelativeLayout.dispatchTouchEvent "
                 + TouchUtils.getTouchEventAction(ev));
-//        return true;
-        return super.dispatchTouchEvent(ev);
+        boolean b = super.dispatchTouchEvent(ev);
+        Log.d(Tag.TOUCH, "TouchRelativeLayout.dispatchTouchEvent "
+                + TouchUtils.getTouchEventAction(ev)
+                + " " + b);
+        return b;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.d(Tag.TOUCH, "TouchRelativeLayout.onInterceptTouchEvent "
-                + TouchUtils.getTouchEventAction(ev));
         /*switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 return false;
@@ -53,16 +54,26 @@ public class TouchRelativeLayout extends RelativeLayout {
             default:
                 return false;
         }*/
-        return super.onInterceptTouchEvent(ev);
-//        return true;
-//        return false;
+        Log.d(Tag.TOUCH, "TouchRelativeLayout.onInterceptTouchEvent "
+                + TouchUtils.getTouchEventAction(ev));
+        boolean b = super.onInterceptTouchEvent(ev);
+        Log.d(Tag.TOUCH, "TouchRelativeLayout.onInterceptTouchEvent "
+                + TouchUtils.getTouchEventAction(ev)
+                + " " + b);
+        return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(Tag.TOUCH, "TouchRelativeLayout.onTouchEvent "
-                + TouchUtils.getTouchEventAction(event));
-//        return true;
-        return super.onTouchEvent(event);
+                + TouchUtils.getTouchEventAction(event)
+                + ", isEnabled:" + isEnabled()
+                + ", isClickable:" + isClickable()
+                + ", isLongClickable:"  + isLongClickable());
+        boolean b = super.onTouchEvent(event);
+        Log.d(Tag.TOUCH, "TouchRelativeLayout.onTouchEvent "
+                + TouchUtils.getTouchEventAction(event)
+                + " " + b);
+        return b;
     }
 }

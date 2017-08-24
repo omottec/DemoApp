@@ -33,13 +33,16 @@ public class TouchActivity extends FragmentActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         Log.d(Tag.TOUCH, "TouchActivity.dispatchTouchEvent " + TouchUtils.getTouchEventAction(ev));
-//        return true;
-        return super.dispatchTouchEvent(ev);
+        boolean b = super.dispatchTouchEvent(ev);
+        Log.d(Tag.TOUCH, "TouchActivity.dispatchTouchEvent " + TouchUtils.getTouchEventAction(ev) + " " + b);
+        return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d(Tag.TOUCH, "TouchActivity.onTouchEvent " + TouchUtils.getTouchEventAction(event));
-        return super.onTouchEvent(event);
+        boolean b = super.onTouchEvent(event);
+        Log.d(Tag.TOUCH, "TouchActivity.onTouchEvent " + TouchUtils.getTouchEventAction(event) + " " + b);
+        return b;
     }
 }

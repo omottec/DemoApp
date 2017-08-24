@@ -14,7 +14,7 @@ import com.omottec.demoapp.R;
  */
 public class TouchFragment extends Fragment {
     private TouchRelativeLayout mRl;
-    private TouchTextView mTv;
+    private TouchView mView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class TouchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRl = (TouchRelativeLayout) inflater.inflate(R.layout.f_touch, null);
-        mTv = (TouchTextView) mRl.findViewById(R.id.touch_tv);
+        mView = (TouchView) mRl.findViewById(R.id.touch_view);
         return mRl;
     }
 

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff0000">
-    <com.omottec.demoapp.touch.TouchTextView
-        android:id="@+id/touch_tv"
+    <com.omottec.demoapp.touch.TouchView
+        android:id="@+id/touch_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"

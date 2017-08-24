@@ -38,8 +38,8 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f_storage, container, false);
-        mCreateFileBtn = view.findViewById(R.id.btn_create_file);
-        mDeleteFileBtn = view.findViewById(R.id.btn_delete_file);
+        mCreateFileBtn = (Button) view.findViewById(R.id.btn_create_file);
+        mDeleteFileBtn = (Button) view.findViewById(R.id.btn_delete_file);
         return view;
     }
 
