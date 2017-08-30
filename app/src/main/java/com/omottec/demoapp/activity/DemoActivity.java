@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import com.omottec.demoapp.fragment.DynamicProxyFragment;
 import com.omottec.demoapp.fragment.FrescoFragment;
 import com.omottec.demoapp.fragment.NinePatchFragment;
+import com.omottec.demoapp.fragment.TypedValueFragment;
 import com.omottec.demoapp.fragment.WebViewFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.ref.RefGcFragment;
@@ -23,6 +24,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new StorageFragment();
+        return new TypedValueFragment();
     }
 }
