@@ -127,6 +127,13 @@ public class SimpleTextFragment extends BaseFragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        Log.d(Tag.FRAME_TAB_PAGER, "onHiddenChanged hidden:" + hidden
+                + " " + this);
+    }
+
+    @Override
     public String toString() {
         return mName + " " + super.toString();
     }
