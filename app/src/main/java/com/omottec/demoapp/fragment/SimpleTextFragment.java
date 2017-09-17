@@ -120,6 +120,13 @@ public class SimpleTextFragment extends BaseFragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(Tag.FRAME_TAB_PAGER, "setUserVisibleHint isVisibleToUser:" + isVisibleToUser
+                + " " + this);
+    }
+
+    @Override
     public String toString() {
         return mName + " " + super.toString();
     }
