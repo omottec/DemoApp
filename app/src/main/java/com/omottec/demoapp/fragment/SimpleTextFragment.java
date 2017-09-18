@@ -39,20 +39,25 @@ public class SimpleTextFragment extends BaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mName = getArguments().getString(ARG_NAME);
+        Bundle bundle = getArguments();
+        if (bundle != null)
+            mName = bundle.getString(ARG_NAME);
         Log.d(Tag.FRAME_TAB_PAGER, "onAttach " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onAttach " + this);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(Tag.FRAME_TAB_PAGER, "onCreate " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onCreate " + this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(Tag.FRAME_TAB_PAGER, "onCreateView " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onCreateView " + this);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -67,6 +72,7 @@ public class SimpleTextFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(Tag.FRAME_TAB_PAGER, "onViewCreated " + this + ", mHasViewCreated:" + mHasViewCreated.get());
+        Log.d(Tag.LIFECYCLE_A_F, "onViewCreated " + this + ", mHasViewCreated:" + mHasViewCreated.get());
         mTV.setText(TextUtils.isEmpty(mName) ? "???" : mName);
         mTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,42 +87,49 @@ public class SimpleTextFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         Log.d(Tag.FRAME_TAB_PAGER, "onStart " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onStart " + this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d(Tag.FRAME_TAB_PAGER, "onResume " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onResume " + this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         Log.d(Tag.FRAME_TAB_PAGER, "onPause " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onPause " + this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         Log.d(Tag.FRAME_TAB_PAGER, "onStop " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onStop " + this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         Log.d(Tag.FRAME_TAB_PAGER, "onDestroyView " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onDestroyView " + this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         Log.d(Tag.FRAME_TAB_PAGER, "onDestroy " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onDestroy " + this);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         Log.d(Tag.FRAME_TAB_PAGER, "onDetach " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onDetach " + this);
     }
 
     @Override
@@ -124,12 +137,16 @@ public class SimpleTextFragment extends BaseFragment {
         super.setUserVisibleHint(isVisibleToUser);
         Log.d(Tag.FRAME_TAB_PAGER, "setUserVisibleHint isVisibleToUser:" + isVisibleToUser
                 + " " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "setUserVisibleHint isVisibleToUser:" + isVisibleToUser
+                + " " + this);
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         Log.d(Tag.FRAME_TAB_PAGER, "onHiddenChanged hidden:" + hidden
+                + " " + this);
+        Log.d(Tag.LIFECYCLE_A_F, "onHiddenChanged hidden:" + hidden
                 + " " + this);
     }
 
