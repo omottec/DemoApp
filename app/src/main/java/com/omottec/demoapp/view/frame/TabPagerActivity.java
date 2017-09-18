@@ -31,6 +31,7 @@ public class TabPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(Tag.FRAME_TAB_PAGER, "onCreate " + this);
         setContentView(R.layout.a_tab_pager);
         initView();
 
@@ -117,26 +118,31 @@ public class TabPagerActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d(Tag.FRAME_TAB_PAGER, "onStart " + this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(Tag.FRAME_TAB_PAGER, "onResume " + this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d(Tag.FRAME_TAB_PAGER, "onPause " + this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(Tag.FRAME_TAB_PAGER, "onStop " + this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.d(Tag.FRAME_TAB_PAGER, "onDestroy " + this);
         mRootView.removeCallbacks(null);
     }
 }
