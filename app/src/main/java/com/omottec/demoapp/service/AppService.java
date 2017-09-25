@@ -2,6 +2,7 @@ package com.omottec.demoapp.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
@@ -17,7 +18,13 @@ public class AppService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Logger.d(Tag.SERVICE, "AppService.onBind");
-        return null;
+        return new Binder();
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        Logger.d(Tag.SERVICE, "AppService.onRebind");
+        super.onRebind(intent);
     }
 
     @Override
