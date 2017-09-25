@@ -39,4 +39,6 @@ public final class Tag {
     public static final String PTR_RECYCLER = "ptr_recycler";
 
     public static final String LIFECYCLE_A_F = "lifecycle_a_f";
+
+    public static final String SERVICE = "service";
 }
