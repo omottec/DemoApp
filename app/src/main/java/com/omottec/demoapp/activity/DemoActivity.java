@@ -2,6 +2,7 @@ package com.omottec.demoapp.activity;
 
 import android.support.v4.app.Fragment;
 
+import com.omottec.demoapp.fragment.BackgroundFragment;
 import com.omottec.demoapp.fragment.DynamicProxyFragment;
 import com.omottec.demoapp.fragment.FrescoFragment;
 import com.omottec.demoapp.fragment.LayoutParamFragment;
@@ -25,6 +26,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new LayoutParamFragment();
+        return new BackgroundFragment();
     }
 }
