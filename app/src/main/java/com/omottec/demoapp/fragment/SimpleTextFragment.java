@@ -152,6 +152,9 @@ public class SimpleTextFragment extends BaseFragment {
 
     @Override
     public String toString() {
-        return mName + " " + super.toString();
+        return mName
+                + ", isVisible:"+ isVisible()
+                + ", isHidden:" + isHidden()
+                + " " + super.toString();
     }
 }
