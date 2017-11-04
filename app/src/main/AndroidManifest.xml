@@ -146,10 +146,7 @@
         </activity>
 
         <activity android:name=".view.frame.TabPagerActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".launch.SplashActivity">
@@ -174,6 +171,13 @@
 
         <activity android:name=".lifecycle.SimpleTextActivity">
 
+        </activity>
+
+        <activity android:name=".view.vpFrag.VpTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service android:name=".ipc.messenger.MessengerService"

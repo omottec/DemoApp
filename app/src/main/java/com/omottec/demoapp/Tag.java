@@ -41,4 +41,6 @@ public final class Tag {
     public static final String LIFECYCLE_A_F = "lifecycle_a_f";
 
     public static final String SERVICE = "service";
+    
+    public static final String VP_FRAG = "vp_frag";
 }
