@@ -1,6 +1,7 @@
 package com.omottec.demoapp.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -74,6 +75,8 @@ public class SimpleTextFragment extends BaseFragment {
         Log.d(Tag.FRAME_TAB_PAGER, "onViewCreated " + this + ", mHasViewCreated:" + mHasViewCreated.get());
         Log.d(Tag.LIFECYCLE_A_F, "onViewCreated " + this + ", mHasViewCreated:" + mHasViewCreated.get());
         mTV.setText(TextUtils.isEmpty(mName) ? "???" : mName);
+//        mTV.setTextColor(0xAA00FF00);
+        mTV.setTextColor(Color.parseColor("0xAA00FF00"));
         mTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
