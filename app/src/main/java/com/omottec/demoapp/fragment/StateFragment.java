@@ -1,5 +1,6 @@
 package com.omottec.demoapp.fragment;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -19,7 +20,7 @@ import com.omottec.demoapp.R;
  * Created by qinbingbing on 11/11/2017.
  */
 
-public class StateListDrawableFragment extends Fragment {
+public class StateFragment extends Fragment {
     private Button mBtn;
     private Button mBtn1;
 
@@ -38,6 +39,7 @@ public class StateListDrawableFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mBtn = view.findViewById(R.id.btn);
         mBtn1 = view.findViewById(R.id.btn1);
+
         ColorDrawable enable = new ColorDrawable(Color.parseColor("#FF0000"));
         ColorDrawable press = new ColorDrawable(Color.parseColor("#00FF00"));
         ColorDrawable disable = new ColorDrawable(Color.parseColor("#0000FF"));
@@ -46,6 +48,15 @@ public class StateListDrawableFragment extends Fragment {
         stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, press);
         stateListDrawable.addState(new int[]{android.R.attr.state_enabled}, enable);
         mBtn.setBackground(stateListDrawable);
+
+        int[][] states = new int[3][];
+        states[0] = new int[]{-android.R.attr.state_enabled};
+        states[1] = new int[]{android.R.attr.state_pressed};
+        states[2] = new int[]{android.R.attr.state_enabled};
+        int[] colors = {Color.parseColor("#FF0000"), Color.parseColor("#0000FF"), Color.parseColor("#00FF00")};
+        ColorStateList colorStateList = new ColorStateList(states, colors);
+        mBtn.setTextColor(colorStateList);
+
         mBtn.setEnabled(false);
 
         mBtn1.setOnClickListener(v -> {
