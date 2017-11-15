@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class ShapeDrawableFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mTv = view.findViewById(R.id.tv);
         mTv1 = view.findViewById(R.id.tv1);
+        mTv1.setText(Html.fromHtml("<font color=\"#FFFFFF\">DemoApp</font>"));
         Drawable background = mTv.getBackground();
         Log.d(TAG, "background:" + background);
 
