@@ -32,7 +32,6 @@ public class LifeCycleActivity1 extends FragmentActivity {
         }
         setContentView(R.layout.full_screen_text);
         TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setBackgroundColor(Color.RED);
         tv.setText("LifeCycleActivity1" + "|id:" + ID);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override

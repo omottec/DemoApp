@@ -1,12 +1,10 @@
 package com.omottec.demoapp.app;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Process;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -16,9 +14,6 @@ import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by qinbingbing on 3/23/16.
@@ -65,6 +60,7 @@ public class MyApplication extends Application {
         }
         LeakCanary.install(this);
         Fresco.initialize(this);
+        registerActivityLifecycleCallbacks(AppStatusHelper.getInstance());
     }
 
     @Override
