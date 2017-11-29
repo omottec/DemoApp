@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.app.fresco.ImagePipelineConfigFactory;
+import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.utils.AppUtils;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -59,7 +61,7 @@ public class MyApplication extends Application {
             return;
         }
         LeakCanary.install(this);
-        Fresco.initialize(this);
+        Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
         registerActivityLifecycleCallbacks(AppStatusHelper.getInstance());
     }
 

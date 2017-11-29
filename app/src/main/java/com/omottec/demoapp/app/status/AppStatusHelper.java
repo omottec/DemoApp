@@ -1,4 +1,4 @@
-package com.omottec.demoapp.app;
+package com.omottec.demoapp.app.status;
 
 import android.app.Activity;
 import android.app.Application;
