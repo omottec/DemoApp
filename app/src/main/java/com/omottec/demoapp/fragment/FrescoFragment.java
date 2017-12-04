@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.app.fresco.Frescos;
 import com.omottec.demoapp.utils.Logger;
@@ -37,13 +38,13 @@ public class FrescoFragment extends Fragment {
 //        String uri = "http://p0.meituan.net/mallimages/dd50357c9fc0afa6740d3b57989214cd79343.jpg";
         String uri = "http://p1.meituan.net/shangchao/bda30e3fb3274baa9ba165c4d1bf35e5.jpg";
 //        String uri = "http://d.hiphotos.baidu.com/image/pic/item/42a98226cffc1e17e11735424090f603738de91d.jpg";
-        mSdv.setImageURI(uri);
-//        Frescos.load(mSdv, uri);
+//        mSdv.setImageURI(uri);
+        Frescos.load(mSdv, uri);
         MyApplication.getUiHandler().postDelayed(() -> {
             mSdv.setDrawingCacheEnabled(true);
             Bitmap drawingCache = mSdv.getDrawingCache();
             mSdv.setDrawingCacheEnabled(false);
-            Logger.d(TAG, "getByteCount:" + drawingCache.getByteCount()
+            Logger.d(Tag.FRESCO, "getByteCount:" + drawingCache.getByteCount()
                     + ", getRowBytes:" + drawingCache.getRowBytes()
                     + ", getHeight:" + drawingCache.getHeight()
                     + ", getWidth:" + drawingCache.getWidth());

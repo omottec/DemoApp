@@ -18,7 +18,7 @@ import com.squareup.okhttp.OkHttpClient;
  */
 
 public class ImagePipelineConfigFactory {
-    private static final String IMAGE_PIPELINE_CACHE_DIR = "retail_imagepipeline_cache";
+    private static final String IMAGE_PIPELINE_CACHE_DIR = "demoapp_imagepipeline_cache";
 
     private static ImagePipelineConfig sImagePipelineConfig;
     private static ImagePipelineConfig sOkHttpImagePipelineConfig;
