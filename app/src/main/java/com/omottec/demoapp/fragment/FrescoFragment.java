@@ -2,6 +2,7 @@ package com.omottec.demoapp.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
@@ -39,7 +43,14 @@ public class FrescoFragment extends Fragment {
         String uri = "http://p1.meituan.net/shangchao/bda30e3fb3274baa9ba165c4d1bf35e5.jpg";
 //        String uri = "http://d.hiphotos.baidu.com/image/pic/item/42a98226cffc1e17e11735424090f603738de91d.jpg";
 //        mSdv.setImageURI(uri);
-        Frescos.load(mSdv, uri);
+
+//        Frescos.load(mSdv, uri);
+
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
+                .setResizeOptions(new ResizeOptions(500, 500))
+                .build();
+        Frescos.load(mSdv, request);
+
         MyApplication.getUiHandler().postDelayed(() -> {
             mSdv.setDrawingCacheEnabled(true);
             Bitmap drawingCache = mSdv.getDrawingCache();
