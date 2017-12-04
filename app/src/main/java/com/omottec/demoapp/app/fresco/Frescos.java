@@ -9,6 +9,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by omottec on 29/11/2017.
@@ -34,11 +35,15 @@ public final class Frescos {
     }
 
     public static void load(DraweeView view, String uri) {
-        load(view, Uri.parse(uri), view.getLayoutParams().width, view.getLayoutParams().height);
+        load(view, Uri.parse(uri),
+                UiUtils.dip2px(view.getContext(), view.getLayoutParams().width),
+                UiUtils.dip2px(view.getContext(), view.getLayoutParams().height));
     }
 
     public static void load(DraweeView view, Uri uri) {
-        load(view, uri, view.getLayoutParams().width, view.getLayoutParams().height);
+        load(view, uri,
+                UiUtils.dip2px(view.getContext(), view.getLayoutParams().width),
+                UiUtils.dip2px(view.getContext(), view.getLayoutParams().height));
     }
 
 }

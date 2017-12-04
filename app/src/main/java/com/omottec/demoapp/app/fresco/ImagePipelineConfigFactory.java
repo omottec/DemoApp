@@ -47,8 +47,7 @@ public class ImagePipelineConfigFactory {
             configureCaches(configBuilder, context);
             configureLoggingListeners(configBuilder);
             sOkHttpImagePipelineConfig = configBuilder
-                    .setDownsampleEnabled(true)
-                    .setResizeAndRotateEnabledForNetwork(true)
+//                    .setDownsampleEnabled(true)
                     .build();
         }
         return sOkHttpImagePipelineConfig;

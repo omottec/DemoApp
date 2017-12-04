@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.fragment.FastClickFragment;
+import com.omottec.demoapp.fragment.FrescoFragment;
 import com.omottec.demoapp.fragment.ShapeDrawableFragment;
 import com.omottec.demoapp.fragment.StateFragment;
 
@@ -14,6 +15,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new FastClickFragment();
+        return new FrescoFragment();
     }
 }

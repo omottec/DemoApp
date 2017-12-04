@@ -6,9 +6,9 @@
     android:layout_height="match_parent">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:viewAspectRatio="2.08"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:viewAspectRatio="1"
         app:placeholderImageScaleType="fitXY"
         app:placeholderImage="@drawable/ic_home_banner_pic"
         app:actualImageScaleType="fitXY"/>
