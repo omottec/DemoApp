@@ -4,8 +4,9 @@
     android:layout_height="match_parent">
     <com.omottec.demoapp.view.ScrollerMoveImageView
         android:id="@+id/iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/userguide_product_icon_fast"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/goods"
+        android:scaleType="centerCrop"
         android:layout_centerInParent="true"/>
 </RelativeLayout>
