@@ -1,6 +1,7 @@
 package com.omottec.demoapp.fragment;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,8 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.cache.common.CacheKey;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.cache.MemoryCache;
 import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.image.CloseableStaticBitmap;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.omottec.demoapp.R;
@@ -44,21 +53,31 @@ public class FrescoFragment extends Fragment {
 //        String uri = "http://d.hiphotos.baidu.com/image/pic/item/42a98226cffc1e17e11735424090f603738de91d.jpg";
 //        mSdv.setImageURI(uri);
 
-        Frescos.load(mSdv, uri);
+        BaseControllerListener<ImageInfo> baseControllerListener = new BaseControllerListener<ImageInfo>() {
+            @Override
+            public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                mSdv.setDrawingCacheEnabled(true);
+                Bitmap drawingCache = mSdv.getDrawingCache();
+                mSdv.setDrawingCacheEnabled(false);
+                Logger.d(Tag.FRESCO, "getByteCount:" + drawingCache.getByteCount()
+                        + ", getRowBytes:" + drawingCache.getRowBytes()
+                        + ", getHeight:" + drawingCache.getHeight()
+                        + ", getWidth:" + drawingCache.getWidth());
 
-        /*ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
-                .setResizeOptions(new ResizeOptions(500, 500))
-                .build();
-        Frescos.load(mSdv, request);*/
+                Logger.d(Tag.FRESCO, "onFinalImageSet id:" + id
+                        + ", imageInfo:" + imageInfo
+                        + ", getSizeInBytes:" + ((CloseableStaticBitmap)imageInfo).getSizeInBytes()
+                        + ", imageInfo.getHeight:" + imageInfo.getHeight()
+                        + ", imageInfo.getHeight:" + imageInfo.getHeight());
+                MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache = Fresco.getImagePipeline().getBitmapMemoryCache();
+                Logger.d(Tag.FRESCO, "MemoryCache:" + bitmapMemoryCache);
+            }
 
-        MyApplication.getUiHandler().postDelayed(() -> {
-            mSdv.setDrawingCacheEnabled(true);
-            Bitmap drawingCache = mSdv.getDrawingCache();
-            mSdv.setDrawingCacheEnabled(false);
-            Logger.d(Tag.FRESCO, "getByteCount:" + drawingCache.getByteCount()
-                    + ", getRowBytes:" + drawingCache.getRowBytes()
-                    + ", getHeight:" + drawingCache.getHeight()
-                    + ", getWidth:" + drawingCache.getWidth());
-        }, 3000);
+            @Override
+            public void onFailure(String id, Throwable throwable) {
+                Logger.d(Tag.FRESCO, "onFailure id:" + id);
+            }
+        };
+        Frescos.load(mSdv, uri, baseControllerListener);
     }
 }

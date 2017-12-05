@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:placeholderImageScaleType="fitXY"
         app:placeholderImage="@drawable/ic_home_banner_pic"
         app:actualImageScaleType="fitXY"/>

@@ -3,6 +3,7 @@ package com.omottec.demoapp.app.fresco;
 import android.net.Uri;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -21,8 +22,8 @@ import com.omottec.demoapp.utils.UiUtils;
 public final class Frescos {
     private Frescos() {}
 
-    public static void load(DraweeView view, String url, int width, int height) {
-        Logger.d(Tag.FRESCO, "origin url:" + url);
+    public static void load(DraweeView view, String url, int width, int height, ControllerListener listener) {
+        Logger.d(Tag.FRESCO, "origin url:" + url + ", width:" + width + ", height:" + height);
         if (width > 0 && height > 0)
             url = new StringBuilder(url).append('@')
                     .append(width).append('w').append('_')
@@ -40,14 +41,25 @@ public final class Frescos {
         DraweeController draweeController = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(imageRequest)
                 .setOldController(view.getController())
+                .setControllerListener(listener)
                 .build();
         view.setController(draweeController);
     }
 
+
+
     public static void load(DraweeView view, String url) {
         load(view, url,
                 view.getLayoutParams().width,
-                view.getLayoutParams().height);
+                view.getLayoutParams().height,
+                null);
+    }
+
+    public static void load(DraweeView view, String url, ControllerListener listener) {
+        load(view, url,
+                view.getLayoutParams().width,
+                view.getLayoutParams().height,
+                listener);
     }
 
     public static void load(DraweeView view, DraweeController controller) {
