@@ -28,6 +28,7 @@ public final class Frescos {
                     .append(width).append('w').append('_')
                     .append(height).append('h').append('_')
                     .append("1l")
+                    .append(".webp")
                     .toString();
         Logger.d(Tag.FRESCO, "venus url:" + url);
         ImageRequest imageRequest =

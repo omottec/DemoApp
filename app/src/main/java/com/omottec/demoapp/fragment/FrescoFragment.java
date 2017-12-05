@@ -44,12 +44,12 @@ public class FrescoFragment extends Fragment {
 //        String uri = "http://d.hiphotos.baidu.com/image/pic/item/42a98226cffc1e17e11735424090f603738de91d.jpg";
 //        mSdv.setImageURI(uri);
 
-//        Frescos.load(mSdv, uri);
+        Frescos.load(mSdv, uri);
 
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
+        /*ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
                 .setResizeOptions(new ResizeOptions(500, 500))
                 .build();
-        Frescos.load(mSdv, request);
+        Frescos.load(mSdv, request);*/
 
         MyApplication.getUiHandler().postDelayed(() -> {
             mSdv.setDrawingCacheEnabled(true);
