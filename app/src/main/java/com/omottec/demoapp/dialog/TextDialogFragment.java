@@ -68,6 +68,7 @@ public class TextDialogFragment extends DialogFragment {
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.width = (int) (UiUtils.getScreenSize(MyApplication.getContext(), true) * 0.9);
         wlp.height = (int) (UiUtils.getScreenSize(MyApplication.getContext(), false) * 0.5);
+
 //        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
 //        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 //        wlp.dimAmount = 0.0f;
