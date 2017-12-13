@@ -63,18 +63,10 @@ public class TextDialogFragment extends DialogFragment {
         super.onStart();
         getDialog().setCanceledOnTouchOutside(false);
         Window window = getDialog().getWindow();
-//        window.setBackgroundDrawableResource(android.R.color.transparent);
-//        window.getDecorView().setPadding(0, 0, 0, 0);
-        WindowManager.LayoutParams wlp = window.getAttributes();
-        wlp.width = (int) (UiUtils.getScreenSize(MyApplication.getContext(), true) * 0.9);
-        wlp.height = (int) (UiUtils.getScreenSize(MyApplication.getContext(), false) * 0.5);
-
-//        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//        wlp.dimAmount = 0.0f;
-//        wlp.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
-//        window.requestFeature(STYLE_NO_TITLE);
-        window.setAttributes(wlp);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = (int) (UiUtils.getScreenSize(MyApplication.getContext(), true) * 0.9);
+        lp.height = (int) (UiUtils.getScreenSize(MyApplication.getContext(), false) * 0.5);
+        window.setAttributes(lp);
     }
 
     @Override
@@ -105,7 +97,6 @@ public class TextDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.d(TAG, "onCreateDialog");
-//        return super.onCreateDialog(savedInstanceState);
         mRootView = View.inflate(getActivity(), R.layout.f_text_dialog, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         AlertDialog dialog = builder.setView(mRootView)
