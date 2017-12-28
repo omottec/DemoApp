@@ -99,7 +99,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void startWelcomeActivity() {
         Intent intent = new Intent(this, WelcomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -108,10 +108,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.tv:
 //                startExternalActivity();
-//                startWelcomeActivity();
+                startWelcomeActivity();
 //                startTabPagerActivity();
 //                startDemoActivity();
-                startLeakActivity();
+//                startLeakActivity();
                 break;
             case R.id.tv1:
                 startSelf();

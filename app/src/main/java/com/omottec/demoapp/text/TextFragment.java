@@ -10,13 +10,16 @@ import android.text.method.ScrollingMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
+import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.UiUtils;
 
 /**
@@ -24,6 +27,7 @@ import com.omottec.demoapp.utils.UiUtils;
  */
 
 public class TextFragment extends Fragment {
+    public static final String TAG = "TextFragment";
     private View mRootView;
     private TextView mTv;
     private TextView mTv1;
@@ -39,8 +43,8 @@ public class TextFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        setPriceAndUnit();
-        setPriceAndLine();
+        setPriceAndUnit();
+//        setPriceAndLine();
         String text = "1. 掌鱼生鲜更新，更好更快一一掌鱼生鲜更新，更好更快一一掌鱼生鲜更新，更好更快一一\n" +
                 "2. 掌鱼生鲜更新，更好更快二二掌鱼生鲜更新，更好更快二二掌鱼生鲜更新，更好更快二二\n" +
                 "3. 掌鱼生鲜更新，更好更快三三掌鱼生鲜更新，更好更快三三掌鱼生鲜更新，更好更快三三\n" +
@@ -48,18 +52,22 @@ public class TextFragment extends Fragment {
                 "5. 掌鱼生鲜更新，更好更快五五掌鱼生鲜更新，更好更快五五掌鱼生鲜更新，更好更快五五";
         mTv1.setMovementMethod(ScrollingMovementMethod.getInstance());
         mTv1.setText(text);
+        Logger.d(TAG, "onViewCreated");
+        Logger.d(TAG, String.format("aaa %d", "bbb"));
     }
 
     private void setPriceAndUnit() {
         String str = getContext().getString(R.string.money_format, 200f, "份");
         int i = str.indexOf("/");
+        int j = str.indexOf("&#165;");
+        Log.d("TextFragment", "j:" + j);
         SpannableString spannableString = new SpannableString(str);
         spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 30)), 0, i,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.GREEN), i, str.length(),
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 10)), i, str.length(),
+//        spannableString.setSpan(new ForegroundColorSpan(Color.GREEN), i, str.length(),
 //                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new AbsoluteSizeSpan(UiUtils.sp2px(MyApplication.getContext(), 10)), i, str.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mTv.setText(spannableString);
     }
 
