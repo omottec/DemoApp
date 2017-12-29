@@ -18,14 +18,17 @@ public class TouchView extends View {
 
     public TouchView(Context context) {
         super(context);
+        setEnabled(false);
     }
 
     public TouchView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setEnabled(false);
     }
 
     public TouchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setEnabled(false);
     }
 
     @Override

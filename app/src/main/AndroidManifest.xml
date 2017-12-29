@@ -26,10 +26,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".task.StandardActivity"
             android:launchMode="standard">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".task.SingleTopActivity"
             android:launchMode="singleTop">
@@ -84,7 +81,10 @@
 
         <activity android:name=".touch.TouchActivity"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".ipc.fileAndBundle.DataWriteActivity"
