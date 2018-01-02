@@ -12,6 +12,7 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.fresco.ImagePipelineConfigFactory;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.utils.AppUtils;
+import com.omottec.demoapp.utils.TimeLogger;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
+        TimeLogger.methodStart();
         super.onCreate();
         Log.d(Tag.TASK, this + " onCreate");
         Log.d(Tag.APP_PROCESS, this + " onCreate");
@@ -63,6 +65,7 @@ public class MyApplication extends Application {
         LeakCanary.install(this);
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
 //        registerActivityLifecycleCallbacks(AppStatusHelper.getInstance());
+        TimeLogger.methodEnd();
     }
 
     @Override
