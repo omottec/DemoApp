@@ -30,23 +30,25 @@ public class GsonFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        String text = "{\"str\":\"\",\"b\":false}";
+//        String text = "{\"str\":\"\",\"b\":false}";
 
         /*String text = "{\n" +
-                "\t\"primaryPrice\": 100,\n" +
-                "\t\"primaryPrice1\": 200\n" +
+                "\t\"intPrice\": 100,\n" +
+                "\t\"intPrice1\": 200\n" +
                 "}";*/
 
-        /*String text = "{\n" +
-                "\t\"primaryPrice\": 100\n" +
-                "}";*/
+        String intText = "{\"intPrice\":0}";
 
-        /*String text = "{\n" +
-                "\t\"primaryPrice\": 100,\n" +
-                "\t\"primaryPrice1\": 0\n" +
-                "}";*/
-        GsonObject gsonObject = new Gson().fromJson(text, GsonObject.class);
-        mJsonTv.setText(text);
+        String integerText = "{\"integerPrice\":0}";
+
+        String stringText = "{\"str\":\"\"}";
+
+        String booleanText = "{\"b\":false}";
+
+        String RefBooleanText = "{\"refBoolean\":false}";
+
+        GsonObject gsonObject = new Gson().fromJson(stringText, GsonObject.class);
+        mJsonTv.setText(stringText);
         mGsonObjectTv.setText(gsonObject.toString());
     }
 }

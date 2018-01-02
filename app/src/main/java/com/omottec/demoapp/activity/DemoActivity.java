@@ -8,6 +8,7 @@ import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.fragment.ShapeDrawableFragment;
 import com.omottec.demoapp.fragment.StateFragment;
+import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.text.TextFragment;
 
 /**
@@ -18,6 +19,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new TextFragment();
+        return new GsonFragment();
     }
 }
