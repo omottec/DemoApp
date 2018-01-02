@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TimeLogger {
     public static final String TAG = "TimeLogger";
-    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
     private static List<String> sTimePointer = new ArrayList<>();
     private static List<Long> sTime = new ArrayList<>();
     private TimeLogger() {}
@@ -58,7 +58,9 @@ public class TimeLogger {
     public static void dump() {
         for (int i = 0; i < sTime.size(); i++) {
             StringBuilder sb = new StringBuilder(sTimePointer.get(i));
-            if (i > 0) sb.append(" +").append(sTime.get(i) - sTime.get(i-1));
+            if (i > 0)
+                sb.append(" delta:").append(sTime.get(i) - sTime.get(i-1))
+                        .append(" total:").append(sTime.get(i) - sTime.get(0));
             Logger.d(TAG, sb.toString());
         }
         sTime.clear();
