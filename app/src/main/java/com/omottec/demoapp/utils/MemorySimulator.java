@@ -17,11 +17,11 @@ public final class MemorySimulator {
     private MemorySimulator() {
     }
 
-    public static void asyncDrainMemoryDouble() {
+    public static void asyncDrainMemoryDouble(long internal) {
         Executors.newSingleThreadExecutor().submit(new Runnable() {
             @Override
             public void run() {
-                drainMemoryDouble();
+                drainMemoryDouble(internal);
             }
         });
     }
@@ -35,11 +35,12 @@ public final class MemorySimulator {
         });
     }
 
-    public static void drainMemoryDouble() {
+    public static void drainMemoryDouble(long internal) {
         byte[] bytes = new byte[1 * 1024 * 1024];
         Log.d(Tag.MEMORY, "alloc memory " + bytes.length / 1024 / 1024 + "M");
         for (int i = 0; i <= bytes.length; i++) {
             if (i == bytes.length) {
+                SystemClock.sleep(internal);
                 bytes = Arrays.copyOf(bytes, bytes.length * 2);
                 Log.d(Tag.MEMORY, "alloc memory " + bytes.length / 1024 / 1024 + "M");
             }

@@ -22,6 +22,7 @@ import java.util.TimerTask;
  */
 public class MemoryFragment extends Fragment {
     public static final String TAG = "MemoryFragment";
+    public static final int MEGA_BYTES = 1 * 1024 * 1024;
     private View mRootView;
     private TextView mTV;
     private Activity mActivity;
@@ -55,16 +56,16 @@ public class MemoryFragment extends Fragment {
                 });
             }
         }, 1000, 1000);
-        MemorySimulator.asyncDrainMemorySlow(2000);
+        MemorySimulator.asyncDrainMemoryDouble(1000);
     }
 
     private void updateMemory() {
         ActivityManager am = (ActivityManager) mActivity.getSystemService(Context.ACTIVITY_SERVICE);
         int memoryClass = am.getMemoryClass();
         int largeMemoryClass = am.getLargeMemoryClass();
-        long maxMemory = Runtime.getRuntime().maxMemory();
-        long totalMemory = Runtime.getRuntime().totalMemory();
-        long freeMemory = Runtime.getRuntime().freeMemory();
+        long maxMemory = Runtime.getRuntime().maxMemory() / MEGA_BYTES;
+        long totalMemory = Runtime.getRuntime().totalMemory() / MEGA_BYTES;
+        long freeMemory = Runtime.getRuntime().freeMemory() / MEGA_BYTES;
 
         StringBuilder sb = new StringBuilder();
         sb.append("am.getMemoryClass(): ").append(memoryClass)
