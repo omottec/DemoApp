@@ -11,6 +11,7 @@ import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.fragment.ShapeDrawableFragment;
 import com.omottec.demoapp.fragment.StateFragment;
 import com.omottec.demoapp.gson.GsonFragment;
+import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.text.TextFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
@@ -38,6 +39,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new MemoryFragment();
+        return new StorageFragment();
     }
 }
