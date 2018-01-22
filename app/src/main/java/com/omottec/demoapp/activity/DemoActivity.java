@@ -13,6 +13,7 @@ import com.omottec.demoapp.fragment.StateFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.text.TextFragment;
+import com.omottec.demoapp.text.TextUtilsFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
 import java.sql.Time;
@@ -39,6 +40,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new StorageFragment();
+        return new TextUtilsFragment();
     }
 }
