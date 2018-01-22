@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.omottec.demoapp.compact.ContextFragment;
 import com.omottec.demoapp.fragment.FastClickFragment;
 import com.omottec.demoapp.fragment.FrescoFragment;
 import com.omottec.demoapp.fragment.MemoryFragment;
@@ -40,6 +41,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new TextUtilsFragment();
+        return new ContextFragment();
     }
 }

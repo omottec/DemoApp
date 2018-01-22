@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.Tag;
 
 /**
  * Created by qinbingbing on 22/01/2018.
