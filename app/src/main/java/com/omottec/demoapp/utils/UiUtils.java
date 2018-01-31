@@ -174,4 +174,8 @@ public final class UiUtils {
                 return "Unknown";
         }
     }
+
+    public static DisplayMetrics getDisplayMetrics(Context context) {
+        return context.getResources().getDisplayMetrics();
+    }
 }
