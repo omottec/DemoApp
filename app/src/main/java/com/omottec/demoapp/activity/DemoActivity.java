@@ -43,6 +43,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new RxJavaFragment();
+        return new FrescoFragment();
     }
 }

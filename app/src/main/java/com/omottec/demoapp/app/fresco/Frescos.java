@@ -22,7 +22,7 @@ import com.omottec.demoapp.utils.UiUtils;
 public final class Frescos {
     private Frescos() {}
 
-    public static void load(DraweeView view, String url, int width, int height, ControllerListener listener) {
+    public static ImageRequest load(DraweeView view, String url, int width, int height, ControllerListener listener) {
         Logger.d(Tag.FRESCO, "origin url:" + url + ", width:" + width + ", height:" + height);
         if (width > 0 && height > 0)
             url = new StringBuilder(url).append('@')
@@ -44,6 +44,7 @@ public final class Frescos {
                 .setControllerListener(listener)
                 .build();
         view.setController(draweeController);
+        return imageRequest;
     }
 
 
@@ -55,11 +56,24 @@ public final class Frescos {
                 null);
     }
 
-    public static void load(DraweeView view, String url, ControllerListener listener) {
-        load(view, url,
+    public static ImageRequest load(DraweeView view, String url, ControllerListener listener) {
+        return load(view,
+                url,
                 view.getLayoutParams().width,
                 view.getLayoutParams().height,
                 listener);
+    }
+
+    public static void rawLoad(SimpleDraweeView sdv, String uriString, ControllerListener listener) {
+        Uri uri = (uriString != null) ? Uri.parse(uriString) : null;
+
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setCallerContext(null)
+                .setUri(uri)
+                .setOldController(sdv.getController())
+                .setControllerListener(listener)
+                .build();
+        sdv.setController(controller);
     }
 
     public static void load(DraweeView view, DraweeController controller) {

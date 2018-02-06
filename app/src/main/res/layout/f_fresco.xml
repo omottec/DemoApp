@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,12 +12,21 @@
         app:placeholderImage="@drawable/ic_home_banner_pic"
         app:actualImageScaleType="fitXY"/>
 
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        app:placeholderImageScaleType="fitXY"
+        app:placeholderImage="@drawable/ic_pic_holder"
+        app:actualImageScaleType="fitXY"/>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sdv"
         android:background="@android:color/holo_red_light"
         android:text="TextView"
         android:gravity="center"/>
 
-</LinearLayout>
+</RelativeLayout>
