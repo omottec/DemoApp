@@ -1,6 +1,5 @@
-package com.omottec.demoapp.fragment;
+package com.omottec.demoapp.fresco;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,7 +23,6 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.app.fresco.Frescos;
 import com.omottec.demoapp.utils.Logger;
 
 import java.lang.reflect.Field;
@@ -70,7 +68,7 @@ public class FrescoFragment extends Fragment {
                 Logger.d(Tag.FRESCO, "onFinalImageSet id:" + id
                         + ", imageInfo:" + imageInfo
                         + ", getSizeInBytes:" + ((CloseableStaticBitmap)imageInfo).getSizeInBytes()
-                        + ", imageInfo.getHeight:" + imageInfo.getHeight()
+                        + ", imageInfo.getWidth:" + imageInfo.getWidth()
                         + ", imageInfo.getHeight:" + imageInfo.getHeight());
 
                 MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache = Fresco.getImagePipeline().getBitmapMemoryCache();

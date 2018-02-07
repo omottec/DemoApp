@@ -9,8 +9,7 @@ import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.app.fresco.ImagePipelineConfigFactory;
-import com.omottec.demoapp.app.status.AppStatusHelper;
+import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
 import com.omottec.demoapp.utils.AppUtils;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.squareup.leakcanary.LeakCanary;

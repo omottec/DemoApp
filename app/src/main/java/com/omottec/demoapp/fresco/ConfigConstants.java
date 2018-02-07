@@ -1,4 +1,4 @@
-package com.omottec.demoapp.app.fresco;
+package com.omottec.demoapp.fresco;
 
 import com.facebook.common.util.ByteConstants;
 

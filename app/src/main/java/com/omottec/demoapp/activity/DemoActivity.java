@@ -3,23 +3,8 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.omottec.demoapp.compact.ContextFragment;
-import com.omottec.demoapp.fragment.DisplayMetricsFragment;
-import com.omottec.demoapp.fragment.FastClickFragment;
-import com.omottec.demoapp.fragment.FrescoFragment;
-import com.omottec.demoapp.fragment.MemoryFragment;
-import com.omottec.demoapp.fragment.ScaleTypeFragment;
-import com.omottec.demoapp.fragment.MultiProcessFragment;
-import com.omottec.demoapp.fragment.ShapeDrawableFragment;
-import com.omottec.demoapp.fragment.StateFragment;
-import com.omottec.demoapp.gson.GsonFragment;
-import com.omottec.demoapp.rxjava.RxJavaFragment;
-import com.omottec.demoapp.storage.StorageFragment;
-import com.omottec.demoapp.text.TextFragment;
-import com.omottec.demoapp.text.TextUtilsFragment;
+import com.omottec.demoapp.fresco.FrescoFragment;
 import com.omottec.demoapp.utils.TimeLogger;
-
-import java.sql.Time;
 
 /**
  * Created by qinbingbing on 3/31/16.

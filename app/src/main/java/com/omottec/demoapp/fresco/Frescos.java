@@ -1,4 +1,4 @@
-package com.omottec.demoapp.app.fresco;
+package com.omottec.demoapp.fresco;
 
 import android.net.Uri;
 
@@ -13,7 +13,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.utils.Logger;
-import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by omottec on 29/11/2017.
@@ -65,6 +64,7 @@ public final class Frescos {
     }
 
     public static void rawLoad(SimpleDraweeView sdv, String uriString, ControllerListener listener) {
+        Logger.d(Tag.FRESCO, "origin url:" + uriString);
         Uri uri = (uriString != null) ? Uri.parse(uriString) : null;
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()

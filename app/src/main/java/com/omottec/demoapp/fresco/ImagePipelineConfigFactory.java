@@ -1,16 +1,14 @@
-package com.omottec.demoapp.app.fresco;
+package com.omottec.demoapp.fresco;
 
 import android.content.Context;
 
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.internal.Sets;
-import com.facebook.common.internal.Supplier;
 import com.facebook.imagepipeline.backends.okhttp.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
-import com.omottec.demoapp.app.MyApplication;
 import com.squareup.okhttp.OkHttpClient;
 
 /**
