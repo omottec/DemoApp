@@ -65,6 +65,7 @@ public class ImagePipelineConfigFactory {
                 Integer.MAX_VALUE);                    // Max cache entry size
         configBuilder
                 .setBitmapMemoryCacheParamsSupplier(() -> bitmapCacheParams)
+//                .setDownsampleEnabled(true)
                 .setMainDiskCacheConfig(
                         DiskCacheConfig.newBuilder(context)
                                 .setBaseDirectoryPath(context.getApplicationContext().getExternalCacheDir())
