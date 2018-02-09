@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.app.MyApplication;
+import com.omottec.demoapp.fresco.FrescoControllerListener;
+import com.omottec.demoapp.fresco.Frescos;
+import com.omottec.demoapp.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +21,7 @@ import java.util.List;
  */
 
 public class PicRecyclerAdapter extends RecyclerView.Adapter<PicRecyclerAdapter.PicHolder> {
+    private FrescoControllerListener mListener = new FrescoControllerListener();
     private List<PicItem> mData = new ArrayList<>();
 
     public void addDataAtLast(List<PicItem> data) {
@@ -47,6 +52,10 @@ public class PicRecyclerAdapter extends RecyclerView.Adapter<PicRecyclerAdapter.
     @Override
     public void onBindViewHolder(PicHolder holder, int position) {
         holder.mSdv.setImageURI(mData.get(position).picUrl);
+        Frescos.rawLoad(holder.mSdv, mData.get(position).picUrl, mListener);
+
+        /*int screenSize = UiUtils.getScreenSize(MyApplication.getContext(), true);
+        Frescos.load(holder.mSdv, mData.get(position).picUrl, screenSize/2, screenSize/2, mListener);*/
         holder.mTv.setText(mData.get(position).title);
     }
 

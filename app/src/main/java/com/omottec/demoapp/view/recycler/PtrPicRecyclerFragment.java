@@ -77,13 +77,20 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
     private void loadData() {
         List<PicRecyclerAdapter.PicItem> data = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            String url = "http://lorempixel.com/400/";
-            url += (370 + new Random().nextInt(30));
+            /*String url = "http://lorempixel.com/400/";
+            url += (370 + new Random().nextInt(30));*/
+            Logger.d(TAG, "loadData mOffset:" + mOffset);
+            String url = "http://lorempixel.com/";
+            url += (721 + mOffset / PAGE_SIZE);
+            url += "/";
+            url += (720 + new Random().nextInt(30));
+
+//            String url = "http://lorempixel.com/750/750";
             data.add(new PicRecyclerAdapter.PicItem(url, "Item " + (mOffset + i)));
         }
         Observable.just(data)
 //                .delay(100 + new Random().nextInt(100), TimeUnit.MILLISECONDS)
-                .delay(200, TimeUnit.MILLISECONDS)
+//                .delay(200, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<PicRecyclerAdapter.PicItem>>() {

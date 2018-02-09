@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.fresco.FrescoFragment;
 import com.omottec.demoapp.utils.TimeLogger;
+import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
 
 /**
  * Created by qinbingbing on 3/31/16.
@@ -28,6 +29,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new FrescoFragment();
+        return new PtrPicRecyclerFragment();
     }
 }
