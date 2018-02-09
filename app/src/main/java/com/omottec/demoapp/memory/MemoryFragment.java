@@ -1,4 +1,4 @@
-package com.omottec.demoapp.fragment;
+package com.omottec.demoapp.memory;
 
 import android.app.Activity;
 import android.app.ActivityManager;
