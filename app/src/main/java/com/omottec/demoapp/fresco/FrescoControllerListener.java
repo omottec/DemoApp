@@ -29,6 +29,7 @@ public class FrescoControllerListener implements ControllerListener<ImageInfo> {
                 + ", imageInfo.getHeight:" + imageInfo.getHeight()
                 + ", animatable:" + animatable);
         Logger.d(Tag.FRESCO, "onFinalImageSet " + MemoryUtils.getMemoryInfo());
+        Frescos.logMemeryCache();
     }
 
     @Override

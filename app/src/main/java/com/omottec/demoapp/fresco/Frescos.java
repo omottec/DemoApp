@@ -2,17 +2,24 @@ package com.omottec.demoapp.fresco;
 
 import android.net.Uri;
 
+import com.facebook.cache.common.CacheKey;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.cache.CountingMemoryCache;
+import com.facebook.imagepipeline.cache.InstrumentedMemoryCache;
+import com.facebook.imagepipeline.cache.MemoryCache;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.common.RotationOptions;
+import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.utils.Logger;
+
+import java.lang.reflect.Field;
 
 /**
  * Created by omottec on 29/11/2017.
@@ -102,5 +109,28 @@ public final class Frescos {
                 .setOldController(view.getController())
                 .build();
         view.setController(draweeController);
+    }
+
+    public static void logMemeryCache() {
+        MemoryCache<CacheKey, CloseableImage> bitmapMemoryCache = Fresco.getImagePipeline().getBitmapMemoryCache();
+        Logger.d(Tag.FRESCO, "MemoryCache:" + bitmapMemoryCache);
+        if (bitmapMemoryCache instanceof InstrumentedMemoryCache) {
+            InstrumentedMemoryCache instrumentedMemoryCache = (InstrumentedMemoryCache) bitmapMemoryCache;
+            try {
+                Field mDelegate = instrumentedMemoryCache.getClass().getDeclaredField("mDelegate");
+                mDelegate.setAccessible(true);
+                CountingMemoryCache countingMemoryCache = (CountingMemoryCache) mDelegate.get(instrumentedMemoryCache);
+                Logger.d(Tag.FRESCO, "countingMemoryCache.getCount:" + countingMemoryCache.getCount());
+                Logger.d(Tag.FRESCO, "countingMemoryCache.getSizeInBytes:" + countingMemoryCache.getSizeInBytes());
+                Logger.d(Tag.FRESCO, "countingMemoryCache.getInUseCount:" + countingMemoryCache.getInUseCount());
+                Logger.d(Tag.FRESCO, "countingMemoryCache.getInUseSizeInBytes:" + countingMemoryCache.getInUseSizeInBytes());
+                Logger.d(Tag.FRESCO, "countingMemoryCache.getEvictionQueueCount:" + countingMemoryCache.getEvictionQueueCount());
+                Logger.d(Tag.FRESCO, "countingMemoryCache.getEvictionQueueSizeInBytes:" + countingMemoryCache.getEvictionQueueSizeInBytes());
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.omottec.demoapp.fresco.BatchLoadFragment;
 import com.omottec.demoapp.fresco.FrescoFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
@@ -29,6 +30,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new PtrPicRecyclerFragment();
+        return new BatchLoadFragment();
     }
 }
