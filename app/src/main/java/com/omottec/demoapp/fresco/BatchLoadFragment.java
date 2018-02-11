@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.memory.MemorySimulator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,5 +83,7 @@ public class BatchLoadFragment extends Fragment {
         mRv.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mRv.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+        MemorySimulator.asyncDrainMemoryDouble(3000);
+//        MemorySimulator.asyncDrainMemorySlow(500);
     }
 }

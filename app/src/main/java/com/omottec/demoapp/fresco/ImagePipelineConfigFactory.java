@@ -63,8 +63,11 @@ public class ImagePipelineConfigFactory {
                 ConfigConstants.MAX_MEMORY_CACHE_SIZE, // Max total size of elements in eviction queue
                 Integer.MAX_VALUE,                     // Max length of eviction queue
                 Integer.MAX_VALUE);                    // Max cache entry size
+        MyMemoryTrimmableRegistry memoryTrimmableRegistry = MyMemoryTrimmableRegistry.getInstance();
+        memoryTrimmableRegistry.registerMemoryTrimmable(new MyMemoryTrimmable());
         configBuilder
                 .setBitmapMemoryCacheParamsSupplier(() -> bitmapCacheParams)
+                .setMemoryTrimmableRegistry(memoryTrimmableRegistry)
 //                .setDownsampleEnabled(true)
                 .setMainDiskCacheConfig(
                         DiskCacheConfig.newBuilder(context)

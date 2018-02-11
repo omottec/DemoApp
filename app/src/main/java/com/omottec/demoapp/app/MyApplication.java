@@ -71,11 +71,13 @@ public class MyApplication extends Application {
     public void onLowMemory() {
         super.onLowMemory();
         Log.d(Tag.MEMORY, this + " onLowMemory");
+        Log.d(Tag.FRESCO, this + " onLowMemory");
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         Log.d(Tag.MEMORY, this + " onTrimMemory level:" + level);
+        Log.d(Tag.FRESCO, this + " onTrimMemory level:" + level);
     }
 }
