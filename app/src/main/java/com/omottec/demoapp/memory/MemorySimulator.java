@@ -1,4 +1,4 @@
-package com.omottec.demoapp.utils;
+package com.omottec.demoapp.memory;
 
 import android.os.SystemClock;
 import android.util.Log;

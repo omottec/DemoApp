@@ -1,7 +1,6 @@
 package com.omottec.demoapp.lifecycle;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.MemorySimulator;
 
 /**
  * Created by qinbingbing on 6/8/16.

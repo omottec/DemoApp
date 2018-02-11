@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.MemorySimulator;
 
 import java.util.Timer;
 import java.util.TimerTask;
