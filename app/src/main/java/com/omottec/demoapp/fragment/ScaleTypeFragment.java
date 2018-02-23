@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
+import com.omottec.demoapp.memory.MemoryUtils;
+import com.omottec.demoapp.utils.Logger;
 
 /**
  * Created by qinbingbing on 8/24/16.
@@ -32,7 +34,7 @@ public class ScaleTypeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.f_iv, null);
+        mRootView = inflater.inflate(R.layout.f_scale_type, null);
         mIv = (ImageView) mRootView.findViewById(R.id.iv);
         return mRootView;
     }
@@ -56,5 +58,6 @@ public class ScaleTypeFragment extends Fragment {
                 Log.d(Tag.SCALE_TYPE, "drawingCache:" + drawingCache.getWidth() + "*" + drawingCache.getHeight());
             }
         }, 3000);
+        Logger.d(Tag.SCALE_TYPE, MemoryUtils.getMemoryInfo());
     }
 }
