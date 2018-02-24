@@ -64,6 +64,7 @@ public class MyApplication extends Application {
         LeakCanary.install(this);
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
 //        registerActivityLifecycleCallbacks(AppStatusHelper.getInstance());
+//        registerComponentCallbacks(this);
         TimeLogger.methodEnd();
     }
 
