@@ -47,8 +47,14 @@ public class GsonFragment extends Fragment {
 
         String RefBooleanText = "{\"refBoolean\":false}";
 
-        GsonObject gsonObject = new Gson().fromJson(stringText, GsonObject.class);
+        String phoneList = "{\"data\": {\"phoneList\": [\"18811445061\", \"18811445064\", \"18311045061\", \"18811445063\", \"18811445062\", \"18311045361\"]},\"code\": 0}";
+
+        /*GsonObject gsonObject = new Gson().fromJson(stringText, GsonObject.class);
         mJsonTv.setText(stringText);
-        mGsonObjectTv.setText(gsonObject.toString());
+        mGsonObjectTv.setText(gsonObject.toString());*/
+
+        ResponseEntity responseEntity = new Gson().fromJson(phoneList, ResponseEntity.class);
+        mJsonTv.setText(phoneList);
+        mGsonObjectTv.setText(responseEntity.toString());
     }
 }
