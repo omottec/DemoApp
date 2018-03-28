@@ -7,6 +7,7 @@ import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.fresco.BatchLoadFragment;
 import com.omottec.demoapp.fresco.FrescoFragment;
 import com.omottec.demoapp.gson.GsonFragment;
+import com.omottec.demoapp.text.TextFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
 
@@ -32,6 +33,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new GsonFragment();
+        return new TextFragment();
     }
 }

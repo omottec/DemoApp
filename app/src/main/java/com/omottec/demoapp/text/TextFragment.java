@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
@@ -43,7 +44,7 @@ public class TextFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setPriceAndUnit();
+//        setPriceAndUnit();
 //        setPriceAndLine();
         String text = "1. 掌鱼生鲜更新，更好更快一一掌鱼生鲜更新，更好更快一一掌鱼生鲜更新，更好更快一一\n" +
                 "2. 掌鱼生鲜更新，更好更快二二掌鱼生鲜更新，更好更快二二掌鱼生鲜更新，更好更快二二\n" +
@@ -53,7 +54,9 @@ public class TextFragment extends Fragment {
         mTv1.setMovementMethod(ScrollingMovementMethod.getInstance());
         mTv1.setText(text);
         Logger.d(TAG, "onViewCreated");
-        Logger.d(TAG, String.format("aaa %d", "bbb"));
+//        Logger.d(TAG, String.format("aaa %d", "bbb"));
+
+        setTagAndTitle("买一赠一", "红富士苹果红富士苹果红富士苹果红富士苹果红富士苹果红富士苹果红富士苹果红富士苹果");
     }
 
     private void setPriceAndUnit() {
@@ -75,6 +78,19 @@ public class TextFragment extends Fragment {
         String originalPriceText = getContext().getString(R.string.money_format, 200f, "份");
         SpannableString spannableString = new SpannableString(originalPriceText);
         spannableString.setSpan(new StrikethroughSpan(), 0, originalPriceText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTv.setText(spannableString);
+    }
+    private void setTagAndTitle(String tag, String title) {
+        if (TextUtils.isEmpty(title)) return;
+        SpannableString spannableString = null;
+        if (TextUtils.isEmpty(tag)) {
+            spannableString = new SpannableString(title);
+            spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            spannableString = new SpannableString(tag + " " + title);
+            spannableString.setSpan(new ForegroundColorSpan(Color.BLUE), 0, tag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new ForegroundColorSpan(Color.RED), tag.length(), tag.length() + title.length() + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
         mTv.setText(spannableString);
     }
 }
