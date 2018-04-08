@@ -65,10 +65,12 @@ public class RecyclerViewFragment extends BaseFragment {
             list.add("" + i);
         mRecyclerAdapter = new SimpleRecyclerAdapter(list);
         mRecyclerAdapter.setOnItemClickListener((holder, view) -> {
-            ArrayList<String> array = new ArrayList<>();
-            array.add("AAA");
-            array.add("BBB");
-            mRecyclerAdapter.addDataAtFirst(array);
+            if(holder.getAdapterPosition() < 10) {
+                ArrayList<String> array = new ArrayList<>();
+                array.add("AAA");
+                array.add("BBB");
+                mRecyclerAdapter.addDataAtFirst(array);
+            }
             String toast = new StringBuilder()
                     .append("ItemViewType:").append(holder.getItemViewType())
                     .append(", AdapterPosition:").append(holder.getAdapterPosition())
