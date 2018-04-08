@@ -62,9 +62,13 @@ public class RecyclerViewFragment extends BaseFragment {
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 200; i++)
-            list.add("item " + i);
+            list.add("" + i);
         mRecyclerAdapter = new SimpleRecyclerAdapter(list);
         mRecyclerAdapter.setOnItemClickListener((holder, view) -> {
+            ArrayList<String> array = new ArrayList<>();
+            array.add("AAA");
+            array.add("BBB");
+            mRecyclerAdapter.addDataAtFirst(array);
             String toast = new StringBuilder()
                     .append("ItemViewType:").append(holder.getItemViewType())
                     .append(", AdapterPosition:").append(holder.getAdapterPosition())
