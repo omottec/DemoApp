@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light">
+
+            <ImageView
+                android:id="@+id/sdv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-20dp"
+                android:layout_marginRight="-20dp"
+                android:background="@android:color/white"
+                android:src="@drawable/fruit"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_green_light">
+            <ImageView
+                android:id="@+id/sdv1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-20dp"
+                android:layout_marginRight="-20dp"
+                android:background="@android:color/white"
+                android:src="@drawable/vegetable"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_bright">
+            <ImageView
+                android:id="@+id/sdv2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-20dp"
+                android:layout_marginRight="-20dp"
+                android:background="@android:color/white"
+                android:src="@drawable/sea_food"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_orange_light">
+            <ImageView
+                android:id="@+id/sdv3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="-20dp"
+                android:layout_marginRight="-20dp"
+                android:background="@android:color/white"
+                android:src="@drawable/meat"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
