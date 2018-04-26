@@ -12,9 +12,12 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.utils.Logger;
 
 import rx.Observable;
+import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -43,7 +46,8 @@ public class RxJavaFragment extends Fragment {
         mTv.setText(TAG);
         mTv.setOnClickListener(v -> {
 //            testRange();
-            testZip();
+//            testZip();
+            testJust();
         });
     }
 
@@ -97,6 +101,17 @@ public class RxJavaFragment extends Fragment {
                         Logger.d(TAG, "range onNext " + integer);
                         Logger.logThread(TAG);
                     }
+                });
+    }
+
+    private void testJust() {
+        Logger.d(TAG, "testJust");
+        Observable.just("Hello word")
+                .map((Func1<String, Object>) s -> s.length())
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    Logger.d(TAG, "get " + s + " @ " + Thread.currentThread().getName());
                 });
     }
 }
