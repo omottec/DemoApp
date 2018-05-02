@@ -73,8 +73,9 @@ public class CustomWorker extends Scheduler.Worker {
                 sa.add(Subscriptions.create(() -> g.cancel(false)));
             }, delayTime, unit);
         }
+        Future<?> finalF = f;
         sa.add(Subscriptions.create(() -> {
-            f.cancel(false);
+            finalF.cancel(false);
         }));
         return null;
     }
