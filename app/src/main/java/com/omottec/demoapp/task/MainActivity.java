@@ -14,6 +14,7 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.activity.DemoActivity;
 import com.omottec.demoapp.app.MyApplication;
+import com.omottec.demoapp.launch.SplashActivity;
 import com.omottec.demoapp.memory.LeakActivity;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
@@ -28,6 +29,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startSplashActivity();
         setContentView(R.layout.two_text);
         TextView tv = (TextView) findViewById(R.id.tv);
         TextView tv1 = (TextView) findViewById(R.id.tv1);
@@ -36,6 +38,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         tv.setOnClickListener(this);
         tv1.setOnClickListener(this);
         Log.d(Tag.TASK, "taskId:" + getTaskId() + "|" + this + "|onCreate|" + ID);
+    }
+
+    private void startSplashActivity() {
+        Intent intent = new Intent(this, SplashActivity.class);
+        startActivity(intent);
     }
 
     private void startSelf() {

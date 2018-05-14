@@ -1,6 +1,5 @@
 package com.omottec.demoapp.launch;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,8 +18,9 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.task.MainActivity;
 import com.omottec.demoapp.utils.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by qinbingbing on 17/03/2017.
@@ -38,7 +38,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mToolbar.setVisibility(View.GONE);
         if (mJump2Main) {
-            jump2MainActivity();
+            finishDisplay();
         } else {
             // 使用占位图和直接加载图片
             /*GenericDraweeHierarchyBuilder builder =
@@ -48,7 +48,7 @@ public class SplashActivity extends BaseActivity {
                     .build();
             mSplashSdv.setHierarchy(hierarchy);
             mSplashSdv.setImageURI(IMG_URI);
-            MyApplication.getUiHandler().postDelayed(() -> jump2MainActivity(), 2 * 1000);*/
+            MyApplication.getUiHandler().postDelayed(() -> finishDisplay(), 2 * 1000);*/
 
             /**
              * 有缓存使用缓存，延迟2s跳主页
@@ -65,18 +65,18 @@ public class SplashActivity extends BaseActivity {
                     if (!dataSource.isFinished()) {
                         mSplashSdv.setImageResource(R.drawable.splash);
                         imagePipeline.prefetchToDiskCache(imageRequest, this);
-                        jump2MainActivity();
+                        finishDisplay();
                         return;
                     }
                     boolean isInCache = dataSource.getResult();
                     Logger.d(Tag.SPLASH, "isInCache:" + isInCache);
                     if (isInCache) {
                         mSplashSdv.setImageURI(uri);
-                        MyApplication.getUiHandler().postDelayed(() -> jump2MainActivity(), 2 * 1000);
+                        finishDisplay();
                     } else {
                         mSplashSdv.setImageResource(R.drawable.splash);
                         imagePipeline.prefetchToDiskCache(imageRequest, this);
-                        jump2MainActivity();
+                        finishDisplay();
                     }
 
                 }
@@ -86,17 +86,18 @@ public class SplashActivity extends BaseActivity {
                     Logger.d(Tag.SPLASH, "onFailureImpl");
                     mSplashSdv.setImageResource(R.drawable.splash);
                     imagePipeline.prefetchToDiskCache(imageRequest, this);
-                    jump2MainActivity();
+                    finishDisplay();
                 }
             };
             inDiskCacheSource.subscribe(subscriber, UiThreadImmediateExecutorService.getInstance());
         }
     }
 
-    private void jump2MainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    private void finishDisplay() {
+        MyApplication.getUiHandler().postDelayed(() -> {
+            finish();
+
+        }, TimeUnit.SECONDS.toMillis(2));
     }
 
     @Override
