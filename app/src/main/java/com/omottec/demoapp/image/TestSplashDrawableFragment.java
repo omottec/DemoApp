@@ -18,14 +18,14 @@ import com.omottec.demoapp.utils.UiUtils;
  * Created by qinbingbing on 16/05/2018.
  */
 
-public class TestDrawableFragment extends Fragment {
-    public static final String TAG = "TestDrawableFragment";
+public class TestSplashDrawableFragment extends Fragment {
+    public static final String TAG = "TestSplashDrawableFragment";
     private ImageView mIv;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mIv = (ImageView) inflater.inflate(R.layout.f_test_drawable, container, false);
+        mIv = (ImageView) inflater.inflate(R.layout.f_test_splash_drawable, container, false);
         return mIv;
     }
 

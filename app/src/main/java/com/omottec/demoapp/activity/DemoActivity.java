@@ -3,13 +3,9 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.omottec.demoapp.image.TestDrawableFragment;
-import com.omottec.demoapp.parse.ParseFragment;
-import com.omottec.demoapp.permission.CallPhoneFragment;
-import com.omottec.demoapp.permission.RxCallPhoneFragment;
-import com.omottec.demoapp.rxjava.RxJavaFragment;
+import com.omottec.demoapp.image.TestIconDrawableFragment;
+import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.utils.TimeLogger;
-import com.omottec.demoapp.view.recycler.RecyclerViewFragment;
 
 /**
  * Created by qinbingbing on 3/31/16.
@@ -33,6 +29,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new TestDrawableFragment();
+        return new TestIconDrawableFragment();
     }
 }
