@@ -96,7 +96,7 @@ public class SplashActivity extends BaseActivity {
     private void finishDisplay() {
         MyApplication.getUiHandler().postDelayed(() -> {
             finish();
-
+            overridePendingTransition(0, R.anim.translate_from_center_to_left);
         }, TimeUnit.SECONDS.toMillis(2));
     }
 

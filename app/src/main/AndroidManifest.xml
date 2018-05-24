@@ -49,7 +49,10 @@
         <activity android:name=".task.MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".memory.LeakActivity">
@@ -253,10 +256,7 @@
 
         <activity android:name=".context.MyAppCompactActitivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <service android:name=".service.AppService"/>
     </application>
