@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.image.TestIconDrawableFragment;
 import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.utils.TimeLogger;
@@ -29,6 +30,6 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new TestIconDrawableFragment();
+        return new ScaleTypeFragment();
     }
 }

@@ -1,8 +1,11 @@
 package com.omottec.demoapp.memory;
 
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.os.Build;
+import android.os.Debug;
 
 import com.omottec.demoapp.app.MyApplication;
 
@@ -25,16 +28,24 @@ public final class MemoryUtils {
         long totalMemory = Runtime.getRuntime().totalMemory() / MEGA_BYTES;
         long freeMemory = Runtime.getRuntime().freeMemory() / MEGA_BYTES;
 
+        String debugMemInfo = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Debug.MemoryInfo memInfo = new Debug.MemoryInfo();
+            Debug.getMemoryInfo(memInfo);
+            debugMemInfo = memInfo.getMemoryStats().toString();
+        }
+
         StringBuilder sb = new StringBuilder();
-        sb.append("am.getMemoryClass(): ").append(memoryClass)
-                .append("\nam.getLargeMemoryClass(): ").append(largeMemoryClass)
-                .append("\nmemoryInfo.availMem: ").append(memoryInfo.availMem)
-                .append("\nmemoryInfo.totalMem: ").append(memoryInfo.totalMem)
-                .append("\nmemoryInfo.threshold: ").append(memoryInfo.threshold)
-                .append("\nmemoryInfo.lowMemory: ").append(memoryInfo.lowMemory)
+        sb.append("ActivityManager.getMemoryClass(): ").append(memoryClass)
+                .append("\nActivityManager.getLargeMemoryClass(): ").append(largeMemoryClass)
+                .append("\nActivityManager.MemoryInfo.availMem: ").append(memoryInfo.availMem / MEGA_BYTES)
+                .append("\nActivityManager.MemoryInfo.totalMem: ").append(memoryInfo.totalMem / MEGA_BYTES)
+                .append("\nActivityManager.MemoryInfo.threshold: ").append(memoryInfo.threshold / MEGA_BYTES)
+                .append("\nActivityManager.MemoryInfo.lowMemory: ").append(memoryInfo.lowMemory)
                 .append("\nRuntime.getRuntime().maxMemory(): ").append(maxMemory)
                 .append("\nRuntime.getRuntime().totalMemory(): ").append(totalMemory)
-                .append("\nRuntime.getRuntime().freeMemory(): ").append(freeMemory);
+                .append("\nRuntime.getRuntime().freeMemory(): ").append(freeMemory)
+                .append("\nDebug.MemoryInfo.getMemoryStats: ").append(debugMemInfo);
         return sb.toString();
     }
 
