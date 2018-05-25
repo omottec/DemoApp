@@ -1,6 +1,7 @@
 package com.omottec.demoapp.memory;
 
 import android.app.ActivityManager;
+import android.content.ComponentCallbacks2;
 import android.content.Context;
 
 import com.omottec.demoapp.app.MyApplication;
@@ -35,5 +36,26 @@ public final class MemoryUtils {
                 .append("\nRuntime.getRuntime().totalMemory(): ").append(totalMemory)
                 .append("\nRuntime.getRuntime().freeMemory(): ").append(freeMemory);
         return sb.toString();
+    }
+
+    public static String getTrimMemoryLevel(int level) {
+        switch (level) {
+            case ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN:
+                return "TRIM_MEMORY_UI_HIDDEN";
+            case ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE:
+                return "TRIM_MEMORY_RUNNING_MODERATE";
+            case ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW:
+                return "TRIM_MEMORY_RUNNING_LOW";
+            case ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL:
+                return "TRIM_MEMORY_RUNNING_CRITICAL";
+            case ComponentCallbacks2.TRIM_MEMORY_BACKGROUND:
+                return "TRIM_MEMORY_BACKGROUND";
+            case ComponentCallbacks2.TRIM_MEMORY_MODERATE:
+                return "TRIM_MEMORY_MODERATE";
+            case ComponentCallbacks2.TRIM_MEMORY_COMPLETE:
+                return "TRIM_MEMORY_COMPLETE";
+            default:
+                return "UNKNOWN";
+        }
     }
 }
