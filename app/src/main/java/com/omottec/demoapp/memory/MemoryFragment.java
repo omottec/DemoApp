@@ -55,7 +55,8 @@ public class MemoryFragment extends Fragment {
                 });
             }
         }, 1000, 1000);
-        MemorySimulator.asyncDrainMemoryDouble(1000);
+//        MemorySimulator.asyncDrainMemoryDouble(1000);
+        MemorySimulator.asyncDrainMemorySlow(2 * 1000);
     }
 
     private void updateMemory() {

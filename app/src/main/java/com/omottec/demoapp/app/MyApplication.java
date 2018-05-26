@@ -14,6 +14,8 @@ import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
 import com.omottec.demoapp.memory.MemoryUtils;
+import com.omottec.demoapp.memory.OomMonitor;
+import com.omottec.demoapp.memory.OomObserver;
 import com.omottec.demoapp.utils.AppUtils;
 import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.TimeLogger;
@@ -70,6 +72,11 @@ public class MyApplication extends Application {
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
         registerAppStatusListener();
 //        registerComponentCallbacks(this);
+        OomMonitor.initialize(new OomObserver() {
+            @Override
+            public void memoryUsage(float rate) {
+            }
+        }, 3000);
         TimeLogger.methodEnd();
     }
 
