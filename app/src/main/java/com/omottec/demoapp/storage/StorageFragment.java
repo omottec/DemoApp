@@ -54,8 +54,11 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 //        File file = new File(MyApplication.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), APP_UPDATE_FILE);
+//        File file = new File(MyApplication.getContext().getExternalCacheDir(), APP_UPDATE_FILE);
+//        File file = new File(MyApplication.getContext().getFilesDir(), APP_UPDATE_FILE);
+        File file = new File(MyApplication.getContext().getCacheDir(), APP_UPDATE_FILE);
 //        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), APP_UPDATE_FILE);
-        File file = new File(Environment.getExternalStorageDirectory(), APP_UPDATE_FILE);
+//        File file = new File(Environment.getExternalStorageDirectory(), APP_UPDATE_FILE);
         Log.d(TAG, file.getAbsolutePath());
         switch (view.getId()) {
             case R.id.btn_create_file:
