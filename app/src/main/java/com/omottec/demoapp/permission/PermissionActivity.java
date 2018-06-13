@@ -1,9 +1,11 @@
 package com.omottec.demoapp.permission;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -103,6 +105,9 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
 
     @SuppressLint("MissingPermission")
     public void getImei() {
+        int checkSelfPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        Logger.d(TAG, "ContextCompat.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission);
+
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         if (telephonyManager == null) return;
         String deviceId = telephonyManager.getDeviceId();
