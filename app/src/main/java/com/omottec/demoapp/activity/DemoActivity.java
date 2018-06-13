@@ -8,6 +8,7 @@ import com.omottec.demoapp.image.TestIconDrawableFragment;
 import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.memory.MemoryFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
+import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
@@ -35,6 +36,7 @@ public class DemoActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
 //        return new ScaleTypeFragment();
 //        return new MemoryFragment();
-        return new StorageFragment();
+//        return new StorageFragment();
+        return new GetImeiFragment();
     }
 }
