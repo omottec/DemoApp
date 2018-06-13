@@ -2,9 +2,12 @@ package com.omottec.demoapp.permission;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -115,8 +118,11 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
         Logger.d(TAG, "ContextCompat.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission);
         int checkSelfPermission1 = PermissionChecker.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         Logger.d(TAG, "PermissionChecker.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission1);
+        boolean shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE);
+        Logger.d(TAG, "ActivityCompat.shouldShowRequestPermissionRationale READ_PHONE_STATE:" + shouldShowRequestPermissionRationale);
 
-        if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {
+        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission1 != PermissionChecker.PERMISSION_GRANTED) {
             String[] permissions = {Manifest.permission.READ_PHONE_STATE};
             Logger.d(TAG, "ActivityCompat.requestPermissions permissions:" + Arrays.toString(permissions)
                     + ", requestCode:" + REQUEST_CODE_PERMISSION_READ_PHONE_STATE);
@@ -140,5 +146,25 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
         Logger.d(TAG, "ContextCompat.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission);
         int checkSelfPermission1 = PermissionChecker.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         Logger.d(TAG, "PermissionChecker.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission1);
+        boolean shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE);
+        Logger.d(TAG, "ActivityCompat.shouldShowRequestPermissionRationale READ_PHONE_STATE:" + shouldShowRequestPermissionRationale);
+
+        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission1 != PermissionChecker.PERMISSION_GRANTED) {
+            startPermissionSetting();
+        }
+    }
+
+    private void startPermissionSetting() {
+        Logger.d(TAG, "startPermissionSetting");
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.fromParts("package", getPackageName(), null));
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            Logger.e(TAG, "startPermissionSetting", e);
+        }
     }
 }
