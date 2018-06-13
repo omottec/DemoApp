@@ -1,8 +1,10 @@
 package com.omottec.demoapp.launch;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.telecom.TelecomManager;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -18,6 +20,7 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.app.MyApplication;
+import com.omottec.demoapp.task.MainActivity;
 import com.omottec.demoapp.utils.Logger;
 
 import java.util.concurrent.TimeUnit;
@@ -28,8 +31,6 @@ import java.util.concurrent.TimeUnit;
 
 public class SplashActivity extends BaseActivity {
     private static final String IMG_URI = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496933431724&di=81c5c1a4aad63cd1c9ac8e7777c49e11&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2012%2F326%2FXP07382U1K18.jpg";
-    private View mContentView;
-    private ImageView mSplashIv;
     private SimpleDraweeView mSplashSdv;
     private boolean mJump2Main = false;
 
@@ -40,6 +41,10 @@ public class SplashActivity extends BaseActivity {
         if (mJump2Main) {
             finishDisplay();
         } else {
+            
+
+
+
             // 使用占位图和直接加载图片
             /*GenericDraweeHierarchyBuilder builder =
                     new GenericDraweeHierarchyBuilder(getResources());
@@ -61,20 +66,21 @@ public class SplashActivity extends BaseActivity {
             DataSubscriber<Boolean> subscriber = new BaseDataSubscriber<Boolean>() {
                 @Override
                 protected void onNewResultImpl(DataSource<Boolean> dataSource) {
-                    Logger.d(Tag.SPLASH, "onNewResultImpl");
-                    if (!dataSource.isFinished()) {
-                        mSplashSdv.setImageResource(R.drawable.splash);
+                    boolean finished = dataSource.isFinished();
+                    Logger.d(Tag.SPLASH, "onNewResultImpl dataSource.isFinished: " + finished);
+                    if (!finished) {
+                        mSplashSdv.setActualImageResource(R.drawable.splash);
                         imagePipeline.prefetchToDiskCache(imageRequest, this);
                         finishDisplay();
                         return;
                     }
                     boolean isInCache = dataSource.getResult();
-                    Logger.d(Tag.SPLASH, "isInCache:" + isInCache);
+                    Logger.d(Tag.SPLASH, "onNewResultImpl isInCache: " + isInCache);
                     if (isInCache) {
                         mSplashSdv.setImageURI(uri);
                         finishDisplay();
                     } else {
-                        mSplashSdv.setImageResource(R.drawable.splash);
+//                        mSplashSdv.setActualImageResource(R.drawable.splash);
                         imagePipeline.prefetchToDiskCache(imageRequest, this);
                         finishDisplay();
                     }
@@ -84,7 +90,7 @@ public class SplashActivity extends BaseActivity {
                 @Override
                 protected void onFailureImpl(DataSource<Boolean> dataSource) {
                     Logger.d(Tag.SPLASH, "onFailureImpl");
-                    mSplashSdv.setImageResource(R.drawable.splash);
+//                    mSplashSdv.setActualImageResource(R.drawable.splash);
                     imagePipeline.prefetchToDiskCache(imageRequest, this);
                     finishDisplay();
                 }
@@ -94,22 +100,20 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void finishDisplay() {
-        MyApplication.getUiHandler().postDelayed(() -> {
-            finish();
-            overridePendingTransition(0, R.anim.translate_from_center_to_left);
-        }, TimeUnit.SECONDS.toMillis(2));
+//        MyApplication.getUiHandler().postDelayed(() -> {
+//            startActivity(new Intent(this, MainActivity.class));
+//            finish();
+//            overridePendingTransition(0, R.anim.translate_from_center_to_left);
+//        }, TimeUnit.SECONDS.toMillis(2));
     }
 
     @Override
     protected View createContentView() {
-        mContentView = View.inflate(this, R.layout.a_splash, null);
-        return mContentView;
+        mSplashSdv = (SimpleDraweeView) View.inflate(this, R.layout.a_splash, null);
+        return mSplashSdv;
     }
 
     @Override
     protected void onViewCreated(View view) {
-        mSplashIv = (ImageView) mContentView.findViewById(R.id.iv_splash);
-        mSplashSdv = (SimpleDraweeView) mContentView.findViewById(R.id.sdv_splash);
-        mSplashSdv.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 }
