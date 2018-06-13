@@ -3,10 +3,10 @@ package com.omottec.demoapp.launch;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.datasource.BaseDataSubscriber;
@@ -59,6 +59,7 @@ public class SplashActivity extends BaseActivity {
              * 有缓存使用缓存，延迟2s跳主页
              * 无缓存使用默认图，下载，立即跳主页
              */
+            SystemClock.sleep(2000);
             ImagePipeline imagePipeline = Fresco.getImagePipeline();
             Uri uri = Uri.parse(IMG_URI);
             ImageRequest imageRequest = ImageRequest.fromUri(IMG_URI);
@@ -69,7 +70,6 @@ public class SplashActivity extends BaseActivity {
                     boolean finished = dataSource.isFinished();
                     Logger.d(Tag.SPLASH, "onNewResultImpl dataSource.isFinished: " + finished);
                     if (!finished) {
-                        mSplashSdv.setActualImageResource(R.drawable.splash);
                         imagePipeline.prefetchToDiskCache(imageRequest, this);
                         finishDisplay();
                         return;
@@ -80,7 +80,6 @@ public class SplashActivity extends BaseActivity {
                         mSplashSdv.setImageURI(uri);
                         finishDisplay();
                     } else {
-//                        mSplashSdv.setActualImageResource(R.drawable.splash);
                         imagePipeline.prefetchToDiskCache(imageRequest, this);
                         finishDisplay();
                     }
@@ -90,7 +89,6 @@ public class SplashActivity extends BaseActivity {
                 @Override
                 protected void onFailureImpl(DataSource<Boolean> dataSource) {
                     Logger.d(Tag.SPLASH, "onFailureImpl");
-//                    mSplashSdv.setActualImageResource(R.drawable.splash);
                     imagePipeline.prefetchToDiskCache(imageRequest, this);
                     finishDisplay();
                 }
