@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.PermissionChecker;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -151,7 +152,7 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
 
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission1 != PermissionChecker.PERMISSION_GRANTED) {
-            startPermissionSetting();
+            showPermissionSettingDialog();
         }
     }
 
@@ -166,5 +167,20 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
         } catch (Exception e) {
             Logger.e(TAG, "startPermissionSetting", e);
         }
+    }
+
+    private void showPermissionSettingDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("权限申请")
+                .setMessage("电话权限,存储权限为必选项，全部开通才可以正常使用App,请到设置中开启")
+                .setCancelable(true)
+                .setNegativeButton("取消", (dialog, which) -> {
+
+                })
+                .setPositiveButton("去设置", (dialog, which) -> {
+                    startPermissionSetting();
+                })
+                .create()
+                .show();
     }
 }
