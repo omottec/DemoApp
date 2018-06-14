@@ -4,6 +4,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by omottec on 13/06/2018.
@@ -40,6 +44,7 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
     public static final String TAG = "PermissionActivity";
     public static final String APP_UPDATE_FILE = "appupdate.bat";
     public static final int REQUEST_CODE_PERMISSION_READ_PHONE_STATE = 1;
+    public static final int REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION = 2;
     private TextView mGetImeiTv;
     private TextView mCreateFileTv;
     private TextView mDeleteFileTv;
@@ -109,7 +114,58 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
                 Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressLint("MissingPermission")
     private void getLocation() {
+        Logger.d(TAG, "getLocation");
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        List<String> allProviders = locationManager.getAllProviders();
+        Logger.d(TAG, "allProviders:" + allProviders);
+        if (allProviders == null || allProviders.isEmpty()) return;
+        for (String provider : allProviders) {
+            boolean enabled = locationManager.isProviderEnabled(provider);
+            Logger.d(TAG, provider + " " + enabled);
+        }
+
+        int checkSelfPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        Logger.d(TAG, "ContextCompat.checkSelfPermission ACCESS_COARSE_LOCATION:" + checkSelfPermission);
+        int checkSelfPermission1 = PermissionChecker.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        Logger.d(TAG, "PermissionChecker.checkSelfPermission ACCESS_COARSE_LOCATION:" + checkSelfPermission1);
+        boolean shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        Logger.d(TAG, "ActivityCompat.shouldShowRequestPermissionRationale ACCESS_COARSE_LOCATION:" + shouldShowRequestPermissionRationale);
+
+        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission1 != PermissionChecker.PERMISSION_GRANTED) {
+            String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION};
+            Logger.d(TAG, "ActivityCompat.requestPermissions permissions:" + Arrays.toString(permissions)
+                    + ", requestCode:" + REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_PERMISSION_ACCESS_COARSE_LOCATION);
+            return;
+        }
+
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+                Logger.d(TAG, "onLocationChanged:" + location);
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+                Logger.d(TAG, "onStatusChanged provider:" + provider
+                        + ", status:" + status
+                        + ", extras:" + extras);
+            }
+
+            public void onProviderEnabled(String provider) {
+                Logger.d(TAG, "onProviderEnabled:" + provider);
+            }
+
+            public void onProviderDisabled(String provider) {
+                Logger.d(TAG, "onProviderDisabled:" + provider);
+            }
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
     }
 
@@ -143,12 +199,12 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
                 + ", permissions:" + Arrays.toString(permissions)
                 + ", grantResults:" + Arrays.toString(grantResults));
 
-        int checkSelfPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
-        Logger.d(TAG, "ContextCompat.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission);
-        int checkSelfPermission1 = PermissionChecker.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
-        Logger.d(TAG, "PermissionChecker.checkSelfPermission READ_PHONE_STATE:" + checkSelfPermission1);
-        boolean shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE);
-        Logger.d(TAG, "ActivityCompat.shouldShowRequestPermissionRationale READ_PHONE_STATE:" + shouldShowRequestPermissionRationale);
+        int checkSelfPermission = ContextCompat.checkSelfPermission(this, permissions[0]);
+        Logger.d(TAG, "ContextCompat.checkSelfPermission " + permissions[0] + ":" + checkSelfPermission);
+        int checkSelfPermission1 = PermissionChecker.checkSelfPermission(this, permissions[0]);
+        Logger.d(TAG, "PermissionChecker.checkSelfPermission " + permissions[0] + ":" + checkSelfPermission1);
+        boolean shouldShowRequestPermissionRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0]);
+        Logger.d(TAG, "ActivityCompat.shouldShowRequestPermissionRationale " + permissions[0] + ":" + shouldShowRequestPermissionRationale);
 
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission1 != PermissionChecker.PERMISSION_GRANTED) {
