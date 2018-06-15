@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startSplashActivity();
+//        startSplashActivity();
         setContentView(R.layout.two_text);
         TextView tv = (TextView) findViewById(R.id.tv);
         TextView tv1 = (TextView) findViewById(R.id.tv1);
