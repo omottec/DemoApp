@@ -14,7 +14,7 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.activity.DemoActivity;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.launch.SplashActivity;
+import com.omottec.demoapp.launch.RetailSplashActivity;
 import com.omottec.demoapp.memory.LeakActivity;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void startSplashActivity() {
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, RetailSplashActivity.class);
         startActivity(intent);
     }
 

@@ -166,7 +166,7 @@
 
         </activity>
 
-        <activity android:name=".launch.SplashActivity"
+        <activity android:name=".launch.RetailSplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
             <intent-filter>

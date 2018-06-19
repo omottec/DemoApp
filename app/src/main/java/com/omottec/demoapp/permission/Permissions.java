@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AlertDialog;
@@ -27,6 +28,7 @@ public final class Permissions {
 
     public static boolean permissionGranted(Context context, String... permissions) {
         Logger.d(Tag.PERMISSION, "permissionGranted permissions:" + Arrays.toString(permissions));
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) return true;
         for (String perm : permissions) {
             try {
                 int selfPermission = PermissionChecker.checkSelfPermission(context, perm);

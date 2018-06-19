@@ -1,17 +1,14 @@
 package com.omottec.demoapp.launch;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.telecom.TelecomManager;
-import android.view.View;
 
 import com.facebook.common.executors.UiThreadImmediateExecutorService;
 import com.facebook.datasource.BaseDataSubscriber;
@@ -23,7 +20,6 @@ import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.activity.BaseActivity;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.permission.Permissions;
 import com.omottec.demoapp.task.MainActivity;
@@ -36,9 +32,10 @@ import java.util.concurrent.TimeUnit;
  * Created by qinbingbing on 17/03/2017.
  */
 
-public class SplashActivity extends AppCompatActivity {
-    public static final String TAG = "SplashActivity";
+public class RetailSplashActivity extends AppCompatActivity {
+    public static final String TAG = "RetailSplashActivity";
     private static final String IMG_URI = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496933431724&di=81c5c1a4aad63cd1c9ac8e7777c49e11&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2012%2F326%2FXP07382U1K18.jpg";
+    public static final String KEY_LOCATION_PERM_REQUESTED = "key_location_perm_requested";
     private static final String[] PERMISSIONS_ON_LAUNCH = new String[] {Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     public static final int REQUEST_CODE_PERMISSIONS_ON_LAUNCH = 1;
     public static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 2;
@@ -50,7 +47,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_splash);
         mSplashSdv = (SimpleDraweeView) findViewById(R.id.sdv_splash);
-//        mSplashSdv.setActualImageResource(R.drawable.launch_bg);
         Logger.d(TAG, "onCreate");
         if (mJump2Main) {
             finishDisplay();
@@ -62,15 +58,20 @@ public class SplashActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, PERMISSIONS_ON_LAUNCH, REQUEST_CODE_PERMISSIONS_ON_LAUNCH);
                 return;
             }
-            boolean locationPermGranted = Permissions.permissionGranted(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-            if (locationPermGranted) {
-                handleDisplay();
-                // get location
-            } else {
-                Logger.d(TAG, "ActivityCompat.requestPermissions requestCode:" + REQUEST_CODE_ACCESS_COARSE_LOCATION);
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ACCESS_COARSE_LOCATION);
-            }
-//            handleDisplay();
+            handleLocationPerm();
+        }
+    }
+
+    private void handleLocationPerm() {
+        Logger.d(TAG, "handleLocationPerm");
+        boolean locationPermGranted = Permissions.permissionGranted(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        if (locationPermGranted) {
+            handleDisplay();
+            // get location
+        } else {
+
+            Logger.d(TAG, "ActivityCompat.requestPermissions requestCode:" + REQUEST_CODE_ACCESS_COARSE_LOCATION);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ACCESS_COARSE_LOCATION);
         }
     }
 
@@ -172,18 +173,11 @@ public class SplashActivity extends AppCompatActivity {
                             false,
                             (dialog, which) -> { finish(); },
                             (dialog, which) -> {
-                                Permissions.startPermissionSetting(SplashActivity.this);
+                                Permissions.startPermissionSetting(RetailSplashActivity.this);
                                 finish();
                             });
                 } else {
-                    boolean locationPermGranted = Permissions.permissionGranted(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-                    if (locationPermGranted) {
-                        handleDisplay();
-                        // get location
-                    } else {
-                        Logger.d(TAG, "ActivityCompat.requestPermissions requestCode:" + REQUEST_CODE_ACCESS_COARSE_LOCATION);
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ACCESS_COARSE_LOCATION);
-                    }
+                    handleLocationPerm();
                 }
                 break;
             case REQUEST_CODE_ACCESS_COARSE_LOCATION:
