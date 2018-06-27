@@ -45,7 +45,8 @@ public final class MemoryUtils {
                 .append("\nRuntime.getRuntime().maxMemory(): ").append(maxMemory)
                 .append("\nRuntime.getRuntime().totalMemory(): ").append(totalMemory)
                 .append("\nRuntime.getRuntime().freeMemory(): ").append(freeMemory)
-                .append("\nDebug.MemoryInfo.getMemoryStats: ").append(debugMemInfo);
+                .append("\nDebug.MemoryInfo.getMemoryStats: ").append(debugMemInfo)
+                .append("\nDebug.getPss: ").append(Debug.getPss());
         return sb.toString();
     }
 

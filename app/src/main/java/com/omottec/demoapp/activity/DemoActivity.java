@@ -7,6 +7,7 @@ import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.image.TestIconDrawableFragment;
 import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.memory.MemoryFragment;
+import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.storage.StorageFragment;
@@ -39,6 +40,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryFragment();
 //        return new StorageFragment();
 //        return new GetImeiFragment();
-        return new CardViewFragment();
+//        return new CardViewFragment();
+//        return new MemoryFragment();
+        return new MemoryInfoFragment();
     }
 }
