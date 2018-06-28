@@ -1,5 +1,6 @@
 package com.omottec.demoapp.permission;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,10 +35,28 @@ public class NotificationFragment extends Fragment {
         tv.setText("NotificationFragment");
         tv.setOnClickListener(v -> {
             Logger.d(TAG, "onClick showNotification");
-            NotificationHandler.INSTANCE.showNotification(mId++,
-                    "title" + (mTitleId++),
-                    "body" + (mBodyId++),
-                    null);
+            boolean notificationEnabled = Permissions.isNotificationEnabled();
+            Logger.d(TAG, "notificationEnabled:" + notificationEnabled);
+            if (notificationEnabled) {
+                NotificationHandler.INSTANCE.showNotification(mId++,
+                        "title" + (mTitleId++),
+                        "body" + (mBodyId++),
+                        null);
+            } else {
+                Permissions.showPermissionSettingDialog(getActivity(), "权限申请", "请允许通知", true,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        },
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Permissions.startPermissionSetting(getActivity());
+                            }
+                });
+            }
         });
     }
 }
