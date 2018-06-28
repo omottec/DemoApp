@@ -10,6 +10,7 @@ import com.omottec.demoapp.memory.MemoryFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
+import com.omottec.demoapp.permission.NotificationFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.v7.CardViewFragment;
@@ -42,6 +43,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
 //        return new MemoryFragment();
-        return new MemoryInfoFragment();
+//        return new MemoryInfoFragment();
+        return new NotificationFragment();
     }
 }
