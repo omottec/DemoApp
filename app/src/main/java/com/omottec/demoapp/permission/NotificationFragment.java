@@ -44,18 +44,10 @@ public class NotificationFragment extends Fragment {
                         null);
             } else {
                 Permissions.showPermissionSettingDialog(getActivity(), "权限申请", "请允许通知", true,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                        (dialog, which) -> {
 
-                            }
                         },
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Permissions.startPermissionSetting(getActivity());
-                            }
-                });
+                        (dialog, which) -> Permissions.startPermissionSetting(getActivity()));
             }
         });
     }
