@@ -14,6 +14,7 @@ import com.omottec.demoapp.permission.NotificationFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.v7.CardViewFragment;
+import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
 
 /**
  * Created by qinbingbing on 3/31/16.
@@ -38,12 +39,12 @@ public class DemoActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
 //        return new ScaleTypeFragment();
-//        return new MemoryFragment();
 //        return new StorageFragment();
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
-        return new NotificationFragment();
+//        return new NotificationFragment();
+        return new PtrPicRecyclerFragment();
     }
 }
