@@ -4,12 +4,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.push.NotificationHandler;
 import com.omottec.demoapp.utils.Logger;
 
@@ -36,8 +38,10 @@ public class NotificationFragment extends Fragment {
         tv.setOnClickListener(v -> {
             Logger.d(TAG, "onClick showNotification");
             boolean notificationEnabled = Permissions.isNotificationEnabled();
-            Logger.d(TAG, "notificationEnabled:" + notificationEnabled);
-            if (notificationEnabled) {
+            Logger.d(TAG, "Permissions.isNotificationEnabled:" + notificationEnabled);
+            boolean enabled = NotificationManagerCompat.from(MyApplication.getContext()).areNotificationsEnabled();
+            Logger.d(TAG, "NotificationManagerCompat.areNotificationsEnabled:" + enabled);
+            if (enabled) {
                 NotificationHandler.INSTANCE.showNotification(mId++,
                         "title" + (mTitleId++),
                         "body" + (mBodyId++),
