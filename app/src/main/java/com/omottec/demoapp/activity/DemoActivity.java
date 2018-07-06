@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.fragment.ScaleTypeFragment;
+import com.omottec.demoapp.fresco.FrescoFragment;
 import com.omottec.demoapp.image.TestIconDrawableFragment;
 import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.memory.MemoryFragment;
@@ -46,7 +47,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
 //        return new NotificationFragment();
-//        return new PtrPicRecyclerFragment();
-        return new PositionFragment();
+        return new PtrPicRecyclerFragment();
+//        return new PositionFragment();
+//        return new FrescoFragment();
     }
 }

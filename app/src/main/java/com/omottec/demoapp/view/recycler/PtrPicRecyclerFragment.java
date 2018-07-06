@@ -39,7 +39,7 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
     private PtrRecyclerAdapter mPtrAdapter;
     private PicRecyclerAdapter mPicAdapter;
     private volatile int mOffset;
-    private int mTotal = 1;
+    private int mTotal = 30 * 30;
     private long mFirstLoadTime = SystemClock.elapsedRealtime();
 
     @Override
@@ -76,7 +76,7 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
 
     private void loadData() {
         List<PicRecyclerAdapter.PicItem> data = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < PAGE_SIZE; i++) {
             /*String url = "http://lorempixel.com/400/";
             url += (370 + new Random().nextInt(30));*/
             Logger.d(TAG, "loadData mOffset:" + mOffset);

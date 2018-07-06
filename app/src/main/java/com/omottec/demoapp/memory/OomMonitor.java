@@ -14,7 +14,9 @@ public final class OomMonitor {
     public static final String TAG = OomMonitor.class.getSimpleName();
     private static OomObserver sObserver;
     private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    private static final long PERIOD_SECONDS = 3 * 60;
+    private static final long PERIOD_SECONDS = 1;
+    public static final int KB = 1024;
+    public static final int MB = 1024 * KB;
 
     private OomMonitor() {}
 
@@ -28,9 +30,9 @@ public final class OomMonitor {
 
             @Override
             public void run() {
-                long maxMemory = Runtime.getRuntime().maxMemory();
-                long totalMemory = Runtime.getRuntime().totalMemory();
-                long freeMemory = Runtime.getRuntime().freeMemory();
+                long maxMemory = Runtime.getRuntime().maxMemory() / MB;
+                long totalMemory = Runtime.getRuntime().totalMemory() / MB;
+                long freeMemory = Runtime.getRuntime().freeMemory() / MB;
                 float memoryUsage = (totalMemory - freeMemory) * 1.0f / maxMemory;
                 StringBuilder memoryInfo = new StringBuilder("maxMemory:").append(maxMemory)
                         .append(", totalMemory:").append(totalMemory)
