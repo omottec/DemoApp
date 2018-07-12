@@ -4,21 +4,30 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
+import com.omottec.demoapp.immersive.ImmersiveActivity;
+import com.omottec.demoapp.immersive.ImmersiveLifecycleCallbacks;
 import com.omottec.demoapp.memory.MemoryUtils;
 import com.omottec.demoapp.memory.OomMonitor;
 import com.omottec.demoapp.memory.OomObserver;
 import com.omottec.demoapp.utils.AppUtils;
 import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.TimeLogger;
+import com.omottec.demoapp.utils.UiUtils;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
@@ -71,6 +80,7 @@ public class MyApplication extends Application {
         LeakCanary.install(this);
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
         registerAppStatusListener();
+        initImmersive();
 //        registerComponentCallbacks(this);
         OomMonitor.initialize(new OomObserver() {
             @Override
@@ -78,6 +88,10 @@ public class MyApplication extends Application {
             }
         }, 3000);
         TimeLogger.methodEnd();
+    }
+
+    private void initImmersive() {
+//        registerActivityLifecycleCallbacks(new ImmersiveLifecycleCallbacks());
     }
 
     private void registerAppStatusListener() {
