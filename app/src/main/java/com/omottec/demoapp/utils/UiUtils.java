@@ -129,15 +129,20 @@ public final class UiUtils {
      * @return
      */
     public static int getStatusBarHeight(Context context) {
-        if (context == null) {
-            return 0;
-        }
-        int result = 0;
+        if (context == null) return 0;
+        int statusBarHeight = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
+            try {
+                statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+            } catch (Exception e) {
+                Logger.i("", "", e);
+            }
         }
-        return result;
+        if (statusBarHeight == 0) {
+            Activity activity = Activities.getActivity(context);
+        }
+        return statusBarHeight;
 //        return context.getResources().getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
     }
 
