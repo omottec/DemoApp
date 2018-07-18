@@ -1,19 +1,18 @@
 package com.omottec.demoapp.view;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Scroller;
-import android.widget.TextView;
 
 import com.omottec.demoapp.Tag;
 
 /**
  * Created by qinbingbing on 8/25/16.
  */
-public class ScrollerMoveTextView extends TextView {
+public class ScrollerMoveTextView extends AppCompatTextView {
     Scroller mScroller;
 
     public ScrollerMoveTextView(Context context) {

@@ -1,10 +1,10 @@
 package com.omottec.demoapp.view;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Scroller;
 
 import com.omottec.demoapp.Tag;
@@ -12,7 +12,7 @@ import com.omottec.demoapp.Tag;
 /**
  * Created by qinbingbing on 8/25/16.
  */
-public class ScrollerMoveImageView extends ImageView {
+public class ScrollerMoveImageView extends AppCompatImageView {
     Scroller mScroller;
 
     public ScrollerMoveImageView(Context context) {

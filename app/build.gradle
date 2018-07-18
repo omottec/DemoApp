@@ -38,8 +38,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
     }
 
+    android.applicationVariants.all {variant ->
+        variant.outputs.each { output ->
+            def lintTask = tasks["lint${variant.name.capitalize()}"]
+            System.out.println("output:" + output + ", variant:" + variant)
+            output.assemble.dependsOn lintTask
+        }
+    }
+
     lintOptions {
-        abortOnError false
+        abortOnError true
     }
 }
 

@@ -17,6 +17,7 @@ android {
     }
 
     lintOptions {
+        quiet false
         abortOnError false
     }
     buildToolsVersion '26.0.2'
