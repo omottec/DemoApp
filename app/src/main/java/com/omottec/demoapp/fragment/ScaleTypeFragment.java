@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.omottec.demoapp.R;
@@ -46,10 +47,10 @@ public class ScaleTypeFragment extends Fragment {
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(getResources(), R.drawable.userguide_product_icon_fast, options);
         Log.d(Tag.SCALE_TYPE, "xhdpi " + options.outWidth + ":" + options.outHeight);*/
-        Log.d(Tag.SCALE_TYPE, "view:" + mIv.getLayoutParams().width + "*" + mIv.getLayoutParams().height);
+        Log.d(Tag.SCALE_TYPE, "view:" + mIv.getWidth() + "*" + mIv.getHeight());
         Bitmap bitmap = ((BitmapDrawable) mIv.getDrawable()).getBitmap();
         Log.d(Tag.SCALE_TYPE, "bitmap:" + bitmap.getWidth() + "*" + bitmap.getHeight());
-        MyApplication.getUiHandler().postDelayed(new Runnable() {
+        /*MyApplication.getUiHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 mIv.setDrawingCacheEnabled(true);
@@ -57,7 +58,14 @@ public class ScaleTypeFragment extends Fragment {
                 mIv.setDrawingCacheEnabled(false);
                 Log.d(Tag.SCALE_TYPE, "drawingCache:" + drawingCache.getWidth() + "*" + drawingCache.getHeight());
             }
-        }, 3000);
+        }, 3000);*/
+        mIv.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Log.d(Tag.SCALE_TYPE, "view:" + mIv.getWidth() + "*" + mIv.getHeight());
+            mIv.setDrawingCacheEnabled(true);
+            Bitmap drawingCache = mIv.getDrawingCache();
+            mIv.setDrawingCacheEnabled(false);
+            Log.d(Tag.SCALE_TYPE, "drawingCache:" + drawingCache.getWidth() + "*" + drawingCache.getHeight());
+        });
         Logger.d(Tag.SCALE_TYPE, MemoryUtils.getMemoryInfo());
     }
 }

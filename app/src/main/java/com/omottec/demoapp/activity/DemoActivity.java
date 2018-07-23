@@ -41,7 +41,7 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-//        return new ScaleTypeFragment();
+        return new ScaleTypeFragment();
 //        return new StorageFragment();
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
@@ -51,6 +51,6 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
 //        return new FrescoFragment();
-        return new WeightFragment();
+//        return new WeightFragment();
     }
 }
