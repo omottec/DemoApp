@@ -2,9 +2,12 @@ package com.omottec.demoapp.net;
 
 import android.support.v4.util.LruCache;
 
+import com.omottec.demoapp.app.MyApplication;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -15,6 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public final class Api {
+    private GsonConverterFactory mGsonConverterFactory;
+    private RxJavaCallAdapterFactory mRxJavaCallAdapterFactory;
+    private OkHttpClient mOkHttpClient;
     private Retrofit mAliyunRetrofit;
     private Retrofit mMockRetrofit;
 
@@ -30,18 +36,24 @@ public final class Api {
     }
 
     private Api() {
+        mGsonConverterFactory = GsonConverterFactory.create();
+        mRxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
+        mOkHttpClient = new OkHttpClient.Builder()
+                .cache(new Cache(MyApplication.getContext().getExternalCacheDir(), 20 * 1024 * 1024))
+                .build();
+
         mAliyunRetrofit = new Retrofit.Builder()
                 .baseUrl("http://gc.ditu.aliyun.com/")
-                .client(new OkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(mOkHttpClient)
+                .addConverterFactory(mGsonConverterFactory)
+                .addCallAdapterFactory(mRxJavaCallAdapterFactory)
                 .build();
 
         mMockRetrofit = new Retrofit.Builder()
                 .baseUrl("https://www.mocky.io/")
-                .client(new OkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(mOkHttpClient)
+                .addConverterFactory(mGsonConverterFactory)
+                .addCallAdapterFactory(mRxJavaCallAdapterFactory)
                 .build();
 
         mApiRetrofitMap.put(GeoCoding.class, mAliyunRetrofit);
