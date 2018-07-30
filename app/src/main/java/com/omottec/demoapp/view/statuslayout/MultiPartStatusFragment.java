@@ -1,22 +1,19 @@
 package com.omottec.demoapp.view.statuslayout;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.fragment.BaseFragment;
 import com.omottec.demoapp.net.Api;
-import com.omottec.demoapp.net.IGeoCoding;
+import com.omottec.demoapp.net.GeoCoding;
+import com.omottec.demoapp.net.MockService;
 import com.omottec.demoapp.utils.Logger;
 import com.trello.rxlifecycle.FragmentEvent;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -96,11 +93,11 @@ public class MultiPartStatusFragment extends BaseFragment {
     private void accessNetForBlueSl() {
         mBlueSl.showLoading();
         Api.getInstance()
-                .get(IGeoCoding.class)
-                .getGeoCoding("上海")
+                .get(MockService.class)
+                .getMockData()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<GeoCoding>() {
+                .subscribe(new Subscriber<MockData>() {
                     @Override
                     public void onCompleted() {
                         Logger.d(TAG, "onCompleted blue");
@@ -113,12 +110,11 @@ public class MultiPartStatusFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(GeoCoding geoCoding) {
-                        Logger.d(TAG, "onNext blue:" + geoCoding);
-                        mBlueTv.setText("lat:" + geoCoding.lat
-                                + ", lon:" + geoCoding.lon);
+                    public void onNext(MockData mockData) {
+                        Logger.d(TAG, "onNext blue:" + mockData);
+                        mBlueTv.setText("onNext blue " + mockData);
                         mBlueSl.showContent();
-                        throw new IllegalStateException();
+//                        throw new IllegalStateException();
                     }
                 });
     }
@@ -126,13 +122,13 @@ public class MultiPartStatusFragment extends BaseFragment {
     private void accessNetForRedSl() {
         mRedSl.showLoading();
         Api.getInstance()
-                .get(IGeoCoding.class)
-                .getGeoCoding("北京")
+                .get(MockService.class)
+                .getMockData()
                 .delay(2000, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .compose(this.<GeoCoding>bindUntilEvent(FragmentEvent.DESTROY))
-                .subscribe(new Subscriber<GeoCoding>() {
+                .compose(this.<MockData>bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribe(new Subscriber<MockData>() {
                     @Override
                     public void onCompleted() {
                         Logger.d(TAG, "onCompleted red");
@@ -145,10 +141,9 @@ public class MultiPartStatusFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(GeoCoding geoCoding) {
-                        Logger.d(TAG, "onNext red:" + geoCoding);
-                        mRedTv.setText("lat:" + geoCoding.lat
-                                + ", lon:" + geoCoding.lon);
+                    public void onNext(MockData mockData) {
+                        Logger.d(TAG, "onNext red:" + mockData);
+                        mRedTv.setText("onNext red " + mockData);
                         mRedSl.showContent();
                     }
                 });
