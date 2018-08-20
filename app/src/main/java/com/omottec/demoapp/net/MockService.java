@@ -10,6 +10,6 @@ import rx.Observable;
  */
 
 public interface MockService {
-    @GET("v2/5185415ba171ea3a00704eed")
+    @GET("v2/5b5ecd102e0000020a69466d")
     Observable<MockData> getMockData();
 }

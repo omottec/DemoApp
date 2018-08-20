@@ -48,12 +48,12 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
 //        return new MemoryFragment();
-//        return new MemoryInfoFragment();
+        return new MemoryInfoFragment();
 //        return new NotificationFragment();
 //        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();
-        return new MultiPartStatusFragment();
+//        return new MultiPartStatusFragment();
     }
 }
