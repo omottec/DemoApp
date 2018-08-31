@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.fragment.ScaleTypeFragment;
+import com.omottec.demoapp.fragment.ScreenSizeFragment;
 import com.omottec.demoapp.fragment.WeightFragment;
 import com.omottec.demoapp.fresco.FrescoFragment;
 import com.omottec.demoapp.image.TestIconDrawableFragment;
@@ -56,6 +57,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new FrescoFragment();
 //        return new WeightFragment();
 //        return new MultiPartStatusFragment();
-        return new RouterFragment();
+//        return new RouterFragment();
+        return new ScreenSizeFragment();
     }
 }
