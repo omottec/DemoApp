@@ -15,6 +15,7 @@ import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.permission.NotificationFragment;
+import com.omottec.demoapp.reuse.ReuseFragment;
 import com.omottec.demoapp.router.RouterFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
@@ -58,6 +59,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new WeightFragment();
 //        return new MultiPartStatusFragment();
 //        return new RouterFragment();
-        return new ScreenSizeFragment();
+//        return new ScreenSizeFragment();
+        return new ReuseFragment();
     }
 }

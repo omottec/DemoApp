@@ -51,4 +51,6 @@ public final class Tag {
     public static final String PERMISSION = "permission";
 
     public static final String IMMERSIVE = "omottec_immersive";
+
+    public static final String REUSE = "reuse";
 }
