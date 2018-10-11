@@ -2,7 +2,9 @@ package com.omottec.demoapp.task;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -121,12 +123,23 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                startTabPagerActivity();
 //                startDemoActivity();
 //                startLeakActivity();
-                startMultiActivities();
+//                startMultiActivities();
+                finishAppAndOpenBrowser();
                 break;
             case R.id.tv1:
                 startSelf();
                 break;
         }
+    }
+
+    private void finishAppAndOpenBrowser() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse("https://www.meituan.com");
+        intent.setData(uri);
+        if (intent.resolveActivity(getPackageManager()) == null) return;
+        startActivity(intent);
+        Process.killProcess(Process.myPid());
     }
 
     private void startMultiActivities() {
