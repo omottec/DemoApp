@@ -15,6 +15,8 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.activity.DemoActivity;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.launch.RetailSplashActivity;
+import com.omottec.demoapp.lifecycle.LifeCycleActivity1;
+import com.omottec.demoapp.lifecycle.LifeCycleActivity2;
 import com.omottec.demoapp.memory.LeakActivity;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
@@ -115,15 +117,23 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.tv:
 //                startExternalActivity();
-                startWelcomeActivity();
+//                startWelcomeActivity();
 //                startTabPagerActivity();
 //                startDemoActivity();
 //                startLeakActivity();
+                startMultiActivities();
                 break;
             case R.id.tv1:
                 startSelf();
                 break;
         }
+    }
+
+    private void startMultiActivities() {
+        Intent intent1 = new Intent(this, LifeCycleActivity1.class);
+        Intent intent2 = new Intent(this, LifeCycleActivity2.class);
+        Intent[] intents = new Intent[]{ intent1, intent2 };
+        startActivities(intents);
     }
 
     private void startExternalActivity() {
