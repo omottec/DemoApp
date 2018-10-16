@@ -9,6 +9,10 @@ import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ import com.omottec.demoapp.launch.RetailSplashActivity;
 import com.omottec.demoapp.lifecycle.LifeCycleActivity1;
 import com.omottec.demoapp.lifecycle.LifeCycleActivity2;
 import com.omottec.demoapp.memory.LeakActivity;
+import com.omottec.demoapp.utils.UiUtils;
 import com.omottec.demoapp.view.frame.TabPagerActivity;
 
 /**
@@ -29,6 +34,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private static int count;
     private static final int ID = count++;
     private long mLastBackPressTime;
+    private View mContentView;
+    private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,12 +131,51 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 //                startDemoActivity();
 //                startLeakActivity();
 //                startMultiActivities();
-                finishAppAndOpenBrowser();
+//                finishAppAndOpenBrowser();
+                addWebView();
                 break;
             case R.id.tv1:
-                startSelf();
+//                startSelf();
+                removeWebView();
                 break;
         }
+    }
+
+    private void addWebView() {
+        if (mContentView == null)
+            mContentView = getWindow().getDecorView().findViewById(android.R.id.content);
+        if (mContentView instanceof FrameLayout) {
+            FrameLayout fl = (FrameLayout) mContentView;
+            if (mWebView == null)
+                mWebView = new WebView(this);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(UiUtils.getScreenSize(this, true) / 2,
+                    UiUtils.getScreenSize(this, false) / 2);
+            fl.addView(mWebView, lp);
+            mWebView.setBackgroundColor(Color.TRANSPARENT);
+            mWebView.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                    return true;
+                }
+            });
+//            mWebView.loadUrl("https://www.meituan.com");
+//            mWebView.loadUrl("https://www.baidu.com");
+            mWebView.loadUrl("file:///android_asset/wx.html");
+
+            /*TextView tv = new TextView(this);
+            tv.setText("float text");
+            tv.setBackgroundColor(Color.BLUE);
+            fl.addView(tv);*/
+        }
+    }
+
+    private void removeWebView() {
+        if (mContentView instanceof FrameLayout
+                && mWebView != null) {
+            FrameLayout fl = (FrameLayout) mContentView;
+            fl.removeView(mWebView);
+        }
+
     }
 
     private void finishAppAndOpenBrowser() {
