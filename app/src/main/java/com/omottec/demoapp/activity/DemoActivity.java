@@ -17,6 +17,7 @@ import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.permission.NotificationFragment;
 import com.omottec.demoapp.reuse.ReuseFragment;
 import com.omottec.demoapp.router.RouterFragment;
+import com.omottec.demoapp.spi.SpiFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.v7.CardViewFragment;
@@ -60,6 +61,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MultiPartStatusFragment();
 //        return new RouterFragment();
 //        return new ScreenSizeFragment();
-        return new ReuseFragment();
+//        return new ReuseFragment();
+        return new SpiFragment();
     }
 }
