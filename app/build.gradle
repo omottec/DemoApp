@@ -56,6 +56,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':PullToRefresh')
     compile project(':service')
+    compile project(':account')
     compile "com.android.support:design:$supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile "com.android.support:cardview-v7:$supportLibraryVersion"

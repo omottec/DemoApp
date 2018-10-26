@@ -28,12 +28,38 @@ public class MyAccountManager implements AccountManager {
     public void login() {
         Log.i(TAG, "login");
         mIsLogin = true;
+        dispatchLogin();
+    }
+
+    private void dispatchLogin() {
+        Log.i(TAG, "dispatchLogin");
+        synchronized (mListeners) {
+            for (AccountListener listener : mListeners)
+                try {
+                    listener.onLogin(getAccount());
+                } catch (Throwable t) {
+                    Log.e(TAG, listener + " throw exception onLogin", t);
+                }
+        }
     }
 
     @Override
     public void logout() {
         Log.i(TAG, "logout");
         mIsLogin = false;
+        dispatchLogout();
+    }
+
+    private void dispatchLogout() {
+        Log.i(TAG, "dispatchLogout");
+        synchronized (mListeners) {
+            for (AccountListener listener : mListeners)
+                try {
+                    listener.onLogout();
+                } catch (Throwable t) {
+                    Log.e(TAG, listener + " throw exception onLogout", t);
+                }
+        }
     }
 
     @Override
