@@ -22,4 +22,16 @@ public final class Views {
         }
         return null;
     }
+
+    public static String getVisibility(View view) {
+        if (view.getVisibility() == View.VISIBLE) {
+            return "View.VISIBLE";
+        } else if (view.getVisibility() == View.INVISIBLE) {
+            return "View.INVISIBLE";
+        } else if (view.getVisibility() == View.GONE) {
+            return "View.GONE";
+        } else {
+            return "Unknown";
+        }
+    }
 }

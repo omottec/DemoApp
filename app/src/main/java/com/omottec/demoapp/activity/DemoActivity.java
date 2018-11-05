@@ -22,6 +22,7 @@ import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.v7.CardViewFragment;
 import com.omottec.demoapp.view.coordinate.PositionFragment;
+import com.omottec.demoapp.view.log.LogFragment;
 import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
 import com.omottec.demoapp.view.statuslayout.MultiPartStatusFragment;
 
@@ -62,6 +63,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RouterFragment();
 //        return new ScreenSizeFragment();
 //        return new ReuseFragment();
-        return new SpiFragment();
+//        return new SpiFragment();
+        return new LogFragment();
     }
 }
