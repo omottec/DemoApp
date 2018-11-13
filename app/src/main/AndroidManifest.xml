@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.omottec.demoapp"
-    android:sharedUserId="android.uid.system">
+    package="com.omottec.demoapp">
+    <!--android:sharedUserId="android.uid.system">-->
 
     <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE"/>
     <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
@@ -27,6 +27,7 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.SET_PREFERRED_APPLICATIONS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_CONTENT_PROVIDERS_EXTERNALLY"/>
 
 
     <application
@@ -287,6 +288,17 @@
             android:screenOrientation="portrait"/>
 
         <service android:name=".service.AppService"/>
+
+        <service android:name=".root.MyAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility"/>
+        </service>
     </application>
 
 </manifest>

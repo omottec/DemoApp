@@ -1,24 +1,33 @@
 package com.omottec.demoapp.root;
 
+import android.accessibilityservice.AccessibilityService;
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.io.IoUtils;
 import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.RootToolsException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +48,8 @@ public class RootFragment extends Fragment implements View.OnClickListener {
     private TextView mUninstallTv;
     private TextView mStartLauncherTv;
     private TextView mSetLauncherTv;
+    private TextView mSetAccessibility;
+
     private ExecutorService mExecutor = Executors.newCachedThreadPool();
 
     @Nullable
@@ -55,12 +66,14 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         mUninstallTv = view.findViewById(R.id.tv_uninstall);
         mStartLauncherTv = view.findViewById(R.id.tv_start_launcher);
         mSetLauncherTv = view.findViewById(R.id.tv_set_launcher);
+        mSetAccessibility = view.findViewById(R.id.tv_set_accessibility);
 
         mRootTv.setOnClickListener(this);
         mInstallTv.setOnClickListener(this);
         mUninstallTv.setOnClickListener(this);
         mStartLauncherTv.setOnClickListener(this);
         mSetLauncherTv.setOnClickListener(this);
+        mSetAccessibility.setOnClickListener(this);
     }
 
     @Override
@@ -80,6 +93,9 @@ public class RootFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_set_launcher:
                 onClickSetLauncher();
+                break;
+            case R.id.tv_set_accessibility:
+                onClickSetAccessibility();
                 break;
         }
     }
@@ -128,6 +144,95 @@ public class RootFragment extends Fragment implements View.OnClickListener {
 
         }
     }
+
+    private void onClickSetAccessibility() {
+        Log.d(TAG, "onClickSetAccessibility");
+
+        /*Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);*/
+
+        int accessibilityEnabled = 0;
+        final String service = getContext().getPackageName() + "/" + MyAccessibilityService.class.getCanonicalName();  //这里改成自己的class
+        try {
+            accessibilityEnabled = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_ENABLED);
+        } catch (Settings.SettingNotFoundException ignored) {
+            Log.e(TAG, "Settings.Secure.getInt", ignored);
+        }
+        Log.d(TAG, "accessibilityEnabled:" + accessibilityEnabled);
+        boolean myAccessibilityServiceEnable = false;
+        TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
+        if (accessibilityEnabled == 1) {
+            String settingValue = Settings.Secure.getString(getContext().getContentResolver(),
+                    Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+            if (settingValue != null) {
+                mStringColonSplitter.setString(settingValue);
+                while (mStringColonSplitter.hasNext()) {
+                    String accessibilityService = mStringColonSplitter.next();
+                    Log.d(TAG, "accessibilityService:" + accessibilityService);
+                    if (service.equals(accessibilityService)) {
+                        myAccessibilityServiceEnable = true;
+                    }
+                }
+            }
+        }
+
+        if (!myAccessibilityServiceEnable) {
+            try {
+                RootTools.debugMode = true;
+                /*List<String> stringList = RootTools.sendShell(
+                        new String[]{"settings put secure enabled_accessibility_services com.omottec.demoapp/com.omottec.demoapp.root.MyAccessibilityService"},
+                        0,
+                        null,
+                        false,
+                        10 * 60 * 1000);*/
+                List<String> stringList = RootTools.sendShell("settings put secure enabled_accessibility_services com.omottec.demoapp/com.omottec.demoapp.root.MyAccessibilityService", 10*60*1000);
+                Log.d(TAG, Arrays.toString(stringList.toArray()));
+                List<String> stringList1 = RootTools.sendShell("settings put secure accessibility_enabled 1", 10*60*1000);
+                Log.d(TAG, Arrays.toString(stringList1.toArray()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (RootToolsException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+
+            /*String cmd = "settings put secure enabled_accessibility_services com.omottec.demoapp/com.omottec.demoapp.root.MyAccessibilityService";
+            String cmd1 = "settings put secure accessibility_enabled 1";
+            execShell(cmd);
+            execShell(cmd1);*/
+        }
+    }
+
+    private void execShell(String cmd) {
+        mExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d(TAG, "start exec " + cmd);
+                    Process p = Runtime.getRuntime().exec(cmd);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    String readLine = br.readLine();
+                    while(readLine != null){
+                        Log.d(TAG, readLine);
+                        readLine = br.readLine();
+                    }
+                    if( br != null) {
+                        IoUtils.close(br);
+                    }
+                    p.destroy();
+                    p = null;
+                    Log.d(TAG, "executed " + cmd);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
     private boolean isRetailLauncherDefault() {
         Log.d(TAG, "isRetailLauncherDefault");
