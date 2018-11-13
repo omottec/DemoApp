@@ -37,7 +37,8 @@ public class RootFragment extends Fragment implements View.OnClickListener {
     private TextView mRootTv;
     private TextView mInstallTv;
     private TextView mUninstallTv;
-    private TextView mLauncherTv;
+    private TextView mStartLauncherTv;
+    private TextView mSetLauncherTv;
     private ExecutorService mExecutor = Executors.newCachedThreadPool();
 
     @Nullable
@@ -52,12 +53,14 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         mRootTv = view.findViewById(R.id.tv_root);
         mInstallTv = view.findViewById(R.id.tv_install);
         mUninstallTv = view.findViewById(R.id.tv_uninstall);
-        mLauncherTv = view.findViewById(R.id.tv_launcher);
+        mStartLauncherTv = view.findViewById(R.id.tv_start_launcher);
+        mSetLauncherTv = view.findViewById(R.id.tv_set_launcher);
 
         mRootTv.setOnClickListener(this);
         mInstallTv.setOnClickListener(this);
         mUninstallTv.setOnClickListener(this);
-        mLauncherTv.setOnClickListener(this);
+        mStartLauncherTv.setOnClickListener(this);
+        mSetLauncherTv.setOnClickListener(this);
     }
 
     @Override
@@ -72,10 +75,48 @@ public class RootFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_uninstall:
                 onClickUninstall();
                 break;
-            case R.id.tv_launcher:
-                onClickLauncher();
+            case R.id.tv_start_launcher:
+                onClickStartLauncher();
+                break;
+            case R.id.tv_set_launcher:
+                onClickSetLauncher();
                 break;
         }
+    }
+
+    private void onClickSetLauncher() {
+        Log.d(TAG, "onClickSetLauncher");
+        PackageManager pm = getContext().getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, PackageManager.MATCH_ALL);
+        Log.d(TAG, Arrays.toString(resolveInfos.toArray()));
+        if (resolveInfos == null || resolveInfos.size() <= 1) return;
+
+        List<ComponentName> componentNames = new ArrayList<>();
+        ComponentName defaultComName = null;
+        for (ResolveInfo resolveInfo : resolveInfos) {
+            if (resolveInfo == null || resolveInfo.activityInfo == null) continue;
+            componentNames.add(new ComponentName(resolveInfo.activityInfo.packageName,
+                    resolveInfo.activityInfo.name));
+
+
+        }
+        if (componentNames.size() <= 1) return;
+
+        for (ComponentName componentName : componentNames) {
+            if ("com.meituan.retail.launcher".equals(componentName.getPackageName())) {
+                defaultComName = new ComponentName(componentName.getPackageName(), componentName.getClassName());
+            } else {
+                pm.clearPackagePreferredActivities(componentName.getPackageName());
+            }
+        }
+        IntentFilter filter = new IntentFilter(Intent.ACTION_MAIN);
+        filter.addCategory(Intent.CATEGORY_HOME);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        ComponentName[] components = new ComponentName[componentNames.size()];
+        componentNames.toArray(components);
+        pm.addPreferredActivity(filter, IntentFilter.MATCH_CATEGORY_EMPTY, components, defaultComName);
     }
 
     @Override
@@ -83,8 +124,9 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         boolean isRetailLauncherDefault = isRetailLauncherDefault();
         Log.d(TAG, "onResume isRetailLauncherDefault:" + isRetailLauncherDefault);
-        if (!isRetailLauncherDefault)
-            startRetailLauncher();
+        if (!isRetailLauncherDefault) {
+
+        }
     }
 
     private boolean isRetailLauncherDefault() {
@@ -98,8 +140,8 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         return "com.meituan.retail.launcher".equals(resolveInfo.activityInfo.packageName);
     }
 
-    private void startRetailLauncher() {
-        Log.d(TAG, "startRetailLauncher");
+    private void onClickStartLauncher() {
+        Log.d(TAG, "onClickStartLauncher");
         PackageManager pm = getContext().getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -125,46 +167,6 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         launcherIntent.setClassName(retailInfo.activityInfo.packageName, retailInfo.activityInfo.name);
         launcherIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(launcherIntent);
-    }
-
-    private void setDefaultLauncher() {
-        Log.d(TAG, "setDefaultLauncher");
-        PackageManager pm = getContext().getPackageManager();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, PackageManager.MATCH_ALL);
-        Log.d(TAG, Arrays.toString(resolveInfos.toArray()));
-        if (resolveInfos == null || resolveInfos.size() <= 1) return;
-
-        List<ComponentName> componentNames = new ArrayList<>();
-        ComponentName defaultComName = null;
-        for (ResolveInfo resolveInfo : resolveInfos) {
-            if (resolveInfo == null || resolveInfo.activityInfo == null) continue;
-            componentNames.add(new ComponentName(resolveInfo.activityInfo.packageName,
-                    resolveInfo.activityInfo.name));
-
-
-        }
-        if (componentNames.size() <= 1) return;
-
-        for (ComponentName componentName : componentNames) {
-            if ("com.meituan.retail.launcher".equals(componentName.getPackageName())) {
-                defaultComName = new ComponentName(componentName.getPackageName(), componentName.getClassName());
-            } else {
-//                pm.clearPackagePreferredActivities(componentName.getPackageName());
-            }
-        }
-        IntentFilter filter = new IntentFilter(Intent.ACTION_MAIN);
-        filter.addCategory(Intent.CATEGORY_HOME);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
-        ComponentName[] components = new ComponentName[componentNames.size()];
-        componentNames.toArray(components);
-//        pm.addPreferredActivity(filter, IntentFilter.MATCH_CATEGORY_EMPTY, components, defaultComName);
-    }
-
-    private void onClickLauncher() {
-        Log.d(TAG, "onClickLauncher");
-        startRetailLauncher();
     }
 
     private void onClickRoot() {

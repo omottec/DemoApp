@@ -34,12 +34,22 @@
         android:text="uninstall"/>
 
     <TextView
-        android:id="@+id/tv_launcher"
+        android:id="@+id/tv_start_launcher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@android:color/holo_red_light"
         android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:text="launcher"/>
+        android:text="startLauncher"/>
+
+    <TextView
+        android:id="@+id/tv_set_launcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/holo_red_light"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="setLauncher"/>
 </LinearLayout>

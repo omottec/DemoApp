@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.omottec.demoapp">
+    package="com.omottec.demoapp"
+    android:sharedUserId="android.uid.system">
 
     <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_SERVICE"/>
     <permission android:name="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
@@ -35,8 +36,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:largeHeap="false"
-        android:sharedUserId="android.uid.system">
+        android:largeHeap="false">
         <activity android:name=".task.StandardActivity"
             android:launchMode="standard">
 
