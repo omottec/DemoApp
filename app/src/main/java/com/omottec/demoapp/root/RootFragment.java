@@ -6,8 +6,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -26,8 +28,12 @@ import com.stericson.RootTools.RootTools;
 import com.stericson.RootTools.RootToolsException;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +55,7 @@ public class RootFragment extends Fragment implements View.OnClickListener {
     private TextView mStartLauncherTv;
     private TextView mSetLauncherTv;
     private TextView mSetAccessibility;
+    private TextView mOneKeyReplace;
 
     private ExecutorService mExecutor = Executors.newCachedThreadPool();
 
@@ -67,6 +74,7 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         mStartLauncherTv = view.findViewById(R.id.tv_start_launcher);
         mSetLauncherTv = view.findViewById(R.id.tv_set_launcher);
         mSetAccessibility = view.findViewById(R.id.tv_set_accessibility);
+        mOneKeyReplace = view.findViewById(R.id.tv_one_key_replace);
 
         mRootTv.setOnClickListener(this);
         mInstallTv.setOnClickListener(this);
@@ -74,6 +82,7 @@ public class RootFragment extends Fragment implements View.OnClickListener {
         mStartLauncherTv.setOnClickListener(this);
         mSetLauncherTv.setOnClickListener(this);
         mSetAccessibility.setOnClickListener(this);
+        mOneKeyReplace.setOnClickListener(this);
     }
 
     @Override
@@ -97,7 +106,92 @@ public class RootFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_set_accessibility:
                 onClickSetAccessibility();
                 break;
+            case R.id.tv_one_key_replace:
+                onClickOneKeyReplace();
+                break;
         }
+    }
+
+    private void onClickOneKeyReplace() {
+        Log.d(TAG, "onClickOneKeyReplace");
+        String replaceAppName = "replace-launcher-release.mp3";
+        String launcherAppName = "app-launcher-release-signed-101.mp3";
+        mExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                boolean launcherAppInstalled = installApp(copyFromAssetsToFile(launcherAppName));
+                Log.d(TAG, "launcherAppInstalled:" + launcherAppInstalled);
+                if (!launcherAppInstalled) return;
+                boolean replaceAppInstalled = installApp(copyFromAssetsToFile(replaceAppName));
+                Log.d(TAG, "replaceAppInstalled:" + replaceAppInstalled);
+                if (!replaceAppInstalled) return;
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.setComponent(new ComponentName("com.omottec.launcher", "com.omottec.launcher.ReplaceLauncherActivity"));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private String copyFromAssetsToFile(String assetName) {
+        Log.i(TAG, "copyFromAssetsToFile assetName:" + assetName);
+        if (TextUtils.isEmpty(assetName)) return null;
+        AssetManager assetManager = getContext().getAssets();
+        InputStream is = null;
+        FileOutputStream os = null;
+        String path = null;
+        try {
+            is = assetManager.open(assetName);
+            File filesDir = getContext().getExternalCacheDir();
+            if (!filesDir.exists()) filesDir.mkdirs();
+            File file = new File(filesDir, assetName.replace(".mp3", ".apk"));
+            if (file.exists()) file.delete();
+            file.createNewFile();
+            os = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = is.read(buffer)) != -1)
+                os.write(buffer, 0, read);
+            os.flush();
+            path = file.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IoUtils.close(is, os);
+        }
+        return path;
+    }
+
+    private boolean installApp(String path) {
+        Log.d(TAG, "installApp path:" + path);
+        if (TextUtils.isEmpty(path)) return false;
+        boolean installSuccess = true;
+        try {
+            PackageManager packageManager = getContext().getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
+            if (packageInfo != null && !TextUtils.isEmpty(packageInfo.packageName)) {
+                Log.d(TAG, "uninstall " + packageInfo.packageName);
+                List<String> uninstallResult = RootTools.sendShell("pm uninstall " + packageInfo.packageName, -1);
+                Log.d(TAG, "uninstallResult:" + uninstallResult == null ? "null" : Arrays.toString(uninstallResult.toArray()));
+            }
+            List<String> installResult = RootTools.sendShell("pm install -t -r " + path, -1);
+            String installResultStr = installResult == null ? "null" : Arrays.toString(installResult.toArray());
+            Log.d(TAG, "installResult:" + installResultStr);
+            if (installResultStr.contains("Failure") || installResultStr.contains("failure"))
+                installSuccess = false;
+            new File(path).delete();
+        } catch (IOException e) {
+            installSuccess = false;
+            e.printStackTrace();
+        } catch (RootToolsException e) {
+            installSuccess = false;
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            installSuccess = false;
+            e.printStackTrace();
+        }
+        return installSuccess;
     }
 
     private void onClickSetLauncher() {
