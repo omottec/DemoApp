@@ -15,6 +15,7 @@ import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.permission.NotificationFragment;
+import com.omottec.demoapp.prop.PropFragment;
 import com.omottec.demoapp.reuse.ReuseFragment;
 import com.omottec.demoapp.root.RootFragment;
 import com.omottec.demoapp.router.RouterFragment;
@@ -66,6 +67,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new ReuseFragment();
 //        return new SpiFragment();
 //        return new LogFragment();
-        return new RootFragment();
+//        return new RootFragment();
+        return new PropFragment();
     }
 }
