@@ -19,6 +19,7 @@ import com.omottec.demoapp.prop.PropFragment;
 import com.omottec.demoapp.reuse.ReuseFragment;
 import com.omottec.demoapp.root.RootFragment;
 import com.omottec.demoapp.router.RouterFragment;
+import com.omottec.demoapp.rxjava.RxJavaFragment;
 import com.omottec.demoapp.spi.SpiFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
@@ -68,6 +69,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new SpiFragment();
 //        return new LogFragment();
 //        return new RootFragment();
-        return new PropFragment();
+//        return new PropFragment();
+        return new RxJavaFragment();
     }
 }

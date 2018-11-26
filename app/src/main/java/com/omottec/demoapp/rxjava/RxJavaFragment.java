@@ -3,6 +3,7 @@ package com.omottec.demoapp.rxjava;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.utils.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Scheduler;
@@ -47,7 +50,8 @@ public class RxJavaFragment extends Fragment {
         mTv.setOnClickListener(v -> {
 //            testRange();
 //            testZip();
-            testJust();
+//            testJust();
+            testPolling();
         });
     }
 
@@ -114,4 +118,52 @@ public class RxJavaFragment extends Fragment {
                     Logger.d(TAG, "get " + s + " @ " + Thread.currentThread().getName());
                 });
     }
+
+    private void testPolling() {
+        Log.d(TAG, "testPolling");
+        pollingServer(1)
+                .subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer integer) {
+                        Log.d(TAG, "onNext: " + integer);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Log.e(TAG, "onError", throwable);
+                    }
+                });
+
+    }
+
+    private Observable<Integer> pollingServer(int delay) {
+        return Observable/*.just(1)*/
+                .create(new Observable.OnSubscribe<Integer>() {
+                    @Override
+                    public void call(Subscriber<? super Integer> subscriber) {
+                        Log.d(TAG, "OnSubscribe call");
+//                        subscriber.onNext(1);
+                        throw new IllegalStateException("must error");
+                    }
+                })
+                .onErrorReturn(new Func1<Throwable, Integer>() {
+                    @Override
+                    public Integer call(Throwable throwable) {
+                        Log.d(TAG, "onErrorReturn call");
+                        return 1;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .delaySubscription(delay, TimeUnit.SECONDS)
+                .switchMap(new Func1<Integer, Observable<Integer>>() {
+                    @Override
+                    public Observable<Integer> call(Integer integer) {
+                        Log.d(TAG, "switchMap call");
+                        return pollingServer(delay);
+                    }
+                });
+    }
+
+
 }
