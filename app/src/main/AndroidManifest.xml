@@ -73,8 +73,7 @@
 
         </activity>
 
-        <activity android:name=".activity.DemoActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".activity.DemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

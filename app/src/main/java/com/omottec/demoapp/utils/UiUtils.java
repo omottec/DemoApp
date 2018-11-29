@@ -2,10 +2,12 @@ package com.omottec.demoapp.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
@@ -16,6 +18,8 @@ import java.lang.reflect.Method;
  * Created by qinbingbing on 4/7/16.
  */
 public final class UiUtils {
+    public static final String TAG = "UiUtils";
+
     private UiUtils() { throw new AssertionError(); }
 
     /**
@@ -86,7 +90,8 @@ public final class UiUtils {
      */
     public static int getScreenSize(Context context, boolean isWidth) {
         DisplayMetrics dm = new DisplayMetrics();
-        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+//        ((WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+        ((WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRealMetrics(dm);
         int temp = 0;
         if (isWidth) {
             temp = dm.widthPixels;
@@ -94,6 +99,20 @@ public final class UiUtils {
             temp = dm.heightPixels;
         }
         return temp;
+    }
+
+    public static String getOrientation(Context context) {
+        switch (context.getResources().getConfiguration().orientation) {
+            case Configuration.ORIENTATION_LANDSCAPE:
+                return "landscape";
+            case Configuration.ORIENTATION_PORTRAIT:
+                return "portrait";
+            case Configuration.ORIENTATION_SQUARE:
+                return "square";
+            case Configuration.ORIENTATION_UNDEFINED:
+            default:
+                return "undefined";
+        }
     }
 
     /**
@@ -136,16 +155,21 @@ public final class UiUtils {
             try {
                 statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
             } catch (Exception e) {
-                Logger.i("", "", e);
+                Log.i(TAG, "", e);
             }
         }
         if (statusBarHeight == 0) {
             Activity activity = Activities.getActivity(context);
+            if (activity != null) {
+                Rect rect = new Rect();
+                activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+                statusBarHeight = rect.top;
+            }
         }
         return statusBarHeight;
-//        return context.getResources().getDimensionPixelSize(com.android.internal.R.dimen.status_bar_height);
     }
 
+    @Deprecated
     public static int getStatusBarHeight1(Activity activity) {
         Rect rect = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);

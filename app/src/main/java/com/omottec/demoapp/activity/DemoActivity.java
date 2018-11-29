@@ -64,12 +64,12 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new WeightFragment();
 //        return new MultiPartStatusFragment();
 //        return new RouterFragment();
-//        return new ScreenSizeFragment();
+        return new ScreenSizeFragment();
 //        return new ReuseFragment();
 //        return new SpiFragment();
 //        return new LogFragment();
 //        return new RootFragment();
 //        return new PropFragment();
-        return new RxJavaFragment();
+//        return new RxJavaFragment();
     }
 }
