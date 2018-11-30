@@ -2,6 +2,7 @@ package com.omottec.demoapp.fragment;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,9 @@ import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.UiUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.util.Properties;
 
 /**
  * Created by qinbingbing on 31/08/2018.
@@ -80,6 +83,24 @@ public class ScreenSizeFragment extends Fragment {
         String orientation = UiUtils.getOrientation(getContext());
         Logger.d(TAG, "orientation: " + orientation);
 
+        Properties properties = System.getProperties();
+        String panelSize = properties.getProperty("ro.boot.mi.panel_size");
+        Logger.d(TAG, "properties:" + properties);
+        Logger.d(TAG, "model:" + Build.MODEL);
+        try {
+            Class clazz = Class.forName("android.os.SystemProperties");
+            panelSize = (String) clazz.getMethod("get", new Class[]{String.class}).invoke(clazz, "ro.boot.mi.panel_size");
+            Logger.d(TAG, "panelSize:" + panelSize);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
         String text = new StringBuilder("statusBarHeight:")
                 .append(statusBarHeight).append('\n')
                 .append("activity context width*height:" + activityContextWidth + "*" + activityContextHeight).append('\n')
@@ -89,6 +110,7 @@ public class ScreenSizeFragment extends Fragment {
                 .append("screenSize double:").append(doubleScreenSize).append('\n')
                 .append("screenSize scale:").append(scaleScreenSize).append('\n')
                 .append("orientation:").append(orientation).append('\n')
+                .append("panelSize:").append(panelSize).append('\n')
                 .toString();
         mTv.setText(text);
     }
