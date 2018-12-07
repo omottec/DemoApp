@@ -11,6 +11,7 @@ public final class Tag {
     public static final String SCALE_TYPE = "scale_type";
     public static final String MOVE_VIEW_BY_SCROLLER = "move_view_by_scroller";
     public static final String TOUCH = "touch";
+    public static final String GESTURE = "gesture";
     public static final String SLIDE = "slide";
     public static final String MEASURE = "measure";
     public static final String CUSTOM_VIEW = "custom_view";

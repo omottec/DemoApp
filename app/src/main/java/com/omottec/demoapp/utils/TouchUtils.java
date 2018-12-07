@@ -8,18 +8,26 @@ import android.view.MotionEvent;
  */
 public final class TouchUtils {
     public static String getTouchEventAction(MotionEvent event) {
+        StringBuilder sb = new StringBuilder();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                return "MotionEvent.ACTION_DOWN@" + event.hashCode() + " eventTime:" + event.getEventTime();
+                sb.append("{ACTION_DOWN");
+                break;
             case MotionEvent.ACTION_MOVE:
-                return "MotionEvent.ACTION_MOVE@" + event.hashCode() + " eventTime:" + event.getEventTime();
+                sb.append("{ACTION_MOVE");
+                break;
             case MotionEvent.ACTION_UP:
-                return "MotionEvent.ACTION_UP@" + event.hashCode() + " eventTime:" + event.getEventTime();
+                sb.append("{ACTION_UP");
+                break;
             case MotionEvent.ACTION_CANCEL:
-                return "MotionEvent.ACTION_CANCEL@" + event.hashCode() + " eventTime:" + event.getEventTime();
+                sb.append("{ACTION_CANCEL");
+                break;
             default:
-                return "MotionEvent.OTHER@" + event.hashCode() + " eventTime:" + event.getEventTime();
+                sb.append("{ACTION_").append(event.getAction());
         }
+        sb.append(" hashCode:").append(event.hashCode())
+                .append(" eventTime:").append(event.getEventTime()).append('}');
+        return sb.toString();
     }
 
 

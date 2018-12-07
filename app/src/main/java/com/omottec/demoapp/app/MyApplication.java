@@ -19,6 +19,7 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
+import com.omottec.demoapp.gesture.ActivityLifecycleCallbacksForGesture;
 import com.omottec.demoapp.immersive.ImmersiveActivity;
 import com.omottec.demoapp.immersive.ImmersiveLifecycleCallbacks;
 import com.omottec.demoapp.memory.MemoryUtils;
@@ -79,6 +80,7 @@ public class MyApplication extends Application {
         }
         LeakCanary.install(this);
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
+        registerGestureListener();
         registerAppStatusListener();
         initImmersive();
 //        registerComponentCallbacks(this);
@@ -93,6 +95,11 @@ public class MyApplication extends Application {
     private void initImmersive() {
 //        registerActivityLifecycleCallbacks(new ImmersiveLifecycleCallbacks());
     }
+
+    private void registerGestureListener() {
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacksForGesture());
+    }
+
 
     private void registerAppStatusListener() {
         AppStatusHelper.getInstance().registerListener(new AppStatusListener() {

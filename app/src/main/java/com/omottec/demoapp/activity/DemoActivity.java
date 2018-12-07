@@ -58,13 +58,13 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
 //        return new NotificationFragment();
-//        return new PtrPicRecyclerFragment();
+        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();
 //        return new MultiPartStatusFragment();
 //        return new RouterFragment();
-        return new ScreenSizeFragment();
+//        return new ScreenSizeFragment();
 //        return new ReuseFragment();
 //        return new SpiFragment();
 //        return new LogFragment();
