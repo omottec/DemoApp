@@ -2,7 +2,10 @@ package com.omottec.demoapp.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.MotionEvent;
 
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.fragment.ScreenSizeFragment;
@@ -23,6 +26,7 @@ import com.omottec.demoapp.rxjava.RxJavaFragment;
 import com.omottec.demoapp.spi.SpiFragment;
 import com.omottec.demoapp.storage.StorageFragment;
 import com.omottec.demoapp.utils.TimeLogger;
+import com.omottec.demoapp.utils.TouchUtils;
 import com.omottec.demoapp.v7.CardViewFragment;
 import com.omottec.demoapp.view.coordinate.PositionFragment;
 import com.omottec.demoapp.view.log.LogFragment;
@@ -71,5 +75,11 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RootFragment();
 //        return new PropFragment();
 //        return new RxJavaFragment();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(Tag.GESTURE, "dispatchTouchEvent " + TouchUtils.getTouchEventAction(ev));
+        return super.dispatchTouchEvent(ev);
     }
 }
