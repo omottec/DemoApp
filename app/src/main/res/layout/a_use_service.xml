@@ -12,16 +12,31 @@
         android:paddingBottom="10dp"
         android:gravity="center"
         android:background="@android:color/holo_green_light"
-        android:text="StartServiceActivity"/>
+        android:text="StartService"
+        android:layout_marginBottom="10dp"/>
+
     <TextView
-        android:id="@+id/tv_start_service1"
+        android:id="@+id/tv_stop_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:background="@android:color/holo_green_light"
+        android:text="StopService"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_start_service_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:gravity="center"
         android:background="@android:color/holo_blue_bright"
-        android:text="StartServiceActivity1"/>
+        android:text="StartServiceActivity"
+        android:layout_marginBottom="10dp"/>
+
     <TextView
         android:id="@+id/tv_bind_service"
         android:layout_width="match_parent"
@@ -30,14 +45,28 @@
         android:paddingBottom="10dp"
         android:gravity="center"
         android:background="@android:color/holo_red_light"
-        android:text="BindServiceActivity"/>
+        android:text="BindService"
+        android:layout_marginBottom="10dp"/>
+
     <TextView
-        android:id="@+id/tv_bind_service1"
+        android:id="@+id/tv_unbind_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:background="@android:color/holo_red_light"
+        android:text="UnbindService"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_bind_service_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:gravity="center"
         android:background="@android:color/holo_orange_light"
-        android:text="BindServiceActivity1"/>
+        android:text="BindServiceActivity"
+        android:layout_marginBottom="10dp"/>
 </LinearLayout>

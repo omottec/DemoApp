@@ -97,7 +97,7 @@ public class MyApplication extends Application {
     }
 
     private void registerGestureListener() {
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacksForGesture());
+//        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacksForGesture());
     }
 
 

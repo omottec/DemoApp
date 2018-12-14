@@ -74,10 +74,7 @@
         </activity>
 
         <activity android:name=".activity.DemoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".lifecycle.LifeCycleActivity1">
@@ -259,17 +256,16 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".service.ServiceActivity"
+        <activity android:name=".service.UseServiceActivity"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".service.StartServiceActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".service.StartServiceActivity1"
-            android:screenOrientation="portrait"/>
         <activity android:name=".service.BindServiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".service.BindServiceActivity1"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".context.MyAppCompactActitivity"
