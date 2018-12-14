@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.omottec.demoapp.R;
@@ -53,6 +54,12 @@ public class PicRecyclerAdapter extends RecyclerView.Adapter<PicRecyclerAdapter.
     public void onBindViewHolder(PicHolder holder, int position) {
         holder.mSdv.setImageURI(mData.get(position).picUrl);
         Frescos.rawLoad(holder.mSdv, mData.get(position).picUrl, mListener);
+        holder.mSdv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "click " + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /*int screenSize = UiUtils.getScreenSize(MyApplication.getContext(), true);
         Frescos.load(holder.mSdv, mData.get(position).picUrl, screenSize/2, screenSize/2, mListener);*/
