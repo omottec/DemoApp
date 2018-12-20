@@ -39,6 +39,7 @@ public final class Api {
         mGsonConverterFactory = GsonConverterFactory.create();
         mRxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
         mOkHttpClient = new OkHttpClient.Builder()
+                .eventListener(new NetEventListener())
                 .cache(new Cache(MyApplication.getContext().getExternalCacheDir(), 20 * 1024 * 1024))
                 .build();
 
