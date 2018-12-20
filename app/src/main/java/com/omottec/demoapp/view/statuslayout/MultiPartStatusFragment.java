@@ -10,6 +10,7 @@ import com.omottec.demoapp.fragment.BaseFragment;
 import com.omottec.demoapp.net.Api;
 import com.omottec.demoapp.net.GeoCoding;
 import com.omottec.demoapp.net.MockService;
+import com.omottec.demoapp.net.NetEventListener;
 import com.omottec.demoapp.utils.Logger;
 import com.trello.rxlifecycle.FragmentEvent;
 
@@ -66,12 +67,14 @@ public class MultiPartStatusFragment extends BaseFragment {
 
         accessNetForBlueSl();
 
-//        accessNetForRedSlByOkhttp();
+        accessNetForRedSlByOkhttp();
     }
 
     private void accessNetForRedSlByOkhttp() {
         mRedSl.showLoading();
-        OkHttpClient okHttpClient = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .eventListener(new NetEventListener())
+                .build();
         Request request = new Request.Builder().url("http://gc.ditu.aliyun.com/geocoding?a=%E5%8C%97%E4%BA%AC").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
