@@ -15,6 +15,7 @@ import com.omottec.demoapp.image.TestIconDrawableFragment;
 import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.memory.MemoryFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
+import com.omottec.demoapp.net.UrlConnectionFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.permission.NotificationFragment;
@@ -69,7 +70,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();
-        return new MultiPartStatusFragment();
+//        return new MultiPartStatusFragment();
 //        return new RouterFragment();
 //        return new ScreenSizeFragment();
 //        return new ReuseFragment();
@@ -78,11 +79,12 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RootFragment();
 //        return new PropFragment();
 //        return new RxJavaFragment();
+        return new UrlConnectionFragment();
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.d(Tag.GESTURE, "dispatchTouchEvent " + TouchUtils.getTouchEventAction(ev));
+//        Log.d(Tag.GESTURE, "dispatchTouchEvent " + TouchUtils.getTouchEventAction(ev));
         return super.dispatchTouchEvent(ev);
     }
 }
