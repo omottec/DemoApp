@@ -15,6 +15,7 @@ import com.omottec.demoapp.image.TestIconDrawableFragment;
 import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.memory.MemoryFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
+import com.omottec.demoapp.net.SocketFragment;
 import com.omottec.demoapp.net.UrlConnectionFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
@@ -79,7 +80,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RootFragment();
 //        return new PropFragment();
 //        return new RxJavaFragment();
-        return new UrlConnectionFragment();
+//        return new UrlConnectionFragment();
+        return new SocketFragment();
     }
 
     @Override

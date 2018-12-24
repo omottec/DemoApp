@@ -10,23 +10,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.io.IoUtils;
 import com.omottec.demoapp.utils.Logger;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-import java.util.Map;
+import java.io.OutputStreamWriter;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 /**
  * Created by qinbingbing on 21/12/2018.
  */
 
-public class UrlConnectionFragment extends Fragment {
-    public static final String TAG = "UrlConnectionFragment";
+public class SocketFragment extends Fragment {
+    public static final String TAG = "SocketFragment";
     private TextView mTv;
     private AsyncTask<Void, Void, String> mNetTask;
 
@@ -50,18 +51,21 @@ public class UrlConnectionFragment extends Fragment {
             @Override
             protected String doInBackground(Void... voids) {
                 Logger.d(TAG, "doInBackground");
-                HttpURLConnection urlConnection = null;
+                Socket socket = new Socket();
+                BufferedWriter writer = null;
+                InputStream in = null;
                 try {
-                    URL url = new URL("http://www.mocky.io/v2/5b5ecd102e0000020a69466d");
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setConnectTimeout(10 * 1000);
-                    urlConnection.setReadTimeout(10 * 1000);
-                    int responseCode = urlConnection.getResponseCode();
-                    Logger.d(TAG, "responseCode:" + responseCode + ", responseMessage:" + urlConnection.getResponseMessage());
-                    if (responseCode != HttpURLConnection.HTTP_OK) return null;
-                    Map<String, List<String>> headerFields = urlConnection.getHeaderFields();
-                    Logger.d(TAG, "headerFields:" + headerFields);
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                    InetSocketAddress socketAddress = new InetSocketAddress("www.mocky.io", 80);
+                    socket.connect(socketAddress);
+
+                    writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+                    writer.write("GET v2/5b5ecd102e0000020a69466d HTTP/1.1\r\n");
+                    writer.write("Host: www.meituan.com\r\n");
+                    writer.write("\r\n");
+                    writer.flush();
+
+                    in = new BufferedInputStream(socket.getInputStream());
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
                     int count;
                     byte[] buffer = new byte[1024];
@@ -70,11 +74,8 @@ public class UrlConnectionFragment extends Fragment {
                     return new String(out.toByteArray());
                 } catch (IOException e) {
                     e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
                 } finally {
-                    if (urlConnection != null)
-                        urlConnection.disconnect();
+                    IoUtils.close(socket, writer, in);
                 }
                 return null;
             }
