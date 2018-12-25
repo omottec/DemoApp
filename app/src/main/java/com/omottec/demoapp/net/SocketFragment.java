@@ -60,8 +60,8 @@ public class SocketFragment extends Fragment {
                     socket.connect(socketAddress);
 
                     writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                    writer.write("GET v2/5b5ecd102e0000020a69466d HTTP/1.1\r\n");
-                    writer.write("Host: www.meituan.com\r\n");
+                    writer.write("GET /v2/5b5ecd102e0000020a69466d HTTP/1.1\r\n");
+                    writer.write("Host: www.mocky.io\r\n");
                     writer.write("\r\n");
                     writer.flush();
 
