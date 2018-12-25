@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.io.IoUtils;
 import com.omottec.demoapp.utils.Logger;
+import com.omottec.demoapp.utils.NetUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -62,6 +63,9 @@ public class SocketFragment extends Fragment {
                     writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                     writer.write("GET /v2/5b5ecd102e0000020a69466d HTTP/1.1\r\n");
                     writer.write("Host: www.mocky.io\r\n");
+                    writer.write("User-Agent: " + NetUtils.getUserAgent(null) + "\r\n");
+                    writer.write("Connection: Keep-Alive\r\n");
+                    writer.write("Accept-Encoding: gzip\r\n");
                     writer.write("\r\n");
                     writer.flush();
 

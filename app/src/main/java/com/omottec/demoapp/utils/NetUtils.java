@@ -5,8 +5,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.annotation.Nullable;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.webkit.WebSettings;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -128,4 +131,17 @@ public final class NetUtils {
                 return getMobileIp();
         }
     }
+
+    /**
+     *
+     * @param context
+     * @return
+     */
+    public static String getUserAgent(@Nullable Context context) {
+        String userAgent = System.getProperty("http.agent");
+        if (TextUtils.isEmpty(userAgent) && context != null)
+            userAgent = WebSettings.getDefaultUserAgent(context);
+        return userAgent;
+    }
+
 }
