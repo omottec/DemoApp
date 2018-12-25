@@ -24,7 +24,7 @@ public final class Logger {
         return "pid-tid-uiThread: "
                 + Process.myPid() + "-"
                 + Process.myTid() + "-"
-                + (Looper.myLooper() == Looper.getMainLooper());
+                + (Looper.myLooper() == Looper.getMainLooper() ? "uiThread" : "workThread");
     }
 
     private static int sLevel = BuildConfig.DEBUG ? Log.VERBOSE : Log.ASSERT + 1;
