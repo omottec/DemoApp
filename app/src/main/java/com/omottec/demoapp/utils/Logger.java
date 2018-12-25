@@ -17,7 +17,7 @@ public final class Logger {
         Log.d(tag, "pid-tid-uiThread: "
                 + Process.myPid() + "-"
                 + Process.myTid() + "-"
-                + (Looper.myLooper() == Looper.getMainLooper()));
+                + (Looper.myLooper() == Looper.getMainLooper() ? "uiThread" : "workThread"));
     }
 
     public static String getThreadInfo() {
