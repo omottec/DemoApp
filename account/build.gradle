@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -18,9 +17,8 @@ android {
         }
     }
 
-    buildToolsVersion '27.0.3'
 }
 
 dependencies {
-    compile project(':service')
+    implementation project(':service')
 }

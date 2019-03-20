@@ -85,8 +85,8 @@ public class DemoActivity extends SingleFragmentActivity {
 
         // Net
 //        return new UrlConnectionFragment();
-//        return new SocketFragment();
-        return new OkhttpFragment();
+        return new SocketFragment();
+//        return new OkhttpFragment();
     }
 
     @Override

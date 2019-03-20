@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
-apply plugin: 'mtj-circle-plugin'
+//apply plugin: 'mtj-circle-plugin'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.omottec.demoapp"
@@ -26,14 +25,14 @@ android {
         }
     }
 
-    MtjCirclePluginConfig {
-        // 设置appkey
-        appkey = '1478516c5a'
-        // 设置debug 开关，如果需要查看日志则打开开关，为避免影响性能建议上线前关闭（设置为false）
-        debug = false
-        // 默认启动此插件，如果开发者不需要可以禁用（设置为false）
-        enabled = true
-    }
+//    MtjCirclePluginConfig {
+//        // 设置appkey
+//        appkey = '1478516c5a'
+//        // 设置debug 开关，如果需要查看日志则打开开关，为避免影响性能建议上线前关闭（设置为false）
+//        debug = false
+//        // 默认启动此插件，如果开发者不需要可以禁用（设置为false）
+//        enabled = true
+//    }
 
     buildTypes {
         release {
@@ -52,7 +51,7 @@ android {
         variant.outputs.each { output ->
             def lintTask = tasks["lint${variant.name.capitalize()}"]
             System.out.println("output:" + output + ", variant:" + variant)
-            output.assemble.dependsOn lintTask
+//            output.assembleProvider.dependsOn lintTask
         }
     }
 
@@ -62,46 +61,46 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile project(':PullToRefresh')
-    compile project(':service')
-    compile project(':account')
-    compile "com.android.support:design:$supportLibraryVersion"
-    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
-    compile "com.android.support:cardview-v7:$supportLibraryVersion"
-    compile "com.android.support:support-v4:$supportLibraryVersion"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation project(':PullToRefresh')
+    implementation project(':service')
+    implementation project(':account')
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
+    implementation "com.android.support:support-v4:$supportLibraryVersion"
 
-//    compile 'com.mcxiaoke.volley:library:1.0.18'
-//    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.squareup.okhttp3:okhttp:3.12.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+//    implementation 'com.mcxiaoke.volley:library:1.0.18'
+//    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
 
-    compile 'com.facebook.fresco:fresco:1.2.0'
-    compile 'com.facebook.fresco:imagepipeline-okhttp:0.5.0'
-//    compile 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.facebook.fresco:fresco:1.2.0'
+    implementation 'com.facebook.fresco:imagepipeline-okhttp:0.5.0'
+//    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
-//    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
-//    compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.0.7'
+//    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
 
-    compile 'io.reactivex:rxjava:1.2.9'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'com.trello:rxlifecycle:0.3.1'
-    compile 'com.trello:rxlifecycle-components:0.3.1'
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
-//    compile 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:2.1.0'
-//    compile 'com.trello:rxlifecycle:1.0'
-//    compile 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
-//    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
-//    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    implementation 'io.reactivex:rxjava:1.2.9'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'com.trello:rxlifecycle:0.3.1'
+    implementation 'com.trello:rxlifecycle-components:0.3.1'
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+//    implementation 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:2.1.0'
+//    implementation 'com.trello:rxlifecycle:1.0'
+//    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
+//    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
+//    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
 
-    compile 'org.greenrobot:greendao:3.2.2'
+    implementation 'org.greenrobot:greendao:3.2.2'
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 
-    compile 'com.appsee:appsee-android:+'
+    implementation 'com.appsee:appsee-android:+'
 }
