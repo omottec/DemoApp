@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.anr.AnrFragment;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.fragment.ScaleTypeFragment;
 import com.omottec.demoapp.fragment.ScreenSizeFragment;
@@ -87,6 +88,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new UrlConnectionFragment();
         return new SocketFragment();
 //        return new OkhttpFragment();
+//        return new AnrFragment();
     }
 
     @Override
