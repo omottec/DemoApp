@@ -74,10 +74,7 @@
         </activity>
 
         <activity android:name=".activity.DemoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".lifecycle.LifeCycleActivity1">
@@ -281,6 +278,20 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".immersive.ImmersiveActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".launch.ActivityA"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".launch.ActivityB">
+
+        </activity>
+        <activity android:name=".launch.ActivityC">
+
+        </activity>
 
         <service android:name=".service.AppService"/>
 
