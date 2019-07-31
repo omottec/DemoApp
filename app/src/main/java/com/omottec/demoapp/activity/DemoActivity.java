@@ -17,6 +17,7 @@ import com.omottec.demoapp.image.TestSplashDrawableFragment;
 import com.omottec.demoapp.memory.MemoryFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
+import com.omottec.demoapp.net.RetrofitFragment;
 import com.omottec.demoapp.net.SocketFragment;
 import com.omottec.demoapp.net.UrlConnectionFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
@@ -86,9 +87,10 @@ public class DemoActivity extends SingleFragmentActivity {
 
         // Net
 //        return new UrlConnectionFragment();
-        return new SocketFragment();
+//        return new SocketFragment();
 //        return new OkhttpFragment();
 //        return new AnrFragment();
+        return new RetrofitFragment();
     }
 
     @Override

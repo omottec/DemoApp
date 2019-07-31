@@ -40,7 +40,7 @@ public final class Api {
         mRxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
         mOkHttpClient = new OkHttpClient.Builder()
                 .eventListener(new NetEventListener())
-                .cache(new Cache(MyApplication.getContext().getExternalCacheDir(), 20 * 1024 * 1024))
+//                .cache(new Cache(MyApplication.getContext().getExternalCacheDir(), 20 * 1024 * 1024))
                 .build();
 
         mAliyunRetrofit = new Retrofit.Builder()

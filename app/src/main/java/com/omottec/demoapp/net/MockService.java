@@ -3,6 +3,7 @@ package com.omottec.demoapp.net;
 import com.omottec.demoapp.view.statuslayout.MockData;
 
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -10,6 +11,9 @@ import rx.Observable;
  */
 
 public interface MockService {
+    @GET("v2/5b5ecd102e0000020a69466d")
+    Observable<MockData> getMockData(@Query("misId") String misId);
+
     @GET("v2/5b5ecd102e0000020a69466d")
     Observable<MockData> getMockData();
 }
