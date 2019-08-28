@@ -20,6 +20,7 @@ import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.net.RetrofitFragment;
 import com.omottec.demoapp.net.SocketFragment;
 import com.omottec.demoapp.net.UrlConnectionFragment;
+import com.omottec.demoapp.pda.idata.IDataFragment;
 import com.omottec.demoapp.permission.CallPhoneFragment;
 import com.omottec.demoapp.permission.GetImeiFragment;
 import com.omottec.demoapp.permission.NotificationFragment;
@@ -90,7 +91,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new SocketFragment();
 //        return new OkhttpFragment();
 //        return new AnrFragment();
-        return new RetrofitFragment();
+//        return new RetrofitFragment();
+        return new IDataFragment();
     }
 
     @Override
