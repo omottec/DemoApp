@@ -2,42 +2,10 @@ package com.omottec.demoapp.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.MotionEvent;
 
-import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.anr.AnrFragment;
-import com.omottec.demoapp.fragment.MultiProcessFragment;
-import com.omottec.demoapp.fragment.ScaleTypeFragment;
-import com.omottec.demoapp.fragment.ScreenSizeFragment;
-import com.omottec.demoapp.fragment.WeightFragment;
-import com.omottec.demoapp.fresco.FrescoFragment;
-import com.omottec.demoapp.image.TestIconDrawableFragment;
-import com.omottec.demoapp.image.TestSplashDrawableFragment;
-import com.omottec.demoapp.memory.MemoryFragment;
-import com.omottec.demoapp.memory.MemoryInfoFragment;
-import com.omottec.demoapp.net.OkhttpFragment;
-import com.omottec.demoapp.net.RetrofitFragment;
-import com.omottec.demoapp.net.SocketFragment;
-import com.omottec.demoapp.net.UrlConnectionFragment;
-import com.omottec.demoapp.pda.idata.IDataFragment;
-import com.omottec.demoapp.permission.CallPhoneFragment;
-import com.omottec.demoapp.permission.GetImeiFragment;
-import com.omottec.demoapp.permission.NotificationFragment;
-import com.omottec.demoapp.prop.PropFragment;
-import com.omottec.demoapp.reuse.ReuseFragment;
-import com.omottec.demoapp.root.RootFragment;
-import com.omottec.demoapp.router.RouterFragment;
-import com.omottec.demoapp.rxjava.RxJavaFragment;
-import com.omottec.demoapp.spi.SpiFragment;
-import com.omottec.demoapp.storage.StorageFragment;
+import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.utils.TimeLogger;
-import com.omottec.demoapp.utils.TouchUtils;
-import com.omottec.demoapp.v7.CardViewFragment;
-import com.omottec.demoapp.view.coordinate.PositionFragment;
-import com.omottec.demoapp.view.log.LogFragment;
-import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
-import com.omottec.demoapp.view.statuslayout.MultiPartStatusFragment;
 
 import com.appsee.Appsee;
 
@@ -92,7 +60,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new OkhttpFragment();
 //        return new AnrFragment();
 //        return new RetrofitFragment();
-        return new IDataFragment();
+//        return new IDataFragment();
+        return new NetFragment();
     }
 
     @Override
