@@ -44,7 +44,7 @@ public final class NetUtils {
                     .toString();
         else
             return new StringBuilder("netInfo:").append(networkInfo)
-                    .append("wifiInfo:").append(getWifiInfo(context))
+                    .append(", wifiInfo:").append(getWifiInfo(context))
                     .toString();
     }
 
@@ -131,6 +131,7 @@ public final class NetUtils {
     public static String getMacByHost(String host) {
         try {
             NetworkInterface networkInterface = NetworkInterface.getByInetAddress(InetAddress.getByName(host));
+            if (networkInterface == null) return "";
             byte[] macBytes = networkInterface.getHardwareAddress();
             StringBuilder macStrBuilder = new StringBuilder();
             for (byte b : macBytes)

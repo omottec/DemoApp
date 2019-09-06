@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
 import com.omottec.demoapp.net.NetFragment;
+import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
 import com.appsee.Appsee;
@@ -57,11 +58,11 @@ public class DemoActivity extends SingleFragmentActivity {
         // Net
 //        return new UrlConnectionFragment();
 //        return new SocketFragment();
-//        return new OkhttpFragment();
+        return new OkhttpFragment();
 //        return new AnrFragment();
 //        return new RetrofitFragment();
 //        return new IDataFragment();
-        return new NetFragment();
+//        return new NetFragment();
     }
 
     @Override

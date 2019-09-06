@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.utils.Logger;
@@ -69,7 +70,16 @@ public class OkhttpFragment extends Fragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Logger.d(TAG, "onFailure");
+                Logger.d(TAG, "onFailure", e);
+                String netInfo = NetUtils.getNetInfo(getContext());
+                String msg = e == null ? netInfo : e.getMessage() + ", " + netInfo;
+                Logger.d(TAG, msg);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
