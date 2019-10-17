@@ -5,12 +5,27 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * An Activity that uses a {@link MvpPresenter} to implement a Model-View-Presenter
+ * architecture.
+ *
+ */
 public abstract class MvpActivity<V extends MvpView, P extends MvpPresenter<V>>
         extends AppCompatActivity
         implements MvpView, MvpDelegateCallback<V, P> {
+
     protected ActivityMvpDelegate mDelegate;
+
+    /**
+     * The presenter for this view. Will be instantiated with {@link #createPresenter()}
+     */
     protected P mPresenter;
 
+    /**
+     * Instantiate a presenter instance
+     *
+     * @return The {@link MvpPresenter} for this view
+     */
     @NonNull
     @Override
     public abstract P createPresenter();

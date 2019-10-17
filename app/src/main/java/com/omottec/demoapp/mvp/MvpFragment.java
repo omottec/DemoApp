@@ -7,10 +7,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+/**
+ * A Fragment that uses a {@link MvpPresenter} to implement a Model-View-Presenter architecture.
+ *
+ */
 public abstract class MvpFragment<V extends MvpView, P extends MvpPresenter<V>>
         extends Fragment
         implements MvpView, MvpDelegateCallback<V, P> {
     protected FragmentMvpDelegate<V, P> mDelegate;
+
+    /**
+     * The presenter for this view. Will be instantiated with {@link #createPresenter()}
+     */
     protected P mPresenter;
 
     protected FragmentMvpDelegate<V, P> getMvpDelegate() {
@@ -84,7 +92,11 @@ public abstract class MvpFragment<V extends MvpView, P extends MvpPresenter<V>>
         getMvpDelegate().onDetach();
     }
 
-
+    /**
+     * Instantiate a presenter instance
+     *
+     * @return The {@link MvpPresenter} for this view
+     */
     @NonNull
     @Override
     public abstract P createPresenter();

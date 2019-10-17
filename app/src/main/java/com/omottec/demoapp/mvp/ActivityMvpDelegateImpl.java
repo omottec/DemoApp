@@ -20,15 +20,11 @@ public class ActivityMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
             throw new NullPointerException("Presenter returned from createPresenter() is null");
         mDelegateCallback.setPresenter(presenter);
 
-        P p = mDelegateCallback.getPresenter();
-        if (p == null)
-            throw new NullPointerException("Presenter returned from getPresenter() is null");
-
         V v = mDelegateCallback.getMvpView();
         if (v == null)
             throw new NullPointerException("View returned from getMvpView() is null");
 
-        p.attachView(v);
+        getPresenter().attachView(v);
     }
 
     @Override
@@ -53,9 +49,15 @@ public class ActivityMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
 
     @Override
     public void onDestroy() {
+        P p = getPresenter();
+        p.detachView();
+        p.destroy();
+    }
+
+    P getPresenter() {
         P p = mDelegateCallback.getPresenter();
         if (p == null)
             throw new NullPointerException("Presenter returned from getPresenter() is null");
-        p.detachView();
+        return p;
     }
 }

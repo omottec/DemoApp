@@ -31,15 +31,11 @@ public class FragmentMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        P p = mDelegateCallback.getPresenter();
-        if (p == null)
-            throw new NullPointerException("Presenter returned from getPresenter() is null");
-
         V v = mDelegateCallback.getMvpView();
         if (v == null)
             throw new NullPointerException("View returned from getMvpView() is null");
 
-        p.attachView(v);
+        getPresenter().attachView(v);
     }
 
     @Override
@@ -69,19 +65,23 @@ public class FragmentMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V
 
     @Override
     public void onDestroyView() {
-        P p = mDelegateCallback.getPresenter();
-        if (p == null)
-            throw new NullPointerException("Presenter returned from getPresenter() is null");
-        p.detachView();
+        getPresenter().detachView();
     }
 
     @Override
     public void onDestroy() {
-
+        getPresenter().destroy();
     }
 
     @Override
     public void onDetach() {
 
+    }
+
+    P getPresenter() {
+        P p = mDelegateCallback.getPresenter();
+        if (p == null)
+            throw new NullPointerException("Presenter returned from getPresenter() is null");
+        return p;
     }
 }
