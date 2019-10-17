@@ -58,11 +58,11 @@ public class DemoActivity extends SingleFragmentActivity {
         // Net
 //        return new UrlConnectionFragment();
 //        return new SocketFragment();
-        return new OkhttpFragment();
+//        return new OkhttpFragment();
 //        return new AnrFragment();
 //        return new RetrofitFragment();
 //        return new IDataFragment();
-//        return new NetFragment();
+        return new NetFragment();
     }
 
     @Override
