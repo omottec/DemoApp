@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
+import com.omottec.demoapp.job.JobFragment;
 import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.utils.TimeLogger;
@@ -62,7 +63,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new AnrFragment();
 //        return new RetrofitFragment();
 //        return new IDataFragment();
-        return new NetFragment();
+//        return new NetFragment();
+        return new JobFragment();
     }
 
     @Override
