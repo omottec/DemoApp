@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_restart"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:text="tv_restart"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_power_off"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:text="tv_power_off"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/tv_screen_bright_minus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:text="tv_screen_bright_minus"
+        android:layout_marginBottom="10dp"/>
+    <TextView
+        android:id="@+id/tv_screen_bright_plus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:text="tv_screen_bright_plus"
+        android:layout_marginBottom="10dp"/>
+</LinearLayout>

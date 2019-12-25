@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
+import com.omottec.demoapp.fragment.PowerOnOffFragment;
 import com.omottec.demoapp.job.JobFragment;
 import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
@@ -64,7 +65,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RetrofitFragment();
 //        return new IDataFragment();
 //        return new NetFragment();
-        return new JobFragment();
+//        return new JobFragment();
+        return new PowerOnOffFragment();
     }
 
     @Override
