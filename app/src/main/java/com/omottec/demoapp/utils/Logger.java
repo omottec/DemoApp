@@ -72,6 +72,23 @@ public final class Logger {
         return Log.d(tag, msg, tr);
     }
 
+    public static int i(String tag) {
+        if (sLevel > Log.INFO) return 0;
+        StringBuilder logBuilder = new StringBuilder()
+                .append(Process.myPid())
+                .append("-").append(Process.myTid())
+                .append("-").append(Thread.currentThread().getName());
+        StackTraceElement[] stackTrace = new Throwable().fillInStackTrace().getStackTrace();
+        if (stackTrace != null & stackTrace.length > 1 & stackTrace[1] != null) {
+            int index = stackTrace[1].getClassName().lastIndexOf('.');
+            logBuilder
+                    .append("-").append(stackTrace[1].getClassName().substring(index + 1))
+                    .append("-").append(stackTrace[1].getMethodName())
+                    .append('-').append(stackTrace[1].getLineNumber());
+        }
+        return Log.i(tag, logBuilder.toString());
+    }
+
     /**
      * @param tag Used to identify the source of a log message.  It usually identifies
      *        the class or activity where the log call occurs.
@@ -79,7 +96,20 @@ public final class Logger {
      */
     public static int i(String tag, String msg) {
         if (sLevel > Log.INFO) return 0;
-        return Log.i(tag, msg);
+        StringBuilder logBuilder = new StringBuilder()
+                .append(Process.myPid())
+                .append("-").append(Process.myTid())
+                .append("-").append(Thread.currentThread().getName());
+        StackTraceElement[] stackTrace = new Throwable().fillInStackTrace().getStackTrace();
+        if (stackTrace != null & stackTrace.length > 1 & stackTrace[1] != null) {
+            int index = stackTrace[1].getClassName().lastIndexOf('.');
+            logBuilder
+                    .append("-").append(stackTrace[1].getClassName().substring(index + 1))
+                    .append("-").append(stackTrace[1].getMethodName())
+                    .append('-').append(stackTrace[1].getLineNumber());
+        }
+        logBuilder.append("-").append(msg);
+        return Log.i(tag, logBuilder.toString());
     }
 
     /**
@@ -90,7 +120,20 @@ public final class Logger {
      */
     public static int i(String tag, String msg, Throwable tr) {
         if (sLevel > Log.INFO) return 0;
-        return Log.i(tag, msg, tr);
+        StringBuilder logBuilder = new StringBuilder()
+                .append(Process.myPid())
+                .append("-").append(Process.myTid())
+                .append("-").append(Thread.currentThread().getName());
+        StackTraceElement[] stackTrace = new Throwable().fillInStackTrace().getStackTrace();
+        if (stackTrace != null & stackTrace.length > 1 & stackTrace[1] != null) {
+            int index = stackTrace[1].getClassName().lastIndexOf('.');
+            logBuilder
+                    .append("-").append(stackTrace[1].getClassName().substring(index + 1))
+                    .append("-").append(stackTrace[1].getMethodName())
+                    .append('-').append(stackTrace[1].getLineNumber());
+        }
+        logBuilder.append("-").append(msg);
+        return Log.i(tag, logBuilder.toString(), tr);
     }
 
     /**
@@ -131,7 +174,20 @@ public final class Logger {
      */
     public static int e(String tag, String msg) {
         if (sLevel > Log.ERROR) return 0;
-        return Log.e(tag, msg);
+        StringBuilder logBuilder = new StringBuilder()
+                .append(Process.myPid())
+                .append("-").append(Process.myTid())
+                .append("-").append(Thread.currentThread().getName());
+        StackTraceElement[] stackTrace = new Throwable().fillInStackTrace().getStackTrace();
+        if (stackTrace != null & stackTrace.length > 1 & stackTrace[1] != null) {
+            int index = stackTrace[1].getClassName().lastIndexOf('.');
+            logBuilder
+                    .append("-").append(stackTrace[1].getClassName().substring(index + 1))
+                    .append("-").append(stackTrace[1].getMethodName())
+                    .append('-').append(stackTrace[1].getLineNumber());
+        }
+        logBuilder.append("-").append(msg);
+        return Log.e(tag, logBuilder.toString());
     }
 
     /**
@@ -142,7 +198,37 @@ public final class Logger {
      */
     public static int e(String tag, String msg, Throwable tr) {
         if (sLevel > Log.ERROR) return 0;
-        return Log.e(tag, msg, tr);
+        StringBuilder logBuilder = new StringBuilder()
+                .append(Process.myPid())
+                .append("-").append(Process.myTid())
+                .append("-").append(Thread.currentThread().getName());
+        StackTraceElement[] stackTrace = new Throwable().fillInStackTrace().getStackTrace();
+        if (stackTrace != null & stackTrace.length > 1 & stackTrace[1] != null) {
+            int index = stackTrace[1].getClassName().lastIndexOf('.');
+            logBuilder
+                    .append("-").append(stackTrace[1].getClassName().substring(index + 1))
+                    .append("-").append(stackTrace[1].getMethodName())
+                    .append('-').append(stackTrace[1].getLineNumber());
+        }
+        logBuilder.append("-").append(msg);
+        return Log.e(tag, logBuilder.toString(), tr);
+    }
+
+    public static int e(String tag, Throwable tr) {
+        if (sLevel > Log.ERROR) return 0;
+        StringBuilder logBuilder = new StringBuilder()
+                .append(Process.myPid())
+                .append("-").append(Process.myTid())
+                .append("-").append(Thread.currentThread().getName());
+        StackTraceElement[] stackTrace = new Throwable().fillInStackTrace().getStackTrace();
+        if (stackTrace != null & stackTrace.length > 1 & stackTrace[1] != null) {
+            int index = stackTrace[1].getClassName().lastIndexOf('.');
+            logBuilder
+                    .append("-").append(stackTrace[1].getClassName().substring(index + 1))
+                    .append("-").append(stackTrace[1].getMethodName())
+                    .append('-').append(stackTrace[1].getLineNumber());
+        }
+        return Log.e(tag, logBuilder.toString(), tr);
     }
 
     public static void logClassAndMethod(Object object) {

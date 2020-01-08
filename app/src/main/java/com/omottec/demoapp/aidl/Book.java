@@ -29,6 +29,11 @@ public class Book implements Parcelable {
         dest.writeString(bookName);
     }
 
+    public void readFromParcel(Parcel in) {
+        bookId = in.readInt();
+        bookName = in.readString();
+    }
+
     @Override
     public int describeContents() {
         return 0;

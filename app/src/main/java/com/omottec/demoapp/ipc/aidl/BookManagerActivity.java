@@ -21,6 +21,7 @@ import com.omottec.demoapp.aidl.Book;
 import com.omottec.demoapp.aidl.IBookManager;
 import com.omottec.demoapp.aidl.IOnBookAddedListener;
 import com.omottec.demoapp.Constants;
+import com.omottec.demoapp.touch.TouchActivity;
 import com.omottec.demoapp.utils.Logger;
 
 import java.util.List;
@@ -30,8 +31,11 @@ import java.util.concurrent.Executors;
 /**
  * Created by qinbingbing on 9/9/16.
  */
-public class BookManagerActivity extends FragmentActivity {
-    private TextView mTv;
+public class BookManagerActivity extends FragmentActivity implements View.OnClickListener {
+    private TextView mQueryBookTv;
+    private TextView mAddBookInTv;
+    private TextView mAddBookOutTv;
+    private TextView mAddBookInOutTv;
     private ExecutorService mExecutor = Executors.newCachedThreadPool();
     private IBookManager mBookManager;
     private Handler mHandler = new Handler() {
@@ -39,7 +43,7 @@ public class BookManagerActivity extends FragmentActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Constants.MSG_BOOK_ADDED:
-                    Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " handleMessage add new book:" + msg.obj);
+                    Logger.i(Tag.IPC_AIDL, "msg.obj:" + msg.obj);
                     break;
                 default:
                     break;
@@ -50,7 +54,7 @@ public class BookManagerActivity extends FragmentActivity {
     private IOnBookAddedListener mOnBookAddedListener = new IOnBookAddedListener.Stub() {
         @Override
         public void onBookAdded(Book book) throws RemoteException {
-            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " BookManagerActivity.onBookAdded:" + book);
+            Logger.i(Tag.IPC_AIDL, "book:" + book);
             mHandler.obtainMessage(Constants.MSG_BOOK_ADDED, book).sendToTarget();
         }
     };
@@ -58,8 +62,7 @@ public class BookManagerActivity extends FragmentActivity {
     private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
         @Override
         public void binderDied() {
-            Log.d(Tag.IPC_AIDL, "binderDied");
-            Logger.logThread(Tag.IPC_AIDL);
+            Logger.i(Tag.IPC_AIDL);
             if (mBookManager == null) return;
             mBookManager.asBinder().unlinkToDeath(mDeathRecipient, 0);
             mBookManager = null;
@@ -70,40 +73,21 @@ public class BookManagerActivity extends FragmentActivity {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d(Tag.IPC_AIDL, Logger.getThreadInfo() + " onServiceConnected ComponentName:" + name
+            Logger.i(Tag.IPC_AIDL, "ComponentName:" + name
                     + ", IBinder:" + service);
             mBookManager = IBookManager.Stub.asInterface(service);
-            Log.d(Tag.IPC_AIDL, "IBookManager:" + mBookManager);
+            Logger.i(Tag.IPC_AIDL, "IBookManager:" + mBookManager);
             try {
 //                mBookManager.asBinder().linkToDeath(null, 0);
                 mBookManager.registerListener(mOnBookAddedListener);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                Logger.e(Tag.IPC_AIDL, e);
             }
-            mExecutor.submit(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        List<Book> books = mBookManager.getBooks();
-                        Log.d(Tag.IPC_AIDL, "query books, list type:"
-                                + books.getClass().getCanonicalName()
-                                + ", list:" + books);
-                        Book book = new Book(books.size() + 1, "Mission Impossible");
-                        Log.d(Tag.IPC_AIDL, "add book:" + book);
-                        mBookManager.addBook(book);
-                        books = mBookManager.getBooks();
-                        Log.d(Tag.IPC_AIDL, "query books:" + books);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.d(Tag.IPC_AIDL, "onServiceDisconnected ComponentName:" + name);
-            Logger.logThread(Tag.IPC_AIDL);
+            Logger.i(Tag.IPC_AIDL, "ComponentName:" + name);
             bindService();
         }
     };
@@ -111,21 +95,23 @@ public class BookManagerActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(Tag.IPC_AIDL, "BookManagerActivity.onCreate");
-        setContentView(R.layout.full_screen_text);
-        mTv = (TextView) findViewById(R.id.tv);
-        mTv.setText("BookManagerActivity");
-        mTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bindService();
-            }
-        });
+        Logger.i(Tag.IPC_AIDL);
+        setContentView(R.layout.a_book_manager);
+        mQueryBookTv = findViewById(R.id.tv_query_book);
+        mAddBookInTv = findViewById(R.id.tv_add_book_in);
+        mAddBookOutTv = findViewById(R.id.tv_add_book_out);
+        mAddBookInOutTv = findViewById(R.id.tv_add_book_in_out);
+
+        mQueryBookTv.setOnClickListener(this);
+        mAddBookInTv.setOnClickListener(this);
+        mAddBookOutTv.setOnClickListener(this);
+        mAddBookInOutTv.setOnClickListener(this);
+
         bindService();
     }
 
     private void bindService() {
-        Log.d(Tag.IPC_AIDL, "bindService");
+        Logger.i(Tag.IPC_AIDL);
         Intent intent = new Intent(getApplicationContext(), BookManagerService.class);
         bindService(intent, mServiceConnection, Service.BIND_AUTO_CREATE);
     }
@@ -133,16 +119,107 @@ public class BookManagerActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(Tag.IPC_AIDL, "BookManagerActivity.onDestroy");
+        Logger.i(Tag.IPC_AIDL);
         if (mBookManager != null && mBookManager.asBinder().isBinderAlive()) {
             try {
                 mBookManager.unregisterListener(mOnBookAddedListener);
             } catch (RemoteException e) {
-                e.printStackTrace();
+                Logger.e(Tag.IPC_AIDL, e);
             }
         }
         unbindService(mServiceConnection);
         mExecutor.shutdownNow();
         mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_query_book:
+                queryBook();
+                break;
+            case R.id.tv_add_book_in:
+                addBookIn();
+                break;
+            case R.id.tv_add_book_out:
+                addBookOut();
+                break;
+            case R.id.tv_add_book_in_out:
+                addBookInOut();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void addBookInOut() {
+        Logger.i(Tag.IPC_AIDL);
+        mExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Book> books = mBookManager.getBooks();
+                    Book book = new Book(books.size() + 1, "Client addBookInOut");
+                    Logger.i(Tag.IPC_AIDL, "addBookInOut:" + book);
+                    mBookManager.addBookInOut(book);
+                    Logger.i(Tag.IPC_AIDL, "after addBookInOut:" + book);
+                } catch (RemoteException e) {
+                    Logger.e(Tag.IPC_AIDL, e);
+                }
+            }
+        });
+    }
+
+    private void addBookOut() {
+        Logger.i(Tag.IPC_AIDL);
+        mExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Book> books = mBookManager.getBooks();
+                    Book book = new Book(books.size() + 1, "Client addBookOut");
+                    Logger.i(Tag.IPC_AIDL, "addBookOut:" + book);
+                    mBookManager.addBookOut(book);
+                    Logger.i(Tag.IPC_AIDL, "after addBookOut:" + book);
+                } catch (RemoteException e) {
+                    Logger.e(Tag.IPC_AIDL, e);
+                }
+            }
+        });
+    }
+
+    private void addBookIn() {
+        Logger.i(Tag.IPC_AIDL);
+        mExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Book> books = mBookManager.getBooks();
+                    Book book = new Book(books.size() + 1, "Client addBookIn");
+                    Logger.i(Tag.IPC_AIDL, "addBookIn:" + book);
+                    mBookManager.addBookIn(book);
+                    Logger.i(Tag.IPC_AIDL, "after addBookIn:" + book);
+                } catch (RemoteException e) {
+                    Logger.e(Tag.IPC_AIDL, e);
+                }
+            }
+        });
+    }
+
+    private void queryBook() {
+        Logger.i(Tag.IPC_AIDL);
+        mExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Book> books = mBookManager.getBooks();
+                    Logger.i(Tag.IPC_AIDL, "queryBook list type:"
+                            + books.getClass().getCanonicalName()
+                            + ", list:" + books);
+                } catch (RemoteException e) {
+                    Logger.e(Tag.IPC_AIDL, e);
+                }
+            }
+        });
     }
 }

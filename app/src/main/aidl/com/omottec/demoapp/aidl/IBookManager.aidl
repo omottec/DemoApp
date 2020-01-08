@@ -8,7 +8,11 @@ import com.omottec.demoapp.aidl.IOnBookAddedListener;
 interface IBookManager {
     List<Book> getBooks();
 
-    void addBook(in Book book);
+    void addBookIn(in Book book);
+
+    void addBookOut(out Book book);
+
+    void addBookInOut(inout Book book);
 
     void registerListener(IOnBookAddedListener listener);
 
