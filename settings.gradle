@@ -1,2 +1,2 @@
-include ':app', ':account', ':service'
+include ':app', ':account', ':service', ':aspectj'
 include ':PullToRefresh'
