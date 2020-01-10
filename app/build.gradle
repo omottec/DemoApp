@@ -155,4 +155,8 @@ dependencies {
     implementation 'com.appsee:appsee-android:+'
 
     implementation 'org.aspectj:aspectjrt:1.8.6'
+
+    implementation project(':apt_api')
+    annotationProcessor project(':apt_processor')
+    annotationProcessor "com.google.auto.service:auto-service:1.0-rc4"
 }

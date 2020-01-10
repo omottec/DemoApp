@@ -1,2 +1,2 @@
-include ':app', ':account', ':service', ':aspectj'
+include ':app', ':account', ':service', ':aspectj', ':apt_api', ':apt_processor'
 include ':PullToRefresh'
