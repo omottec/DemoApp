@@ -126,8 +126,11 @@ public class ButterKnifeProcessor extends AbstractProcessor {
             Element element = iterator.next();
             TypeMirror elementTypeMirror = element.asType();
             TypeMirror viewTypeMirror = elementUtils.getTypeElement(VIEW_TYPE).asType();
+            messager.printMessage(Diagnostic.Kind.NOTE,
+                    "elementTypeMirror:" + elementTypeMirror
+                            + ", viewTypeMirror:" + viewTypeMirror);
             if (typeUtils.isSameType(elementTypeMirror, viewTypeMirror)
-                    || typeUtils.isSameType(elementTypeMirror, viewTypeMirror)) {
+                    || typeUtils.isSubtype(elementTypeMirror, viewTypeMirror)) {
                 TypeElement parent = (TypeElement) element.getEnclosingElement();
                 List<Element> parentElements = elementPackage.get(parent);
                 if (parentElements == null) {
