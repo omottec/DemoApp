@@ -1,6 +1,7 @@
 package com.github.omottec.apt.processor;
 
 import com.github.omottec.apt.api.BindView;
+import com.github.omottec.apt.api.ViewBinding;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -27,17 +28,19 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
+// 自动注册未生效
 @AutoService(Processor.class)
 public class ButterKnifeProcessor extends AbstractProcessor {
     private Map<TypeElement, List<Element>> elementPackage = new HashMap<>();
     public static final String VIEW_TYPE = "android.view.View";
-    public static final String VIEW_BINDER = "com.github.omottec.apt.api.ViewBinding";
+    public static final String VIEW_BINDING_TYPE = ViewBinding.class.getCanonicalName();
 
     private Elements elementUtils;
 
@@ -68,9 +71,9 @@ public class ButterKnifeProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        System.out.println("process annotation");
         messager.printMessage(Diagnostic.Kind.NOTE, "process annotation");
         if (annotations == null || annotations.isEmpty()) return false;
+        messager.printMessage(Diagnostic.Kind.NOTE, "annotations:" + annotations);
         elementPackage.clear();
         Set<? extends Element> bindViewElements = roundEnv.getElementsAnnotatedWith(BindView.class);
         collectData(bindViewElements);
@@ -86,15 +89,18 @@ public class ButterKnifeProcessor extends AbstractProcessor {
             List<Element> elements = entry.getValue();
             MethodSpec methodSpec = generateBindViewMethod(parent, elements);
 
-            String packageName = elementUtils.getPackageOf(parent).getQualifiedName().toString();
-            ClassName viewBinderInterface = ClassName.get(elementUtils.getTypeElement(VIEW_BINDER));
+            PackageElement packageElement = elementUtils.getPackageOf(parent);
+            messager.printMessage(Diagnostic.Kind.NOTE,
+                    "typeElement:" + parent + ", packageElement:" + packageElement);
+            String packageName = packageElement.getQualifiedName().toString();
+            ClassName viewBindingInterface = ClassName.get(elementUtils.getTypeElement(VIEW_BINDING_TYPE));
             String className = parent.getQualifiedName().toString().substring(
                     packageName.length() + 1).replace('.', '$');
             ClassName bindingClassName = ClassName.get(packageName, className + "_ViewBinding");
 
             TypeSpec typeSpec = TypeSpec.classBuilder(bindingClassName)
                     .addModifiers(Modifier.PUBLIC)
-                    .addSuperinterface(viewBinderInterface)
+                    .addSuperinterface(viewBindingInterface)
                     .addMethod(methodSpec)
                     .build();
             try {

@@ -15,6 +15,7 @@ public class ButterKnife {
         try {
             Constructor<? extends ViewBinding> constructor = findBindingConstructorForClass(clazz);
             ViewBinding viewBinding = constructor.newInstance();
+            System.out.println("viewBinding:" + viewBinding);
             viewBinding.bindView(object);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
