@@ -293,14 +293,13 @@
         </activity>
 
         <activity android:name=".activity.TraverseViewActivity">
-
-        </activity>
-
-        <activity android:name=".activity.AptActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.AptActivity">
         </activity>
 
         <service android:name=".service.AppService"/>

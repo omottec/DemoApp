@@ -11,6 +11,7 @@ import com.omottec.demoapp.R;
 import com.omottec.demoapp.utils.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TraverseViewActivity extends Activity implements View.OnClickListener {
@@ -61,11 +62,27 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
         traverseViewBreadth(list.toArray(new View[]{}));
     }
 
+    private void traverseBreadthByList(View root) {
+        if (root == null) return;
+        LinkedList<View> list = new LinkedList<>();
+        list.addLast(root);
+        while (list.size() > 0) {
+            View view = list.pollFirst();
+            Logger.i(TAG, view.toString());
+            if (view instanceof ViewGroup) {
+                ViewGroup group = (ViewGroup) view;
+                for (int i = 0; i < group.getChildCount(); i++)
+                    list.offerLast(group.getChildAt(i));
+            }
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_traverse_breadth:
-                traverseViewBreadth(getWindow().getDecorView());
+                traverseBreadthByList(getWindow().getDecorView());
+//                traverseViewBreadth(getWindow().getDecorView());
                 break;
             case R.id.tv_traverse_depth:
                 traverseViewDepth(getWindow().getDecorView());

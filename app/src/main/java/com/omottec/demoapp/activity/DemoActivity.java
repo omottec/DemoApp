@@ -11,7 +11,7 @@ import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
-import com.appsee.Appsee;
+//import com.appsee.Appsee;
 
 /**
  * Created by qinbingbing on 3/31/16.
@@ -22,7 +22,7 @@ public class DemoActivity extends SingleFragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         TimeLogger.methodStart();
         super.onCreate(savedInstanceState);
-        Appsee.start("c0a22dc0a69a4b8e84de241c5bfc1442");
+//        Appsee.start("c0a22dc0a69a4b8e84de241c5bfc1442");
         TimeLogger.methodEnd();
     }
 
