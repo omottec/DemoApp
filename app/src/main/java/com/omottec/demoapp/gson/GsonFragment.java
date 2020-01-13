@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.omottec.demoapp.R;
 
 /**
@@ -18,6 +19,7 @@ import com.omottec.demoapp.R;
 public class GsonFragment extends Fragment {
     private TextView mJsonTv;
     private TextView mGsonObjectTv;
+    private TextView mGenericTv;
 
     @Nullable
     @Override
@@ -25,6 +27,7 @@ public class GsonFragment extends Fragment {
         View view = inflater.inflate(R.layout.f_gson, container, false);
         mJsonTv = (TextView) view.findViewById(R.id.tv_json);
         mGsonObjectTv = (TextView) view.findViewById(R.id.tv_gson_object);
+        mGenericTv = view.findViewById(R.id.tv_gson_generic);
         return view;
     }
 
@@ -56,5 +59,12 @@ public class GsonFragment extends Fragment {
         ResponseEntity responseEntity = new Gson().fromJson(phoneList, ResponseEntity.class);
         mJsonTv.setText(phoneList);
         mGsonObjectTv.setText(responseEntity.toString());
+
+        String skuStr = "{\"code\":0,\"data\":{\"skuid\":111,\"name\":\"阿克苏苹果\",\"price\":10.99}}";
+        Response<GoodsSku> response = new Gson().fromJson(skuStr,
+                new TypeToken<Response<GoodsSku>>(){}.getType());
+        GoodsSku goodsSku = response.data;
+        mGenericTv.setText(goodsSku.toString());
+
     }
 }

@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 
 import com.omottec.demoapp.aspectj.AspectJFragment;
 import com.omottec.demoapp.fragment.PowerOnOffFragment;
+import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.job.JobFragment;
 import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
@@ -68,7 +69,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new NetFragment();
 //        return new JobFragment();
 //        return new PowerOnOffFragment();
-        return new AspectJFragment();
+//        return new AspectJFragment();
+        return new GsonFragment();
     }
 
     @Override
