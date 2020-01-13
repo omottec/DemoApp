@@ -65,9 +65,24 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
     private void traverseBreadthByList(View root) {
         if (root == null) return;
         LinkedList<View> list = new LinkedList<>();
-        list.addLast(root);
+        list.offerLast(root);
         while (list.size() > 0) {
             View view = list.pollFirst();
+            Logger.i(TAG, view.toString());
+            if (view instanceof ViewGroup) {
+                ViewGroup group = (ViewGroup) view;
+                for (int i = 0; i < group.getChildCount(); i++)
+                    list.offerLast(group.getChildAt(i));
+            }
+        }
+    }
+
+    private void traverseDepthByList(View root) {
+        if (root == null) return;
+        LinkedList<View> list = new LinkedList<>();
+        list.offerLast(root);
+        while (list.size() > 0) {
+            View view = list.pollLast();
             Logger.i(TAG, view.toString());
             if (view instanceof ViewGroup) {
                 ViewGroup group = (ViewGroup) view;
@@ -85,7 +100,8 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
 //                traverseViewBreadth(getWindow().getDecorView());
                 break;
             case R.id.tv_traverse_depth:
-                traverseViewDepth(getWindow().getDecorView());
+                traverseDepthByList(getWindow().getDecorView());
+//                traverseViewDepth(getWindow().getDecorView());
                 break;
         }
     }
