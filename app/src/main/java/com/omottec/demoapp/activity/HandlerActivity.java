@@ -10,12 +10,13 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.utils.Logger;
 
 /**
  * Created by qinbingbing on 4/30/16.
  */
 public class HandlerActivity extends FragmentActivity {
-    public static final String TAG = "s";
+    public static final String TAG = "HandlerActivity";
     private Handler mUiHandler;
     private HandlerThread mHandlerThread = new HandlerThread(TAG);
     private Handler mHandler;
@@ -28,13 +29,13 @@ public class HandlerActivity extends FragmentActivity {
         mHandler = new Handler(mHandlerThread.getLooper()) {
             @Override
             public void handleMessage(Message msg) {
-                logIsUiThread("mHandler");
+                Logger.i(TAG, "mHandler");
             }
         };
         mUiHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                logIsUiThread("mUiHandler");
+                Logger.i(TAG, "mUiHandler");
             }
         };
     }
@@ -47,16 +48,21 @@ public class HandlerActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mHandler.sendEmptyMessage(0);
-        mUiHandler.sendEmptyMessage(0);
+//        mHandler.sendEmptyMessage(0);
+//        mUiHandler.sendEmptyMessage(0);
+
+        Logger.i(TAG, "aaa");
+        mUiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Logger.i(TAG, "bbb");
+            }
+        });
+        Logger.i(TAG, "ccc");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    private void logIsUiThread(String msg) {
-        Log.d(TAG, msg + " UiThread:" + (Looper.myLooper() == Looper.getMainLooper()));
     }
 }
