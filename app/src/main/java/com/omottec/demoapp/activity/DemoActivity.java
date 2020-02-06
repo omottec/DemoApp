@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
+import com.omottec.demoapp.anr.AnrFragment;
 import com.omottec.demoapp.aspectj.AspectJFragment;
 import com.omottec.demoapp.fragment.PowerOnOffFragment;
 import com.omottec.demoapp.gson.GsonFragment;
@@ -63,14 +64,14 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new UrlConnectionFragment();
 //        return new SocketFragment();
 //        return new OkhttpFragment();
-//        return new AnrFragment();
+        return new AnrFragment();
 //        return new RetrofitFragment();
 //        return new IDataFragment();
 //        return new NetFragment();
 //        return new JobFragment();
 //        return new PowerOnOffFragment();
 //        return new AspectJFragment();
-        return new GsonFragment();
+//        return new GsonFragment();
     }
 
     @Override
