@@ -16,24 +16,24 @@ import java.util.List;
 
 public class TraverseViewActivity extends Activity implements View.OnClickListener {
     public static final String TAG = "TraverseViewActivity";
-    private TextView mTraverseBreadth;
-    private TextView mTraverseDepth;
-    private TextView mTraverseBreadthList;
-    private TextView mTraverseDepthList;
+    private TextView mTraverseWidthByArray;
+    private TextView mTraverseDepthByRecursive;
+    private TextView mTraverseWidthByDeque;
+    private TextView mTraverseDepthByDeque;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_traverse_view);
-        mTraverseBreadth = (TextView) findViewById(R.id.tv_traverse_breadth);
-        mTraverseDepth = (TextView) findViewById(R.id.tv_traverse_depth);
-        mTraverseBreadthList = findViewById(R.id.tv_traverse_breadth_list);
-        mTraverseDepthList = findViewById(R.id.tv_traverse_depth_list);
+        mTraverseWidthByArray = (TextView) findViewById(R.id.tv_traverse_width_by_array);
+        mTraverseDepthByRecursive = (TextView) findViewById(R.id.tv_traverse_depth_by_recursive);
+        mTraverseWidthByDeque = findViewById(R.id.tv_traverse_width_by_deque);
+        mTraverseDepthByDeque = findViewById(R.id.tv_traverse_depth_by_deque);
 
-        mTraverseBreadth.setOnClickListener(this);
-        mTraverseDepth.setOnClickListener(this);
-        mTraverseBreadthList.setOnClickListener(this);
-        mTraverseDepthList.setOnClickListener(this);
+        mTraverseWidthByArray.setOnClickListener(this);
+        mTraverseDepthByRecursive.setOnClickListener(this);
+        mTraverseWidthByDeque.setOnClickListener(this);
+        mTraverseDepthByDeque.setOnClickListener(this);
     }
 
     @Override
@@ -47,22 +47,26 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
         return view.toString();
     }
 
-    private void traverseViewDepth(View view) {
+    // 可能有栈溢出问题
+    private void traverseDepthByRecursive(View view) {
         if (view == null) return;
         Logger.i(TAG, getViewStr(view));
 
         if (!(view instanceof ViewGroup)) return;
         ViewGroup group = (ViewGroup) view;
-
         for (int i = 0; i < group.getChildCount(); i++)
-            traverseViewDepth(group.getChildAt(i));
+            traverseDepthByRecursive(group.getChildAt(i));
     }
 
-    private void traverseViewBreadth(View... views) {
+    // 内存性能不好
+    private void traverseWidthByArray(View... views) {
         if (views == null || views.length == 0) return;
+        // 打印父层
         for (View view : views)
             Logger.i(TAG, getViewStr(view));
         Logger.i(TAG, "======================");
+
+        // 打印子层
         List<View> list = new ArrayList<>();
         for (View view : views) {
             if (!(view instanceof ViewGroup)) continue;
@@ -70,35 +74,41 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
             for (int i = 0; i < group.getChildCount(); i++)
                 list.add(group.getChildAt(i));
         }
-        traverseViewBreadth(list.toArray(new View[]{}));
+        traverseWidthByArray(list.toArray(new View[]{}));
     }
 
-    private void traverseBreadthByList(View root) {
+    // 利用Deque深度遍历二叉树，操作双端
+    private void traversWidthByDeque(View root) {
         if (root == null) return;
-        LinkedList<View> list = new LinkedList<>();
-        list.offerLast(root);
-        while (list.size() > 0) {
-            View view = list.pollFirst();
+        // 需要借助双端队列实现，移除父节点时把子节点添加进来
+        LinkedList<View> queue = new LinkedList<>();
+        // add remove get VS offer poll peek
+        queue.offerFirst(root);
+        while (!queue.isEmpty()) {
+            View view = queue.pollLast();
             Logger.i(TAG, getViewStr(view));
             if (view instanceof ViewGroup) {
                 ViewGroup group = (ViewGroup) view;
                 for (int i = 0; i < group.getChildCount(); i++)
-                    list.offerLast(group.getChildAt(i));
+                    queue.offerFirst(group.getChildAt(i));
             }
         }
     }
 
-    private void traverseDepthByList(View root) {
+    // 利用Deque深度遍历二叉树，只操作单端
+    private void traverseDepthByDeque(View root) {
         if (root == null) return;
-        LinkedList<View> list = new LinkedList<>();
-        list.offerLast(root);
-        while (list.size() > 0) {
-            View view = list.pollLast();
+        // 需要借助双端队列实现，移除父节点时把子节点添加进来
+        LinkedList<View> queue = new LinkedList<>();
+        // add remove get VS offer poll peek
+        queue.offerLast(root);
+        while (!queue.isEmpty()) {
+            View view = queue.pollLast();
             Logger.i(TAG, getViewStr(view));
             if (view instanceof ViewGroup) {
                 ViewGroup group = (ViewGroup) view;
-                for (int i = 0; i < group.getChildCount(); i++)
-                    list.offerLast(group.getChildAt(i));
+                for (int i = group.getChildCount() - 1; i >= 0; i--)
+                    queue.offerLast(group.getChildAt(i));
             }
         }
     }
@@ -106,17 +116,17 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_traverse_breadth:
-                traverseViewBreadth(getWindow().getDecorView());
+            case R.id.tv_traverse_width_by_array:
+                traverseWidthByArray(getWindow().getDecorView());
                 break;
-            case R.id.tv_traverse_depth:
-                traverseViewDepth(getWindow().getDecorView());
+            case R.id.tv_traverse_width_by_deque:
+                traversWidthByDeque(getWindow().getDecorView());
                 break;
-            case R.id.tv_traverse_breadth_list:
-                traverseBreadthByList(getWindow().getDecorView());
+            case R.id.tv_traverse_depth_by_recursive:
+                traverseDepthByRecursive(getWindow().getDecorView());
                 break;
-            case R.id.tv_traverse_depth_list:
-                traverseDepthByList(getWindow().getDecorView());
+            case R.id.tv_traverse_depth_by_deque:
+                traverseDepthByDeque(getWindow().getDecorView());
                 break;
         }
     }

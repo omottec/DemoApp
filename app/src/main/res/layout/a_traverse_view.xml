@@ -12,11 +12,11 @@
         android:layout_margin="4dp"
         android:tag="B">
         <TextView
-            android:id="@+id/tv_traverse_breadth"
+            android:id="@+id/tv_traverse_width_by_array"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="tv_traverse_breadth"
+            android:text="tv_traverse_width_by_array"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:background="@android:color/holo_red_light"
@@ -24,18 +24,18 @@
             android:tag="E">
         </TextView>
         <TextView
-            android:id="@+id/tv_traverse_depth"
+            android:id="@+id/tv_traverse_depth_by_recursive"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="tv_traverse_depth"
+            android:text="tv_traverse_depth_by_recursive"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:background="@android:color/holo_red_light"
             android:layout_margin="4dp"
             android:tag="F"/>
         <TextView
-            android:id="@+id/tv_traverse_depth_list"
+            android:id="@+id/tv_traverse_depth_by_deque"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -43,7 +43,7 @@
             android:textColor="@android:color/white"
             android:background="@android:color/holo_red_light"
             android:layout_margin="4dp"
-            android:text="tv_traverse_depth_list"
+            android:text="tv_traverse_depth_by_deque"
             android:tag="G">
         </TextView>
     </LinearLayout>
@@ -65,13 +65,13 @@
         android:layout_margin="4dp"
         android:tag="D">
         <TextView
-            android:id="@+id/tv_traverse_breadth_list"
+            android:id="@+id/tv_traverse_width_by_deque"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
             android:layout_margin="4dp"
-            android:text="tv_traverse_breadth_list"
+            android:text="tv_traverse_width_by_deque"
             android:tag="H">
         </TextView>
         <TextView
