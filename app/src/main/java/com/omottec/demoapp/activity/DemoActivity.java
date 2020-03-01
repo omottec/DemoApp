@@ -9,6 +9,7 @@ import com.omottec.demoapp.aspectj.AspectJFragment;
 import com.omottec.demoapp.fragment.PowerOnOffFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.job.JobFragment;
+import com.omottec.demoapp.memory.ashmem.AshmemClientFragment;
 import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.utils.TimeLogger;
@@ -42,8 +43,10 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new StorageFragment();
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
+
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
+        return new AshmemClientFragment();
 //        return new NotificationFragment();
 //        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
@@ -64,7 +67,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new UrlConnectionFragment();
 //        return new SocketFragment();
 //        return new OkhttpFragment();
-        return new AnrFragment();
+//        return new AnrFragment();
 //        return new RetrofitFragment();
 //        return new IDataFragment();
 //        return new NetFragment();
