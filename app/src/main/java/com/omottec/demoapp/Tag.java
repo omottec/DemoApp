@@ -56,4 +56,6 @@ public final class Tag {
     public static final String REUSE = "reuse";
 
     public static final String ASHMEM = "ashmem";
+
+    public static final String THREAD_POOL = "thread_pool";
 }

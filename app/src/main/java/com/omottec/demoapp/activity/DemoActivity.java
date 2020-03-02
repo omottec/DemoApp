@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 
 import com.omottec.demoapp.anr.AnrFragment;
 import com.omottec.demoapp.aspectj.AspectJFragment;
+import com.omottec.demoapp.concurrent.ThreadPoolFragment;
 import com.omottec.demoapp.fragment.PowerOnOffFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.job.JobFragment;
@@ -44,9 +45,11 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
 
+
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
-        return new AshmemClientFragment();
+//        return new AshmemClientFragment();
+
 //        return new NotificationFragment();
 //        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
@@ -67,14 +70,19 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new UrlConnectionFragment();
 //        return new SocketFragment();
 //        return new OkhttpFragment();
-//        return new AnrFragment();
 //        return new RetrofitFragment();
-//        return new IDataFragment();
 //        return new NetFragment();
-//        return new JobFragment();
+
+//        return new GsonFragment();
+
+//        return new IDataFragment();
 //        return new PowerOnOffFragment();
 //        return new AspectJFragment();
-//        return new GsonFragment();
+//        return new AnrFragment();
+
+
+//        return new JobFragment();
+        return new ThreadPoolFragment();
     }
 
     @Override
