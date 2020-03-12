@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -37,7 +38,7 @@ import java.util.List;
 /**
  * Created by qinbingbing on 3/23/16.
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     public static List<Activity> sLeakActivities = new ArrayList<>();
     private static Context sAppContext;
     private static Handler sUiHandler;
