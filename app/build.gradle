@@ -111,7 +111,7 @@ variants.all { variant ->
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     implementation project(':PullToRefresh')
     implementation project(':service')

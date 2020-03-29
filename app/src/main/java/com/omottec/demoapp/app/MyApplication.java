@@ -11,11 +11,22 @@ import android.os.Handler;
 import android.os.Process;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.profilo.controllers.external.ExternalController;
+import com.facebook.profilo.controllers.external.api.ExternalTraceControl;
+import com.facebook.profilo.core.BaseTraceProvider;
+import com.facebook.profilo.core.TraceController;
+import com.facebook.profilo.core.TraceOrchestrator;
+import com.facebook.profilo.provider.atrace.SystraceProvider;
+import com.facebook.profilo.provider.stacktrace.StackFrameThread;
+import com.facebook.profilo.provider.systemcounters.SystemCounterThread;
+import com.facebook.profilo.provider.threadmetadata.ThreadMetadataProvider;
+import com.facebook.soloader.SoLoader;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
@@ -32,6 +43,7 @@ import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
 import com.squareup.leakcanary.LeakCanary;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +103,48 @@ public class MyApplication extends MultiDexApplication {
             }
         }, 3000);
         TimeLogger.methodEnd();
+
+        // facebook profilo
+        initProfilo();
     }
+
+    private void initProfilo() {
+        try {
+            // SoLoader is a robust native code loading library.
+            SoLoader.init(this.getApplicationContext(), 0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        SparseArray<TraceController> controllers = new SparseArray<>(1);
+// We want the "ExternalController" with the id specified by TRIGGER_EXTERNAL.
+        controllers.put(ExternalController.TRIGGER_EXTERNAL, new ExternalController());
+        BaseTraceProvider[] providers = new BaseTraceProvider[] {
+                new SystemCounterThread(),
+                new StackFrameThread(this),
+                new SystraceProvider(),
+                new ThreadMetadataProvider(),
+        };
+        TraceOrchestrator.initialize(
+                this.getApplicationContext(),
+                /* configProvider */ null,  // we won't be using the remote configurability in this example
+                TraceOrchestrator.MAIN_PROCESS_NAME,
+                /* isMainProcess */ true,
+                providers,
+                controllers,
+                null);
+// Optional, will get called when there's a trace
+// to be uploaded from this app. Without it, traces
+// will be rotated and kept on device.
+        TraceOrchestrator
+                .get()
+                .setBackgroundUploadService(new MyUploadService());
+        ExternalTraceControl.startTrace(
+                StackFrameThread.PROVIDER_STACK_FRAME
+                        | SystemCounterThread.PROVIDER_SYSTEM_COUNTERS
+                        | SystraceProvider.PROVIDER_ATRACE,
+                /*cpuSamplingRateMs*/ 20);
+    }
+
 
     private void initImmersive() {
 //        registerActivityLifecycleCallbacks(new ImmersiveLifecycleCallbacks());

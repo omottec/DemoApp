@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
+import com.facebook.profilo.controllers.external.api.ExternalTraceControl;
 import com.omottec.demoapp.anr.AnrFragment;
 import com.omottec.demoapp.aspectj.AspectJFragment;
 import com.omottec.demoapp.concurrent.ThreadPoolFragment;
@@ -13,6 +14,7 @@ import com.omottec.demoapp.job.JobFragment;
 import com.omottec.demoapp.memory.ashmem.AshmemClientFragment;
 import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
+import com.omottec.demoapp.perf.ProfiloFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
 //import com.appsee.Appsee;
@@ -45,10 +47,11 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new GetImeiFragment();
 //        return new CardViewFragment();
 
-
+//        perf
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
 //        return new AshmemClientFragment();
+        return new ProfiloFragment();
 
 //        return new NotificationFragment();
 //        return new PtrPicRecyclerFragment();
@@ -82,7 +85,7 @@ public class DemoActivity extends SingleFragmentActivity {
 
 
 //        return new JobFragment();
-        return new ThreadPoolFragment();
+//        return new ThreadPoolFragment();
     }
 
     @Override
