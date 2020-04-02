@@ -51,7 +51,9 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryFragment();
 //        return new MemoryInfoFragment();
 //        return new AshmemClientFragment();
-        return new ProfiloFragment();
+//        return new ProfiloFragment();
+        return new AnrFragment();
+
 
 //        return new NotificationFragment();
 //        return new PtrPicRecyclerFragment();
@@ -81,7 +83,6 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new IDataFragment();
 //        return new PowerOnOffFragment();
 //        return new AspectJFragment();
-//        return new AnrFragment();
 
 
 //        return new JobFragment();
