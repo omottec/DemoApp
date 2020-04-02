@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Choreographer;
 import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -16,7 +17,6 @@ import com.omottec.demoapp.utils.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -41,6 +41,20 @@ public class PtrPicRecyclerFragment extends BaseFragment implements PullToRefres
     private volatile int mOffset;
     private int mTotal = 30 * 30;
     private long mFirstLoadTime = SystemClock.elapsedRealtime();
+    private Choreographer.FrameCallback mFpsFrameCallback = new Choreographer.FrameCallback() {
+        @Override
+        public void doFrame(long frameTimeNanos) {
+            Logger.i(TAG, "frameTimeNanos:" + frameTimeNanos);
+            Choreographer.getInstance().postFrameCallback(this);
+        }
+    };
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Choreographer.getInstance().postFrameCallback(mFpsFrameCallback);
+    }
 
     @Override
     protected View createContentView() {

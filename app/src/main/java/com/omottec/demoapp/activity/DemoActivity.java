@@ -16,6 +16,7 @@ import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.perf.ProfiloFragment;
 import com.omottec.demoapp.utils.TimeLogger;
+import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
 
 //import com.appsee.Appsee;
 
@@ -52,11 +53,11 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryInfoFragment();
 //        return new AshmemClientFragment();
 //        return new ProfiloFragment();
-        return new AnrFragment();
+//        return new AnrFragment();
 
 
 //        return new NotificationFragment();
-//        return new PtrPicRecyclerFragment();
+        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();
