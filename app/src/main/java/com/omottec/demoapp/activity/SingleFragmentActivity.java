@@ -13,6 +13,11 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onCreate();
+//        onCreateV1();
+    }
+
+    private void onCreate() {
         setContentView(R.layout.activity_fragment);
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
@@ -20,8 +25,16 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
         if (fragment == null) {
             fragment = createFragment();
             manager.beginTransaction()
-                .add(R.id.fragmentContainer, fragment)
-                .commit();
+                    .add(R.id.fragmentContainer, fragment)
+                    .commit();
         }
+    }
+
+    private void onCreateV1() {
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment fragment = createFragment();
+        manager.beginTransaction()
+                .add(android.R.id.content, fragment)
+                .commit();
     }
 }
