@@ -32,6 +32,7 @@ import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
 import com.omottec.demoapp.gesture.ActivityLifecycleCallbacksForGesture;
+import com.omottec.demoapp.hook.ResTracker;
 import com.omottec.demoapp.immersive.ImmersiveActivity;
 import com.omottec.demoapp.immersive.ImmersiveLifecycleCallbacks;
 import com.omottec.demoapp.memory.MemoryUtils;
@@ -67,6 +68,7 @@ public class MyApplication extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        ResTracker.getInstance().hookLoadRes();
         Log.d(Tag.APP_PROCESS, this + " attachBaseContext");
         Log.d(Tag.APP_PROCESS, "mIsMainProcess before call:" + mIsMainProcess);
         mIsMainProcess = AppUtils.isMainProcess(this, Process.myPid());
