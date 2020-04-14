@@ -1,5 +1,6 @@
 package com.omottec.demoapp.hook;
 
+import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 
@@ -33,7 +34,9 @@ public class ResTracker {
     private static Set<String> sResFiles = new CopyOnWriteArraySet<>();
 
     public void hookLoadRes() {
-        Log.i(TAG, "hookLoadRes");
+        int sdkInt = Build.VERSION.SDK_INT;
+        Log.i(TAG, "hookLoadRes sdkInt:" + sdkInt);
+        if (sdkInt <= Build.VERSION_CODES.KITKAT || sdkInt > Build.VERSION_CODES.O_MR1) return;
         hookResourcesImpl();
         hookAssetManager();
         hookSystem();
@@ -122,7 +125,7 @@ public class ResTracker {
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             super.beforeHookedMethod(param);
                             sResFiles.add(param.args[0].toString());
-                            Log.i(TAG, "AssetManager#load filename:" + param.args[0]);
+                            Log.i(TAG, "System#load filename:" + param.args[0]);
                         }
                     });
             DexposedBridge.hookAllMethods(clazz,
@@ -132,7 +135,7 @@ public class ResTracker {
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             super.beforeHookedMethod(param);
                             sResFiles.add(param.args[0].toString());
-                            Log.i(TAG, "AssetManager#loadLibrary libname:" + param.args[0]);
+                            Log.i(TAG, "System#loadLibrary libname:" + param.args[0]);
                         }
                     });
         } catch (ClassNotFoundException e) {
