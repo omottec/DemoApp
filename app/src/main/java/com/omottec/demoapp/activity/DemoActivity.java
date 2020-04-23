@@ -8,6 +8,7 @@ import com.facebook.profilo.controllers.external.api.ExternalTraceControl;
 import com.omottec.demoapp.anr.AnrFragment;
 import com.omottec.demoapp.aspectj.AspectJFragment;
 import com.omottec.demoapp.concurrent.ThreadPoolFragment;
+import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.fragment.PowerOnOffFragment;
 import com.omottec.demoapp.gson.GsonFragment;
 import com.omottec.demoapp.job.JobFragment;
@@ -54,10 +55,11 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new AshmemClientFragment();
 //        return new ProfiloFragment();
 //        return new AnrFragment();
+        return new MultiProcessFragment();
 
 
 //        return new NotificationFragment();
-        return new PtrPicRecyclerFragment();
+//        return new PtrPicRecyclerFragment();
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();

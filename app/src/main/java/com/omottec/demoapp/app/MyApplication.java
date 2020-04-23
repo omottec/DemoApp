@@ -40,6 +40,7 @@ import com.omottec.demoapp.memory.OomMonitor;
 import com.omottec.demoapp.memory.OomObserver;
 import com.omottec.demoapp.utils.AppUtils;
 import com.omottec.demoapp.utils.Logger;
+import com.omottec.demoapp.utils.ProcessUtils;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -70,6 +71,7 @@ public class MyApplication extends MultiDexApplication {
         super.attachBaseContext(base);
         ResTracker.getInstance().hookLoadRes();
         Log.d(Tag.APP_PROCESS, this + " attachBaseContext");
+        ProcessUtils.testApi(this);
         Log.d(Tag.APP_PROCESS, "mIsMainProcess before call:" + mIsMainProcess);
         mIsMainProcess = AppUtils.isMainProcess(this, Process.myPid());
         Log.d(Tag.APP_PROCESS, "mIsMainProcess after call:" + mIsMainProcess);
