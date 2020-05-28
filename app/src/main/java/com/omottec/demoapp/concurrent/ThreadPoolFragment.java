@@ -1,6 +1,7 @@
 package com.omottec.demoapp.concurrent;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,6 +62,7 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
 
     private TextView mCountTv;
     private TextView mAddTaskTv;
+    private TextView mAddCrashTaskTv;
 
     @Nullable
     @Override
@@ -72,8 +74,10 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mCountTv = view.findViewById(R.id.tv_count);
         mAddTaskTv = view.findViewById(R.id.tv_add_task);
+        mAddCrashTaskTv = view.findViewById(R.id.tv_add_carsh_task);
         mCountTv.setOnClickListener(this);
         mAddTaskTv.setOnClickListener(this);
+        mAddCrashTaskTv.setOnClickListener(this);
 
         Logger.i(Tag.THREAD_POOL, "CPU_COUNT:" + CPU_COUNT
                 + ", CORE_POOL_SIZE:" + CORE_POOL_SIZE
@@ -89,6 +93,9 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
             case R.id.tv_add_task:
                 onClickAddTask();
                 break;
+            case R.id.tv_add_carsh_task:
+                onClickAddCrashTask();
+                break;
             default:
                 break;
         }
@@ -97,6 +104,10 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
     private void onClickAddTask() {
         THREAD_POOL_EXECUTOR.execute(new NamedRunnable());
         showCount();
+    }
+
+    private void onClickAddCrashTask() {
+        THREAD_POOL_EXECUTOR.submit(new CrashRunnable());
     }
 
     private void showCount() {
@@ -131,6 +142,15 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
             Logger.i(Tag.THREAD_POOL, "Task #" + mTaskId + " start execute by " + Thread.currentThread());
             SystemClock.sleep(2 * 60 * 60 * 1000);
             Logger.i(Tag.THREAD_POOL, "Task #" + mTaskId + " end execute by " + Thread.currentThread());
+        }
+    }
+
+    private static class CrashRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            Logger.i(Tag.THREAD_POOL);
+            throw new IllegalStateException("CrashRunnable IllegalState");
         }
     }
 }

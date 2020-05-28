@@ -57,7 +57,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new ProfiloFragment();
 //        return new AnrFragment();
 //        return new MultiProcessFragment();
-        return new LooperFragment();
+//        return new LooperFragment();
 
 
 //        return new NotificationFragment();
@@ -91,7 +91,7 @@ public class DemoActivity extends SingleFragmentActivity {
 
 
 //        return new JobFragment();
-//        return new ThreadPoolFragment();
+        return new ThreadPoolFragment();
     }
 
     @Override
