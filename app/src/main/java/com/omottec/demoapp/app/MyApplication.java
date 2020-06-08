@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Process;
 import android.support.multidex.MultiDexApplication;
@@ -46,8 +47,11 @@ import com.omottec.demoapp.utils.UiUtils;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by qinbingbing on 3/23/16.
@@ -68,6 +72,15 @@ public class MyApplication extends MultiDexApplication {
 
     @Override
     protected void attachBaseContext(Context base) {
+        SimpleDateFormat dateFormat =
+            new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
+        String logDate = dateFormat.format(new Date());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Debug.startMethodTracingSampling(
+                base.getExternalCacheDir().getAbsolutePath() + "/demoapp_" + logDate,
+                50 * 1024 * 1024,
+                10);
+        }
         super.attachBaseContext(base);
         ResTracker.getInstance().hookLoadRes();
         Log.d(Tag.APP_PROCESS, this + " attachBaseContext");

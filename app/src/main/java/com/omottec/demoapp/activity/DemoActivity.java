@@ -1,6 +1,7 @@
 package com.omottec.demoapp.activity;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
@@ -41,6 +42,12 @@ public class DemoActivity extends SingleFragmentActivity {
         super.onResume();
         TimeLogger.methodEnd();
         TimeLogger.dump();
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Debug.stopMethodTracing();
+            }
+        }, 5000);
     }
 
     @Override
