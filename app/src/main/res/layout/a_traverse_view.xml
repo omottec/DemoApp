@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.omottec.demoapp.view.log.LogLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:tag="A">
-    <LinearLayout
+    android:tag="A"
+    android:background="@android:color/white">
+    <com.omottec.demoapp.view.log.LogLinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:layout_margin="4dp"
-        android:tag="B">
-        <TextView
+        android:tag="B"
+        android:background="@android:color/white">
+        <com.omottec.demoapp.view.log.LogTextView
             android:id="@+id/tv_traverse_width_by_array"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -21,9 +24,8 @@
             android:textColor="@android:color/white"
             android:background="@android:color/holo_red_light"
             android:layout_margin="4dp"
-            android:tag="E">
-        </TextView>
-        <TextView
+            android:tag="E"/>
+        <com.omottec.demoapp.view.log.LogTextView
             android:id="@+id/tv_traverse_depth_by_recursive"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -34,7 +36,7 @@
             android:background="@android:color/holo_red_light"
             android:layout_margin="4dp"
             android:tag="F"/>
-        <TextView
+        <com.omottec.demoapp.view.log.LogTextView
             android:id="@+id/tv_traverse_depth_by_deque"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -44,11 +46,10 @@
             android:background="@android:color/holo_red_light"
             android:layout_margin="4dp"
             android:text="tv_traverse_depth_by_deque"
-            android:tag="G">
-        </TextView>
-    </LinearLayout>
+            android:tag="G"/>
+    </com.omottec.demoapp.view.log.LogLinearLayout>
 
-    <LinearLayout
+    <com.omottec.demoapp.view.log.LogLinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -57,14 +58,15 @@
         android:background="@android:color/holo_green_light"
         android:tag="C"/>
 
-    <LinearLayout
+    <com.omottec.demoapp.view.log.LogLinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_margin="4dp"
-        android:tag="D">
-        <TextView
+        android:tag="D"
+        android:background="@android:color/white">
+        <com.omottec.demoapp.view.log.LogTextView
             android:id="@+id/tv_traverse_width_by_deque"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -72,16 +74,14 @@
             android:background="@android:color/holo_blue_light"
             android:layout_margin="4dp"
             android:text="tv_traverse_width_by_deque"
-            android:tag="H">
-        </TextView>
-        <TextView
+            android:tag="H"/>
+        <com.omottec.demoapp.view.log.LogTextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/holo_blue_light"
             android:layout_margin="4dp"
-            android:tag="I">
-        </TextView>
-    </LinearLayout>
+            android:tag="I"/>
+    </com.omottec.demoapp.view.log.LogLinearLayout>
 
-</LinearLayout>
+</com.omottec.demoapp.view.log.LogLinearLayout>

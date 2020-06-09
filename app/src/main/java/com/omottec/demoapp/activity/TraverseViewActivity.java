@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -37,13 +38,19 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(TAG, "onRestoreInstanceState");
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
 
     private String getViewStr(View view) {
         if (view.getTag() != null)
-            return view.getTag().toString();
+            return view.getTag().toString() + "|" + view.toString();
         return view.toString();
     }
 
