@@ -77,7 +77,7 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
         traverseWidthByArray(list.toArray(new View[]{}));
     }
 
-    // 利用Deque深度遍历二叉树，操作双端
+    // 利用Deque广度遍历二叉树，操作双端
     private void traversWidthByDeque(View root) {
         if (root == null) return;
         // 需要借助双端队列实现，移除父节点时把子节点添加进来

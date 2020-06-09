@@ -75,10 +75,7 @@
         </activity>
 
         <activity android:name=".activity.DemoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".lifecycle.LifeCycleActivity1">
@@ -263,7 +260,10 @@
         </activity>
 
         <activity android:name=".activity.TraverseViewActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".activity.AptActivity">
