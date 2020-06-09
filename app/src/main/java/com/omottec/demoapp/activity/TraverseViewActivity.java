@@ -26,10 +26,10 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_traverse_view);
-        mTraverseWidthByArray = (TextView) findViewById(R.id.tv_traverse_width_by_array);
-        mTraverseDepthByRecursive = (TextView) findViewById(R.id.tv_traverse_depth_by_recursive);
-        mTraverseWidthByDeque = findViewById(R.id.tv_traverse_width_by_deque);
-        mTraverseDepthByDeque = findViewById(R.id.tv_traverse_depth_by_deque);
+        mTraverseWidthByArray = (TextView) findViewById(R.id.tv_bfs_by_array);
+        mTraverseDepthByRecursive = (TextView) findViewById(R.id.tv_dfs_by_recursive);
+        mTraverseWidthByDeque = findViewById(R.id.tv_bfs_by_deque);
+        mTraverseDepthByDeque = findViewById(R.id.tv_dfs_by_deque);
 
         mTraverseWidthByArray.setOnClickListener(this);
         mTraverseDepthByRecursive.setOnClickListener(this);
@@ -55,18 +55,18 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
     }
 
     // 可能有栈溢出问题
-    private void traverseDepthByRecursive(View view) {
+    private void dfsByRecursive(View view) {
         if (view == null) return;
         Logger.i(TAG, getViewStr(view));
 
         if (!(view instanceof ViewGroup)) return;
         ViewGroup group = (ViewGroup) view;
         for (int i = 0; i < group.getChildCount(); i++)
-            traverseDepthByRecursive(group.getChildAt(i));
+            dfsByRecursive(group.getChildAt(i));
     }
 
     // 内存性能不好
-    private void traverseWidthByArray(View... views) {
+    private void bfsByArray(View... views) {
         if (views == null || views.length == 0) return;
         // 打印父层
         for (View view : views)
@@ -81,11 +81,11 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
             for (int i = 0; i < group.getChildCount(); i++)
                 list.add(group.getChildAt(i));
         }
-        traverseWidthByArray(list.toArray(new View[]{}));
+        bfsByArray(list.toArray(new View[]{}));
     }
 
-    // 利用Deque广度遍历二叉树，操作双端
-    private void traversWidthByDeque(View root) {
+    // 利用Deque广度遍历二叉树(breadth first search)，操作双端
+    private void bfsByDeque(View root) {
         if (root == null) return;
         // 需要借助双端队列实现，移除父节点时把子节点添加进来
         LinkedList<View> queue = new LinkedList<>();
@@ -102,8 +102,8 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
         }
     }
 
-    // 利用Deque深度遍历二叉树，只操作单端
-    private void traverseDepthByDeque(View root) {
+    // 利用Deque深度遍历二叉树(depth first search)，只操作单端
+    private void dfsByDeque(View root) {
         if (root == null) return;
         // 需要借助双端队列实现，移除父节点时把子节点添加进来
         LinkedList<View> queue = new LinkedList<>();
@@ -123,17 +123,17 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_traverse_width_by_array:
-                traverseWidthByArray(getWindow().getDecorView());
+            case R.id.tv_bfs_by_array:
+                bfsByArray(getWindow().getDecorView());
                 break;
-            case R.id.tv_traverse_width_by_deque:
-                traversWidthByDeque(getWindow().getDecorView());
+            case R.id.tv_bfs_by_deque:
+                bfsByDeque(getWindow().getDecorView());
                 break;
-            case R.id.tv_traverse_depth_by_recursive:
-                traverseDepthByRecursive(getWindow().getDecorView());
+            case R.id.tv_dfs_by_recursive:
+                dfsByRecursive(getWindow().getDecorView());
                 break;
-            case R.id.tv_traverse_depth_by_deque:
-                traverseDepthByDeque(getWindow().getDecorView());
+            case R.id.tv_dfs_by_deque:
+                dfsByDeque(getWindow().getDecorView());
                 break;
         }
     }
