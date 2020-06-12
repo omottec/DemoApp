@@ -42,12 +42,12 @@ public class DemoActivity extends SingleFragmentActivity {
         super.onResume();
         TimeLogger.methodEnd();
         TimeLogger.dump();
-        getWindow().getDecorView().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Debug.stopMethodTracing();
-            }
-        }, 5000);
+        //getWindow().getDecorView().postDelayed(new Runnable() {
+        //    @Override
+        //    public void run() {
+        //        Debug.stopMethodTracing();
+        //    }
+        //}, 5000);
     }
 
     @Override

@@ -76,10 +76,10 @@ public class MyApplication extends MultiDexApplication {
             new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
         String logDate = dateFormat.format(new Date());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Debug.startMethodTracingSampling(
-                base.getExternalCacheDir().getAbsolutePath() + "/demoapp_" + logDate,
-                50 * 1024 * 1024,
-                10);
+            //Debug.startMethodTracingSampling(
+            //    base.getExternalCacheDir().getAbsolutePath() + "/demoapp_" + logDate,
+            //    50 * 1024 * 1024,
+            //    10);
         }
         super.attachBaseContext(base);
         ResTracker.getInstance().hookLoadRes();
