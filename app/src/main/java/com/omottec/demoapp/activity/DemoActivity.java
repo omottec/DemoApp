@@ -1,25 +1,11 @@
 package com.omottec.demoapp.activity;
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
-import com.facebook.profilo.controllers.external.api.ExternalTraceControl;
-import com.omottec.demoapp.anr.AnrFragment;
-import com.omottec.demoapp.aspectj.AspectJFragment;
-import com.omottec.demoapp.concurrent.ThreadPoolFragment;
-import com.omottec.demoapp.fragment.LooperFragment;
-import com.omottec.demoapp.fragment.MultiProcessFragment;
-import com.omottec.demoapp.fragment.PowerOnOffFragment;
-import com.omottec.demoapp.gson.GsonFragment;
-import com.omottec.demoapp.job.JobFragment;
-import com.omottec.demoapp.memory.ashmem.AshmemClientFragment;
-import com.omottec.demoapp.net.NetFragment;
-import com.omottec.demoapp.net.OkhttpFragment;
-import com.omottec.demoapp.perf.ProfiloFragment;
+import com.omottec.demoapp.log.LogTagFragment;
 import com.omottec.demoapp.utils.TimeLogger;
-import com.omottec.demoapp.view.recycler.PtrPicRecyclerFragment;
 
 //import com.appsee.Appsee;
 
@@ -81,7 +67,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RootFragment();
 //        return new PropFragment();
 //        return new RxJavaFragment();
-
+        return new LogTagFragment();
 
         // Net
 //        return new UrlConnectionFragment();
@@ -98,7 +84,7 @@ public class DemoActivity extends SingleFragmentActivity {
 
 
 //        return new JobFragment();
-        return new ThreadPoolFragment();
+//        return new ThreadPoolFragment();
     }
 
     @Override
