@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
 import com.omottec.demoapp.log.LogTagFragment;
+import com.omottec.demoapp.memory.BitmapFragment;
+import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
 //import com.appsee.Appsee;
@@ -51,6 +53,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new AnrFragment();
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
+        return new BitmapFragment();
 
 
 //        return new NotificationFragment();
@@ -67,7 +70,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new RootFragment();
 //        return new PropFragment();
 //        return new RxJavaFragment();
-        return new LogTagFragment();
+//        return new LogTagFragment();
 
         // Net
 //        return new UrlConnectionFragment();
