@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
+import com.omottec.demoapp.cpu.CpuFragment;
 import com.omottec.demoapp.log.LogTagFragment;
 import com.omottec.demoapp.memory.BitmapFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
@@ -53,7 +54,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new AnrFragment();
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
-        return new BitmapFragment();
+//        return new BitmapFragment();
+        return new CpuFragment();
 
 
 //        return new NotificationFragment();
