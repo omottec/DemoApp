@@ -1,10 +1,12 @@
 package com.omottec.demoapp.ipc.aidl;
 
+import android.app.ActivityManager;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -21,22 +23,30 @@ import com.omottec.demoapp.aidl.Book;
 import com.omottec.demoapp.aidl.IBookManager;
 import com.omottec.demoapp.aidl.IOnBookAddedListener;
 import com.omottec.demoapp.Constants;
-import com.omottec.demoapp.touch.TouchActivity;
 import com.omottec.demoapp.utils.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by qinbingbing on 9/9/16.
  */
 public class BookManagerActivity extends FragmentActivity implements View.OnClickListener {
+    public static final String TAG = "BookManagerActivity";
     private TextView mQueryBookTv;
     private TextView mAddBookInTv;
     private TextView mAddBookOutTv;
     private TextView mAddBookInOutTv;
+    private TextView mGetProcPssTv;
     private ExecutorService mExecutor = Executors.newCachedThreadPool();
+    private ScheduledExecutorService mScheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     private IBookManager mBookManager;
     private Handler mHandler = new Handler() {
         @Override
@@ -101,11 +111,13 @@ public class BookManagerActivity extends FragmentActivity implements View.OnClic
         mAddBookInTv = findViewById(R.id.tv_add_book_in);
         mAddBookOutTv = findViewById(R.id.tv_add_book_out);
         mAddBookInOutTv = findViewById(R.id.tv_add_book_in_out);
+        mGetProcPssTv = findViewById(R.id.tv_get_proc_pss);
 
         mQueryBookTv.setOnClickListener(this);
         mAddBookInTv.setOnClickListener(this);
         mAddBookOutTv.setOnClickListener(this);
         mAddBookInOutTv.setOnClickListener(this);
+        mGetProcPssTv.setOnClickListener(this);
 
         bindService();
     }
@@ -147,8 +159,96 @@ public class BookManagerActivity extends FragmentActivity implements View.OnClic
             case R.id.tv_add_book_in_out:
                 addBookInOut();
                 break;
+            case R.id.tv_get_proc_pss:
+                getProcPss();
+                break;
             default:
                 break;
+        }
+    }
+
+    private void getProcPss() {
+        mScheduledExecutor.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                Log.i(TAG, "----------------------------------------");
+                ActivityManager am =
+                    (ActivityManager) getApplicationContext().getSystemService(Service.ACTIVITY_SERVICE);
+                List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                    am.getRunningAppProcesses();
+                List<ProcMemory> procMemories = new ArrayList<>();
+                for (ActivityManager.RunningAppProcessInfo processInfo : runningAppProcesses) {
+                    Log.i(TAG, "processName:" + processInfo.processName
+                        + ", pid:" + processInfo.pid);
+                    if (processInfo.processName.startsWith(getApplicationContext().getPackageName())) {
+                        ProcMemory memInfo = new ProcMemory();
+                        memInfo.pid = processInfo.pid;
+                        memInfo.processName = processInfo.processName;
+                        procMemories.add(memInfo);
+                    }
+                }
+                if (procMemories.size() == 0) return;
+                int[] pids = new int[procMemories.size()];
+                for (int i = 0; i < procMemories.size(); i++)
+                    pids[i] = procMemories.get(i).pid;
+                Debug.MemoryInfo[] memoryInfos = am.getProcessMemoryInfo(pids);
+                if (procMemories.size() != memoryInfos.length) return;
+                int appDalvikPss = 0;
+                int appNativePss = 0;
+                int appTotalPss = 0;
+                for (int i = 0; i < procMemories.size(); i++) {
+                    int dalvikPss = memoryInfos[i].dalvikPss;
+                    procMemories.get(i).dalvikPss = dalvikPss;
+                    appDalvikPss += dalvikPss;
+                    int nativePss = memoryInfos[i].nativePss;
+                    procMemories.get(i).nativePss = nativePss;
+                    appNativePss += nativePss;
+                    int totalPss = memoryInfos[i].getTotalPss();
+                    procMemories.get(i).totalPss = totalPss;
+                    appTotalPss += totalPss;
+                }
+                ProcMemory appMemory = new ProcMemory(-1, "app",
+                    appDalvikPss, appNativePss, appTotalPss);
+                procMemories.add(appMemory);
+                JSONArray jsonArray = new JSONArray();
+                for (ProcMemory procMemory : procMemories) {
+                    jsonArray.put(procMemory.jsonObj());
+                }
+                Log.i(TAG, jsonArray.toString());
+            }
+        }, 1000, 3000, TimeUnit.MILLISECONDS);
+    }
+
+    private static class ProcMemory {
+        public int pid;
+        public String processName;
+        public int dalvikPss;
+        public int nativePss;
+        public int totalPss;
+
+        public ProcMemory() {
+        }
+
+        public ProcMemory(int pid, String processName, int dalvikPss, int nativePss, int totalPss) {
+            this.pid = pid;
+            this.processName = processName;
+            this.dalvikPss = dalvikPss;
+            this.nativePss = nativePss;
+            this.totalPss = totalPss;
+        }
+
+        public JSONObject jsonObj() {
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("pid", pid);
+                jsonObject.put("processName", processName);
+                jsonObject.put("dalvikPss", dalvikPss);
+                jsonObject.put("nativePss", nativePss);
+                jsonObject.put("totalPss", totalPss);
+            } catch (JSONException e) {
+                Log.e(TAG, "", e);
+            }
+            return jsonObject;
         }
     }
 
