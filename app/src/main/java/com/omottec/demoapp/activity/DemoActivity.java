@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import com.omottec.demoapp.cpu.CpuFragment;
 import com.omottec.demoapp.log.LogTagFragment;
 import com.omottec.demoapp.memory.BitmapFragment;
+import com.omottec.demoapp.memory.DumpHeapFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
@@ -51,11 +52,12 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryInfoFragment();
 //        return new AshmemClientFragment();
 //        return new ProfiloFragment();
+        return new DumpHeapFragment();
 //        return new AnrFragment();
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
 //        return new BitmapFragment();
-        return new CpuFragment();
+//        return new CpuFragment();
 
 
 //        return new NotificationFragment();
