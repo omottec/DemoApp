@@ -9,6 +9,7 @@ import com.omottec.demoapp.log.LogTagFragment;
 import com.omottec.demoapp.memory.BitmapFragment;
 import com.omottec.demoapp.memory.DumpHeapFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
+import com.omottec.demoapp.memory.StackSizeFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
 //import com.appsee.Appsee;
@@ -52,7 +53,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MemoryInfoFragment();
 //        return new AshmemClientFragment();
 //        return new ProfiloFragment();
-        return new DumpHeapFragment();
+//        return new DumpHeapFragment();
+        return new StackSizeFragment();
 //        return new AnrFragment();
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
