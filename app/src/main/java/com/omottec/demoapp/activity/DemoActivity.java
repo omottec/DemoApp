@@ -10,6 +10,16 @@ import com.omottec.demoapp.memory.BitmapFragment;
 import com.omottec.demoapp.memory.DumpHeapFragment;
 import com.omottec.demoapp.memory.MemoryInfoFragment;
 import com.omottec.demoapp.memory.StackSizeFragment;
+import com.omottec.demoapp.anr.AnrFragment;
+import com.omottec.demoapp.aspectj.AspectJFragment;
+import com.omottec.demoapp.concurrent.ThreadPoolFragment;
+import com.omottec.demoapp.fragment.ApiFragment;
+import com.omottec.demoapp.fragment.PowerOnOffFragment;
+import com.omottec.demoapp.gson.GsonFragment;
+import com.omottec.demoapp.job.JobFragment;
+import com.omottec.demoapp.memory.ashmem.AshmemClientFragment;
+import com.omottec.demoapp.net.NetFragment;
+import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 
 //import com.appsee.Appsee;
@@ -54,7 +64,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new AshmemClientFragment();
 //        return new ProfiloFragment();
 //        return new DumpHeapFragment();
-        return new StackSizeFragment();
+//        return new StackSizeFragment();
 //        return new AnrFragment();
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
@@ -94,6 +104,8 @@ public class DemoActivity extends SingleFragmentActivity {
 
 //        return new JobFragment();
 //        return new ThreadPoolFragment();
+
+        return new ApiFragment();
     }
 
     @Override
