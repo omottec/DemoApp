@@ -1,2 +1,4 @@
+include ':lib_a'
+include ':lib_b'
 include ':app', ':account', ':service', ':aspectj', ':apt_api', ':apt_processor'
 include ':PullToRefresh'
