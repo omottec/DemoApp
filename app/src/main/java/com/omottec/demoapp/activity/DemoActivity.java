@@ -69,7 +69,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
 //        return new BitmapFragment();
-//        return new CpuFragment();
+        return new CpuFragment();
 
 
 //        return new NotificationFragment();
@@ -105,7 +105,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new JobFragment();
 //        return new ThreadPoolFragment();
 
-        return new ApiFragment();
+        //return new ApiFragment();
     }
 
     @Override
