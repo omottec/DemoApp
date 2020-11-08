@@ -45,6 +45,8 @@ public class CpuUtils {
     public static boolean isDevice64ByBuild() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return false;
         Log.i(TAG, "ro.product.cpu.abilist64:" + Arrays.toString(Build.SUPPORTED_64_BIT_ABIS));
+        Log.i(TAG, "ro.product.cpu.abilist32:" + Arrays.toString(Build.SUPPORTED_32_BIT_ABIS));
+        Log.i(TAG, "ro.product.cpu.abilist:" + Arrays.toString(Build.SUPPORTED_ABIS));
         return Build.SUPPORTED_64_BIT_ABIS.length > 0;
     }
 
