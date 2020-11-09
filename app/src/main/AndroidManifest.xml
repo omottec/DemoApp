@@ -275,6 +275,10 @@
 
         </activity>
 
+        <activity android:name=".activity.SubProcActivity"
+            android:process=":subproc">
+
+        </activity>
 
         <service android:name=".ipc.messenger.MessengerService"
             android:process=":remote">
@@ -315,8 +319,6 @@
         <service android:name=".memory.ashmem.AshmemServer"
             android:process=":ashmem"/>
 
-
-
         <provider
             android:authorities="com.omottec.demoapp.provider"
             android:name=".ipc.provider.BookProvider"
@@ -326,7 +328,14 @@
         <provider
             android:authorities="${applicationId}.provider.DemoProvider"
             android:name=".provider.DemoProvider"
-            android:exported="false"/>
+            android:exported="false"
+            android:multiprocess="false"/>
+
+        <provider
+            android:authorities="${applicationId}.provider.AshmemProcProvider"
+            android:name=".provider.AshmemProcProvider"
+            android:exported="false"
+            android:process=":ashmem"/>
 
         <receiver android:name=".push.PushReceiver">
             <intent-filter>

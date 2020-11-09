@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_query_provider"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_red_light"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="tv_query_provider"/>
+
+    <TextView
+        android:id="@+id/tv_start_proc_by_activity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_green_light"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text=""/>
+</LinearLayout>
