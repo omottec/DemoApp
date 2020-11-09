@@ -323,7 +323,10 @@
             android:process=":provider"
             android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
 
-
+        <provider
+            android:authorities="${applicationId}.provider.DemoProvider"
+            android:name=".provider.DemoProvider"
+            android:exported="false"/>
 
         <receiver android:name=".push.PushReceiver">
             <intent-filter>
