@@ -329,6 +329,7 @@
             android:authorities="${applicationId}.provider.DemoProvider"
             android:name=".provider.DemoProvider"
             android:exported="false"
+            tools:node="remove"
             android:multiprocess="false"/>
 
         <provider
