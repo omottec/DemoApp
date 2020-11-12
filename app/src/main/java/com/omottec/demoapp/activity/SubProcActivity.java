@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.provider.DemoProvider;
 
 public class SubProcActivity extends Activity implements View.OnClickListener {
     public static final String TAG = "SubProcActivity";
@@ -37,7 +36,7 @@ public class SubProcActivity extends Activity implements View.OnClickListener {
     private void queryProvider() {
         Log.i(TAG, this + " queryProvider");
         ContentResolver contentResolver = getContentResolver();
-        contentResolver.query(Uri.parse("content://" + DemoProvider.class.getCanonicalName()),
+        contentResolver.query(Uri.parse("content://" + getPackageName() + ".DemoProvider"),
                 null, null, null, null);
     }
 }

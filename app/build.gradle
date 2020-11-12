@@ -118,6 +118,7 @@ dependencies {
     implementation project(':service')
     implementation project(':account')
     implementation project(':aspectj')
+    implementation project(':lib_a')
     implementation "com.android.support:multidex:1.0.3"
     implementation "com.android.support:design:$supportLibraryVersion"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"

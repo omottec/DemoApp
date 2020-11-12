@@ -326,8 +326,8 @@
             android:permission="com.omottec.demoapp.permission.ACCESS_BOOK_PROVIDER"/>
 
         <provider
-            android:authorities="${applicationId}.provider.DemoProvider"
-            android:name=".provider.DemoProvider"
+            android:authorities="${applicationId}.DemoProvider"
+            android:name="com.omottec.lib.a.DemoProvider"
             android:exported="false"
             tools:node="remove"
             android:multiprocess="false"/>

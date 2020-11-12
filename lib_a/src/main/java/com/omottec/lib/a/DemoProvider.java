@@ -1,8 +1,7 @@
-package com.omottec.demoapp.provider;
+package com.omottec.lib.a;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;

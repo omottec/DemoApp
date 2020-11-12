@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omottec.lib.a">
-
+    <application>
+        <activity android:name=".LibAActivity"/>
+        <provider
+            android:authorities="${applicationId}.DemoProvider"
+            android:name="com.omottec.lib.a.DemoProvider"/>
+    </application>
 </manifest>
