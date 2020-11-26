@@ -10,9 +10,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import java.lang.reflect.Method;
+import java.util.LinkedList;
 
 /**
  * Created by qinbingbing on 4/7/16.
@@ -206,5 +208,47 @@ public final class UiUtils {
 
     public static DisplayMetrics getDisplayMetrics(Context context) {
         return context.getResources().getDisplayMetrics();
+    }
+
+    // 利用Deque广度遍历二叉树(breadth first search)，操作双端
+    public static void bfsByDeque(View root) {
+        if (root == null) return;
+        // 需要借助双端队列实现，移除父节点时把子节点添加进来
+        LinkedList<View> queue = new LinkedList<>();
+        // add remove get VS offer poll peek
+        queue.offerFirst(root);
+        while (!queue.isEmpty()) {
+            View view = queue.pollLast();
+            Logger.i(TAG, getViewStr(view));
+            if (view instanceof ViewGroup) {
+                ViewGroup group = (ViewGroup) view;
+                for (int i = 0; i < group.getChildCount(); i++)
+                    queue.offerFirst(group.getChildAt(i));
+            }
+        }
+    }
+
+    // 利用Deque深度遍历二叉树(depth first search)，只操作单端
+    public static void dfsByDeque(View root) {
+        if (root == null) return;
+        // 需要借助双端队列实现，移除父节点时把子节点添加进来
+        LinkedList<View> queue = new LinkedList<>();
+        // add remove get VS offer poll peek
+        queue.offerLast(root);
+        while (!queue.isEmpty()) {
+            View view = queue.pollLast();
+            Logger.i(TAG, getViewStr(view));
+            if (view instanceof ViewGroup) {
+                ViewGroup group = (ViewGroup) view;
+                for (int i = group.getChildCount() - 1; i >= 0; i--)
+                    queue.offerLast(group.getChildAt(i));
+            }
+        }
+    }
+
+    private static String getViewStr(View view) {
+        if (view.getTag() != null)
+            return view.getTag().toString() + "|" + view.toString();
+        return view.toString();
     }
 }

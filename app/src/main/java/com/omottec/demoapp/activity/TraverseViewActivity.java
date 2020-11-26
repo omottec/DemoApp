@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.demoapp.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -84,42 +85,6 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
         bfsByArray(list.toArray(new View[]{}));
     }
 
-    // 利用Deque广度遍历二叉树(breadth first search)，操作双端
-    private void bfsByDeque(View root) {
-        if (root == null) return;
-        // 需要借助双端队列实现，移除父节点时把子节点添加进来
-        LinkedList<View> queue = new LinkedList<>();
-        // add remove get VS offer poll peek
-        queue.offerFirst(root);
-        while (!queue.isEmpty()) {
-            View view = queue.pollLast();
-            Logger.i(TAG, getViewStr(view));
-            if (view instanceof ViewGroup) {
-                ViewGroup group = (ViewGroup) view;
-                for (int i = 0; i < group.getChildCount(); i++)
-                    queue.offerFirst(group.getChildAt(i));
-            }
-        }
-    }
-
-    // 利用Deque深度遍历二叉树(depth first search)，只操作单端
-    private void dfsByDeque(View root) {
-        if (root == null) return;
-        // 需要借助双端队列实现，移除父节点时把子节点添加进来
-        LinkedList<View> queue = new LinkedList<>();
-        // add remove get VS offer poll peek
-        queue.offerLast(root);
-        while (!queue.isEmpty()) {
-            View view = queue.pollLast();
-            Logger.i(TAG, getViewStr(view));
-            if (view instanceof ViewGroup) {
-                ViewGroup group = (ViewGroup) view;
-                for (int i = group.getChildCount() - 1; i >= 0; i--)
-                    queue.offerLast(group.getChildAt(i));
-            }
-        }
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -127,13 +92,13 @@ public class TraverseViewActivity extends Activity implements View.OnClickListen
                 bfsByArray(getWindow().getDecorView());
                 break;
             case R.id.tv_bfs_by_deque:
-                bfsByDeque(getWindow().getDecorView());
+                UiUtils.bfsByDeque(getWindow().getDecorView());
                 break;
             case R.id.tv_dfs_by_recursive:
                 dfsByRecursive(getWindow().getDecorView());
                 break;
             case R.id.tv_dfs_by_deque:
-                dfsByDeque(getWindow().getDecorView());
+                UiUtils.dfsByDeque(getWindow().getDecorView());
                 break;
         }
     }

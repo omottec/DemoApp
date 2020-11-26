@@ -1,6 +1,7 @@
 package com.omottec.demoapp.activity;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
@@ -22,6 +23,8 @@ import com.omottec.demoapp.memory.ashmem.AshmemClientFragment;
 import com.omottec.demoapp.net.NetFragment;
 import com.omottec.demoapp.net.OkhttpFragment;
 import com.omottec.demoapp.utils.TimeLogger;
+import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.demoapp.view.statuslayout.MultiPartStatusFragment;
 
 //import com.appsee.Appsee;
 
@@ -44,12 +47,13 @@ public class DemoActivity extends SingleFragmentActivity {
         super.onResume();
         TimeLogger.methodEnd();
         TimeLogger.dump();
-        //getWindow().getDecorView().postDelayed(new Runnable() {
-        //    @Override
-        //    public void run() {
-        //        Debug.stopMethodTracing();
-        //    }
-        //}, 5000);
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UiUtils.bfsByDeque(getWindow().getDecorView());
+                //Debug.stopMethodTracing();
+            }
+        }, 5000);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new DumpHeapFragment();
 //        return new StackSizeFragment();
 //        return new AnrFragment();
-        return new MultiProcessFragment();
+//        return new MultiProcessFragment();
 //        return new LooperFragment();
 //        return new BitmapFragment();
 //        return new CpuFragment();
@@ -78,7 +82,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();
-//        return new MultiPartStatusFragment();
+        return new MultiPartStatusFragment();
 //        return new RouterFragment();
 //        return new ScreenSizeFragment();
 //        return new ReuseFragment();
