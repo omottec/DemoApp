@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 
 import com.omottec.demoapp.cpu.CpuFragment;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
+import com.omottec.demoapp.kt.KtFragment;
 import com.omottec.demoapp.log.LogTagFragment;
 import com.omottec.demoapp.memory.BitmapFragment;
 import com.omottec.demoapp.memory.DumpHeapFragment;
@@ -82,7 +83,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new PositionFragment();
 //        return new FrescoFragment();
 //        return new WeightFragment();
-        return new MultiPartStatusFragment();
+//        return new MultiPartStatusFragment();
 //        return new RouterFragment();
 //        return new ScreenSizeFragment();
 //        return new ReuseFragment();
@@ -111,6 +112,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new ThreadPoolFragment();
 
         //return new ApiFragment();
+
+        return new KtFragment();
     }
 
     @Override

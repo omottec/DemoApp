@@ -3,6 +3,7 @@ import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'mtj-circle-plugin'
 
@@ -166,4 +167,8 @@ dependencies {
 //    annotationProcessor "com.google.auto.service:auto-service:1.0-rc4"
 
     implementation 'me.weishu:epic:0.6.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
