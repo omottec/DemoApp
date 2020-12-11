@@ -18,7 +18,8 @@ class KtFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        mTv = view?.findViewById(R.id.tv)!!;
+        view ?: return;
+        mTv = view.findViewById(R.id.tv)!!;
         mTv.setText("KtFragment")
     }
 }
