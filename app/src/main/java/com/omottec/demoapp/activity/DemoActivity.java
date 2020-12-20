@@ -109,11 +109,11 @@ public class DemoActivity extends SingleFragmentActivity {
 
 
 //        return new JobFragment();
-//        return new ThreadPoolFragment();
+        return new ThreadPoolFragment();
 
         //return new ApiFragment();
 
-        return new KtFragment();
+        //return new KtFragment();
     }
 
     @Override

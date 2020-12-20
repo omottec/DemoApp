@@ -1,15 +1,16 @@
 package com.omottec.demoapp.concurrent;
 
 import android.os.Bundle;
-import android.os.Looper;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EdgeEffect;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
@@ -31,7 +32,7 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
     // the CPU with background work
     private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
     private static final int MAX_POOL_SIZE = CPU_COUNT * 2 + 1;
-    private static final int KEEP_ALIVE_SECONDS = 1 * 60 * 60;
+    private static final int KEEP_ALIVE_SECONDS = 10;
     private static final ThreadFactory THREAD_FACTORY = new ThreadFactory() {
         private final AtomicInteger mCount = new AtomicInteger(1);
 
@@ -41,7 +42,7 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
         }
     };
     private static final AtomicInteger TASK_COUNT = new AtomicInteger(1);
-    private static final BlockingQueue<Runnable> POOL_WORK_QUEUE = new LinkedBlockingDeque<>(8);
+    private static final BlockingQueue<Runnable> POOL_WORK_QUEUE = new LinkedBlockingDeque<>(3);
     private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR;
 
     static {
@@ -61,6 +62,7 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
     }
 
     private TextView mCountTv;
+    private EditText mTaskTimeEt;
     private TextView mAddTaskTv;
     private TextView mAddCrashTaskTv;
 
@@ -73,6 +75,7 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mCountTv = view.findViewById(R.id.tv_count);
+        mTaskTimeEt = view.findViewById(R.id.et_task_time);
         mAddTaskTv = view.findViewById(R.id.tv_add_task);
         mAddCrashTaskTv = view.findViewById(R.id.tv_add_carsh_task);
         mCountTv.setOnClickListener(this);
@@ -102,7 +105,12 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
     }
 
     private void onClickAddTask() {
-        THREAD_POOL_EXECUTOR.execute(new NamedRunnable());
+        String txt = mTaskTimeEt.getText().toString();
+        if (TextUtils.isEmpty(txt) || !TextUtils.isDigitsOnly(txt)) {
+            THREAD_POOL_EXECUTOR.execute(new NamedTimedRunnable());
+        } else {
+            THREAD_POOL_EXECUTOR.execute(new NamedTimedRunnable(Long.parseLong(txt)));
+        }
         showCount();
     }
 
@@ -130,17 +138,26 @@ public class ThreadPoolFragment extends Fragment implements View.OnClickListener
         THREAD_POOL_EXECUTOR.shutdown();
     }
 
-    private static class NamedRunnable implements Runnable {
+    private static class NamedTimedRunnable implements Runnable {
         private static final AtomicInteger TASK_COUNT = new AtomicInteger(1);
         private int mTaskId;
-        public NamedRunnable() {
+        private long mTimeMs;
+        public NamedTimedRunnable() {
             mTaskId = TASK_COUNT.getAndIncrement();
+        }
+
+        public NamedTimedRunnable(long timeMs) {
+            mTaskId = TASK_COUNT.getAndIncrement();
+            mTimeMs = timeMs;
         }
 
         @Override
         public void run() {
             Logger.i(Tag.THREAD_POOL, "Task #" + mTaskId + " start execute by " + Thread.currentThread());
-            SystemClock.sleep(2 * 60 * 60 * 1000);
+            if (mTimeMs > 0)
+                SystemClock.sleep(mTimeMs);
+            else
+                SystemClock.sleep(60 * 1000);
             Logger.i(Tag.THREAD_POOL, "Task #" + mTaskId + " end execute by " + Thread.currentThread());
         }
     }
