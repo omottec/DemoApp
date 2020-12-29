@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.aidl.ashmem.IAshmemService;
-import com.omottec.demoapp.aspectj.TestAspect;
 import com.omottec.demoapp.utils.Logger;
 
 public class AshmemClientFragment extends Fragment implements View.OnClickListener {

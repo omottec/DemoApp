@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.utils.Logger;
 
 public class AspectJFragment extends Fragment {
@@ -37,7 +38,7 @@ public class AspectJFragment extends Fragment {
         try {
             throw new IllegalStateException("manual exception");
         } catch (Exception e) {
-            Logger.e(TestAspect.TAG, e);
+            Logger.e(Tag.ASPECTJ, e);
         }
     }
 }

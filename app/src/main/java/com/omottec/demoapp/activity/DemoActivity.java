@@ -105,11 +105,11 @@ public class DemoActivity extends SingleFragmentActivity {
 
 //        return new IDataFragment();
 //        return new PowerOnOffFragment();
-//        return new AspectJFragment();
+        return new AspectJFragment();
 
 
 //        return new JobFragment();
-        return new ThreadPoolFragment();
+//        return new ThreadPoolFragment();
 
         //return new ApiFragment();
 
