@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 
@@ -240,6 +239,7 @@ public final class UiUtils {
             Logger.i(TAG, getViewStr(view));
             if (view instanceof ViewGroup) {
                 ViewGroup group = (ViewGroup) view;
+                // 按从右到左获取子View
                 for (int i = group.getChildCount() - 1; i >= 0; i--)
                     queue.offerLast(group.getChildAt(i));
             }
