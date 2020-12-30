@@ -35,10 +35,9 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
-// 自动注册未生效
 @AutoService(Processor.class)
 public class ButterKnifeProcessor extends AbstractProcessor {
-    private Map<TypeElement, List<Element>> elementPackage = new HashMap<>();
+    private Map<TypeElement, List<Element>> elementMap = new HashMap<>();
     public static final String VIEW_TYPE = "android.view.View";
     public static final String VIEW_BINDING_TYPE = ViewBinding.class.getCanonicalName();
 
@@ -57,7 +56,7 @@ public class ButterKnifeProcessor extends AbstractProcessor {
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.RELEASE_7;
+        return SourceVersion.RELEASE_8;
     }
 
     @Override
@@ -74,7 +73,7 @@ public class ButterKnifeProcessor extends AbstractProcessor {
         messager.printMessage(Diagnostic.Kind.NOTE, "process annotation");
         if (annotations == null || annotations.isEmpty()) return false;
         messager.printMessage(Diagnostic.Kind.NOTE, "annotations:" + annotations);
-        elementPackage.clear();
+        elementMap.clear();
         Set<? extends Element> bindViewElements = roundEnv.getElementsAnnotatedWith(BindView.class);
         collectData(bindViewElements);
         generateCode();
@@ -82,20 +81,25 @@ public class ButterKnifeProcessor extends AbstractProcessor {
     }
 
     private void generateCode() {
-        Iterator<Map.Entry<TypeElement, List<Element>>> iterator = elementPackage.entrySet().iterator();
+        Iterator<Map.Entry<TypeElement, List<Element>>> iterator = elementMap.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<TypeElement, List<Element>> entry = iterator.next();
-            TypeElement parent = entry.getKey();
+            TypeElement typeElement = entry.getKey();
             List<Element> elements = entry.getValue();
-            MethodSpec methodSpec = generateBindViewMethod(parent, elements);
+            MethodSpec methodSpec = generateBindViewMethod(typeElement, elements);
 
-            PackageElement packageElement = elementUtils.getPackageOf(parent);
-            messager.printMessage(Diagnostic.Kind.NOTE,
-                    "typeElement:" + parent + ", packageElement:" + packageElement);
+            PackageElement packageElement = elementUtils.getPackageOf(typeElement);
+            messager.printMessage(Diagnostic.Kind.NOTE, "packageElement:" + packageElement
+                + ", packageElement.getKind:" + packageElement.getKind()
+                + ", packageElement.asType:" + packageElement.asType());
+
+
+            String typeName = typeElement.getQualifiedName().toString();
             String packageName = packageElement.getQualifiedName().toString();
+            messager.printMessage(Diagnostic.Kind.NOTE, "typeName:" + typeName
+                + ", packageName:" + packageName);
             ClassName viewBindingInterface = ClassName.get(elementUtils.getTypeElement(VIEW_BINDING_TYPE));
-            String className = parent.getQualifiedName().toString().substring(
-                    packageName.length() + 1).replace('.', '$');
+            String className = typeName.substring(packageName.length() + 1).replace('.', '$');
             ClassName bindingClassName = ClassName.get(packageName, className + "_ViewBinding");
 
             TypeSpec typeSpec = TypeSpec.classBuilder(bindingClassName)
@@ -130,6 +134,9 @@ public class ButterKnifeProcessor extends AbstractProcessor {
         Iterator<? extends Element> iterator = elements.iterator();
         while (iterator.hasNext()) {
             Element element = iterator.next();
+            messager.printMessage(Diagnostic.Kind.NOTE, "element:" + element
+                + ", element.getKind:" + element.getKind()
+                + ", element.asType:" + element.asType());
             TypeMirror elementTypeMirror = element.asType();
             TypeMirror viewTypeMirror = elementUtils.getTypeElement(VIEW_TYPE).asType();
             messager.printMessage(Diagnostic.Kind.NOTE,
@@ -137,13 +144,16 @@ public class ButterKnifeProcessor extends AbstractProcessor {
                             + ", viewTypeMirror:" + viewTypeMirror);
             if (typeUtils.isSameType(elementTypeMirror, viewTypeMirror)
                     || typeUtils.isSubtype(elementTypeMirror, viewTypeMirror)) {
-                TypeElement parent = (TypeElement) element.getEnclosingElement();
-                List<Element> parentElements = elementPackage.get(parent);
-                if (parentElements == null) {
-                    parentElements = new ArrayList<>();
-                    elementPackage.put(parent, parentElements);
+                TypeElement typeElement = (TypeElement) element.getEnclosingElement();
+                messager.printMessage(Diagnostic.Kind.NOTE, "typeElement:" + typeElement
+                    + ", typeElement.getKind:" + typeElement.getKind()
+                    + ", typeElement.asType:" + typeElement.asType());
+                List<Element> enclosedElements = elementMap.get(typeElement);
+                if (enclosedElements == null) {
+                    enclosedElements = new ArrayList<>();
+                    elementMap.put(typeElement, enclosedElements);
                 }
-                parentElements.add(element);
+                enclosedElements.add(element);
             } else {
                 throw new RuntimeException("BindView应该标注在类型是View的字段上");
             }
