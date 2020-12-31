@@ -26,6 +26,9 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 
+/**
+ * apt_processor/build/classes/java/main/META-INF/services/javax.annotation.processing.Processor
+ */
 @AutoService(Processor.class)
 public class GenCodeProcessor extends AbstractProcessor {
 
