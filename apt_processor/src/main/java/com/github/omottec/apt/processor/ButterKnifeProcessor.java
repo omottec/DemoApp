@@ -70,7 +70,7 @@ public class ButterKnifeProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        messager.printMessage(Diagnostic.Kind.NOTE, "process annotation");
+        messager.printMessage(Diagnostic.Kind.NOTE, "ButterKnifeProcessor.process");
         if (annotations == null || annotations.isEmpty()) return false;
         messager.printMessage(Diagnostic.Kind.NOTE, "annotations:" + annotations);
         elementMap.clear();
