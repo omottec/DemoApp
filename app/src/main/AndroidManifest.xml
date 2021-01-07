@@ -266,6 +266,10 @@
         </activity>
 
         <activity android:name=".activity.AptActivity">
+
+        </activity>
+
+        <activity android:name=".aspectj.AspectJActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

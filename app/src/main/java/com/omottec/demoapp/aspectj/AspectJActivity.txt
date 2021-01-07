@@ -1,0 +1,105 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+package com.omottec.demoapp.aspectj;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Toast;
+import com.omottec.demoapp.utils.Logger;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.runtime.reflect.Factory;
+
+public class AspectJActivity extends Activity {
+    public static final String TAG = "AspectJActivity";
+
+    static {
+        ajc$preClinit();
+    }
+
+    public AspectJActivity() {
+    }
+
+    private void showToast(String var1) {
+        Logger.i("AspectJActivity", var1);
+        Toast.makeText(this, var1, 0).show();
+    }
+
+    protected void onCreate(Bundle var1) {
+        JoinPoint var2 = Factory.makeJP(ajc$tjp_1, this, this, var1);
+
+        try {
+            super.onCreate(var1);
+            this.setContentView(2131361918);
+            Logger.i("AspectJActivity");
+            JoinPoint var5 = Factory.makeJP(ajc$tjp_0, this, this, "Hello AspectJ");
+            AspectJHook.aspectOf().methodWithMarker(var5);
+            this.showToast("Hello AspectJ");
+        } finally {
+            AspectJHook.aspectOf().onCreateMethod(var2);
+        }
+
+    }
+
+    protected void onDestroy() {
+        JoinPoint var1 = Factory.makeJP(ajc$tjp_6, this, this);
+
+        try {
+            super.onDestroy();
+            Logger.i("AspectJActivity");
+        } finally {
+            AspectJHook.aspectOf().onLifecycleMethod(var1);
+        }
+
+    }
+
+    protected void onPause() {
+        JoinPoint var1 = Factory.makeJP(ajc$tjp_4, this, this);
+
+        try {
+            super.onPause();
+            Logger.i("AspectJActivity");
+        } finally {
+            AspectJHook.aspectOf().onLifecycleMethod(var1);
+        }
+
+    }
+
+    protected void onResume() {
+        JoinPoint var1 = Factory.makeJP(ajc$tjp_3, this, this);
+
+        try {
+            super.onResume();
+            Logger.i("AspectJActivity");
+        } finally {
+            AspectJHook.aspectOf().onLifecycleMethod(var1);
+        }
+
+    }
+
+    protected void onStart() {
+        JoinPoint var1 = Factory.makeJP(ajc$tjp_2, this, this);
+
+        try {
+            super.onStart();
+            Logger.i("AspectJActivity");
+        } finally {
+            AspectJHook.aspectOf().onLifecycleMethod(var1);
+        }
+
+    }
+
+    protected void onStop() {
+        JoinPoint var1 = Factory.makeJP(ajc$tjp_5, this, this);
+
+        try {
+            super.onStop();
+            Logger.i("AspectJActivity");
+        } finally {
+            AspectJHook.aspectOf().onLifecycleMethod(var1);
+        }
+
+    }
+}
