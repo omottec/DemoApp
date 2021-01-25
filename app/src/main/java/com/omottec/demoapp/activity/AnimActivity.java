@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by qinbingbing on 9/21/16.
@@ -29,6 +30,12 @@ public class AnimActivity extends FragmentActivity {
                 overridePendingTransition(R.anim.down_2_up, R.anim.up_2_down);
             }
         });
+        mTv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UiUtils.logRootView(getWindow());
+            }
+        }, 1000);
     }
 
     @Override

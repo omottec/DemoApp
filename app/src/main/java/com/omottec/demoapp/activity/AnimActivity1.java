@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.utils.UiUtils;
 
 /**
  * Created by qinbingbing on 9/21/16.
@@ -19,6 +20,12 @@ public class AnimActivity1 extends FragmentActivity {
         setContentView(R.layout.full_screen_text);
         mTv = (TextView) findViewById(R.id.tv);
         mTv.setText("AnimActivity1");
+        mTv.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UiUtils.logRootView(getWindow());
+            }
+        }, 1000);
     }
 
     @Override

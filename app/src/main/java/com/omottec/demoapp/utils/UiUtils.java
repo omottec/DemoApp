@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 
@@ -250,5 +252,21 @@ public final class UiUtils {
         if (view.getTag() != null)
             return view.getTag().toString() + "|" + view.toString();
         return view.toString();
+    }
+
+    public static void logRootView(Window window) {
+        Log.i(TAG, "window:" + window);
+        View decorView = window.getDecorView();
+        Log.i(TAG, "decorView:" + decorView);
+        Log.i(TAG, "decorView.getViewTreeObserver:" + decorView.getViewTreeObserver());
+        try {
+            Field mAttachInfo = View.class.getDeclaredField("mAttachInfo");
+            mAttachInfo.setAccessible(true);
+            Log.i(TAG, "mAttachInfo:" + mAttachInfo.get(decorView));
+        } catch (NoSuchFieldException e) {
+            Log.e(TAG, "", e);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "", e);
+        }
     }
 }
