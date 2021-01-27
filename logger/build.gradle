@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
+    id 'com.jfrog.bintray'
 }
 
 apply from: rootProject.file('gradles/common.gradle')
@@ -16,4 +18,37 @@ android {
 
 dependencies {
 
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    override = false
+    publish = true
+    pkg {
+        repo = 'maven'
+        name = 'com.github.omottec:logger'
+        licenses = ['Apache-2.0']
+        vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
+    }
+    publications = ['MyPublication']
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            MyPublication(MavenPublication) {
+                artifact(bundleReleaseAar)
+                artifact(androidSourcesJar)
+                groupId "com.github.omottec"
+                artifactId 'logger'
+                version '0.0.3'
+            }
+        }
+    }
 }

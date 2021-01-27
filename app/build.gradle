@@ -5,14 +5,12 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'android-aspectjx'
 
 apply from: rootProject.file('gradles/config.gradle')
+apply from: rootProject.file('gradles/common.gradle')
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.omottec.demoapp"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
         versionName "2.0"
         multiDexEnabled true
@@ -77,11 +75,6 @@ android {
         }
     }
 
-    compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
-    }
-
     applicationVariants.all {variant ->
         variant.outputs.each { output ->
             def lintTask = tasks["lint${variant.name.capitalize()}"]
@@ -96,11 +89,6 @@ android {
         println(">>>" + variant.name)
         println(">>>" + variant.flavors.name)
         println(">>>" + variant.buildType.name)
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError true
     }
 }
 
