@@ -23,8 +23,8 @@ import com.omottec.demoapp.aidl.Book;
 import com.omottec.demoapp.aidl.IBookManager;
 import com.omottec.demoapp.aidl.IOnBookAddedListener;
 import com.omottec.demoapp.Constants;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;

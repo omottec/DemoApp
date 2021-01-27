@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 25/09/2017.

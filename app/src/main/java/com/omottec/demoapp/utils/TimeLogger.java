@@ -1,5 +1,6 @@
 package com.omottec.demoapp.utils;
 
+import com.omottec.logger.Logger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * doc test

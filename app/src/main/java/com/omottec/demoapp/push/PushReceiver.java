@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.task.MainActivity;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 07/06/2017.

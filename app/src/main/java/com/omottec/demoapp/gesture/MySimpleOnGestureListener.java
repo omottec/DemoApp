@@ -4,8 +4,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.TouchUtils;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 07/12/2018.

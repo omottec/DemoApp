@@ -1,8 +1,7 @@
 package com.omottec.demoapp.net;
 
 
-import com.omottec.demoapp.utils.Logger;
-
+import com.omottec.logger.Logger;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

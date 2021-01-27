@@ -3,14 +3,12 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 4/30/16.

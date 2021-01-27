@@ -11,12 +11,11 @@ import android.os.Process;
 import android.provider.Settings;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

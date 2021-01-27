@@ -2,7 +2,6 @@ package com.omottec.demoapp.immersive;
 
 import android.app.Activity;
 import android.app.Application;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 12/07/2018.

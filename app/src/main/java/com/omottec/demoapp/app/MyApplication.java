@@ -1,21 +1,14 @@
 package com.omottec.demoapp.app;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.Debug;
 import android.os.Handler;
 import android.os.Process;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 import android.util.SparseArray;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.profilo.controllers.external.ExternalController;
@@ -32,18 +25,14 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
-import com.omottec.demoapp.gesture.ActivityLifecycleCallbacksForGesture;
 import com.omottec.demoapp.hook.ResTracker;
-import com.omottec.demoapp.immersive.ImmersiveActivity;
-import com.omottec.demoapp.immersive.ImmersiveLifecycleCallbacks;
 import com.omottec.demoapp.memory.MemoryUtils;
 import com.omottec.demoapp.memory.OomMonitor;
 import com.omottec.demoapp.memory.OomObserver;
 import com.omottec.demoapp.utils.AppUtils;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.ProcessUtils;
 import com.omottec.demoapp.utils.TimeLogger;
-import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.io.IOException;

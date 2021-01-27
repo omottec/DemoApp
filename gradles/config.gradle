@@ -1,0 +1,14 @@
+println("apply config...")
+
+logInfo()
+
+void logInfo() {
+    println(">>>" + gradle)
+    println(">>>" + gradle.startParameter)
+    println(">>>" + gradle.startParameter.taskRequests)
+    println(">>>" + gradle.ext)
+    println(">>>" + rootProject.projectDir.absolutePath)
+    println(">>>" + project.path)
+    println(">>>" + project.parent.path)
+
+}

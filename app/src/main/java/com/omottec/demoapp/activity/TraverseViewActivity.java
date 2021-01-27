@@ -9,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
 
 import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.logger.Logger;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class TraverseViewActivity extends Activity implements View.OnClickListener {

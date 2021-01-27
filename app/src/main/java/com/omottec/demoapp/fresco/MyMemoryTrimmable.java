@@ -3,7 +3,7 @@ package com.omottec.demoapp.fresco;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.MemoryTrimmable;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 11/02/2018.

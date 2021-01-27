@@ -5,8 +5,8 @@ import android.content.Context;
 
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.util.List;
 
 /**

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 public class ApiFragment extends Fragment {
     public static final String TAG = "ApiFragment";

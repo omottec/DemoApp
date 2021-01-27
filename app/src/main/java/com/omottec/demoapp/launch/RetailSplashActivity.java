@@ -2,7 +2,6 @@ package com.omottec.demoapp.launch;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,8 +22,8 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.permission.Permissions;
 import com.omottec.demoapp.task.MainActivity;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 

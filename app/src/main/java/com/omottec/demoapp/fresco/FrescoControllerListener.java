@@ -7,7 +7,7 @@ import com.facebook.imagepipeline.image.CloseableStaticBitmap;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.memory.MemoryUtils;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 09/02/2018.

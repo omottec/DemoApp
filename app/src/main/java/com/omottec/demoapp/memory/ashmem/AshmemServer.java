@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 public class AshmemServer extends Service {
     private AshmemService mAshmemService;

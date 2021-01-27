@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 12/07/2018.

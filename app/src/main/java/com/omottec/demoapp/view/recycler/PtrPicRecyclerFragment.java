@@ -12,8 +12,8 @@ import android.view.View;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.fragment.BaseFragment;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

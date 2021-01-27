@@ -10,15 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.io.IOException;
-import java.net.Proxy;
-import java.net.ProxySelector;
-import java.net.SocketAddress;
-import java.net.URI;
-import java.util.Collections;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;

@@ -8,7 +8,7 @@ package com.omottec.demoapp.aspectj;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.runtime.reflect.Factory;
 

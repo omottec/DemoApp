@@ -4,6 +4,8 @@ apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'mtj-circle-plugin'
 apply plugin: 'android-aspectjx'
 
+apply from: rootProject.file('gradles/config.gradle')
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -45,19 +47,55 @@ android {
         }
     }
 
+    flavorDimensions "env", "region"
+
+    productFlavors {
+        development {
+            dimension "env"
+            applicationIdSuffix ".debug"
+        }
+
+        production {
+            dimension "env"
+        }
+
+        china {
+            dimension "region"
+            applicationId "com.omottec.demoapp.cn"
+            ndk {
+//                abiFilters "armeabi-v7a"
+                abiFilters "arm64-v8a"
+            }
+        }
+
+        us {
+            dimension "region"
+            applicationId "com.omottec.demoapp.us"
+            ndk {
+                abiFilters "arm64-v8a"
+            }
+        }
+    }
+
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
 
-    android.applicationVariants.all {variant ->
+    applicationVariants.all {variant ->
         variant.outputs.each { output ->
             def lintTask = tasks["lint${variant.name.capitalize()}"]
-            System.out.println("output:" + output + ", variant:" + variant)
+            println(">>>output:" + output + ", variant:" + variant)
+            println(">>>variant.name:" + variant.name.capitalize())
 //            output.assembleProvider.dependsOn lintTask
-//            System.out.println("output.versionName:" + output.versionName)
-//            System.out.println("output.versionCode:" + output.versionCode)
+            println(">>>output.versionName:" + output.versionCode + ", output.versionCode:" + output.versionCode)
         }
+    }
+
+    variantFilter { variant ->
+        println(">>>" + variant.name)
+        println(">>>" + variant.flavors.name)
+        println(">>>" + variant.buildType.name)
     }
 
     lintOptions {
@@ -77,6 +115,7 @@ dependencies {
     implementation project(':service')
     implementation project(':account')
     implementation project(':lib_a')
+    implementation project(':logger')
 
     implementation "com.android.support:multidex:1.0.3"
     implementation "com.android.support:design:$supportLibraryVersion"
@@ -126,4 +165,15 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'org.aspectj:aspectjrt:1.9.5'
+
+    configurations.all {
+        resolutionStrategy {
+            dependencySubstitution {
+            }
+        }
+
+        resolutionStrategy.dependencySubstitution {
+
+        }
+    }
 }

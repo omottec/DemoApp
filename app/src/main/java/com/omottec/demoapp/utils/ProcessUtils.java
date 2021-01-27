@@ -104,6 +104,7 @@ public class ProcessUtils {
             Field loadedApkField = app.getClass().getField("mLoadedApk");
             loadedApkField.setAccessible(true);
             Object loadedApk = loadedApkField.get(app);
+            Log.i(TAG, "loadedApk:" + loadedApk);
 
             Field activityThreadField = loadedApk.getClass().getDeclaredField("mActivityThread");
             activityThreadField.setAccessible(true);

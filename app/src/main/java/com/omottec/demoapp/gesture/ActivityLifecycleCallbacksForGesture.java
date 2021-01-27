@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 07/12/2018.

@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.io.IoUtils;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.NetUtils;
 
+import com.omottec.logger.Logger;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;

@@ -27,8 +27,8 @@ import android.widget.Toast;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.io.IoUtils;
-import com.omottec.demoapp.utils.Logger;
 
+import com.omottec.logger.Logger;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,9 @@ import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.UiUtils;
 
+import com.omottec.logger.Logger;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Properties;

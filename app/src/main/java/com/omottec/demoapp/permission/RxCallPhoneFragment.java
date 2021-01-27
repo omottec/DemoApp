@@ -2,25 +2,18 @@ package com.omottec.demoapp.permission;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 import com.tbruyelle.rxpermissions.RxPermissions;
-
-import java.util.Arrays;
-
-import rx.functions.Action1;
 
 /**
  * Created by omottec on 09/01/2018.

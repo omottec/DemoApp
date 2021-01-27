@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 16/05/2018.

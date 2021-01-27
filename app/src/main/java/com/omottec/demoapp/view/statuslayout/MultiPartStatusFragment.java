@@ -8,10 +8,9 @@ import android.widget.TextView;
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.fragment.BaseFragment;
 import com.omottec.demoapp.net.Api;
-import com.omottec.demoapp.net.GeoCoding;
 import com.omottec.demoapp.net.MockService;
 import com.omottec.demoapp.net.NetEventListener;
-import com.omottec.demoapp.utils.Logger;
+import com.omottec.logger.Logger;
 import com.trello.rxlifecycle.FragmentEvent;
 
 import java.io.IOException;

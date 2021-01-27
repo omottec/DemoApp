@@ -6,12 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.app.MyApplication;
-import com.omottec.demoapp.utils.Logger;
 import com.omottec.demoapp.utils.Views;
+import com.omottec.logger.Logger;
 
 /**
  * Created by qinbingbing on 16/05/2018.
