@@ -17,7 +17,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.google.code.gson:gson:2.8.0'
 }
 
 bintray {
@@ -31,7 +31,7 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
         version {
-            name = '0.0.5'
+            name = '0.0.7'
             released  = new Date()
         }
     }
@@ -51,7 +51,23 @@ afterEvaluate {
                 artifact(androidSourcesJar)
                 groupId 'com.github.omottec'
                 artifactId 'logger'
-                version '0.0.5'
+                version '0.0.7'
+
+                // Define this explicitly if using implementation or api configurations
+                pom.withXml {
+                    def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+
+                    // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+                    configurations.implementation.allDependencies.each {
+                        // Ensure dependencies such as fileTree are not included.
+                        if (it.name != 'unspecified') {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                        }
+                    }
+                }
             }
         }
     }
