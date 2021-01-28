@@ -31,11 +31,11 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
         version {
-            name = '0.0.7'
+            name = '0.0.8'
             released  = new Date()
         }
     }
-    publications = ['MyPublication']
+    publications = ['mavenReleaseAar']
 }
 
 task androidSourcesJar(type: Jar) {
@@ -46,12 +46,12 @@ task androidSourcesJar(type: Jar) {
 afterEvaluate {
     publishing {
         publications {
-            MyPublication(MavenPublication) {
-                artifact(bundleReleaseAar)
-                artifact(androidSourcesJar)
+            mavenReleaseAar(MavenPublication) {
+                artifact bundleReleaseAar
+                artifact androidSourcesJar
                 groupId 'com.github.omottec'
                 artifactId 'logger'
-                version '0.0.7'
+                version '0.0.8'
 
                 // Define this explicitly if using implementation or api configurations
                 pom.withXml {

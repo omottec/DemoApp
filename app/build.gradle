@@ -105,7 +105,7 @@ dependencies {
     implementation project(':lib_a')
 
 //    implementation project(':logger')
-    implementation "com.github.omottec:logger:0.0.4"
+    implementation "com.github.omottec:logger:0.0.8"
 
     implementation "com.android.support:multidex:1.0.3"
     implementation "com.android.support:design:$supportLibraryVersion"
@@ -157,13 +157,21 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.9.5'
 
     configurations.all {
-        resolutionStrategy {
-            dependencySubstitution {
+        resolutionStrategy.dependencySubstitution {
+//            substitute module('com.github.omottec:logger') with project(':logger')
+            all { DependencySubstitution substitution ->
+                println(">>>substitution.requested:" + substitution.requested.toString())
+                if (substitution.requested.toString().contains("com.github.omottec:logger"))
+                    substitution.useTarget project(':logger')
             }
         }
 
-        resolutionStrategy.dependencySubstitution {
-
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            println(">>>ModuleVersionSelector")
+            println(details.requested.module.toString())
+            println(details.requested.group
+                + ":" + details.requested.name
+                + ":" + details.requested.version)
         }
     }
 }
