@@ -30,6 +30,10 @@ bintray {
         name = 'com.github.omottec:logger'
         licenses = ['Apache-2.0']
         vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
+        version {
+            name = '0.0.5'
+            released  = new Date()
+        }
     }
     publications = ['MyPublication']
 }
@@ -45,10 +49,12 @@ afterEvaluate {
             MyPublication(MavenPublication) {
                 artifact(bundleReleaseAar)
                 artifact(androidSourcesJar)
-                groupId "com.github.omottec"
+                groupId 'com.github.omottec'
                 artifactId 'logger'
-                version '0.0.3'
+                version '0.0.5'
             }
         }
     }
 }
+
+// ./gradlew :logger:clean :logger:bintrayUpload --no-configure-on-demand --no-parallel

@@ -103,7 +103,9 @@ dependencies {
     implementation project(':service')
     implementation project(':account')
     implementation project(':lib_a')
-    implementation project(':logger')
+
+//    implementation project(':logger')
+    implementation "com.github.omottec:logger:0.0.4"
 
     implementation "com.android.support:multidex:1.0.3"
     implementation "com.android.support:design:$supportLibraryVersion"
