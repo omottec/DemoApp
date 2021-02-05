@@ -1,6 +1,8 @@
 package com.omottec.demoapp.cpu;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Process;
 import android.text.TextUtils;
@@ -10,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -71,6 +74,34 @@ public class CpuUtils {
                     Log.e(TAG, "", e);
                 }
             }
+        }
+        return device64;
+    }
+
+    public static boolean isDevice64ByAppInfo(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        boolean device64 = false;
+        try {
+            ApplicationInfo applicationInfo =
+                packageManager.getApplicationInfo(context.getPackageName(),
+                    PackageManager.GET_META_DATA);
+            Field primaryCpuAbi = ApplicationInfo.class.getDeclaredField("primaryCpuAbi");
+            primaryCpuAbi.setAccessible(true);
+            Object primaryCpuAbiValue = primaryCpuAbi.get(applicationInfo);
+            Log.i(TAG, "primaryCpuAbiValue:" + primaryCpuAbiValue);
+            if (primaryCpuAbiValue instanceof String)
+                device64 = ((String) primaryCpuAbiValue).toLowerCase().contains("64");
+
+            Field secondaryCpuAbi = ApplicationInfo.class.getDeclaredField("secondaryCpuAbi");
+            secondaryCpuAbi.setAccessible(true);
+            Object secondaryCpuAbiValue = secondaryCpuAbi.get(applicationInfo);
+            Log.i(TAG, "secondaryCpuAbiValue:" + secondaryCpuAbiValue);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "", e);
+        } catch (NoSuchFieldException e) {
+            Log.e(TAG, "", e);
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, "", e);
         }
         return device64;
     }

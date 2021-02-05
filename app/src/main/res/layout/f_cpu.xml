@@ -20,6 +20,14 @@
         android:gravity="center"
         android:text="build"/>
     <TextView
+        android:id="@+id/tv_app_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_green_light"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="tv_app_info"/>
+    <TextView
         android:id="@+id/tv_proc"
         android:layout_width="match_parent"
         android:layout_height="50dp"

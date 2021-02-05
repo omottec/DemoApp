@@ -14,6 +14,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
     private TextView mCpuTv;
     private TextView mBuildTv;
     private TextView mProcTv;
+    private TextView mAppInfoTv;
     private TextView mProcessTv;
     private TextView mClassLoaderTv;
     private TextView mSystemTv;
@@ -31,6 +32,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
         mCpuTv = view.findViewById(R.id.tv_cpu);
         mBuildTv = view.findViewById(R.id.tv_build);
         mProcTv = view.findViewById(R.id.tv_proc);
+        mAppInfoTv = view.findViewById(R.id.tv_app_info);
         mProcessTv = view.findViewById(R.id.tv_process);
         mClassLoaderTv = view.findViewById(R.id.tv_class_loader);
         mSystemTv = view.findViewById(R.id.tv_system);
@@ -38,6 +40,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
         mCpuTv.setOnClickListener(this);
         mBuildTv.setOnClickListener(this);
         mProcTv.setOnClickListener(this);
+        mAppInfoTv.setOnClickListener(this);
         mProcessTv.setOnClickListener(this);
         mClassLoaderTv.setOnClickListener(this);
         mSystemTv.setOnClickListener(this);
@@ -55,6 +58,9 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_proc:
                 mProcTv.setText("mProcTv device64:" + CpuUtils.isDevice64ByProc());
+                break;
+            case R.id.tv_app_info:
+                mAppInfoTv.setText("mAppInfoTv device64:" + CpuUtils.isDevice64ByAppInfo(getContext()));
                 break;
             case R.id.tv_process:
                 mProcessTv.setText("mProcessTv app64:" + CpuUtils.isApp64ByProcess());
