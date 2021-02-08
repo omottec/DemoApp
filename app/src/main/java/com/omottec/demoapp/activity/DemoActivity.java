@@ -5,6 +5,7 @@ import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
+import com.omottec.demoapp.GpuFragment;
 import com.omottec.demoapp.cpu.CpuFragment;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
 import com.omottec.demoapp.kt.KtFragment;
@@ -75,7 +76,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
 //        return new BitmapFragment();
-        return new CpuFragment();
+//        return new CpuFragment();
+        return new GpuFragment();
 
 
 //        return new NotificationFragment();
