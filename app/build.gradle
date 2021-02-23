@@ -86,7 +86,7 @@ android {
         variant.outputs.each { output ->
             def lintTask = tasks["lint${variant.name.capitalize()}"]
             println(">>>output:" + output + ", variant:" + variant)
-            println(">>>variant.name:" + variant.name.capitalize())
+            println(">>>variant.name:" + variant.name)
 //            output.assembleProvider.dependsOn lintTask
             println(">>>output.versionName:" + output.versionCode + ", output.versionCode:" + output.versionCode)
         }
@@ -168,8 +168,8 @@ dependencies {
 //            substitute module('com.github.omottec:logger') with project(':logger')
             all { DependencySubstitution substitution ->
                 println(">>>substitution.requested:" + substitution.requested.toString())
-                if (substitution.requested.toString().contains("com.github.omottec:logger"))
-                    substitution.useTarget project(':logger')
+//                if (substitution.requested.toString().contains("com.github.omottec:logger"))
+//                    substitution.useTarget project(':logger')
             }
         }
 
