@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import com.omottec.demoapp.GpuFragment;
 import com.omottec.demoapp.cpu.CpuFragment;
 import com.omottec.demoapp.fragment.MultiProcessFragment;
+import com.omottec.demoapp.fragment.YellowScreenFragment;
 import com.omottec.demoapp.kt.KtFragment;
 import com.omottec.demoapp.log.LogTagFragment;
 import com.omottec.demoapp.memory.BitmapFragment;
@@ -77,7 +78,8 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new LooperFragment();
 //        return new BitmapFragment();
 //        return new CpuFragment();
-        return new GpuFragment();
+//        return new GpuFragment();
+        return new YellowScreenFragment();
 
 
 //        return new NotificationFragment();
