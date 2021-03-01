@@ -70,17 +70,16 @@ public class ResTracker {
                         } else {
                             locale = tv.getContext().getResources().getConfiguration().locale;
                         }
-                        Log.i(TAG, "locale:" + locale
-                            + ", language:" + locale.getLanguage()
-                            + ", displayLanguage:" + locale.getDisplayLanguage()
-                            + ", displayName:" + locale.getDisplayName());
+                        printLocal(locale);
+                        printLocal(Locale.CHINESE);
+                        printLocal(Locale.ENGLISH);
                         // locale:zh_CN_#Hans, language:zh, displayLanguage:中文, displayName:中文 (简体中文,中国)
                         // locale:en_CN, language:en, displayLanguage:English, displayName:English (China)
 
-                        if (locale.getLanguage().equals("zh")) {
+                        if (locale.getLanguage().equals(Locale.CHINESE.getLanguage())) {
                             if (param.args[0].equals("聊天"))
                                 param.args[0] = "聊天聊天";
-                        } else if (locale.getLanguage().equals("en")) {
+                        } else if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
                             if (param.args[0].equals("Chats"))
                                 param.args[0] = "ChatsChats";
                         }
@@ -89,6 +88,21 @@ public class ResTracker {
         } catch (ClassNotFoundException e) {
             Log.e(TAG, "TextView Not Found", e);
         }
+    }
+
+    private static void printLocal(Locale locale) {
+        // locale:zh_CN, hashCode:6041, language:zh, displayLanguage:中文, displayName:中文 (中国)
+        // locale:zh, hashCode:3886, language:zh, displayLanguage:中文, displayName:中文
+        // locale:en, hashCode:3241, language:en, displayLanguage:英文, displayName:英文
+
+        // locale:en_US, hashCode:5959, language:en, displayLanguage:English, displayName:English (United States)
+        // locale:zh, hashCode:3886, language:zh, displayLanguage:Chinese, displayName:Chinese
+        // locale:en, hashCode:3241, language:en, displayLanguage:English, displayName:English
+        Log.i(TAG, "locale:" + locale
+            + ", hashCode:" + locale.hashCode()
+            + ", language:" + locale.getLanguage()
+            + ", displayLanguage:" + locale.getDisplayLanguage()
+            + ", displayName:" + locale.getDisplayName());
     }
 
     private void hookResourcesImpl() {
