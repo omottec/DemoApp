@@ -4,15 +4,17 @@ import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 
+import android.widget.TextView;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.io.IoUtils;
-import com.taobao.android.dexposed.DexposedBridge;
-import com.taobao.android.dexposed.XC_MethodHook;
 
+import de.robv.android.xposed.DexposedBridge;
+import de.robv.android.xposed.XC_MethodHook;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executors;
@@ -36,12 +38,57 @@ public class ResTracker {
     public void hookLoadRes() {
         int sdkInt = Build.VERSION.SDK_INT;
         Log.i(TAG, "hookLoadRes sdkInt:" + sdkInt);
-        if (sdkInt <= Build.VERSION_CODES.KITKAT || sdkInt > Build.VERSION_CODES.O_MR1) return;
-        hookResourcesImpl();
-        hookAssetManager();
-        hookSystem();
-        hookRuntime();
-        writeLoadedRes();
+        //if (sdkInt <= Build.VERSION_CODES.KITKAT || sdkInt > Build.VERSION_CODES.O_MR1) return;
+        //hookResourcesImpl();
+        //hookAssetManager();
+        //hookSystem();
+        //hookRuntime();
+        hookText();
+        //writeLoadedRes();
+    }
+
+    private void hookText() {
+        try {
+            Log.i(TAG, "hookText");
+            Class<?> clazz = Class.forName("android.widget.TextView");
+            DexposedBridge.findAndHookMethod(clazz, "setText",
+                CharSequence.class,
+                TextView.BufferType.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        Log.i(TAG, "TextView#setText "
+                            + "TextView:" + param.thisObject
+                            + ", text:" + param.args[0]
+                            + ", type:" + param.args[1]);
+                        TextView tv = (TextView) param.thisObject;
+                        Log.i(TAG, "TextView tag:" + tv.getTag());
+                        Locale locale;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            locale = tv.getContext().getResources().getConfiguration().getLocales().get(0);
+                        } else {
+                            locale = tv.getContext().getResources().getConfiguration().locale;
+                        }
+                        Log.i(TAG, "locale:" + locale
+                            + ", language:" + locale.getLanguage()
+                            + ", displayLanguage:" + locale.getDisplayLanguage()
+                            + ", displayName:" + locale.getDisplayName());
+                        // locale:zh_CN_#Hans, language:zh, displayLanguage:中文, displayName:中文 (简体中文,中国)
+                        // locale:en_CN, language:en, displayLanguage:English, displayName:English (China)
+
+                        if (locale.getLanguage().equals("zh")) {
+                            if (param.args[0].equals("聊天"))
+                                param.args[0] = "聊天聊天";
+                        } else if (locale.getLanguage().equals("en")) {
+                            if (param.args[0].equals("Chats"))
+                                param.args[0] = "ChatsChats";
+                        }
+                    }
+                });
+        } catch (ClassNotFoundException e) {
+            Log.e(TAG, "TextView Not Found", e);
+        }
     }
 
     private void hookResourcesImpl() {

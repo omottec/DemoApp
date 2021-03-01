@@ -19,4 +19,11 @@
     <string name="add">Add</string>
     <string name="click_to_remove">Click to remove it</string>
     <string name="money_format">&#165;%1$.2f/%2$s</string>
+
+    <string name="dynamic_text_body">主体</string>
+    <string name="dynamic_text_body_click">主体点击</string>
+    <string name="dynamic_text_tab_1">聊天</string>
+    <string name="dynamic_text_tab_2">通讯录</string>
+    <string name="dynamic_text_tab_3">发现</string>
+    <string name="dynamic_text_tab_4">我</string>
 </resources>

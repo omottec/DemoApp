@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="dynamic_text_body">Body</string>
+    <string name="dynamic_text_body_click">Body Click</string>
+    <string name="dynamic_text_tab_1">Chats</string>
+    <string name="dynamic_text_tab_2">Contacts</string>
+    <string name="dynamic_text_tab_3">Discover</string>
+    <string name="dynamic_text_tab_4">Me</string>
+</resources>
