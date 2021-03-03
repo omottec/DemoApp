@@ -1,34 +1,12 @@
 package com.omottec.demoapp.activity;
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 
-import com.omottec.demoapp.GpuFragment;
-import com.omottec.demoapp.cpu.CpuFragment;
-import com.omottec.demoapp.fragment.MultiProcessFragment;
-import com.omottec.demoapp.fragment.ReplaceTextFragment;
-import com.omottec.demoapp.fragment.YellowScreenFragment;
-import com.omottec.demoapp.kt.KtFragment;
-import com.omottec.demoapp.log.LogTagFragment;
-import com.omottec.demoapp.memory.BitmapFragment;
-import com.omottec.demoapp.memory.DumpHeapFragment;
-import com.omottec.demoapp.memory.MemoryInfoFragment;
-import com.omottec.demoapp.memory.StackSizeFragment;
-import com.omottec.demoapp.anr.AnrFragment;
-import com.omottec.demoapp.aspectj.AspectJFragment;
-import com.omottec.demoapp.concurrent.ThreadPoolFragment;
-import com.omottec.demoapp.fragment.ApiFragment;
-import com.omottec.demoapp.fragment.PowerOnOffFragment;
-import com.omottec.demoapp.gson.GsonFragment;
-import com.omottec.demoapp.job.JobFragment;
-import com.omottec.demoapp.memory.ashmem.AshmemClientFragment;
-import com.omottec.demoapp.net.NetFragment;
-import com.omottec.demoapp.net.OkhttpFragment;
+import com.omottec.demoapp.fragment.ReplaceResFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
-import com.omottec.demoapp.view.statuslayout.MultiPartStatusFragment;
 
 //import com.appsee.Appsee;
 
@@ -81,7 +59,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new CpuFragment();
 //        return new GpuFragment();
 //        return new YellowScreenFragment();
-        return new ReplaceTextFragment();
+        return new ReplaceResFragment();
 
 
 //        return new NotificationFragment();

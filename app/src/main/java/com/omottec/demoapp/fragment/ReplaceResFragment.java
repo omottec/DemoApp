@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.omottec.demoapp.R;
 
-public class ReplaceTextFragment extends Fragment {
+public class ReplaceResFragment extends Fragment {
     public static final String TAG = "ReplaceTextFragment";
     private TextView mBodyTv;
 
@@ -23,7 +23,7 @@ public class ReplaceTextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.f_replace_text, container, false);
+        return inflater.inflate(R.layout.f_replace_res, container, false);
     }
 
     @Override

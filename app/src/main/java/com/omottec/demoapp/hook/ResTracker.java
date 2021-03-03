@@ -1,15 +1,12 @@
 package com.omottec.demoapp.hook;
 
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
-
 import android.widget.TextView;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.io.IoUtils;
-
 import de.robv.android.xposed.DexposedBridge;
 import de.robv.android.xposed.XC_MethodHook;
 import java.io.BufferedWriter;
