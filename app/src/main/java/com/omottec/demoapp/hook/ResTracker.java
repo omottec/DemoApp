@@ -1,7 +1,9 @@
 package com.omottec.demoapp.hook;
 
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.util.TypedValue;
 
 import android.widget.TextView;
@@ -14,7 +16,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.Executors;
@@ -34,6 +38,32 @@ public class ResTracker {
     public static final String TAG = "ResTracker";
 
     private static Set<String> sResFiles = new CopyOnWriteArraySet<>();
+
+    private static Map<String, Pair<String, ReplaceScope>> sZhMap = new HashMap<>();
+
+    private static Map<String, Pair<String, ReplaceScope>> sEnMap = new HashMap<>();
+
+    private enum ReplaceScope {
+        GLOBAL, LOCAL;
+    }
+
+    static {
+        sZhMap.put("主体", new Pair<>("主体1", ReplaceScope.GLOBAL));
+        sZhMap.put("全局替换的文案", new Pair<>("全局替换的文案1", ReplaceScope.GLOBAL));
+        sZhMap.put("局部替换的文案", new Pair<>("局部替换的文案1", ReplaceScope.LOCAL));
+        sZhMap.put("聊天", new Pair<>("聊天1", ReplaceScope.GLOBAL));
+        sZhMap.put("通讯录", new Pair<>("通讯录1", ReplaceScope.GLOBAL));
+        sZhMap.put("发现", new Pair<>("发现1", ReplaceScope.GLOBAL));
+        sZhMap.put("我", new Pair<>("我1", ReplaceScope.GLOBAL));
+
+        sEnMap.put("Body", new Pair<>("Body1", ReplaceScope.GLOBAL));
+        sEnMap.put("Global Replace Item", new Pair<>("Global Replace Item1", ReplaceScope.GLOBAL));
+        sEnMap.put("Local Replace Item", new Pair<>("Local Replace Item1", ReplaceScope.LOCAL));
+        sEnMap.put("Chats", new Pair<>("Chats1", ReplaceScope.GLOBAL));
+        sEnMap.put("Contacts", new Pair<>("Contacts1", ReplaceScope.GLOBAL));
+        sEnMap.put("Discover", new Pair<>("Discover1", ReplaceScope.GLOBAL));
+        sEnMap.put("Me", new Pair<>("Me1", ReplaceScope.GLOBAL));
+    }
 
     public void hookLoadRes() {
         int sdkInt = Build.VERSION.SDK_INT;
@@ -58,8 +88,8 @@ public class ResTracker {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Log.i(TAG, "TextView#setText "
-                            + "TextView:" + param.thisObject
+                        Log.i(TAG, "before method:" + param.method
+                            + ", this:" + param.thisObject
                             + ", text:" + param.args[0]
                             + ", type:" + param.args[1]);
                         TextView tv = (TextView) param.thisObject;
@@ -76,12 +106,23 @@ public class ResTracker {
                         // locale:zh_CN_#Hans, language:zh, displayLanguage:中文, displayName:中文 (简体中文,中国)
                         // locale:en_CN, language:en, displayLanguage:English, displayName:English (China)
 
+                        String str = (String) param.args[0];
                         if (locale.getLanguage().equals(Locale.CHINESE.getLanguage())) {
-                            if (param.args[0].equals("聊天"))
-                                param.args[0] = "聊天聊天";
+                            if (sZhMap.get(str) == null) return;
+                            if (sZhMap.get(str).second == ReplaceScope.GLOBAL)
+                                param.args[0] = sZhMap.get(str).first;
+                            else {
+                                if ("tag_tv_dynamic_text".equals(tv.getTag()))
+                                    param.args[0] = sZhMap.get(str).first;
+                            }
                         } else if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
-                            if (param.args[0].equals("Chats"))
-                                param.args[0] = "ChatsChats";
+                            if (sEnMap.get(str) == null) return;
+                            if (sEnMap.get(str).second == ReplaceScope.GLOBAL)
+                                param.args[0] = sEnMap.get(str).first;
+                            else {
+                                if ("tag_tv_dynamic_text".equals(tv.getTag()))
+                                    param.args[0] = sEnMap.get(str).first;
+                            }
                         }
                     }
                 });

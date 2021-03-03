@@ -2,6 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="dynamic_text_body">Body</string>
     <string name="dynamic_text_body_click">Body Click</string>
+    <string name="dynamic_text_global_item">Global Replace Item</string>
+    <string name="dynamic_text_local_item">Local Replace Item</string>
     <string name="dynamic_text_tab_1">Chats</string>
     <string name="dynamic_text_tab_2">Contacts</string>
     <string name="dynamic_text_tab_3">Discover</string>
