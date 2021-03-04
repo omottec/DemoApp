@@ -9,7 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.EncodeStrategy;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.omottec.demoapp.R;
+import com.omottec.demoapp.app.GlideApp;
 
 public class ReplaceResFragment extends Fragment {
     public static final String TAG = "ReplaceTextFragment";
@@ -48,8 +53,23 @@ public class ReplaceResFragment extends Fragment {
             }
         });
 
-        Glide.with(getActivity())
-            .load("https://www.flaticon.com/svg/vstatic/svg/616/616430.svg?token=exp=1614841658~hmac=696c94acae5cf9e4c8f3415e6e1e481b")
+        GlideApp.with(this)
+            .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F94%2F21%2F8356f2bd030acd8.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617435408&t=8915e4faf455bf540df593eb639dfd3c")
+            //.load("null")
+            .placeholder(R.drawable.yellow_face_1)
+            .onlyRetrieveFromCache(true)
             .into(mTab1Iv);
+        GlideApp.with(this)
+            .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F29%2F09%2F4556d22602384e5.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617435534&t=35061944e9505123fef69f0151e729f3")
+            .placeholder(R.drawable.yellow_face_2)
+            .into(mTab2Iv);
+        GlideApp.with(this)
+            .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F85%2F22%2F6256e8958f8b6e2.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617435665&t=df79a3a662e52b32acf45d36b38c49be")
+            .placeholder(R.drawable.yellow_face_3)
+            .into(mTab3Iv);
+        GlideApp.with(this)
+            .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fstatic.easyicon.net%2Fpreview%2F53%2F530838.gif&refer=http%3A%2F%2Fstatic.easyicon.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617435723&t=72229e661003141a2ec8edbc748ca0a7")
+            .placeholder(R.drawable.yellow_face_4)
+            .into(mTab4Iv);
     }
 }
