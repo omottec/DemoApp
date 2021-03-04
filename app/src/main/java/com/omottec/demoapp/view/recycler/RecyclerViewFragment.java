@@ -2,23 +2,16 @@ package com.omottec.demoapp.view.recycler;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.SimpleArrayMap;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.fragment.BaseFragment;
-import com.omottec.demoapp.view.recycler.MultiRecyclerAdapter;
-import com.omottec.demoapp.view.recycler.SimpleRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

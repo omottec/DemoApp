@@ -6,7 +6,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Process;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 import android.util.Log;
 import android.util.SparseArray;
 

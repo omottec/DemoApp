@@ -2,7 +2,7 @@ package com.omottec.demoapp.rxjava.serializedAccess;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import java.util.Objects;
 import java.util.Queue;

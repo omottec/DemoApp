@@ -4,7 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.omottec.demoapp.io.IoUtils;
 import com.omottec.demoapp.utils.NetUtils;

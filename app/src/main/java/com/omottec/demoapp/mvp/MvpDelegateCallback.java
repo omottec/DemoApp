@@ -1,6 +1,6 @@
 package com.omottec.demoapp.mvp;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  *

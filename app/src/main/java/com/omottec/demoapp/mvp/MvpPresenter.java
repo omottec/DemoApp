@@ -1,6 +1,6 @@
 package com.omottec.demoapp.mvp;
 
-import android.support.annotation.UiThread;
+import androidx.annotation.UiThread;
 
 /**
  * The root interface for every mvp presenter

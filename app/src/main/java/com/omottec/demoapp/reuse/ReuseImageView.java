@@ -1,7 +1,7 @@
 package com.omottec.demoapp.reuse;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 
 import com.omottec.demoapp.Tag;
@@ -11,7 +11,7 @@ import com.omottec.logger.Logger;
  * Created by qinbingbing on 09/09/2018.
  */
 
-public class ReuseImageView extends android.support.v7.widget.AppCompatImageView {
+public class ReuseImageView extends androidx.appcompat.widget.AppCompatImageView {
     public ReuseImageView(Context context) {
         super(context);
         Logger.d(Tag.REUSE, this +  " ReuseImageView(Context context)");

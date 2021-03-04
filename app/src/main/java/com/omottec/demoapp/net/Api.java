@@ -1,13 +1,10 @@
 package com.omottec.demoapp.net;
 
-import android.support.v4.util.LruCache;
-
-import com.omottec.demoapp.app.MyApplication;
+import androidx.collection.LruCache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

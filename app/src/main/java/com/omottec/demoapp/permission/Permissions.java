@@ -9,8 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Process;
 import android.provider.Settings;
-import android.support.v4.content.PermissionChecker;
-import android.support.v7.app.AlertDialog;
+import androidx.core.content.PermissionChecker;
+import androidx.appcompat.app.AlertDialog;
 
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;

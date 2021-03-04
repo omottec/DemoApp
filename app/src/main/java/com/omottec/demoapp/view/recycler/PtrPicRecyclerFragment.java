@@ -2,9 +2,9 @@ package com.omottec.demoapp.view.recycler;
 
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;

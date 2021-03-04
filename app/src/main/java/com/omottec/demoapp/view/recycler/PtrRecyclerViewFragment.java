@@ -1,24 +1,18 @@
 package com.omottec.demoapp.view.recycler;
 
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.fragment.BaseFragment;
-import com.omottec.demoapp.utils.TouchUtils;
-import com.omottec.demoapp.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by qinbingbing on 22/03/2017.

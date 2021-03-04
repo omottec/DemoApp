@@ -1,22 +1,15 @@
 package com.omottec.demoapp.view.vpFrag;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.utils.UiUtils;
-import com.omottec.demoapp.view.frame.SimpleFragStatePagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by qinbingbing on 16/03/2017.

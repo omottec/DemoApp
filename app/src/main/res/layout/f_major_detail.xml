@@ -10,12 +10,12 @@
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_major"
         android:layout_width="150dp"
         android:layout_height="match_parent"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_detail"
         android:layout_toRightOf="@+id/rv_major"
         android:layout_width="match_parent"

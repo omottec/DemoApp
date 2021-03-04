@@ -1,12 +1,11 @@
 package com.omottec.demoapp.touch;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.utils.TouchUtils;

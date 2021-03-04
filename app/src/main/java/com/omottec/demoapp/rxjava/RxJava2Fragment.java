@@ -1,13 +1,11 @@
 package com.omottec.demoapp.rxjava;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
 import com.omottec.demoapp.R;
-import com.omottec.demoapp.fragment.AnimatorFragment;
 import com.omottec.demoapp.fragment.BaseFragment;
 
 //import org.reactivestreams.Subscriber;

@@ -109,7 +109,7 @@ public class GenCodeProcessor extends AbstractProcessor {
         ClassName viewGroup = ClassName.get("android.view", "ViewGroup");
         ClassName bundle = ClassName.get("android.os", "Bundle");
         ClassName view = ClassName.get("android.view", "View");
-        ClassName nullable = ClassName.get("android.support.annotation", "Nullable");
+        ClassName nullable = ClassName.get("androidx.annotation", "Nullable");
 
         MethodSpec onCreateView = MethodSpec.methodBuilder("onCreateView")
             .addParameter(ParameterSpec.builder(layoutInflater, "inflater").build())
@@ -141,7 +141,7 @@ public class GenCodeProcessor extends AbstractProcessor {
             .build();
 
         TypeSpec typeSpec = TypeSpec.classBuilder("JavaPoetFragmentGen")
-            .superclass(ClassName.get("android.support.v4.app", "Fragment"))
+            .superclass(ClassName.get("androidx.fragment.app", "Fragment"))
             .addModifiers(Modifier.PUBLIC)
             .addField(fieldSpec)
             .addMethod(onCreateView)

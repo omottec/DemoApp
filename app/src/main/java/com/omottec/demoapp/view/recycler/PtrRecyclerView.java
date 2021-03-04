@@ -1,8 +1,8 @@
 package com.omottec.demoapp.view.recycler;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +12,6 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.utils.TouchUtils;
 import com.omottec.demoapp.utils.UiUtils;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by qinbingbing on 22/03/2017.

@@ -3,7 +3,7 @@ package com.omottec.demoapp.ipc.socket;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.omottec.demoapp.Constants;
@@ -11,7 +11,6 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.io.IoUtils;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -20,7 +19,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by qinbingbing on 9/13/16.

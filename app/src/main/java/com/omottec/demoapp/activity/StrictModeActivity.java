@@ -3,7 +3,7 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.app.MyApplication;

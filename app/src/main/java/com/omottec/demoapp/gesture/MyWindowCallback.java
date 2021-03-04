@@ -1,6 +1,6 @@
 package com.omottec.demoapp.gesture;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;

@@ -1,17 +1,16 @@
 package com.omottec.demoapp.view.frame;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.app.MyApplication;
 import com.omottec.demoapp.utils.UiUtils;
 
 import java.util.ArrayList;

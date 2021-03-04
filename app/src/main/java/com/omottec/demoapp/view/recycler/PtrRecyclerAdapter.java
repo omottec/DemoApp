@@ -1,9 +1,8 @@
 package com.omottec.demoapp.view.recycler;
 
 import android.graphics.Color;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 
 /**

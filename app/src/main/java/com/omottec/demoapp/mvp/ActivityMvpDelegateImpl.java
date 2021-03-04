@@ -1,7 +1,7 @@
 package com.omottec.demoapp.mvp;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class ActivityMvpDelegateImpl<V extends MvpView, P extends MvpPresenter<V>>
         implements ActivityMvpDelegate {

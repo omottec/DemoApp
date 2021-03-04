@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;

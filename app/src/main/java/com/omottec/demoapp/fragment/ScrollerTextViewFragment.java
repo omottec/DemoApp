@@ -2,8 +2,8 @@ package com.omottec.demoapp.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.omottec.demoapp.R;
 import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.view.ScrollerMoveImageView;
 import com.omottec.demoapp.view.ScrollerMoveTextView;
 
 /**

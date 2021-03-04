@@ -1,7 +1,7 @@
 package com.omottec.demoapp.rxjava.serializedAccess;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
