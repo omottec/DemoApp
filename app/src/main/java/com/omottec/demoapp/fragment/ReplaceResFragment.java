@@ -1,6 +1,7 @@
 package com.omottec.demoapp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class ReplaceResFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
     }
 
     @Nullable
@@ -44,12 +46,18 @@ public class ReplaceResFragment extends Fragment {
         mTab2Iv = view.findViewById(R.id.iv_tab_2);
         mTab3Iv = view.findViewById(R.id.iv_tab_3);
         mTab4Iv = view.findViewById(R.id.iv_tab_4);
+        Log.i(TAG, "R.id.tv_body:" + R.id.tv_body);
+        Log.i(TAG, "R.id.iv_tab_1:" + R.id.iv_tab_1);
+        Log.i(TAG, "R.id.iv_tab_2:" + R.id.iv_tab_2);
+        Log.i(TAG, "R.id.iv_tab_3:" + R.id.iv_tab_3);
+        Log.i(TAG, "R.id.iv_tab_4:" + R.id.iv_tab_4);
 
 
         mBodyTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBodyTv.setText(R.string.dynamic_text_body_click);
+                Log.i(TAG, "onClick");
             }
         });
 
