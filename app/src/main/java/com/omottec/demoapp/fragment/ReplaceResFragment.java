@@ -65,7 +65,7 @@ public class ReplaceResFragment extends Fragment {
             .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F94%2F21%2F8356f2bd030acd8.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617435408&t=8915e4faf455bf540df593eb639dfd3c")
             //.load("null")
             .placeholder(R.drawable.yellow_face_1)
-            .onlyRetrieveFromCache(true)
+            //.onlyRetrieveFromCache(true)
             .into(mTab1Iv);
         GlideApp.with(this)
             .load("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F00%2F29%2F09%2F4556d22602384e5.jpg&refer=http%3A%2F%2Fbpic.588ku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617435534&t=35061944e9505123fef69f0151e729f3")
