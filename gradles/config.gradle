@@ -2,13 +2,27 @@ println("apply config...")
 
 logInfo()
 
+logMap()
+
 void logInfo() {
     println(">>>" + gradle)
     println(">>>" + gradle.startParameter)
     println(">>>" + gradle.startParameter.taskRequests)
+    println(">>>" + gradle.startParameter.taskRequests.toString())
     println(">>>" + gradle.ext)
     println(">>>" + rootProject.projectDir.absolutePath)
     println(">>>" + project.path)
     println(">>>" + project.parent.path)
+}
 
+void logMap() {
+    gradle.ext.propMap = [
+        key1 : "value1",
+    ]
+    if (gradle.ext.propMap) {
+        println(">>> propMap ture")
+        println(">>> propMap key1:" + gradle.propMap.key1)
+    } else {
+        println(">>> propMap false")
+    }
 }
