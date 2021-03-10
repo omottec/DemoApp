@@ -70,7 +70,7 @@ public class ResTracker {
         //hookAssetManager();
         //hookSystem();
         //hookRuntime();
-        hookText();
+        //hookText();
         //writeLoadedRes();
     }
 

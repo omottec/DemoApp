@@ -60,4 +60,6 @@ public final class Tag {
     public static final String THREAD_POOL = "thread_pool";
 
     public static final String ASPECTJ = "aspectj";
+
+    public static final String REPLACE_RES = "replace_res";
 }

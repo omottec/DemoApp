@@ -1,12 +1,16 @@
 package com.omottec.demoapp.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
-
+import androidx.fragment.app.Fragment;
+import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.fragment.ReplaceResFragment;
+import com.omottec.demoapp.hook.ProxyResources;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
+import com.omottec.logger.Logger;
 
 //import com.appsee.Appsee;
 
@@ -18,8 +22,13 @@ public class DemoActivity extends SingleFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         TimeLogger.methodStart();
+        LayoutInflater inflater = getLayoutInflater();
+        Logger.i(Tag.REPLACE_RES, "before super.onCreate " + Logger.getInflaterInfo(inflater));
         super.onCreate(savedInstanceState);
-//        Appsee.start("c0a22dc0a69a4b8e84de241c5bfc1442");
+        LayoutInflater inflater1 = getLayoutInflater();
+        Logger.i(Tag.REPLACE_RES, "after super.onCreate " + Logger.getInflaterInfo(inflater1));
+        Logger.i(Tag.REPLACE_RES, "Activity getResources:" + getResources());
+        //        Appsee.start("c0a22dc0a69a4b8e84de241c5bfc1442");
         TimeLogger.methodEnd();
     }
 
@@ -104,5 +113,10 @@ public class DemoActivity extends SingleFragmentActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
 //        Log.d(Tag.GESTURE, "dispatchTouchEvent " + TouchUtils.getTouchEventAction(ev));
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public Resources getResources() {
+        return new ProxyResources(super.getResources());
     }
 }

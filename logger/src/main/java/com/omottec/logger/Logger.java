@@ -3,6 +3,7 @@ package com.omottec.logger;
 import android.os.Looper;
 import android.os.Process;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 /**
  * Created by qinbingbing on 9/8/16.
@@ -20,6 +21,13 @@ public final class Logger {
 
     public static void appendCallInfo(boolean append) {
         sAppendCallInfo = append;
+    }
+
+    public static String getInflaterInfo(LayoutInflater inflater) {
+        return new StringBuilder("inflater:").append(inflater)
+            .append(", factory:").append(inflater.getFactory())
+            .append(", factory2:").append(inflater.getFactory2())
+            .toString();
     }
 
     public static void logThread(String tag) {

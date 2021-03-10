@@ -25,6 +25,7 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
+import com.omottec.demoapp.hook.ReplaceResCallback;
 import com.omottec.demoapp.hook.ResTracker;
 import com.omottec.demoapp.memory.MemoryUtils;
 import com.omottec.demoapp.memory.OomMonitor;
@@ -71,11 +72,13 @@ public class MyApplication extends MultiDexApplication {
             //    10);
         }
         super.attachBaseContext(base);
+        Logger.appendCallInfo(true);
         ResTracker.getInstance().hookLoadRes();
         Log.d(Tag.APP_PROCESS, this + " attachBaseContext");
         ProcessUtils.testApi(this);
         Log.d(Tag.APP_PROCESS, "mIsMainProcess before call:" + mIsMainProcess);
         mIsMainProcess = AppUtils.isMainProcess(this, Process.myPid());
+        Logger.i(Tag.REPLACE_RES, "MyApplication.attachBaseContext:" + getResources());
         Log.d(Tag.APP_PROCESS, "mIsMainProcess after call:" + mIsMainProcess);
     }
 
@@ -101,6 +104,7 @@ public class MyApplication extends MultiDexApplication {
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
         registerGestureListener();
         registerAppStatusListener();
+        registerReplaceResCallback();
         initImmersive();
 //        registerComponentCallbacks(this);
         OomMonitor.initialize(new OomObserver() {
@@ -160,6 +164,10 @@ public class MyApplication extends MultiDexApplication {
 //        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacksForGesture());
     }
 
+
+    private void registerReplaceResCallback() {
+        registerActivityLifecycleCallbacks(new ReplaceResCallback());
+    }
 
     private void registerAppStatusListener() {
         AppStatusHelper.getInstance().registerListener(new AppStatusListener() {
