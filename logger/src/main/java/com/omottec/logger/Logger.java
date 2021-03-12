@@ -27,6 +27,8 @@ public final class Logger {
         return new StringBuilder("inflater:").append(inflater)
             .append(", factory:").append(inflater.getFactory())
             .append(", factory2:").append(inflater.getFactory2())
+            .append(", context:").append(inflater.getContext())
+            .append(", context.getResources:").append(inflater.getContext().getResources())
             .toString();
     }
 

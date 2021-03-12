@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="dynamic_text_body">主体1</string>
+
+    <string name="dynamic_text_inflate_sys">inflate系统TextView1</string>
+    <string name="dynamic_text_inflate_define">inflate自定义TextView1</string>
+    <string name="dynamic_text_new_sys">new系统TextView1</string>
+    <string name="dynamic_text_new_define">new自定义TextView1</string>
+
+    <string name="dynamic_text_tab_1_inflate_sys">解析1</string>
+    <string name="dynamic_text_tab_2_inflate_define">解析自1</string>
+    <string name="dynamic_text_tab_3_new_sys">代码1</string>
+    <string name="dynamic_text_tab_4_new_define">代码自1</string>
+</resources>

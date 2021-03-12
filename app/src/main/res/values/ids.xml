@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tv_new_sys" type="id"/>
+    <item name="tv_new_define" type="id"/>
+
+    <item name="ll_tab_3" type="id"/>
+    <item name="tv_tab_3" type="id"/>
+    <item name="iv_tab_3" type="id"/>
+    <item name="ll_tab_4" type="id"/>
+    <item name="tv_tab_4" type="id"/>
+    <item name="iv_tab_4" type="id"/>
+</resources>

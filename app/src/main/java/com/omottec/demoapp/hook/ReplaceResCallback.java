@@ -18,6 +18,7 @@ public class ReplaceResCallback implements Application.ActivityLifecycleCallback
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         LayoutInflater inflater = activity.getLayoutInflater();
         Logger.i(Tag.REPLACE_RES, Logger.getInflaterInfo(inflater));
+        Logger.i(Tag.REPLACE_RES, "getResources:" + activity.getResources());
         LayoutInflater.Factory2 factory2 = inflater.getFactory2();
         if (factory2 != null) {
             return;

@@ -20,13 +20,23 @@
     <string name="click_to_remove">Click to remove it</string>
     <string name="money_format">&#165;%1$.2f/%2$s</string>
 
-    <string name="dynamic_text_body">主体</string>
+
     <string name="dynamic_text_add">代码添加</string>
     <string name="dynamic_text_body_click">主体点击</string>
     <string name="dynamic_text_global_item">全局替换的文案</string>
     <string name="dynamic_text_local_item">局部替换的文案</string>
-    <string name="dynamic_text_tab_1">聊天</string>
-    <string name="dynamic_text_tab_2">通讯录</string>
-    <string name="dynamic_text_tab_3">发现</string>
-    <string name="dynamic_text_tab_4">我</string>
+
+
+    <string name="dynamic_text_body">主体</string>
+
+    <string name="dynamic_text_inflate_sys">inflate系统TextView</string>
+    <string name="dynamic_text_inflate_define">inflate自定义TextView</string>
+    <string name="dynamic_text_new_sys">new系统TextView</string>
+    <string name="dynamic_text_new_define">new自定义TextView</string>
+
+    <string name="dynamic_text_tab_1_inflate_sys">解析</string>
+    <string name="dynamic_text_tab_2_inflate_define">解析自</string>
+    <string name="dynamic_text_tab_3_new_sys">代码</string>
+    <string name="dynamic_text_tab_4_new_define">代码自</string>
+
 </resources>

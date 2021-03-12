@@ -3,9 +3,11 @@ package com.omottec.demoapp.app;
 import android.app.Activity;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Process;
+import android.util.Pair;
 import androidx.multidex.MultiDexApplication;
 import android.util.Log;
 import android.util.SparseArray;
@@ -25,7 +27,10 @@ import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.status.AppStatusHelper;
 import com.omottec.demoapp.app.status.AppStatusListener;
 import com.omottec.demoapp.fresco.ImagePipelineConfigFactory;
+import com.omottec.demoapp.hook.LoadedApkInfo;
+import com.omottec.demoapp.hook.ProxyResources;
 import com.omottec.demoapp.hook.ReplaceResCallback;
+import com.omottec.demoapp.hook.ResManager;
 import com.omottec.demoapp.hook.ResTracker;
 import com.omottec.demoapp.memory.MemoryUtils;
 import com.omottec.demoapp.memory.OomMonitor;
@@ -78,7 +83,6 @@ public class MyApplication extends MultiDexApplication {
         ProcessUtils.testApi(this);
         Log.d(Tag.APP_PROCESS, "mIsMainProcess before call:" + mIsMainProcess);
         mIsMainProcess = AppUtils.isMainProcess(this, Process.myPid());
-        Logger.i(Tag.REPLACE_RES, "MyApplication.attachBaseContext:" + getResources());
         Log.d(Tag.APP_PROCESS, "mIsMainProcess after call:" + mIsMainProcess);
     }
 
@@ -90,6 +94,7 @@ public class MyApplication extends MultiDexApplication {
         Log.d(Tag.APP_PROCESS, this + " onCreate");
         Log.d(Tag.APP_PROCESS, "mIsMainProcess:" + mIsMainProcess);
         sAppContext = this;
+        initResManager();
         sUiHandler = new Handler();
         /*if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
@@ -104,7 +109,7 @@ public class MyApplication extends MultiDexApplication {
         Fresco.initialize(this, ImagePipelineConfigFactory.getOkHttpImagePipelineConfig(this));
         registerGestureListener();
         registerAppStatusListener();
-        registerReplaceResCallback();
+        //registerReplaceResCallback();
         initImmersive();
 //        registerComponentCallbacks(this);
         OomMonitor.initialize(new OomObserver() {
@@ -116,6 +121,15 @@ public class MyApplication extends MultiDexApplication {
 
         // facebook profilo
         initProfilo();
+    }
+
+    private void initResManager() {
+        ResManager resManager = ResManager.getInstance();
+        Resources appRes = getResources();
+        Logger.i(Tag.REPLACE_RES, "getResources:" + appRes);
+        //LoadedApkInfo loadedApkInfo = resManager.getLoadedApkInfo(appRes);
+        //resManager.setProxyResources(new ProxyResources(appRes, loadedApkInfo));
+        resManager.loadApk(appRes);
     }
 
     private void initProfilo() {
