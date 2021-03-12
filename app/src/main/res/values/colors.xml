@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="tabColor">#99CC00</color>
     <color name="itemColor">#FF4081</color>
+    <color name="dynamicColor">#99CC00</color>
 </resources>

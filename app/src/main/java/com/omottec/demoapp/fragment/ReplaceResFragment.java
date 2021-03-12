@@ -57,7 +57,7 @@ public class ReplaceResFragment extends Fragment {
         tv.setId(R.id.tv_new_sys);
         tv.setText(R.string.dynamic_text_new_sys);
         tv.setGravity(Gravity.CENTER);
-        tv.setBackgroundColor(getResources().getColor(R.color.itemColor));
+        tv.setBackgroundColor(getResources().getColor(R.color.dynamicColor));
         LinearLayout.LayoutParams tvParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 UiUtils.dip2px(getContext(), 50));
@@ -68,7 +68,7 @@ public class ReplaceResFragment extends Fragment {
         tv.setId(R.id.tv_new_define);
         logTv.setText(R.string.dynamic_text_new_define);
         logTv.setGravity(Gravity.CENTER);
-        logTv.setBackgroundColor(getResources().getColor(R.color.itemColor));
+        logTv.setBackgroundColor(getResources().getColor(R.color.dynamicColor));
         LinearLayout.LayoutParams logTvParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 UiUtils.dip2px(getContext(), 50));
@@ -79,7 +79,7 @@ public class ReplaceResFragment extends Fragment {
         LinearLayout tab3Ll = new LinearLayout(getContext());
         tab3Ll.setId(R.id.ll_tab_3);
         tab3Ll.setOrientation(LinearLayout.VERTICAL);
-        tab3Ll.setBackgroundResource(R.color.tabColor);
+        tab3Ll.setBackgroundResource(R.color.dynamicColor);
         LinearLayout.LayoutParams tab3LlParams =
             new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         mNavLl.addView(tab3Ll, tab3LlParams);
@@ -103,7 +103,7 @@ public class ReplaceResFragment extends Fragment {
         LinearLayout tab4Ll = new LinearLayout(getContext());
         tab4Ll.setId(R.id.ll_tab_4);
         tab4Ll.setOrientation(LinearLayout.VERTICAL);
-        tab4Ll.setBackgroundResource(R.color.tabColor);
+        tab4Ll.setBackgroundResource(R.color.dynamicColor);
         LinearLayout.LayoutParams tab4LlParams =
             new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         mNavLl.addView(tab4Ll, tab4LlParams);
