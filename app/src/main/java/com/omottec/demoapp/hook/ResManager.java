@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.util.Pair;
 import com.omottec.demoapp.Tag;
 import com.omottec.demoapp.app.MyApplication;
 import com.omottec.logger.Logger;
@@ -47,6 +46,7 @@ public final class ResManager {
         packageInfo.applicationInfo.publicSourceDir = loadedApkPath;
         try {
             mLoadedApkInfo = new LoadedApkInfo();
+            mLoadedApkInfo.apkPath = loadedApkPath;
             mLoadedApkInfo.resources = new Resources(
                 pm.getResourcesForApplication(packageInfo.applicationInfo).getAssets(),
                 appRes.getDisplayMetrics(), appRes.getConfiguration());

@@ -3,6 +3,7 @@ package com.omottec.demoapp.hook;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
@@ -91,6 +92,14 @@ public class ProxyResources extends Resources {
 
     public ProxyResources(Resources appRes, LoadedApkInfo loadedApkInfo) {
         super(appRes.getAssets(), appRes.getDisplayMetrics(), appRes.getConfiguration());
+        if (loadedApkInfo != null) {
+            mLoadedRes = loadedApkInfo.resources;
+            mLoadedPkgName = loadedApkInfo.pkgName;
+        }
+    }
+
+    public ProxyResources(AssetManager asset, Resources appRes, LoadedApkInfo loadedApkInfo) {
+        super(asset, appRes.getDisplayMetrics(), appRes.getConfiguration());
         if (loadedApkInfo != null) {
             mLoadedRes = loadedApkInfo.resources;
             mLoadedPkgName = loadedApkInfo.pkgName;
