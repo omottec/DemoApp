@@ -23,8 +23,7 @@ public class ReplaceResFactory2 implements LayoutInflater.Factory2 {
         = new ArrayMap<>();
     private static final String[] sClassPrefixList = {
         "android.widget.",
-        "android.view.",
-        "android.webkit."
+        "android.view."
     };
     private AppCompatDelegate mDelegate;
     private final Object[] mConstructorArgs = new Object[2];
