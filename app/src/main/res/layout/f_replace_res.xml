@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_content"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -35,6 +36,38 @@
             android:text="@string/dynamic_text_inflate_define"
             android:layout_marginBottom="2dp"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/darker_gray">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/appcenter_navigation_tab_icon"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/appcenter_navigation_tab_icon"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/yellow_face_1"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/yellow_face_1"/>
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/appcenter_tab_normal_desktop"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/dog_1"/>
     </LinearLayout>
 
     <LinearLayout

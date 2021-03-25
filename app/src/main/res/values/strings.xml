@@ -39,4 +39,6 @@
     <string name="dynamic_text_tab_3_new_sys">代码</string>
     <string name="dynamic_text_tab_4_new_define">代码自</string>
 
+    <string name="no_reference_str">没有引用的文案</string>
+
 </resources>
