@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import androidx.fragment.app.Fragment;
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.fragment.FileFragment;
 import com.omottec.demoapp.fragment.ReplaceResFragment;
 import com.omottec.demoapp.hook.ProxyResources;
 import com.omottec.demoapp.hook.ResManager;
@@ -70,7 +71,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new CpuFragment();
 //        return new GpuFragment();
 //        return new YellowScreenFragment();
-        return new ReplaceResFragment();
+//        return new ReplaceResFragment();
 
 
 //        return new NotificationFragment();
@@ -109,6 +110,10 @@ public class DemoActivity extends SingleFragmentActivity {
         //return new ApiFragment();
 
         //return new KtFragment();
+
+
+        // IO
+        return new FileFragment();
     }
 
     @Override
