@@ -105,10 +105,12 @@ public class ProcessUtils {
             loadedApkField.setAccessible(true);
             Object loadedApk = loadedApkField.get(app);
             Log.i(TAG, "loadedApk:" + loadedApk);
+            if (loadedApk == null) return processName;
 
             Field activityThreadField = loadedApk.getClass().getDeclaredField("mActivityThread");
             activityThreadField.setAccessible(true);
             Object activityThread = activityThreadField.get(loadedApk);
+            if (activityThread == null) return processName;
 
             Method getProcessName = activityThread.getClass().getDeclaredMethod("getProcessName");
             processName = (String) getProcessName.invoke(activityThread);
