@@ -1,0 +1,2 @@
+aapt2 compile --dir res link --manifest AndroidManifest.xml -o res_app_aapt
+aapt2 link -o res_app_aapt_stable -I $ANDROID_HOME/platforms/android-29/android.jar compile/drawable-xhdpi_yellow_face_1.png.flat compile/drawable-xhdpi_yellow_face_2.png.flat compile/drawable-xhdpi_yellow_face_3.png.flat compile/drawable-xhdpi_yellow_face_4.png.flat compile/values_colors.arsc.flat compile/values_strings.arsc.flat --manifest AndroidManifest.xml --stable-ids /Users/qbb/Bt/repalce_res/demo/stable_ids

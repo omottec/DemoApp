@@ -74,6 +74,7 @@ public class ProxyResources extends Resources {
         String resourceEntryName = resources.getResourceEntryName(id);
         Logger.i(Tag.REPLACE_RES,
             new StringBuilder("resourceName:").append(resourceName)
+                .append(", id:").append(id)
                 .append(", resourcePackageName:").append(resourcePackageName)
                 .append(", resourceTypeName:").append(resourceTypeName)
                 .append(", resourceEntryName:").append(resourceEntryName)

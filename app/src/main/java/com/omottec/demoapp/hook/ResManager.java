@@ -35,7 +35,7 @@ public final class ResManager {
     public void loadApk(Resources appRes) {
         Context appContext = MyApplication.getContext();
         PackageManager pm = appContext.getPackageManager();
-        String loadedApkPath = appContext.getFilesDir() +  "/res.zip";
+        String loadedApkPath = appContext.getFilesDir() +  "/res_app_aapt_stable";
         Logger.i(Tag.REPLACE_RES, "loadedApkPath:" + loadedApkPath);
         Logger.i(Tag.REPLACE_RES, "apk exists:" + new File(loadedApkPath).exists());
         PackageInfo packageInfo =

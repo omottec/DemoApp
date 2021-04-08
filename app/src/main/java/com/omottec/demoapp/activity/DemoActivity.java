@@ -71,7 +71,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new CpuFragment();
 //        return new GpuFragment();
 //        return new YellowScreenFragment();
-//        return new ReplaceResFragment();
+        return new ReplaceResFragment();
 
 
 //        return new NotificationFragment();
@@ -113,7 +113,7 @@ public class DemoActivity extends SingleFragmentActivity {
 
 
         // IO
-        return new FileFragment();
+        //return new FileFragment();
     }
 
     @Override
