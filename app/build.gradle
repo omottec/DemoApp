@@ -115,8 +115,8 @@ dependencies {
     implementation project(':account')
     implementation project(':lib_a')
 
-//    implementation project(':logger')
-    implementation "com.github.omottec:logger:0.0.8"
+    implementation project(':logger')
+//    implementation "com.github.omottec:logger:0.1.0"
 
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.google.android.material:material:1.0.0'
@@ -170,7 +170,7 @@ dependencies {
 
     configurations.all {
         resolutionStrategy.dependencySubstitution {
-            substitute module('com.github.omottec:logger') with project(':logger')
+//            substitute module('com.github.omottec:logger') with project(':logger')
             all { DependencySubstitution substitution ->
                 println(">>>substitution.requested:" + substitution.requested.toString())
 //                if (substitution.requested.toString().contains("com.github.omottec:logger"))

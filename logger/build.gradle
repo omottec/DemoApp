@@ -1,10 +1,22 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
-    id 'com.jfrog.bintray'
+//    id 'maven-publish'
+//    id 'com.jfrog.bintray'
 }
 
 apply from: rootProject.file('gradles/common.gradle')
+apply from: rootProject.file('gradles/publish-mvncentral.gradle')
+
+ext {
+    GROUP_ID = "com.github.omottec"
+    ARTIFACT_ID = 'logger'
+    VERSION = '0.1.2-SNAPSHOT'
+    POM_DESCRIPTION = 'android logger lib'
+    POM_URL = 'https://github.com/omottec/DemoApp/tree/dev/logger'
+    POM_SCM_CONNECTION = 'scm:git:github.com:omottec/DemoApp.git'
+    POM_SCM_DEVELOPER_CONNECTION = 'scm:git:ssh://github.com:omottec/DemoApp.git'
+    POM_SCM_URL = 'https://github.com/omottec/DemoApp/tree/dev'
+}
 
 android {
     buildTypes {
@@ -20,58 +32,58 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    override = false
-    publish = true
-    pkg {
-        repo = 'maven'
-        name = 'com.github.omottec:logger'
-        licenses = ['Apache-2.0']
-        vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
-        version {
-            name = '0.0.8'
-            released  = new Date()
-        }
-    }
-    publications = ['mavenReleaseAar']
-}
+//bintray {
+//    user = System.getenv('BINTRAY_USER')
+//    key = System.getenv('BINTRAY_KEY')
+//    override = false
+//    publish = true
+//    pkg {
+//        repo = 'maven'
+//        name = 'com.github.omottec:logger'
+//        licenses = ['Apache-2.0']
+//        vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
+//        version {
+//            name = '0.0.8'
+//            released  = new Date()
+//        }
+//    }
+//    publications = ['mavenReleaseAar']
+//}
 
-task androidSourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
+//task androidSourcesJar(type: Jar) {
+//    archiveClassifier = 'sources'
+//    from android.sourceSets.main.java.srcDirs
+//}
 
-afterEvaluate {
-    publishing {
-        publications {
-            mavenReleaseAar(MavenPublication) {
-                artifact bundleReleaseAar
-                artifact androidSourcesJar
-                groupId 'com.github.omottec'
-                artifactId 'logger'
-                version '0.0.8'
-
-                // Define this explicitly if using implementation or api configurations
-                pom.withXml {
-                    def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
-
-                    // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
-                    configurations.implementation.allDependencies.each {
-                        // Ensure dependencies such as fileTree are not included.
-                        println("pom " + it.group + ":" + it.name + ":" + it.version)
-                        if (it.name != 'unspecified') {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', it.group)
-                            dependencyNode.appendNode('artifactId', it.name)
-                            dependencyNode.appendNode('version', it.version)
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            mavenReleaseAar(MavenPublication) {
+//                artifact bundleReleaseAar
+//                artifact androidSourcesJar
+//                groupId 'com.github.omottec'
+//                artifactId 'logger'
+//                version '0.0.8'
+//
+//                // Define this explicitly if using implementation or api configurations
+//                pom.withXml {
+//                    def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+//
+//                    // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
+//                    configurations.implementation.allDependencies.each {
+//                        // Ensure dependencies such as fileTree are not included.
+//                        println("pom " + it.group + ":" + it.name + ":" + it.version)
+//                        if (it.name != 'unspecified') {
+//                            def dependencyNode = dependenciesNode.appendNode('dependency')
+//                            dependencyNode.appendNode('groupId', it.group)
+//                            dependencyNode.appendNode('artifactId', it.name)
+//                            dependencyNode.appendNode('version', it.version)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 // ./gradlew :logger:clean :logger:bintrayUpload --no-configure-on-demand --no-parallel
