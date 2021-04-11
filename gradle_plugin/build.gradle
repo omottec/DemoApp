@@ -1,0 +1,24 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+group='com.omottec.plugin'
+version='1.0.2'
+
+uploadArchives {
+    repositories {
+//        mavenLocal()
+        mavenDeployer {
+            repository(url: uri('/Users/qbb/.m2/repository'))
+        }
+    }
+}

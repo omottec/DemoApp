@@ -4,6 +4,8 @@ apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'mtj-circle-plugin'
 apply plugin: 'android-aspectjx'
 
+apply plugin: 'com.omottec.gradle'
+
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/common.gradle')
 
