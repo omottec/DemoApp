@@ -1,14 +1,17 @@
 package com.omottec.plugin
 
+import com.android.build.gradle.AppExtension
 import org.gradle.api.Project
 import org.gradle.api.Plugin
 
-public class DemoPlugin implements Plugin<Project> {
+class AsmPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project target) {
         println("=================================================================")
-        println("this is a demo plugin")
+        println("this is asm plugin")
+        def extension = target.extensions.getByType(AppExtension)
+        extension.registerTransform(new AsmTransform())
         println("=================================================================")
     }
 }

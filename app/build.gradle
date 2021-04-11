@@ -107,6 +107,8 @@ aspectjx {
 
 dependencies {
     implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+//    implementation 'com.android.tools.build:gradle:3.6.1'
+
     testImplementation 'junit:junit:4.12'
     implementation project(':PullToRefresh')
     implementation project(':service')
