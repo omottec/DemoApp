@@ -14,11 +14,10 @@ class KtFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.full_screen_text, container, false);
+        return inflater.inflate(R.layout.full_screen_text, container, false);
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view ?: return;
         mTv = view.findViewById(R.id.tv)!!;
         mTv.setText("KtFragment")
     }
