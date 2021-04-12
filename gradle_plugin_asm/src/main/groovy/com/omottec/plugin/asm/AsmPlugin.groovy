@@ -1,4 +1,4 @@
-package com.omottec.plugin
+package com.omottec.plugin.asm
 
 import com.android.build.gradle.AppExtension
 import org.gradle.api.Project
@@ -9,7 +9,7 @@ class AsmPlugin implements Plugin<Project> {
     @Override
     void apply(Project target) {
         println("=================================================================")
-        println("this is asm plugin")
+        println("AsmPlugin apply $target")
         def extension = target.extensions.getByType(AppExtension)
         extension.registerTransform(new AsmTransform())
         println("=================================================================")

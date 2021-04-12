@@ -1,4 +1,4 @@
-package com.omottec.plugin;
+package com.omottec.plugin.asm;
 
 import com.android.build.api.transform.DirectoryInput;
 import com.android.build.api.transform.Format;

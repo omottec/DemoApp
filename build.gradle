@@ -17,7 +17,10 @@ buildscript {
         //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
 
-        classpath 'com.omottec.plugin:gradle_plugin:1.0.6'
+
+        // classpath 'group:module:version'
+//        classpath 'com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.18'
+        classpath 'com.omottec.plugin.asm:gradle_plugin_asm:2.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

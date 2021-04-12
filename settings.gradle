@@ -1,5 +1,5 @@
-include ':gradle_plugin'
-include ':res_app'
+include ':gradle_plugin_lifecycle'
+include ':gradle_plugin_asm'
 include ':logger'
 include ':lib_a'
 include ':lib_b'

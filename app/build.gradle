@@ -4,7 +4,9 @@ apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'mtj-circle-plugin'
 apply plugin: 'android-aspectjx'
 
-apply plugin: 'com.omottec.gradle'
+// gradle_plugin_lifecycle/src/main/resources/META-INF/gradle-plugins/com.omottec.plugin.lifecycle.properties
+//apply plugin: 'com.omottec.plugin.lifecycle'
+apply plugin: 'com.omottec.plugin.asm'
 
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/common.gradle')

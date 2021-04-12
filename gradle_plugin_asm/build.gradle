@@ -1,0 +1,32 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'org.ow2.asm:asm:9.0'
+    implementation 'org.ow2.asm:asm-commons:9.0'
+    implementation 'com.android.tools.build:gradle:3.6.1'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+group='com.omottec.plugin.asm'
+version='2.0.1'
+
+uploadArchives {
+    repositories {
+//        mavenLocal()
+        mavenDeployer {
+            repository(url: uri('/Users/qbb/.m2/repository'))
+//            repository(url: uri('/Users/omottec/.m2/repository'))
+        }
+    }
+}

@@ -18,8 +18,8 @@ repositories {
     mavenCentral()
 }
 
-group='com.omottec.plugin'
-version='1.0.6'
+group='com.omottec.plugin.lifecycle'
+version='1.0.18'
 
 uploadArchives {
     repositories {
