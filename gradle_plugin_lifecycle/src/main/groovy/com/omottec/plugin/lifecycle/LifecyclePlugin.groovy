@@ -1,6 +1,7 @@
 package com.omottec.plugin.lifecycle
 
 import com.android.build.api.transform.DirectoryInput
+import com.android.build.api.transform.Format
 import com.android.build.api.transform.JarInput
 import com.android.build.api.transform.QualifiedContent
 import com.android.build.api.transform.Transform
@@ -10,6 +11,7 @@ import com.android.build.api.transform.TransformInvocation
 import com.android.build.api.transform.TransformOutputProvider
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.android.utils.FileUtils
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.IOUtils
 import org.gradle.api.Plugin
@@ -17,6 +19,7 @@ import org.gradle.api.Project
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
+import org.objectweb.asm.Opcodes
 
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
@@ -99,14 +102,14 @@ class LifecyclePlugin extends Transform implements Plugin<Project> {
                 ZipEntry zipEntry = new ZipEntry(entryName)
                 InputStream inputStream = jarFile.getInputStream(jarEntry)
                 //插桩class
-                if ("androidx/fragment/app/FragmentActivity.class".equals(entryName)) {
-                    //class文件处理
-                    println '----------- deal with "jar" class file <' + entryName + '> -----------'
+                if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
+                    println "deal class file $jarInput.file $entryName"
                     jarOutputStream.putNextEntry(zipEntry)
                     ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream))
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS)
-                    ClassVisitor cv = new LifecycleClassVisitor(classWriter)
-                    classReader.accept(cv, EXPAND_FRAMES)
+                    ClassVisitor cv = new LifecycleClassVisitor(Opcodes.ASM9, classWriter)
+
+                    classReader.accept(cv, ClassReader.EXPAND_FRAMES)
                     byte[] code = classWriter.toByteArray()
                     jarOutputStream.write(code)
                 } else {

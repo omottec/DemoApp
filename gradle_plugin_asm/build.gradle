@@ -19,14 +19,14 @@ repositories {
 }
 
 group='com.omottec.plugin.asm'
-version='2.0.1'
+version='2.0.2'
 
 uploadArchives {
     repositories {
 //        mavenLocal()
         mavenDeployer {
-            repository(url: uri('/Users/qbb/.m2/repository'))
-//            repository(url: uri('/Users/omottec/.m2/repository'))
+//            repository(url: uri('/Users/qbb/.m2/repository'))
+            repository(url: uri('/Users/omottec/.m2/repository'))
         }
     }
 }

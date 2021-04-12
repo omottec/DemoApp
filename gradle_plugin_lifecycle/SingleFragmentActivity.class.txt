@@ -1,0 +1,85 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+// app/build/intermediates/transforms/LifecyclePlugin/developmentUs/debug/com/omottec/demoapp/activity/SingleFragmentActivity.class
+package com.omottec.demoapp.activity;
+
+import android.content.res.Resources;
+import android.content.res.Resources.Theme;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.LayoutInflaterCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import com.omottec.demoapp.hook.LoadedApkInfo;
+import com.omottec.demoapp.hook.ProxyResources;
+import com.omottec.demoapp.hook.ReplaceResFactory2;
+import com.omottec.demoapp.hook.ResManager;
+import com.omottec.logger.Logger;
+
+public abstract class SingleFragmentActivity extends AppCompatActivity {
+    private ProxyResources mProxyRes;
+    private Resources mAppRes;
+
+    public SingleFragmentActivity() {
+    }
+
+    protected abstract Fragment createFragment();
+
+    public void onCreate(Bundle savedInstanceState) {
+        Log.i("TAG", "-------> onCreate : " + this.getClass().getSimpleName());
+        Logger.i("replace_res", "activity:" + this + ", BaseContext:" + this.getBaseContext() + ", ApplicationContext:" + this.getApplicationContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        Logger.i("replace_res", "Activity layoutInflater:" + Logger.getInflaterInfo(layoutInflater));
+        if (layoutInflater.getFactory2() == null) {
+            LayoutInflaterCompat.setFactory2(layoutInflater, new ReplaceResFactory2(this.getDelegate()));
+        }
+
+        super.onCreate(savedInstanceState);
+        this.onCreate();
+    }
+
+    private void onCreate() {
+        Log.i("TAG", "-------> onCreate : " + this.getClass().getSimpleName());
+        this.setContentView(2131427388);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        Logger.i("replace_res", Logger.getInflaterInfo(layoutInflater));
+        FragmentManager manager = this.getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentById(2131230822);
+        if (fragment == null) {
+            fragment = this.createFragment();
+            manager.beginTransaction().add(2131230822, fragment).commit();
+        }
+
+    }
+
+    private void onCreateV1() {
+        FragmentManager manager = this.getSupportFragmentManager();
+        Fragment fragment = this.createFragment();
+        manager.beginTransaction().add(16908290, fragment).commit();
+    }
+
+    public Resources getResources() {
+        if (this.mProxyRes == null) {
+            this.mAppRes = super.getResources();
+            Logger.i("replace_res", "getResources appResources:" + this.mAppRes);
+            LoadedApkInfo loadedApkInfo = ResManager.getInstance().getLoadedApkInfo();
+            this.mProxyRes = new ProxyResources(this.mAppRes, loadedApkInfo);
+            Logger.i("replace_res", "getResources mProxyRes:" + this.mProxyRes);
+        }
+
+        return this.mProxyRes;
+    }
+
+    public Resources getAppRes() {
+        return this.mAppRes;
+    }
+
+    public Theme getTheme() {
+        return super.getTheme();
+    }
+}

@@ -45,14 +45,15 @@ public class AsmTransform extends Transform {
         for (TransformInput ti : transformInvocation.getInputs()) {
             for (DirectoryInput di : ti.getDirectoryInputs()) {
                 System.out.println("DirectoryInput:" + di.getFile().getAbsolutePath());
-                copyQualifiedContent(op, di, null, Format.DIRECTORY);
+//                copyQualifiedContent(op, di, null, Format.DIRECTORY);
             }
 
             for (JarInput ji : ti.getJarInputs()) {
                 System.out.println("JarInput:" + ji.getFile().getAbsolutePath());
-                copyQualifiedContent(op, ji, getUniqueName(ji.getFile()), Format.JAR);
+//                copyQualifiedContent(op, ji, getUniqueName(ji.getFile()), Format.JAR);
             }
         }
+        super.transform(transformInvocation);
         System.out.println("===================> AsmTransform.transform end");
 
     }

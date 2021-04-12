@@ -32,7 +32,7 @@ public class LifecycleClassVisitor extends ClassVisitor implements Opcodes {
         System.out.println("LifecycleClassVisitor.visitMethod " + name);
         MethodVisitor mv =
             cv.visitMethod(access, name, descriptor, signature, exceptions);
-        if ("androidx/fragment/app/FragmentActivity".equals(mClassName)) {
+        if (Target.CLASS_NAME.equals(mClassName)) {
             if ("onCreate".equals(name)) {
                 return new LifecycleOnCreateMethodVisitor(Opcodes.ASM9, mv);
             } else if ("onDestroy".equals(name)) {
