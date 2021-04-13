@@ -19,14 +19,12 @@ repositories {
 }
 
 group='com.omottec.plugin.lifecycle'
-version='1.0.26'
+version='1.0.30'
 
 uploadArchives {
     repositories {
-//        mavenLocal()
         mavenDeployer {
-//            repository(url: uri('/Users/qbb/.m2/repository'))
-            repository(url: uri('/Users/omottec/.m2/repository'))
+            repository(url: uri(mavenLocal().url))
         }
     }
 }
