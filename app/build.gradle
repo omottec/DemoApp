@@ -1,12 +1,15 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'org.greenrobot.greendao'
-//apply plugin: 'mtj-circle-plugin'
-apply plugin: 'android-aspectjx'
+import com.omottec.demoapp.build.Dependencies
+
+apply plugin: Dependencies.ANDROID_APP_PLUGIN
+apply plugin: Dependencies.KOTLIN_PLUGIN_ID
+apply plugin: Dependencies.GREENDAO_PLUGIN
+apply plugin: Dependencies.ASPECTJ_PLUGIN
+
+//apply plugin: Dependencies.APPSEE_PLUGIN
 
 // gradle_plugin_lifecycle/src/main/resources/META-INF/gradle-plugins/com.omottec.plugin.lifecycle.properties
-apply plugin: 'com.omottec.plugin.lifecycle'
-//apply plugin: 'com.omottec.plugin.asm'
+apply plugin: Dependencies.LIFECYCLE_PLUGIN
+//apply plugin: Dependencies.ASM_PLUGIN
 
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/common.gradle')
@@ -105,87 +108,84 @@ android {
 
 aspectjx {
     include 'com.omottec.demoapp.aspectj'
-}
+    dependencies {
+        implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+        //    implementation 'com.android.tools.build:gradle:3.6.1'
 
-dependencies {
-    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-//    implementation 'com.android.tools.build:gradle:3.6.1'
+        testImplementation 'junit:junit:4.12'
+        implementation project(':PullToRefresh')
+        implementation project(':service')
+        implementation project(':account')
+        implementation project(':lib_a')
 
-    testImplementation 'junit:junit:4.12'
-    implementation project(':PullToRefresh')
-    implementation project(':service')
-    implementation project(':account')
-    implementation project(':lib_a')
+//        implementation project(':logger')
+        implementation Dependencies.LOGGER
 
-    implementation project(':logger')
-//    implementation "com.github.omottec:logger:0.1.0"
+        implementation Dependencies.MULTIDEX
+        implementation Dependencies.MATERIAL
+        implementation Dependencies.APPCOMPAT
+        implementation Dependencies.CARDVIEW
+        implementation Dependencies.LEGACY_SUPPORT_V4
 
-    implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+        //    implementation Dependencies.MCXIAOKE_VOLLEY
+        //    implementation Dependencies.ANDROID_VOLLEY
+        implementation Dependencies.GSON
+        implementation Dependencies.OKHTTP3
+        implementation Dependencies.RETROFIT2_RETROFIT
+        implementation Dependencies.RETROFIT2_CONVERTER
+        implementation Dependencies.RETROFIT2_ADAPTER
 
-//    implementation 'com.mcxiaoke.volley:library:1.0.18'
-//    implementation 'com.android.volley:volley:1.0.0'
-    implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+        implementation Dependencies.FRESCO_FRESCO
+        implementation Dependencies.FRESCO_IMAGEPIPELINE
+        implementation Dependencies.GLIDE_AAR
+        annotationProcessor Dependencies.GLIDE_ANNOTATION_PROCESSOR
 
-    implementation 'com.facebook.fresco:fresco:1.2.0'
-    implementation 'com.facebook.fresco:imagepipeline-okhttp:0.5.0'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+        implementation Dependencies.RXJAVA
+        implementation Dependencies.RXANDROID
+        implementation Dependencies.RXLIFECYCLE
+        implementation Dependencies.RXLIFECYCLE_COMPONENTS
+        implementation Dependencies.RXPERMISSIONS
 
-    //    implementation 'io.reactivex.rxjava2:rxjava:2.0.7'
-//    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+        //    implementation Dependencies.RXLIFECYCLE2_ANDROID_LIFECYCLE
+        //    implementation Dependencies.RXJAVA2
+        //    implementation Dependencies.RXLIFECYCLE2
+        //    implementation Dependencies.RXLIFECYCLE2_ANDROID
+        //    implementation Dependencies.RXLIFECYCLE2_COMPONENTS
 
-    implementation 'io.reactivex:rxjava:1.2.9'
-    implementation 'io.reactivex:rxandroid:1.2.1'
-    implementation 'com.trello:rxlifecycle:0.3.1'
-    implementation 'com.trello:rxlifecycle-components:0.3.1'
-    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
-//    implementation 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:2.1.0'
-//    implementation 'com.trello:rxlifecycle:1.0'
-//    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
-//    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
-//    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+        implementation Dependencies.GREENDAO_AAR
 
-    implementation 'org.greenrobot:greendao:3.3.0'
+        debugImplementation Dependencies.LEAKCANARY_ANDROID
+        releaseImplementation Dependencies.LEAKCANARY_ANDROID_NO_OP
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+        implementation Dependencies.APPSEE_AAR
 
-//    implementation 'com.appsee:appsee-android:+'
+        implementation project(':apt_api')
+        annotationProcessor project(':apt_processor')
 
-    implementation project(':apt_api')
-    annotationProcessor project(':apt_processor')
+//        annotationProcessor Dependencies.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-//    annotationProcessor "com.google.auto.service:auto-service:1.0-rc4"
+        implementation Dependencies.EPIC
+        implementation Dependencies.KOTLIN_AAR
+        implementation Dependencies.ASPECTJ_AAR
 
-    implementation 'me.weishu:epic:0.11.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation 'org.aspectj:aspectjrt:1.9.5'
-
-    configurations.all {
-        resolutionStrategy.dependencySubstitution {
-//            substitute module('com.github.omottec:logger') with project(':logger')
-            all { DependencySubstitution substitution ->
-                println(">>>substitution.requested:" + substitution.requested.toString())
-//                if (substitution.requested.toString().contains("com.github.omottec:logger"))
-//                    substitution.useTarget project(':logger')
+        configurations.all {
+            resolutionStrategy.dependencySubstitution {
+                //            substitute module('com.github.omottec:logger') with project(':logger')
+                all { DependencySubstitution substitution ->
+                    println(">>>substitution.requested:" + substitution.requested.toString())
+                    //                if (substitution.requested.toString().contains("com.github.omottec:logger"))
+                    //                    substitution.useTarget project(':logger')
+                }
             }
-        }
 
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-            println(">>>ModuleVersionSelector")
-            println(details.requested.module.toString())
-            println(details.requested.group
-                + ":" + details.requested.name
-                + ":" + details.requested.version)
+            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+                println(">>>ModuleVersionSelector")
+                println(details.requested.module.toString())
+                println(details.requested.group
+                    + ":" + details.requested.name
+                    + ":" + details.requested.version)
+            }
         }
     }
 }
+

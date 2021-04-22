@@ -1,4 +1,6 @@
-apply plugin: 'com.android.library'
+import com.omottec.demoapp.build.Dependencies
+
+apply plugin: Dependencies.ANDROID_LIB_PLUGIN
 
 apply from: rootProject.file('gradles/common.gradle')
 

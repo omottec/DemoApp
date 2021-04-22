@@ -1,4 +1,6 @@
-apply plugin: 'java-library'
+import com.omottec.demoapp.build.Dependencies
+
+apply plugin: Dependencies.JAVA_LIB_PLUGIN
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
