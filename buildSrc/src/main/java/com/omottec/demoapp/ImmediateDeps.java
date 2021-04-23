@@ -1,6 +1,6 @@
 package com.omottec.demoapp;
 
-public final class Deps {
+public final class ImmediateDeps {
 
     public static final int MIN_SDK_VERSION = 21;
     public static final int TARGET_SDK_VERSION = 25;
@@ -39,4 +39,6 @@ public final class Deps {
     public static final String ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
     public static final String ASM_AAR = "org.ow2.asm:asm:9.0";
     public static final String ASM_COMMON_AAR = "org.ow2.asm:asm-commons:9.0";
+
+    public static final String CIRCLE_CLASSPATH = "com.baidu.mobstat:mtj-circle-plugin:latest.integration";
 }

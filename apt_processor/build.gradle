@@ -1,11 +1,11 @@
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.dependency.DelayDeps
 
 apply from: rootProject.file('gradles/java_lib_common.gradle')
 
 
 dependencies {
     implementation project(':apt_api')
-    implementation AarDeps.AUTO_SERVICE
-    annotationProcessor AarDeps.AUTO_SERVICE
-    implementation AarDeps.JAVAPOET
+    implementation DelayDeps.AUTO_SERVICE
+    annotationProcessor DelayDeps.AUTO_SERVICE
+    implementation DelayDeps.JAVAPOET
 }

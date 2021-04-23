@@ -1,6 +1,6 @@
-import com.omottec.demoapp.Deps
+import com.omottec.demoapp.ImmediateDeps
 
-apply plugin: Deps.ANDROID_LIB_PLUGIN
+apply plugin: ImmediateDeps.ANDROID_LIB_PLUGIN
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 
 dependencies {

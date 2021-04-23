@@ -1,16 +1,13 @@
-import com.omottec.demoapp.Deps
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.dependency.DelayDeps
 
-apply plugin: com.omottec.demoapp.Deps.ANDROID_APP_PLUGIN
-apply plugin: com.omottec.demoapp.Deps.KOTLIN_PLUGIN_ID
-apply plugin: com.omottec.demoapp.Deps.GREENDAO_PLUGIN
-apply plugin: com.omottec.demoapp.Deps.ASPECTJ_PLUGIN
-
-//apply plugin: Deps.APPSEE_PLUGIN
+apply plugin: ImmediateDeps.ANDROID_APP_PLUGIN
+apply plugin: ImmediateDeps.KOTLIN_PLUGIN_ID
+apply plugin: ImmediateDeps.GREENDAO_PLUGIN
+apply plugin: ImmediateDeps.ASPECTJ_PLUGIN
 
 // gradle_plugin_lifecycle/src/main/resources/META-INF/gradle-plugins/com.omottec.plugin.lifecycle.properties
-apply plugin: com.omottec.demoapp.Deps.LIFECYCLE_PLUGIN
-//apply plugin: Deps.ASM_PLUGIN
+apply plugin: ImmediateDeps.LIFECYCLE_PLUGIN
 
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/android_lib_common.gradle')
@@ -121,32 +118,32 @@ aspectjx {
 
 //        implementation project(':logger')
 //        implementation Dependencies.LOGGER
-        implementation AarDeps.LOGGER
+        implementation DelayDeps.LOGGER
 
-        implementation AarDeps.MULTIDEX
-        implementation AarDeps.MATERIAL
-        implementation AarDeps.APPCOMPAT
-        implementation AarDeps.CARDVIEW
-        implementation AarDeps.LEGACY_SUPPORT_V4
+        implementation DelayDeps.MULTIDEX
+        implementation DelayDeps.MATERIAL
+        implementation DelayDeps.APPCOMPAT
+        implementation DelayDeps.CARDVIEW
+        implementation DelayDeps.LEGACY_SUPPORT_V4
 
         //    implementation AarDeps.MCXIAOKE_VOLLEY
         //    implementation AarDeps.ANDROID_VOLLEY
-        implementation AarDeps.GSON
-        implementation AarDeps.OKHTTP3
-        implementation AarDeps.RETROFIT2_RETROFIT
-        implementation AarDeps.RETROFIT2_CONVERTER
-        implementation AarDeps.RETROFIT2_ADAPTER
+        implementation DelayDeps.GSON
+        implementation DelayDeps.OKHTTP3
+        implementation DelayDeps.RETROFIT2_RETROFIT
+        implementation DelayDeps.RETROFIT2_CONVERTER
+        implementation DelayDeps.RETROFIT2_ADAPTER
 
-        implementation AarDeps.FRESCO_FRESCO
-        implementation AarDeps.FRESCO_IMAGEPIPELINE
-        implementation AarDeps.GLIDE_AAR
-        annotationProcessor AarDeps.GLIDE_ANNOTATION_PROCESSOR
+        implementation DelayDeps.FRESCO_FRESCO
+        implementation DelayDeps.FRESCO_IMAGEPIPELINE
+        implementation DelayDeps.GLIDE_AAR
+        annotationProcessor DelayDeps.GLIDE_ANNOTATION_PROCESSOR
 
-        implementation AarDeps.RXJAVA
-        implementation AarDeps.RXANDROID
-        implementation AarDeps.RXLIFECYCLE
-        implementation AarDeps.RXLIFECYCLE_COMPONENTS
-        implementation AarDeps.RXPERMISSIONS
+        implementation DelayDeps.RXJAVA
+        implementation DelayDeps.RXANDROID
+        implementation DelayDeps.RXLIFECYCLE
+        implementation DelayDeps.RXLIFECYCLE_COMPONENTS
+        implementation DelayDeps.RXPERMISSIONS
 
         //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
         //    implementation AarDeps.RXJAVA2
@@ -154,21 +151,21 @@ aspectjx {
         //    implementation AarDeps.RXLIFECYCLE2_ANDROID
         //    implementation AarDeps.RXLIFECYCLE2_COMPONENTS
 
-        implementation com.omottec.demoapp.Deps.GREENDAO_AAR
+        implementation ImmediateDeps.GREENDAO_AAR
 
-        debugImplementation AarDeps.LEAKCANARY_ANDROID
-        releaseImplementation AarDeps.LEAKCANARY_ANDROID_NO_OP
+        debugImplementation DelayDeps.LEAKCANARY_ANDROID
+        releaseImplementation DelayDeps.LEAKCANARY_ANDROID_NO_OP
 
-        implementation AarDeps.APPSEE_AAR
+        implementation DelayDeps.APPSEE_AAR
 
         implementation project(':apt_api')
         annotationProcessor project(':apt_processor')
 
 //        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-        implementation AarDeps.EPIC
-        implementation Deps.KOTLIN_AAR
-        implementation Deps.ASPECTJ_AAR
+        implementation DelayDeps.EPIC
+        implementation ImmediateDeps.KOTLIN_AAR
+        implementation ImmediateDeps.ASPECTJ_AAR
 
         configurations.all {
             resolutionStrategy.dependencySubstitution {

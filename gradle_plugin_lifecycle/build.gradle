@@ -1,10 +1,10 @@
-import com.omottec.demoapp.Deps
+import com.omottec.demoapp.ImmediateDeps
 
 apply from: rootProject.file("gradles/gradle_plugin_common.gradle")
 
 dependencies {
-    implementation Deps.ASM_AAR
-    implementation Deps.ASM_COMMON_AAR
+    implementation ImmediateDeps.ASM_AAR
+    implementation ImmediateDeps.ASM_COMMON_AAR
 }
 
 group='com.omottec.plugin.lifecycle'

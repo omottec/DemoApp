@@ -1,4 +1,4 @@
-import com.omottec.demoapp.Deps
+import com.omottec.demoapp.ImmediateDeps
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -10,15 +10,12 @@ buildscript {
         google()
     }
     dependencies {
-        classpath Deps.GRADLE
-        classpath Deps.GREENDAO_CLASSPATH
-        classpath Deps.ASPECTJ_CLASSPATH
-        classpath Deps.KOTLIN_CLASSPATH
-        classpath Deps.LIFECYCLE_CLASSPATH
-        classpath Deps.ASM_CLASSPATH
-
-//        classpath 'com.baidu.mobstat:mtj-circle-plugin:latest.integration'
-//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath ImmediateDeps.GRADLE
+        classpath ImmediateDeps.GREENDAO_CLASSPATH
+        classpath ImmediateDeps.ASPECTJ_CLASSPATH
+        classpath ImmediateDeps.KOTLIN_CLASSPATH
+        classpath ImmediateDeps.LIFECYCLE_CLASSPATH
+        classpath ImmediateDeps.ASM_CLASSPATH
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

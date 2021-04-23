@@ -1,8 +1,8 @@
-import com.omottec.demoapp.Deps
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.dependency.DelayDeps
 
-apply plugin: Deps.ANDROID_LIB_PLUGIN
-apply plugin: Deps.MAVEN_PUBLISH_PLUGIN
+apply plugin: ImmediateDeps.ANDROID_LIB_PLUGIN
+apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
 
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 apply from: rootProject.file('gradles/publish_mvncentral.gradle')
@@ -19,5 +19,5 @@ ext {
 }
 
 dependencies {
-    implementation AarDeps.GSON
+    implementation DelayDeps.GSON
 }

@@ -3,16 +3,27 @@ package com.omottec.demoapp.dependency;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
-public final class AarDeps implements Plugin<Project> {
+public final class DelayDeps implements Plugin<Project> {
     @Override
     public void apply(Project target) {
 
     }
 
+    public static final int ANDROID_MIN_SDK_VERSION = 21;
+    public static final int ANDROID_TARGET_SDK_VERSION = 25;
+    public static final int ANDROID_COMPILE_SDK_VERSION = 29;
+    public static final String ANDROID_BUILD_TOOLS_VERSION = "29.0.2";
+
+    public static final String ANDROID_APP_PLUGIN = "com.android.application";
+    public static final String ANDROID_LIB_PLUGIN = "com.android.library";
+
+    public static final String JAVA_LIB_PLUGIN = "java-library";
+    public static final String JAVA_PLUGIN = "java";
+    public static final String GROOVY_PLUGIN = "groovy";
+    public static final String MAVEN_PLUGIN = "maven";
+    public static final String MAVEN_PUBLISH_PLUGIN = "maven-publish";
+
     public static final String LOGGER = "com.github.omottec:logger:0.1.0";
-    public static final String LOGGER1 = "com.github.omottec:logger:0.1.0";
-    public static final String LOGGER2 = "com.github.omottec:logger:0.1.0";
-    public static final String LOGGER3 = "com.github.omottec:logger:0.1.0";
 
     public static final String MULTIDEX = "androidx.multidex:multidex:2.0.0";
     public static final String APPCOMPAT = "androidx.appcompat:appcompat:1.0.0";
