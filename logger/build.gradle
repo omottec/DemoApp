@@ -1,5 +1,5 @@
 import com.omottec.demoapp.ImmediateDeps
-import com.omottec.demoapp.dependency.DelayDeps
+import com.omottec.demoapp.dependency.AarDeps
 
 apply plugin: ImmediateDeps.ANDROID_LIB_PLUGIN
 apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
@@ -19,5 +19,5 @@ ext {
 }
 
 dependencies {
-    implementation DelayDeps.GSON
+    implementation AarDeps.GSON
 }

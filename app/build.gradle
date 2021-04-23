@@ -1,5 +1,5 @@
 import com.omottec.demoapp.ImmediateDeps
-import com.omottec.demoapp.dependency.DelayDeps
+import com.omottec.demoapp.dependency.AarDeps
 
 apply plugin: ImmediateDeps.ANDROID_APP_PLUGIN
 apply plugin: ImmediateDeps.KOTLIN_PLUGIN_ID
@@ -118,32 +118,32 @@ aspectjx {
 
 //        implementation project(':logger')
 //        implementation Dependencies.LOGGER
-        implementation DelayDeps.LOGGER
+        implementation AarDeps.LOGGER
 
-        implementation DelayDeps.MULTIDEX
-        implementation DelayDeps.MATERIAL
-        implementation DelayDeps.APPCOMPAT
-        implementation DelayDeps.CARDVIEW
-        implementation DelayDeps.LEGACY_SUPPORT_V4
+        implementation AarDeps.MULTIDEX
+        implementation AarDeps.MATERIAL
+        implementation AarDeps.APPCOMPAT
+        implementation AarDeps.CARDVIEW
+        implementation AarDeps.LEGACY_SUPPORT_V4
 
         //    implementation AarDeps.MCXIAOKE_VOLLEY
         //    implementation AarDeps.ANDROID_VOLLEY
-        implementation DelayDeps.GSON
-        implementation DelayDeps.OKHTTP3
-        implementation DelayDeps.RETROFIT2_RETROFIT
-        implementation DelayDeps.RETROFIT2_CONVERTER
-        implementation DelayDeps.RETROFIT2_ADAPTER
+        implementation AarDeps.GSON
+        implementation AarDeps.OKHTTP3
+        implementation AarDeps.RETROFIT2_RETROFIT
+        implementation AarDeps.RETROFIT2_CONVERTER
+        implementation AarDeps.RETROFIT2_ADAPTER
 
-        implementation DelayDeps.FRESCO_FRESCO
-        implementation DelayDeps.FRESCO_IMAGEPIPELINE
-        implementation DelayDeps.GLIDE_AAR
-        annotationProcessor DelayDeps.GLIDE_ANNOTATION_PROCESSOR
+        implementation AarDeps.FRESCO_FRESCO
+        implementation AarDeps.FRESCO_IMAGEPIPELINE
+        implementation AarDeps.GLIDE_AAR
+        annotationProcessor AarDeps.GLIDE_ANNOTATION_PROCESSOR
 
-        implementation DelayDeps.RXJAVA
-        implementation DelayDeps.RXANDROID
-        implementation DelayDeps.RXLIFECYCLE
-        implementation DelayDeps.RXLIFECYCLE_COMPONENTS
-        implementation DelayDeps.RXPERMISSIONS
+        implementation AarDeps.RXJAVA
+        implementation AarDeps.RXANDROID
+        implementation AarDeps.RXLIFECYCLE
+        implementation AarDeps.RXLIFECYCLE_COMPONENTS
+        implementation AarDeps.RXPERMISSIONS
 
         //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
         //    implementation AarDeps.RXJAVA2
@@ -153,17 +153,17 @@ aspectjx {
 
         implementation ImmediateDeps.GREENDAO_AAR
 
-        debugImplementation DelayDeps.LEAKCANARY_ANDROID
-        releaseImplementation DelayDeps.LEAKCANARY_ANDROID_NO_OP
+        debugImplementation AarDeps.LEAKCANARY_ANDROID
+        releaseImplementation AarDeps.LEAKCANARY_ANDROID_NO_OP
 
-        implementation DelayDeps.APPSEE_AAR
+        implementation AarDeps.APPSEE_AAR
 
         implementation project(':apt_api')
         annotationProcessor project(':apt_processor')
 
 //        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-        implementation DelayDeps.EPIC
+        implementation AarDeps.EPIC
         implementation ImmediateDeps.KOTLIN_AAR
         implementation ImmediateDeps.ASPECTJ_AAR
 

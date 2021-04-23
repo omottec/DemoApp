@@ -4,7 +4,7 @@ gradlePlugin {
     plugins {
         version {
             id = 'com.omottec.demoapp.plugin'
-            implementationClass = 'com.omottec.demoapp.dependency.DelayDeps'
+            implementationClass = 'com.omottec.demoapp.dependency.AarDeps'
         }
     }
 }
