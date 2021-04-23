@@ -15,6 +15,7 @@ public final class ImmediateDeps {
     public static final String GROOVY_PLUGIN = "groovy";
     public static final String MAVEN_PLUGIN = "maven";
     public static final String MAVEN_PUBLISH_PLUGIN = "maven-publish";
+    public static final String MAVEN_SIGNING_PLUGIN = "signing";
 
     // have classpath
     public static final String KOTLIN_CLASSPATH = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21";

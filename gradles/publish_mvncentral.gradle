@@ -1,5 +1,7 @@
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+import com.omottec.demoapp.ImmediateDeps
+
+apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
+apply plugin: ImmediateDeps.MAVEN_SIGNING_PLUGIN
 
 task androidSourcesJar(type: Jar) {
     archiveClassifier = 'sources'

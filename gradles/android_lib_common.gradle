@@ -1,8 +1,6 @@
 import com.omottec.demoapp.ImmediateDeps
-//import com.omottec.demoapp.dependency.DelayDeps
 
 android {
-//    compileSdkVersion DelayDeps.ANDROID_COMPILE_SDK_VERSION
     compileSdkVersion ImmediateDeps.COMPILE_SDK_VERSION
     buildToolsVersion ImmediateDeps.BUILD_TOOLS_VERSION
 
