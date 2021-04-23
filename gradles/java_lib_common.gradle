@@ -1,0 +1,6 @@
+import com.omottec.demoapp.Deps
+
+apply plugin: Deps.JAVA_LIB_PLUGIN
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

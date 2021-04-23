@@ -1,7 +1,7 @@
-import com.omottec.demoapp.Deps
 import com.omottec.demoapp.dependency.AarDeps
 
-apply plugin: Deps.JAVA_LIB_PLUGIN
+apply from: rootProject.file('gradles/java_lib_common.gradle')
+
 
 dependencies {
     implementation project(':apt_api')
@@ -9,6 +9,3 @@ dependencies {
     annotationProcessor AarDeps.AUTO_SERVICE
     implementation AarDeps.JAVAPOET
 }
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
