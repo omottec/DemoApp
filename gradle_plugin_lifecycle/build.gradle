@@ -1,32 +1,11 @@
 import com.omottec.demoapp.Deps
 
-apply plugin: Deps.GROOVY_PLUGIN
-apply plugin: Deps.JAVA_PLUGIN
-apply plugin: Deps.MAVEN_PLUGIN
+apply from: rootProject.file("gradles/gradle_plugin_common.gradle")
 
 dependencies {
-    implementation gradleApi()
-    implementation localGroovy()
     implementation Deps.ASM_AAR
     implementation Deps.ASM_COMMON_AAR
-    implementation Deps.GRADLE
-}
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-repositories {
-    mavenLocal()
-    mavenCentral()
 }
 
 group='com.omottec.plugin.lifecycle'
 version='1.0.30'
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri(mavenLocal().url))
-        }
-    }
-}
