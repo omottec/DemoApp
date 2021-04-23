@@ -1,8 +1,12 @@
-import com.omottec.demoapp.Dependencies
+import com.omottec.demoapp.Deps
+import com.omottec.demoapp.dependency.AarDeps
 
-apply plugin: Dependencies.ANDROID_LIB_PLUGIN
-apply plugin: Dependencies.MAVEN_PUBLISH_PLUGIN
-//apply plugin: Dependencies.BINTRAY_PLUGIN
+plugins {
+    id 'com.omottec.demoapp.plugin'
+}
+apply plugin: Deps.ANDROID_LIB_PLUGIN
+apply plugin: Deps.MAVEN_PUBLISH_PLUGIN
+//apply plugin: Deps.BINTRAY_PLUGIN
 
 apply from: rootProject.file('gradles/common.gradle')
 apply from: rootProject.file('gradles/publish-mvncentral.gradle')
@@ -29,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation Dependencies.GSON
+    implementation AarDeps.GSON
 }
 
 //bintray {

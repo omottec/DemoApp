@@ -1,13 +1,13 @@
-import com.omottec.demoapp.Dependencies
+import com.omottec.demoapp.Deps
 
-apply plugin: Dependencies.ANDROID_LIB_PLUGIN
+apply plugin: Deps.ANDROID_LIB_PLUGIN
 
 android {
-    compileSdkVersion Dependencies.COMPILE_SDK_VERSION
+    compileSdkVersion Deps.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion Dependencies.MIN_SDK_VERSION
-        targetSdkVersion Dependencies.TARGET_SDK_VERSION
+        minSdkVersion Deps.MIN_SDK_VERSION
+        targetSdkVersion Deps.TARGET_SDK_VERSION
     }
 
     buildTypes {

@@ -1,12 +1,17 @@
-import com.omottec.demoapp.Dependencies
+import com.omottec.demoapp.Deps
+import com.omottec.demoapp.dependency.AarDeps
 
-apply plugin: Dependencies.JAVA_LIB_PLUGIN
+plugins {
+    id 'com.omottec.demoapp.plugin'
+}
+
+apply plugin: Deps.JAVA_LIB_PLUGIN
 
 dependencies {
     implementation project(':apt_api')
-    implementation Dependencies.AUTO_SERVICE
-    annotationProcessor Dependencies.AUTO_SERVICE
-    implementation Dependencies.JAVAPOET
+    implementation AarDeps.AUTO_SERVICE
+    annotationProcessor AarDeps.AUTO_SERVICE
+    implementation AarDeps.JAVAPOET
 }
 
 sourceCompatibility = "8"

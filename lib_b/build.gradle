@@ -1,13 +1,17 @@
-import com.omottec.demoapp.Dependencies
+import com.omottec.demoapp.Deps
+import com.omottec.demoapp.dependency.AarDeps
 
-apply plugin: Dependencies.ANDROID_LIB_PLUGIN
+plugins {
+    id 'com.omottec.demoapp.plugin'
+}
+apply plugin: Deps.ANDROID_LIB_PLUGIN
 
 android {
-    compileSdkVersion Dependencies.COMPILE_SDK_VERSION
+    compileSdkVersion Deps.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdkVersion Dependencies.MIN_SDK_VERSION
-        targetSdkVersion Dependencies.TARGET_SDK_VERSION
+        minSdkVersion Deps.MIN_SDK_VERSION
+        targetSdkVersion Deps.TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
 
@@ -27,7 +31,7 @@ android {
 }
 
 dependencies {
-//    implementation Dependencies.GSON
-    api Dependencies.GSON
-//    compileOnly Dependencies.GSON
+//    implementation AarDeps.GSON
+    api AarDeps.GSON
+//    compileOnly AarDeps.GSON
 }

@@ -1,0 +1,10 @@
+apply plugin: 'java-gradle-plugin'
+
+gradlePlugin {
+    plugins {
+        version {
+            id = 'com.omottec.demoapp.plugin'
+            implementationClass = 'com.omottec.demoapp.dependency.AarDeps'
+        }
+    }
+}

@@ -1,15 +1,15 @@
-import com.omottec.demoapp.Dependencies
+import com.omottec.demoapp.Deps
 
-apply plugin: Dependencies.GROOVY_PLUGIN
-apply plugin: Dependencies.JAVA_PLUGIN
-apply plugin: Dependencies.MAVEN_PLUGIN
+apply plugin: Deps.GROOVY_PLUGIN
+apply plugin: Deps.JAVA_PLUGIN
+apply plugin: Deps.MAVEN_PLUGIN
 
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    implementation Dependencies.ASM_AAR
-    implementation Dependencies.ASM_COMMON_AAR
-    implementation Dependencies.GRADLE
+    implementation Deps.ASM_AAR
+    implementation Deps.ASM_COMMON_AAR
+    implementation Deps.GRADLE
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8

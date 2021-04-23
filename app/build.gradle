@@ -1,15 +1,19 @@
-import com.omottec.demoapp.Dependencies
+import com.omottec.demoapp.Deps
+import com.omottec.demoapp.dependency.AarDeps
 
-apply plugin: Dependencies.ANDROID_APP_PLUGIN
-apply plugin: Dependencies.KOTLIN_PLUGIN_ID
-apply plugin: Dependencies.GREENDAO_PLUGIN
-apply plugin: Dependencies.ASPECTJ_PLUGIN
+plugins {
+    id 'com.omottec.demoapp.plugin'
+}
+apply plugin: com.omottec.demoapp.Deps.ANDROID_APP_PLUGIN
+apply plugin: com.omottec.demoapp.Deps.KOTLIN_PLUGIN_ID
+apply plugin: com.omottec.demoapp.Deps.GREENDAO_PLUGIN
+apply plugin: com.omottec.demoapp.Deps.ASPECTJ_PLUGIN
 
-//apply plugin: Dependencies.APPSEE_PLUGIN
+//apply plugin: Deps.APPSEE_PLUGIN
 
 // gradle_plugin_lifecycle/src/main/resources/META-INF/gradle-plugins/com.omottec.plugin.lifecycle.properties
-apply plugin: Dependencies.LIFECYCLE_PLUGIN
-//apply plugin: Dependencies.ASM_PLUGIN
+apply plugin: com.omottec.demoapp.Deps.LIFECYCLE_PLUGIN
+//apply plugin: Deps.ASM_PLUGIN
 
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/common.gradle')
@@ -119,54 +123,55 @@ aspectjx {
         implementation project(':lib_a')
 
 //        implementation project(':logger')
-        implementation Dependencies.LOGGER
+//        implementation Dependencies.LOGGER
+        implementation AarDeps.LOGGER
 
-        implementation Dependencies.MULTIDEX
-        implementation Dependencies.MATERIAL
-        implementation Dependencies.APPCOMPAT
-        implementation Dependencies.CARDVIEW
-        implementation Dependencies.LEGACY_SUPPORT_V4
+        implementation AarDeps.MULTIDEX
+        implementation AarDeps.MATERIAL
+        implementation AarDeps.APPCOMPAT
+        implementation AarDeps.CARDVIEW
+        implementation AarDeps.LEGACY_SUPPORT_V4
 
-        //    implementation Dependencies.MCXIAOKE_VOLLEY
-        //    implementation Dependencies.ANDROID_VOLLEY
-        implementation Dependencies.GSON
-        implementation Dependencies.OKHTTP3
-        implementation Dependencies.RETROFIT2_RETROFIT
-        implementation Dependencies.RETROFIT2_CONVERTER
-        implementation Dependencies.RETROFIT2_ADAPTER
+        //    implementation AarDeps.MCXIAOKE_VOLLEY
+        //    implementation AarDeps.ANDROID_VOLLEY
+        implementation AarDeps.GSON
+        implementation AarDeps.OKHTTP3
+        implementation AarDeps.RETROFIT2_RETROFIT
+        implementation AarDeps.RETROFIT2_CONVERTER
+        implementation AarDeps.RETROFIT2_ADAPTER
 
-        implementation Dependencies.FRESCO_FRESCO
-        implementation Dependencies.FRESCO_IMAGEPIPELINE
-        implementation Dependencies.GLIDE_AAR
-        annotationProcessor Dependencies.GLIDE_ANNOTATION_PROCESSOR
+        implementation AarDeps.FRESCO_FRESCO
+        implementation AarDeps.FRESCO_IMAGEPIPELINE
+        implementation AarDeps.GLIDE_AAR
+        annotationProcessor AarDeps.GLIDE_ANNOTATION_PROCESSOR
 
-        implementation Dependencies.RXJAVA
-        implementation Dependencies.RXANDROID
-        implementation Dependencies.RXLIFECYCLE
-        implementation Dependencies.RXLIFECYCLE_COMPONENTS
-        implementation Dependencies.RXPERMISSIONS
+        implementation AarDeps.RXJAVA
+        implementation AarDeps.RXANDROID
+        implementation AarDeps.RXLIFECYCLE
+        implementation AarDeps.RXLIFECYCLE_COMPONENTS
+        implementation AarDeps.RXPERMISSIONS
 
-        //    implementation Dependencies.RXLIFECYCLE2_ANDROID_LIFECYCLE
-        //    implementation Dependencies.RXJAVA2
-        //    implementation Dependencies.RXLIFECYCLE2
-        //    implementation Dependencies.RXLIFECYCLE2_ANDROID
-        //    implementation Dependencies.RXLIFECYCLE2_COMPONENTS
+        //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
+        //    implementation AarDeps.RXJAVA2
+        //    implementation AarDeps.RXLIFECYCLE2
+        //    implementation AarDeps.RXLIFECYCLE2_ANDROID
+        //    implementation AarDeps.RXLIFECYCLE2_COMPONENTS
 
-        implementation Dependencies.GREENDAO_AAR
+        implementation com.omottec.demoapp.Deps.GREENDAO_AAR
 
-        debugImplementation Dependencies.LEAKCANARY_ANDROID
-        releaseImplementation Dependencies.LEAKCANARY_ANDROID_NO_OP
+        debugImplementation AarDeps.LEAKCANARY_ANDROID
+        releaseImplementation AarDeps.LEAKCANARY_ANDROID_NO_OP
 
-        implementation Dependencies.APPSEE_AAR
+        implementation AarDeps.APPSEE_AAR
 
         implementation project(':apt_api')
         annotationProcessor project(':apt_processor')
 
-//        annotationProcessor Dependencies.AUTO_SERVICE_ANNOTATION_PROCESSOR
+//        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-        implementation Dependencies.EPIC
-        implementation Dependencies.KOTLIN_AAR
-        implementation Dependencies.ASPECTJ_AAR
+        implementation AarDeps.EPIC
+        implementation Deps.KOTLIN_AAR
+        implementation Deps.ASPECTJ_AAR
 
         configurations.all {
             resolutionStrategy.dependencySubstitution {
