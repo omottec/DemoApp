@@ -2,6 +2,7 @@ import com.omottec.demoapp.Deps
 
 android {
     compileSdkVersion Deps.COMPILE_SDK_VERSION
+    buildToolsVersion Deps.BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion Deps.MIN_SDK_VERSION
