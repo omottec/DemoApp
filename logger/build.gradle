@@ -3,10 +3,9 @@ import com.omottec.demoapp.dependency.AarDeps
 
 apply plugin: Deps.ANDROID_LIB_PLUGIN
 apply plugin: Deps.MAVEN_PUBLISH_PLUGIN
-//apply plugin: Deps.BINTRAY_PLUGIN
 
 apply from: rootProject.file('gradles/android_lib_common.gradle')
-apply from: rootProject.file('gradles/publish-mvncentral.gradle')
+apply from: rootProject.file('gradles/publish_mvncentral.gradle')
 
 ext {
     GROUP_ID = "com.github.omottec"
@@ -22,59 +21,3 @@ ext {
 dependencies {
     implementation AarDeps.GSON
 }
-
-//bintray {
-//    user = System.getenv('BINTRAY_USER')
-//    key = System.getenv('BINTRAY_KEY')
-//    override = false
-//    publish = true
-//    pkg {
-//        repo = 'maven'
-//        name = 'com.github.omottec:logger'
-//        licenses = ['Apache-2.0']
-//        vcsUrl = "https://github.com/omottec/DemoApp/tree/dev/logger"
-//        version {
-//            name = '0.0.8'
-//            released  = new Date()
-//        }
-//    }
-//    publications = ['mavenReleaseAar']
-//}
-
-//task androidSourcesJar(type: Jar) {
-//    archiveClassifier = 'sources'
-//    from android.sourceSets.main.java.srcDirs
-//}
-
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            mavenReleaseAar(MavenPublication) {
-//                artifact bundleReleaseAar
-//                artifact androidSourcesJar
-//                groupId 'com.github.omottec'
-//                artifactId 'logger'
-//                version '0.0.8'
-//
-//                // Define this explicitly if using implementation or api configurations
-//                pom.withXml {
-//                    def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
-//
-//                    // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
-//                    configurations.implementation.allDependencies.each {
-//                        // Ensure dependencies such as fileTree are not included.
-//                        println("pom " + it.group + ":" + it.name + ":" + it.version)
-//                        if (it.name != 'unspecified') {
-//                            def dependencyNode = dependenciesNode.appendNode('dependency')
-//                            dependencyNode.appendNode('groupId', it.group)
-//                            dependencyNode.appendNode('artifactId', it.name)
-//                            dependencyNode.appendNode('version', it.version)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-
-// ./gradlew :logger:clean :logger:bintrayUpload --no-configure-on-demand --no-parallel

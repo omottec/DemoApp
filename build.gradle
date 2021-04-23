@@ -14,7 +14,6 @@ buildscript {
         classpath Deps.GREENDAO_CLASSPATH
         classpath Deps.ASPECTJ_CLASSPATH
         classpath Deps.KOTLIN_CLASSPATH
-        classpath Deps.BINTRAY_CLASSPATH
         classpath Deps.LIFECYCLE_CLASSPATH
         classpath Deps.ASM_CLASSPATH
 

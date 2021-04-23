@@ -32,14 +32,11 @@ public final class Deps {
     // classpath "group:module:version"
     public static final String LIFECYCLE_CLASSPATH = "com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.30";
     public static final String LIFECYCLE_PLUGIN = "com.omottec.plugin.lifecycle";
+    public static final String ASM_PLUGIN = "com.omottec.plugin.asm";
 
     public static final String GRADLE = "com.android.tools.build:gradle:3.6.1";
 
-    public static final String BINTRAY_CLASSPATH = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+";
-    public static final String BINTRAY_PLUGIN = "com.jfrog.bintray";
-
     public static final String ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
-    public static final String ASM_PLUGIN = "com.omottec.plugin.asm";
     public static final String ASM_AAR = "org.ow2.asm:asm:9.0";
     public static final String ASM_COMMON_AAR = "org.ow2.asm:asm-commons:9.0";
 }
