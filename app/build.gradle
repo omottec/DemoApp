@@ -1,4 +1,4 @@
-import com.omottec.demoapp.build.Dependencies
+import com.omottec.demoapp.Dependencies
 
 apply plugin: Dependencies.ANDROID_APP_PLUGIN
 apply plugin: Dependencies.KOTLIN_PLUGIN_ID

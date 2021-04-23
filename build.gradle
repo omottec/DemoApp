@@ -1,4 +1,4 @@
-import com.omottec.demoapp.build.Dependencies
+import com.omottec.demoapp.Dependencies
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 

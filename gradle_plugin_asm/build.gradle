@@ -1,4 +1,4 @@
-import com.omottec.demoapp.build.Dependencies
+import com.omottec.demoapp.Dependencies
 
 apply plugin: Dependencies.GROOVY_PLUGIN
 apply plugin: Dependencies.JAVA_PLUGIN

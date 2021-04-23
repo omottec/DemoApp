@@ -1,4 +1,4 @@
-import com.omottec.demoapp.build.Dependencies
+import com.omottec.demoapp.Dependencies
 
 android {
     compileSdkVersion Dependencies.COMPILE_SDK_VERSION
