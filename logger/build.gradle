@@ -1,9 +1,6 @@
 import com.omottec.demoapp.Deps
 import com.omottec.demoapp.dependency.AarDeps
 
-plugins {
-    id 'com.omottec.demoapp.plugin'
-}
 apply plugin: Deps.ANDROID_LIB_PLUGIN
 apply plugin: Deps.MAVEN_PUBLISH_PLUGIN
 //apply plugin: Deps.BINTRAY_PLUGIN

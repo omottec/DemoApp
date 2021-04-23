@@ -1,9 +1,6 @@
 import com.omottec.demoapp.Deps
 import com.omottec.demoapp.dependency.AarDeps
 
-plugins {
-    id 'com.omottec.demoapp.plugin'
-}
 apply plugin: com.omottec.demoapp.Deps.ANDROID_APP_PLUGIN
 apply plugin: com.omottec.demoapp.Deps.KOTLIN_PLUGIN_ID
 apply plugin: com.omottec.demoapp.Deps.GREENDAO_PLUGIN

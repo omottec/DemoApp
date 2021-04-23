@@ -1,10 +1,6 @@
 import com.omottec.demoapp.Deps
 import com.omottec.demoapp.dependency.AarDeps
 
-plugins {
-    id 'com.omottec.demoapp.plugin'
-}
-
 apply plugin: Deps.JAVA_LIB_PLUGIN
 
 dependencies {
