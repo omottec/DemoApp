@@ -31,15 +31,12 @@ public final class ImmediateDeps {
     public static final String ASPECTJ_AAR = "org.aspectj:aspectjrt:1.9.5";
 
     // classpath "group:module:version"
-    public static final String LIFECYCLE_CLASSPATH = "com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.30";
-    public static final String LIFECYCLE_PLUGIN = "com.omottec.plugin.lifecycle";
-    public static final String ASM_PLUGIN = "com.omottec.plugin.asm";
+    public static final String DEMO_LIFECYCLE_CLASSPATH = "com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.30";
+    public static final String DEMO_LIFECYCLE_PLUGIN = "com.omottec.plugin.lifecycle";
+    public static final String DEMO_ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
+    public static final String DEMO_ASM_PLUGIN = "com.omottec.plugin.asm";
 
     public static final String GRADLE = "com.android.tools.build:gradle:3.6.1";
-
-    public static final String ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
-    public static final String ASM_AAR = "org.ow2.asm:asm:9.0";
-    public static final String ASM_COMMON_AAR = "org.ow2.asm:asm-commons:9.0";
 
     public static final String CIRCLE_CLASSPATH = "com.baidu.mobstat:mtj-circle-plugin:latest.integration";
 }

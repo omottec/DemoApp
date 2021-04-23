@@ -7,8 +7,6 @@ apply plugin: ImmediateDeps.MAVEN_PLUGIN
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    implementation ImmediateDeps.ASM_AAR
-    implementation ImmediateDeps.ASM_COMMON_AAR
     implementation ImmediateDeps.GRADLE
 }
 

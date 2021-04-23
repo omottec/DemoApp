@@ -7,7 +7,7 @@ apply plugin: ImmediateDeps.GREENDAO_PLUGIN
 apply plugin: ImmediateDeps.ASPECTJ_PLUGIN
 
 // gradle_plugin_lifecycle/src/main/resources/META-INF/gradle-plugins/com.omottec.plugin.lifecycle.properties
-apply plugin: ImmediateDeps.LIFECYCLE_PLUGIN
+apply plugin: ImmediateDeps.DEMO_LIFECYCLE_PLUGIN
 
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/android_lib_common.gradle')

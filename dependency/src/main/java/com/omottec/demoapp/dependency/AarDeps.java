@@ -59,4 +59,7 @@ public final class AarDeps implements Plugin<Project> {
     public static final String EPIC = "me.weishu:epic:0.11.0";
 
     public static final String JAVAPOET = "com.squareup:javapoet:1.12.0";
+
+    public static final String ASM_AAR = "org.ow2.asm:asm:9.0";
+    public static final String ASM_COMMON_AAR = "org.ow2.asm:asm-commons:9.0";
 }
