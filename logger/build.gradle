@@ -5,7 +5,7 @@ apply plugin: Deps.ANDROID_LIB_PLUGIN
 apply plugin: Deps.MAVEN_PUBLISH_PLUGIN
 //apply plugin: Deps.BINTRAY_PLUGIN
 
-apply from: rootProject.file('gradles/common.gradle')
+apply from: rootProject.file('gradles/android_lib_common.gradle')
 apply from: rootProject.file('gradles/publish-mvncentral.gradle')
 
 ext {
@@ -17,16 +17,6 @@ ext {
     POM_SCM_CONNECTION = 'scm:git:github.com:omottec/DemoApp.git'
     POM_SCM_DEVELOPER_CONNECTION = 'scm:git:ssh://github.com:omottec/DemoApp.git'
     POM_SCM_URL = 'https://github.com/omottec/DemoApp/tree/dev'
-}
-
-android {
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-                'proguard-rules.pro'
-        }
-    }
 }
 
 dependencies {

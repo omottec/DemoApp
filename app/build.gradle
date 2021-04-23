@@ -13,7 +13,7 @@ apply plugin: com.omottec.demoapp.Deps.LIFECYCLE_PLUGIN
 //apply plugin: Deps.ASM_PLUGIN
 
 apply from: rootProject.file('gradles/config.gradle')
-apply from: rootProject.file('gradles/common.gradle')
+apply from: rootProject.file('gradles/android_lib_common.gradle')
 
 android {
 

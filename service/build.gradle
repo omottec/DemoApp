@@ -2,7 +2,7 @@ import com.omottec.demoapp.Deps
 
 apply plugin: Deps.ANDROID_LIB_PLUGIN
 
-apply from: rootProject.file('gradles/common.gradle')
+apply from: rootProject.file('gradles/android_lib_common.gradle')
 
 dependencies {
 }
