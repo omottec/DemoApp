@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
  * Created by qinbingbing on 9/8/16.
  */
 public final class Logger {
+    public static final String VERSION = "0.1.2";
+
     private static int sLevel = Log.VERBOSE;
 
     private static boolean sAppendCallInfo = false;
