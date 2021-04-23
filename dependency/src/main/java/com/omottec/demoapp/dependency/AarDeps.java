@@ -9,7 +9,7 @@ public final class AarDeps implements Plugin<Project> {
 
     }
 
-    public static final String LOGGER = "com.github.omottec:logger:0.1.0";
+    public static final String LOGGER = "com.github.omottec:logger:0.1.2";
 
     public static final String MULTIDEX = "androidx.multidex:multidex:2.0.0";
     public static final String APPCOMPAT = "androidx.appcompat:appcompat:1.0.0";

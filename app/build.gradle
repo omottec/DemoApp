@@ -116,8 +116,8 @@ aspectjx {
         implementation project(':account')
         implementation project(':lib_a')
 
-        implementation project(':logger')
-//        implementation AarDeps.LOGGER
+//        implementation project(':logger')
+        implementation AarDeps.LOGGER
 
         implementation AarDeps.MULTIDEX
         implementation AarDeps.MATERIAL
