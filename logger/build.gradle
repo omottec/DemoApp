@@ -10,7 +10,7 @@ apply from: rootProject.file('gradles/publish_mvncentral.gradle')
 ext {
     GROUP_ID = "com.github.omottec"
     ARTIFACT_ID = 'logger'
-    VERSION = '0.1.4'
+    VERSION = '0.1.5'
     POM_DESCRIPTION = 'android logger lib'
     POM_URL = 'https://github.com/omottec/DemoApp/tree/dev/logger'
     POM_SCM_CONNECTION = 'scm:git:github.com:omottec/DemoApp.git'
