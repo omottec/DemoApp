@@ -36,15 +36,9 @@ public final class ImmediateDeps {
     public static final String ASPECTJ_AAR = "org.aspectj:aspectjrt:1.9.5";
 
     // classpath "group:module:version"
-    //public static final String DEMO_LIFECYCLE_CLASSPATH = "com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.30";
-    //public static final String DEMO_LIFECYCLE_PLUGIN = "com.omottec.plugin.lifecycle";
-    public static final String DEMO_LIFECYCLE_CLASSPATH = "com.github.omottec:gradle-plugin:1.0.38";
-    public static final String DEMO_LIFECYCLE_PLUGIN = "com.github.omottec.lifecycle";
     public static final String OMOTTEC_PLUGIN_CLASSPATH = "com.github.omottec:gradle-plugin:1.0.39";
     public static final String OMOTTEC_LIFECYCLE_PLUGIN = "com.github.omottec.lifecycle";
     public static final String OMOTTEC_HELLO_PLUGIN = "com.github.omottec.lifecycle";
-    public static final String DEMO_ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
-    public static final String DEMO_ASM_PLUGIN = "com.omottec.plugin.asm";
 
     public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:3.6.1";
 
