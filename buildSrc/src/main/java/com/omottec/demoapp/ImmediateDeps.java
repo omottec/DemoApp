@@ -41,6 +41,4 @@ public final class ImmediateDeps {
     public static final String OMOTTEC_HELLO_PLUGIN = "com.github.omottec.lifecycle";
 
     public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:3.6.1";
-
-    public static final String CIRCLE_CLASSPATH = "com.baidu.mobstat:mtj-circle-plugin:latest.integration";
 }
