@@ -1,29 +1,12 @@
 import com.omottec.demoapp.ImmediateDeps
 
-apply plugin: ImmediateDeps.GROOVY_PLUGIN
-//apply plugin: ImmediateDeps.JAVA_PLUGIN
 apply plugin: ImmediateDeps.JAVA_GRADLE_PLUGIN
-apply plugin: ImmediateDeps.MAVEN_PLUGIN
 apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
 
 dependencies {
     implementation gradleApi()
-    implementation localGroovy()
-    implementation ImmediateDeps.GRADLE
+    implementation ImmediateDeps.AGP_CLASSPATH
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri(mavenLocal().url))
-        }
-    }
-}

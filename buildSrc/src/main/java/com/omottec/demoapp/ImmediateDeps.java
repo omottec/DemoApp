@@ -19,6 +19,10 @@ public final class ImmediateDeps {
     public static final String MAVEN_SIGNING_PLUGIN = "signing";
 
     // have classpath
+    public static final String GRADLE_PLUGIN_REPO = "https://plugins.gradle.org/m2/";
+    public static final String GRADLE_PLUGIN_PUBLISH_PLUGIN_CLASSPATH = "com.gradle.publish:plugin-publish-plugin:0.14.0";
+    public static final String GRADLE_PLUGIN_PUBLISH_PLUGIN_ID = "com.gradle.plugin-publish";
+
     public static final String KOTLIN_CLASSPATH = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.21";
     public static final String KOTLIN_PLUGIN_ID = "kotlin-android";
     public static final String KOTLIN_AAR = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21";
@@ -42,7 +46,7 @@ public final class ImmediateDeps {
     public static final String DEMO_ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
     public static final String DEMO_ASM_PLUGIN = "com.omottec.plugin.asm";
 
-    public static final String GRADLE = "com.android.tools.build:gradle:3.6.1";
+    public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:3.6.1";
 
     public static final String CIRCLE_CLASSPATH = "com.baidu.mobstat:mtj-circle-plugin:latest.integration";
 }
