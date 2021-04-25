@@ -1,6 +1,8 @@
 import com.omottec.demoapp.ImmediateDeps
 import com.omottec.demoapp.dependency.AarDeps
 
+// https://plugins.gradle.org/docs/publish-plugin
+
 buildscript {
     repositories {
         maven {
