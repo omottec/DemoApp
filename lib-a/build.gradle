@@ -5,7 +5,7 @@ apply plugin: ImmediateDeps.ANDROID_LIB_PLUGIN
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 
 dependencies {
-    implementation project(':lib_b')
-//    api project(':lib_b')
+    implementation project(':lib-b')
+//    api project(':lib-b')
     implementation AarDeps.ANNOTATION
 }

@@ -4,7 +4,7 @@ apply from: rootProject.file('gradles/java_lib_common.gradle')
 
 
 dependencies {
-    implementation project(':apt_api')
+    implementation project(':apt-api')
     implementation AarDeps.AUTO_SERVICE
     annotationProcessor AarDeps.AUTO_SERVICE
     implementation AarDeps.JAVAPOET

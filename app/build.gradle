@@ -115,7 +115,7 @@ aspectjx {
         implementation project(':PullToRefresh')
         implementation project(':service')
         implementation project(':account')
-        implementation project(':lib_a')
+        implementation project(':lib-a')
 
 //        implementation project(':logger')
         implementation AarDeps.LOGGER
@@ -158,8 +158,8 @@ aspectjx {
 
         implementation AarDeps.APPSEE_AAR
 
-        implementation project(':apt_api')
-        annotationProcessor project(':apt_processor')
+        implementation project(':apt-api')
+        annotationProcessor project(':apt-processor')
 
 //        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
