@@ -14,6 +14,7 @@ public final class ImmediateDeps {
     public static final String JAVA_PLUGIN = "java";
     public static final String GROOVY_PLUGIN = "groovy";
     public static final String MAVEN_PLUGIN = "maven";
+    public static final String JAVA_GRADLE_PLUGIN = "java-gradle-plugin";
     public static final String MAVEN_PUBLISH_PLUGIN = "maven-publish";
     public static final String MAVEN_SIGNING_PLUGIN = "signing";
 
@@ -31,8 +32,13 @@ public final class ImmediateDeps {
     public static final String ASPECTJ_AAR = "org.aspectj:aspectjrt:1.9.5";
 
     // classpath "group:module:version"
-    public static final String DEMO_LIFECYCLE_CLASSPATH = "com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.30";
-    public static final String DEMO_LIFECYCLE_PLUGIN = "com.omottec.plugin.lifecycle";
+    //public static final String DEMO_LIFECYCLE_CLASSPATH = "com.omottec.plugin.lifecycle:gradle_plugin_lifecycle:1.0.30";
+    //public static final String DEMO_LIFECYCLE_PLUGIN = "com.omottec.plugin.lifecycle";
+    public static final String DEMO_LIFECYCLE_CLASSPATH = "com.github.omottec:gradle-plugin:1.0.38";
+    public static final String DEMO_LIFECYCLE_PLUGIN = "com.github.omottec.lifecycle";
+    public static final String OMOTTEC_PLUGIN_CLASSPATH = "com.github.omottec:gradle-plugin:1.0.39";
+    public static final String OMOTTEC_LIFECYCLE_PLUGIN = "com.github.omottec.lifecycle";
+    public static final String OMOTTEC_HELLO_PLUGIN = "com.github.omottec.lifecycle";
     public static final String DEMO_ASM_CLASSPATH = "com.omottec.plugin.asm:gradle_plugin_asm:2.0.3";
     public static final String DEMO_ASM_PLUGIN = "com.omottec.plugin.asm";
 

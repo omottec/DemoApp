@@ -1,4 +1,4 @@
-package com.omottec.plugin.lifecycle;
+package com.github.omottec.lifecycle;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

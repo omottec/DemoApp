@@ -1,5 +1,5 @@
 includeBuild 'dependency'
-include ':gradle_plugin_lifecycle'
+include ':gradle-plugin'
 include ':gradle_plugin_asm'
 include ':logger'
 include ':lib_a'

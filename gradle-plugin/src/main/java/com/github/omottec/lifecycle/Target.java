@@ -1,4 +1,4 @@
-package com.omottec.plugin.lifecycle;
+package com.github.omottec.lifecycle;
 
 
 public final class Target {

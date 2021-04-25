@@ -1,8 +1,10 @@
 import com.omottec.demoapp.ImmediateDeps
 
 apply plugin: ImmediateDeps.GROOVY_PLUGIN
-apply plugin: ImmediateDeps.JAVA_PLUGIN
+//apply plugin: ImmediateDeps.JAVA_PLUGIN
+apply plugin: ImmediateDeps.JAVA_GRADLE_PLUGIN
 apply plugin: ImmediateDeps.MAVEN_PLUGIN
+apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
 
 dependencies {
     implementation gradleApi()
