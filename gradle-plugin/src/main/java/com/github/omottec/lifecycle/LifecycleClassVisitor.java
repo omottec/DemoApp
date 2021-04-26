@@ -34,9 +34,9 @@ public class LifecycleClassVisitor extends ClassVisitor implements Opcodes {
             cv.visitMethod(access, name, descriptor, signature, exceptions);
         if (Target.CLASS_NAME.equals(mClassName)) {
             if ("onCreate".equals(name)) {
-                return new LifecycleOnCreateMethodVisitor(Opcodes.ASM9, mv);
+                return new LifecycleOnCreateMethodVisitor(Opcodes.ASM7, mv);
             } else if ("onDestroy".equals(name)) {
-                return new LifecycleOnDestroyMethodVisitor(Opcodes.ASM9, mv);
+                return new LifecycleOnDestroyMethodVisitor(Opcodes.ASM7, mv);
             }
         }
         return mv;

@@ -87,56 +87,57 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
     }
 
     private void handleJarInput(JarInput jarInput, TransformOutputProvider outputProvider) {
-        if (jarInput.getFile().getAbsolutePath().endsWith(".jar")) {
-            //重命名输出文件，因为可能会同名覆盖
-            String jarName = jarInput.getName();
-            String md5Name = DigestUtils.md5Hex(jarInput.getFile().getAbsolutePath());
-            if (jarName.endsWith(".jar")) {
-                jarName = jarName.substring(0, jarName.length() - 4);
-            }
+        String jarName = jarInput.getName();
+        File file = jarInput.getFile();
+        System.out.println("==========> handleJarInput begin");
+        System.out.println("jarName:" + jarName + ", file:" + file.getAbsolutePath());
+        if (!file.getAbsolutePath().endsWith(".jar")) return;
 
-            try {
-                JarFile jarFile = new JarFile(jarInput.getFile());
-                Enumeration enumeration = jarFile.entries();
-                File tmpFile = new File(jarInput.getFile().getParent() + File.separator + "classes_temp.jar");
-                //避免上次的缓存被重复插入
-                if (tmpFile.exists()) {
-                    tmpFile.delete();
-                }
-                JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(tmpFile));
-                //用于保存
-                while (enumeration.hasMoreElements()) {
-                    JarEntry jarEntry = (JarEntry) enumeration.nextElement();
-                    String entryName = jarEntry.getName();
-                    ZipEntry zipEntry = new ZipEntry(entryName);
-                    InputStream inputStream = jarFile.getInputStream(jarEntry);
-                    //插桩class
-                    if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
-                        System.out.println("deal class file " + jarInput.getFile() + ", entryName:" + entryName);
-                        jarOutputStream.putNextEntry(zipEntry);
-                        ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
-                        ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
-                        ClassVisitor cv = new LifecycleClassVisitor(Opcodes.ASM9, classWriter);
+        //重命名输出文件，因为可能会同名覆盖
+        String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
+        if (jarName.endsWith(".jar"))
+            jarName = jarName.substring(0, jarName.length() - 4);
 
-                        classReader.accept(cv, ClassReader.EXPAND_FRAMES);
-                        byte[] code = classWriter.toByteArray();
-                        jarOutputStream.write(code);
-                    } else {
-                        jarOutputStream.putNextEntry(zipEntry);
-                        jarOutputStream.write(IOUtils.toByteArray(inputStream));
-                    }
-                    jarOutputStream.closeEntry();
-                }
-                //结束
-                jarOutputStream.close();
-                jarFile.close();
-                File dest = outputProvider.getContentLocation(jarName + md5Name,
-                    jarInput.getContentTypes(), jarInput.getScopes(), Format.JAR);
-                FileUtils.copyFile(tmpFile, dest);
+        try {
+            JarFile jarFile = new JarFile(file);
+            Enumeration enumeration = jarFile.entries();
+            File tmpFile = new File(file.getParent() + File.separator + "classes_temp.jar");
+            if (tmpFile.exists())
                 tmpFile.delete();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(tmpFile));
+            while (enumeration.hasMoreElements()) {
+                JarEntry jarEntry = (JarEntry) enumeration.nextElement();
+                String entryName = jarEntry.getName();
+                ZipEntry zipEntry = new ZipEntry(entryName);
+                InputStream inputStream = jarFile.getInputStream(jarEntry);
+                //插桩class
+                System.out.println("entryName:" + entryName);
+                if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
+                    jarOutputStream.putNextEntry(zipEntry);
+                    ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
+                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
+                    ClassVisitor cv = new LifecycleClassVisitor(Opcodes.ASM7, classWriter);
+
+                    classReader.accept(cv, ClassReader.EXPAND_FRAMES);
+                    byte[] code = classWriter.toByteArray();
+                    jarOutputStream.write(code);
+                } else {
+                    jarOutputStream.putNextEntry(zipEntry);
+                    jarOutputStream.write(IOUtils.toByteArray(inputStream));
+                }
+                jarOutputStream.closeEntry();
             }
+            jarOutputStream.close();
+            jarFile.close();
+            File dest = outputProvider.getContentLocation(jarName + md5Name,
+                jarInput.getContentTypes(), jarInput.getScopes(), Format.JAR);
+            System.out.println("dest:" + dest);
+            System.out.println("<========== handleJarInput end");
+            FileUtils.copyFile(tmpFile, dest);
+            tmpFile.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
