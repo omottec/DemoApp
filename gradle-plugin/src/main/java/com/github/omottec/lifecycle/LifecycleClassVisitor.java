@@ -1,5 +1,6 @@
 package com.github.omottec.lifecycle;
 
+import com.github.omottec.Target;
 import java.util.Arrays;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

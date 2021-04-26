@@ -1,4 +1,4 @@
-package com.github.omottec.lifecycle;
+package com.github.omottec.javassist;
 
 import com.android.build.api.transform.DirectoryInput;
 import com.android.build.api.transform.Format;
@@ -24,27 +24,30 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import javassist.NotFoundException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
+import org.jetbrains.annotations.NotNull;
 
-public class LifecyclePlugin extends Transform implements Plugin<Project> {
+public class JavassistPlugin extends Transform implements Plugin<Project> {
+    private Project project;
+    private AppExtension appExtension;
+    private String appcompatClasspath;
 
     @Override
-    public void apply(Project target) {
-        System.out.println("LifecyclePlugin apply " + target);
-        AppExtension android = target.getExtensions().getByType(AppExtension.class);
-        android.registerTransform(this);
+    public void apply(@NotNull Project target) {
+        appExtension = target.getExtensions().getByType(AppExtension.class);
+        appExtension.registerTransform(this);
     }
 
     @Override
     public String getName() {
-        return "LifecyclePlugin";
+        return "JavassistPlugin";
     }
 
     @Override
@@ -65,44 +68,63 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
     @Override
     public void transform(TransformInvocation transformInvocation)
         throws TransformException, InterruptedException, IOException {
-        System.out.println("===================>LifecyclePlugin.transform begin");
+        System.out.println("*************************>JavassistPlugin.transform begin");
         long startTime = System.currentTimeMillis();
 
         TransformOutputProvider provider = transformInvocation.getOutputProvider();
         // delete old output
         if (provider != null)
             provider.deleteAll();
-        Collection<TransformInput> inputs = transformInvocation.getInputs();
-        for (TransformInput ti : inputs) {
-            for (DirectoryInput di : ti.getDirectoryInputs())
-                handleDirectoryInput(di, provider);
-            for (JarInput ji : ti.getJarInputs())
-                handleJarInput(ji, provider);
+
+        try {
+            ClassPool.getDefault().appendClassPath(appExtension.getBootClasspath().get(0).getAbsolutePath());
+            Collection<TransformInput> inputs = transformInvocation.getInputs();
+            for (TransformInput ti : inputs) {
+                for (DirectoryInput di : ti.getDirectoryInputs())
+                    handleDirectoryInput(di, provider);
+                for (JarInput ji : ti.getJarInputs())
+                    handleJarInput(ji, provider);
+            }
+        } catch (NotFoundException e) {
+            e.printStackTrace();
         }
         long cost = System.currentTimeMillis() - startTime;
-        System.out.println("<===================LifecyclePlugin.transform end cost " + cost + " ms");
+        System.out.println("<*************************JavassistPlugin.transform end cost " + cost + " ms");
     }
 
     private void handleDirectoryInput(DirectoryInput di, TransformOutputProvider provider) {
-        System.out.println("==========> LifecyclePlugin.handleDirectoryInput begin");
+        System.out.println("***********> JavassistPlugin.handleDirectoryInput begin");
         System.out.println("directoryInput:" + di);
-        System.out.println("<========== LifecyclePlugin.handleDirectoryInput end");
-
+        ClassPool classPool = ClassPool.getDefault();
+        try {
+            classPool.appendClassPath(di.getFile().getAbsolutePath());
+            File dest = provider.getContentLocation(di.getName(), di.getContentTypes(), di.getScopes(),
+                    Format.DIRECTORY);
+            FileUtils.copyFile(di.getFile(), dest);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("<*********** JavassistPlugin.handleDirectoryInput end");
     }
 
     private void handleJarInput(JarInput jarInput, TransformOutputProvider outputProvider) {
-        System.out.println("==========> LifecyclePlugin.handleJarInput begin");
+        System.out.println("***********> JavassistPlugin.handleJarInput begin");
         System.out.println("jarInput:" + jarInput);
 
         String jarName = jarInput.getName();
         File file = jarInput.getFile();
-        if (!file.getAbsolutePath().endsWith(".jar")) return;
-
-        String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
-        if (jarName.endsWith(".jar"))
-            jarName = jarName.substring(0, jarName.length() - 4);
-
         try {
+            ClassPool.getDefault().appendClassPath(file.getAbsolutePath());
+
+            String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
+            if (jarName.endsWith(".jar"))
+                jarName = jarName.substring(0, jarName.length() - 4);
+
+            if (jarInput.getName().startsWith("androidx.appcompat:appcompat"))
+                appcompatClasspath = jarInput.getFile().getAbsolutePath();
+
             JarFile jarFile = new JarFile(file);
             Enumeration enumeration = jarFile.entries();
             File tmpFile = new File(file.getParent() + File.separator + "classes_temp.jar");
@@ -119,13 +141,20 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
                 System.out.println("entryName:" + entryName);
                 if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
                     jarOutputStream.putNextEntry(zipEntry);
-                    ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
-                    ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
-                    ClassVisitor cv = new LifecycleClassVisitor(Opcodes.ASM7, classWriter);
-
-                    classReader.accept(cv, ClassReader.EXPAND_FRAMES);
-                    byte[] code = classWriter.toByteArray();
-                    jarOutputStream.write(code);
+                    ClassPool classPool = ClassPool.getDefault();
+                    classPool.importPackage("android.os.Bundle");
+                    classPool.importPackage("androidx.appcompat.app.AppCompatActivity");
+                    CtClass ctClass = classPool.get(Target.CLASS_NAME.replace("/", "."));
+                    System.out.println("ctClass:" + ctClass);
+                    if (ctClass.isFrozen())
+                        ctClass.defrost();
+                    CtMethod ctMethod = ctClass.getDeclaredMethod("onCreate");
+                    System.out.println("ctMethod:" + ctMethod);
+                    ctMethod.insertBefore("android.util.Log.i(\"Javassist\", \"=====  onCreate begin===\");");
+                    ctMethod.insertAfter("android.util.Log.i(\"Javassist\", \"=====  onCreate end===\");");
+                    byte[] bytes = ctClass.toBytecode();
+                    ctClass.detach();
+                    jarOutputStream.write(bytes);
                 } else {
                     jarOutputStream.putNextEntry(zipEntry);
                     jarOutputStream.write(IOUtils.toByteArray(inputStream));
@@ -142,6 +171,6 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("<========== LifecyclePlugin.handleJarInput end");
+        System.out.println("<*********** JavassistPlugin.handleJarInput end");
     }
 }

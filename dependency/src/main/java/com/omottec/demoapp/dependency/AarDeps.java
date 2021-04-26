@@ -59,4 +59,6 @@ public final class AarDeps implements Plugin<Project> {
 
     public static final String ASM_AAR = "org.ow2.asm:asm:7.0";
     public static final String ASM_COMMON_AAR = "org.ow2.asm:asm-commons:7.0";
+
+    public static final String JAVASSIST = "javassist:javassist:3.12.0.GA";
 }

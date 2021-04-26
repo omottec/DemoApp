@@ -1,19 +1,9 @@
 package com.omottec.demoapp.activity;
 
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.collection.ArrayMap;
 import androidx.core.view.LayoutInflaterCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,10 +14,6 @@ import com.omottec.demoapp.hook.ProxyResources;
 import com.omottec.demoapp.hook.ReplaceResFactory2;
 import com.omottec.demoapp.hook.ResManager;
 import com.omottec.logger.Logger;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     private ProxyResources mProxyRes;
