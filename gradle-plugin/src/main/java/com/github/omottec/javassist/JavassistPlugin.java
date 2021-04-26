@@ -142,8 +142,6 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
                 if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
                     jarOutputStream.putNextEntry(zipEntry);
                     ClassPool classPool = ClassPool.getDefault();
-                    classPool.importPackage("android.os.Bundle");
-                    classPool.importPackage("androidx.appcompat.app.AppCompatActivity");
                     CtClass ctClass = classPool.get(Target.CLASS_NAME.replace("/", "."));
                     System.out.println("ctClass:" + ctClass);
                     if (ctClass.isFrozen())
