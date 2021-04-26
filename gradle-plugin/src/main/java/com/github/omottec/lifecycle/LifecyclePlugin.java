@@ -36,7 +36,7 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
-        System.out.println("LifecyclePlugin apply $target");
+        System.out.println("LifecyclePlugin apply " + target);
         AppExtension android = target.getExtensions().getByType(AppExtension.class);
         android.registerTransform(this);
     }
@@ -112,7 +112,7 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
                     InputStream inputStream = jarFile.getInputStream(jarEntry);
                     //插桩class
                     if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
-                        System.out.println("deal class file $jarInput.file $entryName");
+                        System.out.println("deal class file " + jarInput.getFile() + ", entryName:" + entryName);
                         jarOutputStream.putNextEntry(zipEntry);
                         ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
                         ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
