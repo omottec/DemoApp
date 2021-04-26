@@ -3,19 +3,23 @@ package com.github.omottec.lifecycle;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class LifecycleOnCreateMethodVisitor extends MethodVisitor {
-    public LifecycleOnCreateMethodVisitor(int api, MethodVisitor methodVisitor) {
+public class OnDestroyMethodVisitor extends MethodVisitor {
+    public OnDestroyMethodVisitor(int api, MethodVisitor methodVisitor) {
         super(api, methodVisitor);
     }
 
     @Override
-    public void visitCode() {
+    public void visitMethodInsn(int opcode,
+                                String owner,
+                                String name,
+                                String descriptor,
+                                boolean isInterface) {
         //方法执行前插入
-        mv.visitLdcInsn("TAG");
+        mv.visitLdcInsn("ASM");
         mv.visitTypeInsn(Opcodes.NEW, "java/lang/StringBuilder");
         mv.visitInsn(Opcodes.DUP);
         mv.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
-        mv.visitLdcInsn("-------> onCreate : ");
+        mv.visitLdcInsn("-------> onDestroy : ");
         mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
         mv.visitVarInsn(Opcodes.ALOAD, 0);
         mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;", false);

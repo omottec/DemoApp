@@ -6,10 +6,10 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class LifecycleClassVisitor extends ClassVisitor {
+public class AsmClassVisitor extends ClassVisitor {
     private String mClassName;
 
-    public LifecycleClassVisitor(int api, ClassVisitor classVisitor) {
+    public AsmClassVisitor(int api, ClassVisitor classVisitor) {
         super(api, classVisitor);
     }
 
@@ -48,9 +48,9 @@ public class LifecycleClassVisitor extends ClassVisitor {
             cv.visitMethod(access, name, descriptor, signature, exceptions);
         if (Target.CLASS_NAME.equals(mClassName)) {
             if ("onCreate".equals(name)) {
-                return new LifecycleOnCreateMethodVisitor(Opcodes.ASM7, mv);
+                return new OnCreateMethodVisitor(Opcodes.ASM7, mv);
             } else if ("onDestroy".equals(name)) {
-                return new LifecycleOnDestroyMethodVisitor(Opcodes.ASM7, mv);
+                return new OnDestroyMethodVisitor(Opcodes.ASM7, mv);
             }
         }
         return mv;

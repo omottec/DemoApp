@@ -33,18 +33,18 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 
-public class LifecyclePlugin extends Transform implements Plugin<Project> {
+public class AsmPlugin extends Transform implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
-        System.out.println("LifecyclePlugin apply " + target);
+        System.out.println("AsmPlugin apply " + target);
         AppExtension android = target.getExtensions().getByType(AppExtension.class);
         android.registerTransform(this);
     }
 
     @Override
     public String getName() {
-        return "LifecyclePlugin";
+        return "AsmPlugin";
     }
 
     @Override
@@ -65,7 +65,7 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
     @Override
     public void transform(TransformInvocation transformInvocation)
         throws TransformException, InterruptedException, IOException {
-        System.out.println("===================>LifecyclePlugin.transform begin");
+        System.out.println("===================>AsmPlugin.transform begin");
         long startTime = System.currentTimeMillis();
 
         TransformOutputProvider provider = transformInvocation.getOutputProvider();
@@ -80,18 +80,18 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
                 handleJarInput(ji, provider);
         }
         long cost = System.currentTimeMillis() - startTime;
-        System.out.println("<===================LifecyclePlugin.transform end cost " + cost + " ms");
+        System.out.println("<===================AsmPlugin.transform end cost " + cost + " ms");
     }
 
     private void handleDirectoryInput(DirectoryInput di, TransformOutputProvider provider) {
-        System.out.println("==========> LifecyclePlugin.handleDirectoryInput begin");
+        System.out.println("==========> AsmPlugin.handleDirectoryInput begin");
         System.out.println("directoryInput:" + di);
-        System.out.println("<========== LifecyclePlugin.handleDirectoryInput end");
+        System.out.println("<========== AsmPlugin.handleDirectoryInput end");
 
     }
 
     private void handleJarInput(JarInput jarInput, TransformOutputProvider outputProvider) {
-        System.out.println("==========> LifecyclePlugin.handleJarInput begin");
+        System.out.println("==========> AsmPlugin.handleJarInput begin");
         System.out.println("jarInput:" + jarInput);
 
         String jarName = jarInput.getName();
@@ -121,7 +121,7 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
                     jarOutputStream.putNextEntry(zipEntry);
                     ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
-                    ClassVisitor cv = new LifecycleClassVisitor(Opcodes.ASM7, classWriter);
+                    ClassVisitor cv = new AsmClassVisitor(Opcodes.ASM7, classWriter);
 
                     classReader.accept(cv, ClassReader.EXPAND_FRAMES);
                     byte[] code = classWriter.toByteArray();
@@ -142,6 +142,6 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("<========== LifecyclePlugin.handleJarInput end");
+        System.out.println("<========== AsmPlugin.handleJarInput end");
     }
 }

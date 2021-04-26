@@ -6,7 +6,7 @@ apply plugin: ImmediateDeps.KOTLIN_PLUGIN_ID
 apply plugin: ImmediateDeps.GREENDAO_PLUGIN
 apply plugin: ImmediateDeps.ASPECTJ_PLUGIN
 
-apply plugin: ImmediateDeps.OMOTTEC_LIFECYCLE_PLUGIN
+apply plugin: ImmediateDeps.OMOTTEC_ASM_PLUGIN
 apply plugin: ImmediateDeps.OMOTTEC_HELLO_PLUGIN
 apply plugin: ImmediateDeps.OMOTTEC_JAVASSIST_PLUGIN
 
