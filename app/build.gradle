@@ -149,8 +149,6 @@ aspectjx {
         debugImplementation AarDeps.LEAKCANARY_ANDROID
         releaseImplementation AarDeps.LEAKCANARY_ANDROID_NO_OP
 
-        implementation AarDeps.APPSEE_AAR
-
         implementation project(':apt-api')
         annotationProcessor project(':apt-processor')
 

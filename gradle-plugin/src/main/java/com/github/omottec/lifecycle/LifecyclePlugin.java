@@ -87,13 +87,14 @@ public class LifecyclePlugin extends Transform implements Plugin<Project> {
     }
 
     private void handleJarInput(JarInput jarInput, TransformOutputProvider outputProvider) {
+
+        System.out.println("==========> handleJarInput begin");
+        System.out.println("jarInput:" + jarInput);
+
         String jarName = jarInput.getName();
         File file = jarInput.getFile();
-        System.out.println("==========> handleJarInput begin");
-        System.out.println("jarName:" + jarName + ", file:" + file.getAbsolutePath());
         if (!file.getAbsolutePath().endsWith(".jar")) return;
 
-        //重命名输出文件，因为可能会同名覆盖
         String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
         if (jarName.endsWith(".jar"))
             jarName = jarName.substring(0, jarName.length() - 4);
