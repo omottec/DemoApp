@@ -1,5 +1,6 @@
 package com.github.omottec.lifecycle;
 
+import java.util.Arrays;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -18,7 +19,13 @@ public class LifecycleClassVisitor extends ClassVisitor implements Opcodes {
                       String signature,
                       String superName,
                       String[] interfaces) {
-        System.out.println("LifecycleClassVisitor.visit " + name);
+        System.out.println(new StringBuilder("LifecycleClassVisitor.visit version:").append(version)
+            .append(", access:").append(access)
+            .append(", name:").append(name)
+            .append(", signature:").append(signature)
+            .append(", superName:").append(superName)
+            .append(", interfaces:").append(Arrays.toString(interfaces))
+            .toString());
         mClassName = name;
         super.visit(version, access, name, signature, superName, interfaces);
     }
@@ -29,7 +36,13 @@ public class LifecycleClassVisitor extends ClassVisitor implements Opcodes {
                                      String descriptor,
                                      String signature,
                                      String[] exceptions) {
-        System.out.println("LifecycleClassVisitor.visitMethod " + name);
+        System.out.println(new StringBuilder("LifecycleClassVisitor.visitMethod ")
+            .append(" access:").append(access)
+            .append(", name:").append(name)
+            .append(", descriptor:").append(descriptor)
+            .append(", signature:").append(signature)
+            .append(", exceptions:").append(Arrays.toString(exceptions))
+            .toString());
         MethodVisitor mv =
             cv.visitMethod(access, name, descriptor, signature, exceptions);
         if (Target.CLASS_NAME.equals(mClassName)) {

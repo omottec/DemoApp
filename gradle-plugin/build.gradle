@@ -23,7 +23,7 @@ dependencies {
 }
 
 group='com.github.omottec'
-version='1.0.56'
+version='1.0.58'
 
 gradlePlugin {
     plugins {
