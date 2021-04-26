@@ -5,7 +5,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-public class LifecycleClassVisitor extends ClassVisitor implements Opcodes {
+public class LifecycleClassVisitor extends ClassVisitor {
     private String mClassName;
 
     public LifecycleClassVisitor(int api, ClassVisitor classVisitor) {
