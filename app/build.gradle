@@ -9,6 +9,9 @@ apply plugin: ImmediateDeps.ASPECTJ_PLUGIN
 apply plugin: ImmediateDeps.OMOTTEC_LIFECYCLE_PLUGIN
 apply plugin: ImmediateDeps.OMOTTEC_HELLO_PLUGIN
 
+//apply plugin: ImmediateDeps.OMOTTEC_BUILD_SRC_PLUGIN
+apply plugin: com.omottec.demoapp.BuildSrcPlugin
+
 apply from: rootProject.file('gradles/config.gradle')
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 
