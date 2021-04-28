@@ -4,10 +4,13 @@ logInfo()
 
 logMap()
 
+logProp()
+
 void logInfo() {
     println(">>>" + gradle)
     println(">>>" + gradle.startParameter)
     println(">>>" + gradle.startParameter.taskRequests)
+    println(">>>" + gradle.startParameter.taskRequests.get(0).properties)
     println(">>>" + gradle.startParameter.taskRequests.toString())
     println(">>>" + gradle.ext)
     println(">>>" + rootProject.projectDir.absolutePath)
@@ -25,4 +28,9 @@ void logMap() {
     } else {
         println(">>> propMap false")
     }
+}
+
+void logProp() {
+    println(">>> USER_NAME:" + USER_NAME)
+    println(">>> android.enableR8:" + project.getProperties().get("android.enableR8"))
 }
