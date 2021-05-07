@@ -12,6 +12,7 @@ void logInfo() {
     println(">>>" + gradle.startParameter.taskRequests)
     println(">>>" + gradle.startParameter.taskRequests.get(0).properties)
     println(">>>" + gradle.startParameter.taskRequests.toString())
+    println(">>>" + gradle.startParameter.taskNames)
     println(">>>" + gradle.ext)
     println(">>>" + rootProject.projectDir.absolutePath)
     println(">>>" + project.path)
