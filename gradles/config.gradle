@@ -10,7 +10,7 @@ if (true) {
     println "enter if true"
     if (false) return
     println "after if false"
-    if (true) return
+//    if (true) return
     println "after if true"
 }
 
@@ -22,9 +22,6 @@ void logInfo() {
     println(">>>" + gradle.startParameter.taskRequests.get(0).properties)
     println(">>>" + gradle.startParameter.taskNames)
     println(">>>" + gradle.ext)
-    println(">>>" + rootProject.projectDir.absolutePath)
-    println(">>>" + project.path)
-    println(">>>" + project.parent.path)
 }
 
 void logMap() {
@@ -41,5 +38,11 @@ void logMap() {
 
 void logProp() {
     println(">>> USER_NAME:" + USER_NAME)
-    println(">>> android.enableR8:" + project.getProperties().get("android.enableR8"))
 }
+
+gradle.ext.plugin = true
+gradle.ext.plugin1 = false
+
+println("in config.gradle plugin:" + gradle.plugin + ", gradle.plugin1:" + gradle.plugin1)
+
+println("System.getenv:" + System.getenv())

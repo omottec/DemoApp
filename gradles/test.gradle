@@ -1,0 +1,7 @@
+println("apply test...")
+
+println(">>>" + rootProject.projectDir.absolutePath)
+println(">>>" + project.path)
+println(">>>" + project.parent.path)
+
+println(">>> android.enableR8:" + project.getProperties().get("android.enableR8"))

@@ -1,3 +1,5 @@
+apply from: 'gradles/config.gradle'
+
 includeBuild 'dependency'
 include ':gradle-plugin'
 include ':logger'
