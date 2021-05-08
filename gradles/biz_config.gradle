@@ -1,0 +1,7 @@
+println(">>>>>>apply biz_config.gradle start")
+
+gradle.ext.plugin = true
+gradle.ext.plugin1 = false
+
+println("in biz_config gradle plugin:" + gradle.plugin + ", gradle.plugin1:" + gradle.plugin1)
+println("<<<<<<apply biz_config.gradle end")

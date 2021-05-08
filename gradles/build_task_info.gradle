@@ -1,0 +1,37 @@
+import java.util.regex.Pattern
+
+println(">>>>>>apply build_task_info.gradle begin")
+println("gradle:" + gradle)
+println("gradle.startParameter:" + gradle.startParameter)
+println("gradle.startParameter.taskRequests:" + gradle.startParameter.taskRequests)
+println("gradle.startParameter.taskRequests.toString():" + gradle.startParameter.taskRequests.toString())
+println("gradle.startParameter.taskRequests.get(0).properties:" + gradle.startParameter.taskRequests.get(0).properties)
+println("gradle.startParameter.taskNames:" + gradle.startParameter.taskNames)
+println("gradle.ext:" + gradle.ext)
+
+gradle.ext.isDebugBuild = isDebugBuild()
+println("isDebugBuild:" + gradle.isDebugBuild)
+
+gradle.ext.isDevelopmentBuild = isDevelopmentBuild()
+println("gradle.isDevelopmentBuild:" + gradle.isDevelopmentBuild)
+
+gradle.ext.isChinaBuild = isChinaBuild()
+println("gradle.isChinaBuild:" + gradle.isChinaBuild)
+
+
+boolean isDebugBuild() {
+    def taskNames = gradle.startParameter.taskNames.toString()
+    return taskNames != null &&Pattern.compile("(Debug)|((a|i)(D|P)(C|U)D)").matcher(taskNames).find()
+}
+
+boolean isDevelopmentBuild() {
+    def taskNames = gradle.startParameter.taskNames.toString()
+    return taskNames != null &&Pattern.compile("(Development)|((a|i)D(C|U)(D|R))").matcher(taskNames).find()
+}
+
+boolean isChinaBuild() {
+    def taskNames = gradle.startParameter.taskNames.toString()
+    return taskNames != null &&Pattern.compile("(China)|((a|i)(D|P)C(D|R))").matcher(taskNames).find()
+}
+
+println("<<<<<<apply build_task_info.gradle end")

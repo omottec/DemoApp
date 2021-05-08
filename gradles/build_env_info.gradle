@@ -1,0 +1,4 @@
+println(">>>>>>apply build_env_info.gradle begin")
+
+println("System.getenv:" + System.getenv())
+println("<<<<<<apply build_env_info.gradle end")

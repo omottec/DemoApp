@@ -12,12 +12,11 @@ apply plugin: ImmediateDeps.OMOTTEC_JAVASSIST_PLUGIN
 
 apply plugin: com.omottec.demoapp.BuildSrcPlugin
 
-println("before apply config.gradle plugin:" + gradle.plugin + ", gradle.plugin1:" + gradle.plugin1)
+println("in :app:build.gradle gradle plugin:" + gradle.plugin + ", gradle.plugin1:" + gradle.plugin1)
 
 apply from: rootProject.file('gradles/test.gradle')
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 
-println("after apply config.gradle plugin:" + gradle.plugin + ", gradle.plugin1:" + gradle.plugin1)
 
 android {
 
@@ -88,17 +87,17 @@ android {
     applicationVariants.all {variant ->
         variant.outputs.each { output ->
             def lintTask = tasks["lint${variant.name.capitalize()}"]
-            println(">>>output:" + output + ", variant:" + variant)
-            println(">>>variant.name:" + variant.name)
+            println("output:" + output + ", variant:" + variant)
+            println("variant.name:" + variant.name)
 //            output.assembleProvider.dependsOn lintTask
-            println(">>>output.versionName:" + output.versionCode + ", output.versionCode:" + output.versionCode)
+            println("output.versionName:" + output.versionCode + ", output.versionCode:" + output.versionCode)
         }
     }
 
     variantFilter { variant ->
-        println(">>>" + variant.name)
-        println(">>>" + variant.flavors.name)
-        println(">>>" + variant.buildType.name)
+        println("variant.name:" + variant.name)
+        println("variant.flavors.name:" + variant.flavors.name)
+        println("variant.buildType.name:" + variant.buildType.name)
     }
 }
 
@@ -166,14 +165,14 @@ aspectjx {
             resolutionStrategy.dependencySubstitution {
                 //            substitute module('com.github.omottec:logger') with project(':logger')
                 all { DependencySubstitution substitution ->
-                    println(">>>substitution.requested:" + substitution.requested.toString())
+                    println("substitution.requested:" + substitution.requested.toString())
                     //                if (substitution.requested.toString().contains("com.github.omottec:logger"))
                     //                    substitution.useTarget project(':logger')
                 }
             }
 
             resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-                println(">>>ModuleVersionSelector")
+                println("ModuleVersionSelector")
                 println(details.requested.module.toString())
                 println(details.requested.group
                     + ":" + details.requested.name

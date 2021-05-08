@@ -1,7 +1,36 @@
-println("apply test...")
+println(">>>>>>apply test.gradle begin")
 
-println(">>>" + rootProject.projectDir.absolutePath)
-println(">>>" + project.path)
-println(">>>" + project.parent.path)
+println("rootProject.projectDir.absolutePath:" + rootProject.projectDir.absolutePath)
+println("project.path:" + project.path)
+println("project.parent.path:" + project.parent.path)
 
-println(">>> android.enableR8:" + project.getProperties().get("android.enableR8"))
+println("android.enableR8:" + project.getProperties().get("android.enableR8"))
+
+logMap()
+
+logProp()
+
+if (true) {
+    println "enter if true"
+    if (false) return
+    println "after if false"
+    //    if (true) return
+    println "after if true"
+}
+
+void logMap() {
+    gradle.ext.propMap = [
+        key1 : "value1",
+    ]
+    if (gradle.ext.propMap) {
+        println("propMap ture")
+        println("propMap key1:" + gradle.propMap.key1)
+    } else {
+        println("propMap false")
+    }
+}
+
+void logProp() {
+    println("USER_NAME:" + USER_NAME)
+}
+println("<<<<<<apply test.gradle end")

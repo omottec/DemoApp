@@ -1,4 +1,6 @@
-apply from: 'gradles/config.gradle'
+apply from: 'gradles/build_task_info.gradle'
+apply from: 'gradles/build_env_info.gradle'
+apply from: 'gradles/biz_config.gradle'
 
 includeBuild 'dependency'
 include ':gradle-plugin'
