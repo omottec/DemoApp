@@ -6,12 +6,20 @@ logMap()
 
 logProp()
 
+if (true) {
+    println "enter if true"
+    if (false) return
+    println "after if false"
+    if (true) return
+    println "after if true"
+}
+
 void logInfo() {
     println(">>>" + gradle)
     println(">>>" + gradle.startParameter)
     println(">>>" + gradle.startParameter.taskRequests)
-    println(">>>" + gradle.startParameter.taskRequests.get(0).properties)
     println(">>>" + gradle.startParameter.taskRequests.toString())
+    println(">>>" + gradle.startParameter.taskRequests.get(0).properties)
     println(">>>" + gradle.startParameter.taskNames)
     println(">>>" + gradle.ext)
     println(">>>" + rootProject.projectDir.absolutePath)
