@@ -41,5 +41,5 @@ public final class ImmediateDeps {
     public static final String OMOTTEC_HELLO_PLUGIN = "com.github.omottec.hello";
     public static final String OMOTTEC_JAVASSIST_PLUGIN = "com.github.omottec.javassist";
 
-    public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:3.6.1";
+    public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:4.1.0";
 }
