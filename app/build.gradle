@@ -161,22 +161,22 @@ aspectjx {
         implementation ImmediateDeps.KOTLIN_AAR
         implementation ImmediateDeps.ASPECTJ_AAR
 
-        configurations.all {
-            resolutionStrategy.dependencySubstitution {
-                //            substitute module('com.github.omottec:logger') with project(':logger')
+        configurations.all { Configuration configuration ->
+            configuration.resolutionStrategy.dependencySubstitution {
+//                substitute module('com.github.omottec:logger') with project(':logger')
                 all { DependencySubstitution substitution ->
-                    println("substitution.requested:" + substitution.requested.toString())
-                    //                if (substitution.requested.toString().contains("com.github.omottec:logger"))
-                    //                    substitution.useTarget project(':logger')
+                    println("DependencySubstitution.requested:" + substitution.requested.toString())
+                    println("DependencySubstitution.requested:" + substitution.requested.class)
+//                    if (substitution.requested.toString().contains("com.github.omottec:logger"))
+//                        substitution.useTarget project(':logger')
                 }
             }
 
             resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-                println("ModuleVersionSelector")
-                println(details.requested.module.toString())
-                println(details.requested.group
-                    + ":" + details.requested.name
-                    + ":" + details.requested.version)
+                println("DependencyResolveDetails.requested:" + details.requested.toString())
+                println("DependencyResolveDetails.requested:" + details.requested.class)
+//                if (details.requested.toString().contains("com.github.omottec:logger"))
+//                    details.useVersion("0.1.5")
             }
         }
     }

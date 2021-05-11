@@ -33,4 +33,24 @@ void logMap() {
 void logProp() {
     println("USER_NAME:" + USER_NAME)
 }
+
+def fun1() {
+    println("exe fun1")
+}
+
+def fun2(String arg) {
+    println("exe fun2 " + arg)
+}
+
+def fun3(String arg) {
+    println("exe fun2")
+}
+
+gradle.ext.funMap = [fun1:  this.&fun1,
+                     fun2:  this.&fun2,
+                     fun3:  this.&fun3]
+
+gradle.ext.fun1Value = gradle.funMap.fun1()
+gradle.ext.fun2Value = gradle.funMap.fun2("aaa")
+
 println("<<<<<<apply test.gradle end")
