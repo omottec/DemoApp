@@ -1,10 +1,10 @@
 println(">>>>>>apply test.gradle begin")
 
-println("rootProject.projectDir.absolutePath:" + rootProject.projectDir.absolutePath)
-println("project.path:" + project.path)
-println("project.parent.path:" + project.parent.path)
+//println("rootProject.projectDir.absolutePath:" + rootProject.projectDir.absolutePath)
+//println("project.path:" + project.path)
+//println("project.parent.path:" + project.parent.path)
 
-println("android.enableR8:" + project.getProperties().get("android.enableR8"))
+//println("android.enableR8:" + project.getProperties().get("android.enableR8"))
 
 logMap()
 
@@ -65,16 +65,17 @@ def addAllComponents() {
         allComponents.put(k, v)
     }
     println("allComponents:" + allComponents)
+    gradle.ext.allComponents = allComponents
 }
 
 gradle.ext.funMap = [fun1:                  this.&fun1,
                      fun2:                  this.&fun2,
                      fun3:                  this.&fun3,
-                     addAllCompnents:       this.&addAllComponents]
+                     allComponents:         this.&addAllComponents]
 
 
 gradle.funMap.fun1()
 gradle.funMap.fun2("aaa")
-gradle.funMap.addAllCompnents()
+gradle.funMap.allComponents()
 
 println("<<<<<<apply test.gradle end")

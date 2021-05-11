@@ -1,6 +1,7 @@
 apply from: 'gradles/build_task_info.gradle'
 apply from: 'gradles/build_env_info.gradle'
 apply from: 'gradles/biz_config.gradle'
+apply from: 'gradles/test.gradle'
 
 includeBuild 'dependency'
 include ':gradle-plugin'

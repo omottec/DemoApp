@@ -4,6 +4,8 @@ import com.omottec.demoapp.dependency.AarDeps
 apply plugin: ImmediateDeps.ANDROID_LIB_PLUGIN
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 
+println("gradle.allComponents:" + gradle.allComponents)
+
 dependencies {
     implementation project(':lib-b')
 //    api project(':lib-b')
