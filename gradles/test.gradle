@@ -46,11 +46,35 @@ def fun3(String arg) {
     println("exe fun2")
 }
 
-gradle.ext.funMap = [fun1:  this.&fun1,
-                     fun2:  this.&fun2,
-                     fun3:  this.&fun3]
 
-gradle.ext.fun1Value = gradle.funMap.fun1()
-gradle.ext.fun2Value = gradle.funMap.fun2("aaa")
+gradle.ext.projectMap = [project1: "project1 value",
+                         project2: "project2 value",
+                         project3: "project3 value"]
+
+gradle.ext.moduleMap = [aar1: "aar1 value",
+                        aar2: "aar2 value",
+                        aar3: "aar3 value"]
+
+def addAllComponents() {
+//    Map allComponents = new HashMap<String, Project>()
+    Map allComponents = new HashMap()
+    gradle.projectMap.each { k, v ->
+        allComponents.put(k, v)
+    }
+    gradle.moduleMap.each { k, v ->
+        allComponents.put(k, v)
+    }
+    println("allComponents:" + allComponents)
+}
+
+gradle.ext.funMap = [fun1:                  this.&fun1,
+                     fun2:                  this.&fun2,
+                     fun3:                  this.&fun3,
+                     addAllCompnents:       this.&addAllComponents]
+
+
+gradle.funMap.fun1()
+gradle.funMap.fun2("aaa")
+gradle.funMap.addAllCompnents()
 
 println("<<<<<<apply test.gradle end")
