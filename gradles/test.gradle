@@ -6,6 +6,10 @@ println(">>>>>>apply test.gradle begin")
 
 //println("android.enableR8:" + project.getProperties().get("android.enableR8"))
 
+gradle.rootProject {
+    println("gradle.rootProject")
+}
+
 logMap()
 
 logProp()
