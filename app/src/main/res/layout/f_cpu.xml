@@ -59,4 +59,12 @@
         android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="system"/>
+    <TextView
+        android:id="@+id/tv_app_info_app_64"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="app_info app 64"/>
 </LinearLayout>

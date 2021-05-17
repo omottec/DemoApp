@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import androidx.fragment.app.Fragment;
 import com.omottec.demoapp.Tag;
+import com.omottec.demoapp.cpu.CpuFragment;
 import com.omottec.demoapp.fragment.FileFragment;
 import com.omottec.demoapp.fragment.ReplaceResFragment;
 import com.omottec.demoapp.hook.ProxyResources;
@@ -68,10 +69,10 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
 //        return new BitmapFragment();
-//        return new CpuFragment();
+        return new CpuFragment();
 //        return new GpuFragment();
 //        return new YellowScreenFragment();
-        return new ReplaceResFragment();
+//        return new ReplaceResFragment();
 
 
 //        return new NotificationFragment();

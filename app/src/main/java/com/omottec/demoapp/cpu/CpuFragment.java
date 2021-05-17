@@ -17,6 +17,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
     private TextView mProcessTv;
     private TextView mClassLoaderTv;
     private TextView mSystemTv;
+    private TextView mAppInfoApp64Tv;
 
     @Nullable
     @Override
@@ -35,6 +36,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
         mProcessTv = view.findViewById(R.id.tv_process);
         mClassLoaderTv = view.findViewById(R.id.tv_class_loader);
         mSystemTv = view.findViewById(R.id.tv_system);
+        mAppInfoApp64Tv = view.findViewById(R.id.tv_app_info_app_64);
 
         mCpuTv.setOnClickListener(this);
         mBuildTv.setOnClickListener(this);
@@ -43,6 +45,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
         mProcessTv.setOnClickListener(this);
         mClassLoaderTv.setOnClickListener(this);
         mSystemTv.setOnClickListener(this);
+        mAppInfoApp64Tv.setOnClickListener(this);
     }
 
     @Override
@@ -50,7 +53,7 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_cpu:
                 mCpuTv.setText("mCpuTv device64:" + CpuUtils.isDevice64()
-                    + ", app64:" + CpuUtils.isApp64());
+                    + ", app64:" + CpuUtils.isApp64(getContext()));
                 break;
             case R.id.tv_build:
                 mBuildTv.setText("mBuildTv device64:" + CpuUtils.isDevice64ByBuild());
@@ -69,6 +72,9 @@ public class CpuFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_system:
                 mSystemTv.setText("mSystemTv app64:" + CpuUtils.isApp64BySystem());
+                break;
+            case R.id.tv_app_info_app_64:
+                mAppInfoApp64Tv.setText("mAppInfoApp64Tv app64:" + CpuUtils.isApp64ByAppInfo(getContext()));
                 break;
         }
     }
