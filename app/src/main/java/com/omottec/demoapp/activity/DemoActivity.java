@@ -12,6 +12,7 @@ import com.omottec.demoapp.fragment.FileFragment;
 import com.omottec.demoapp.fragment.ReplaceResFragment;
 import com.omottec.demoapp.hook.ProxyResources;
 import com.omottec.demoapp.hook.ResManager;
+import com.omottec.demoapp.kt.KtFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
 import com.omottec.logger.Logger;
@@ -69,7 +70,7 @@ public class DemoActivity extends SingleFragmentActivity {
 //        return new MultiProcessFragment();
 //        return new LooperFragment();
 //        return new BitmapFragment();
-        return new CpuFragment();
+//        return new CpuFragment();
 //        return new GpuFragment();
 //        return new YellowScreenFragment();
 //        return new ReplaceResFragment();
@@ -110,7 +111,7 @@ public class DemoActivity extends SingleFragmentActivity {
 
         //return new ApiFragment();
 
-        //return new KtFragment();
+        return new KtFragment();
 
 
         // IO
