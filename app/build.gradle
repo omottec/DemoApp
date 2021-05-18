@@ -67,9 +67,10 @@ android {
             dimension "env"
         }
 
-        def abi = System.getenv("ABI_FILTERS")
-        if (abi == null)
-            abi = 'armeabi-v7a'
+        def abi = 'armeabi-v7a'
+        if (System.getenv("IS_ABI_64") == "true")
+            abi = 'arm64-v8a'
+        println("abi:" + abi)
 
         china {
             dimension "region"
