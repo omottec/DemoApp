@@ -67,13 +67,18 @@ android {
             dimension "env"
         }
 
+        def abi = System.getenv("ABI_FILTERS")
+        if (abi == null)
+            abi = 'armeabi-v7a'
+
         china {
             dimension "region"
             applicationId "com.omottec.demoapp.cn"
             ndk {
 //                abiFilters 'armeabi-v7a'
-                abiFilters 'arm64-v8a'
+//                abiFilters 'arm64-v8a'
 //                abiFilters 'armeabi-v7a','arm64-v8a'
+                abiFilters abi
             }
         }
 
@@ -81,7 +86,7 @@ android {
             dimension "region"
             applicationId "com.omottec.demoapp.us"
             ndk {
-                abiFilters "arm64-v8a"
+                abiFilters abi
             }
         }
     }
