@@ -12,7 +12,10 @@ public final class ReflectUtils {
 
     public static Field getField(Class clazz, String name) throws NoSuchFieldException {
         try {
-            return clazz.getField(name);
+            Field field = clazz.getField(name);
+            if (Modifier.isFinal(field.getModifiers()))
+                field.setAccessible(true);
+            return field;
         } catch (NoSuchFieldException e) {
             Logger.e(TAG, e);
             do {
