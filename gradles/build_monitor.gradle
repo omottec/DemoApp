@@ -1,0 +1,40 @@
+gradle.addBuildListener(new BuildListener() {
+    @Override
+    void buildStarted(Gradle gradle) {
+        println("BuildListener#buildStarted " + gradle)
+    }
+
+    @Override
+    void settingsEvaluated(Settings settings) {
+        println("BuildListener#settingsEvaluated " + settings)
+    }
+
+    @Override
+    void projectsLoaded(Gradle gradle) {
+        println("BuildListener#projectsLoaded " + gradle)
+    }
+
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+        println("BuildListener#projectsEvaluated " + gradle)
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        println("BuildListener#buildFinished result.gradle:" + result.gradle
+            + ", result.action:" + result.action
+            + ", result.failure:" + result.failure)
+    }
+})
+
+gradle.addProjectEvaluationListener(new ProjectEvaluationListener() {
+    @Override
+    void beforeEvaluate(Project project) {
+        println("ProjectEvaluationListener#beforeEvaluate " + project)
+    }
+
+    @Override
+    void afterEvaluate(Project project, ProjectState state) {
+        println("ProjectEvaluationListener#afterEvaluate project:" + project + ", state:" + state)
+    }
+})
