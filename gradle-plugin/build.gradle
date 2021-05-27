@@ -24,17 +24,13 @@ dependencies {
 }
 
 group='com.github.omottec'
-version='1.0.80'
+version='1.0.81'
 
 gradlePlugin {
     plugins {
         lifecycle {
             id = 'com.github.omottec.asm'
             implementationClass = 'com.github.omottec.lifecycle.AsmPlugin'
-        }
-        hello {
-            id = 'com.github.omottec.hello'
-            implementationClass = 'com.github.omottec.hello.HelloPlugin'
         }
         javassit {
             id = 'com.github.omottec.javassist'
@@ -45,24 +41,19 @@ gradlePlugin {
 
 pluginBundle {
     website = 'https://github.com/'
-    vcsUrl = 'https://github.com/omottec/DemoApp/tree/dev/gradle-plugin'
-    description = 'omottec plugin'
+    vcsUrl = 'https://github.com/omottec/DemoApp'
+    description = 'hook android activity lifecycle with asm and javassist'
 
     plugins {
         lifecycle {
             id = 'com.github.omottec.asm'
             displayName = 'omottec asm plugin'
-            tags = ['lifecycle']
-        }
-        hello {
-            id = 'com.github.omottec.hello'
-            displayName = 'omottec hello plugin'
-            tags = ['hello']
+            tags = ['lifecycle', 'asm']
         }
         javassit {
             id = 'com.github.omottec.javassist'
-            displayName = 'omottec javassist plugin'
-            tags = ['javassist']
+            displayName = ' javassist plugin'
+            tags = ['lifecycle', 'javassist']
         }
     }
 }
