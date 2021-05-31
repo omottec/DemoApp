@@ -1,3 +1,4 @@
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 println(">>>>>>apply build_task_info.gradle begin")
@@ -21,17 +22,55 @@ println("gradle.isChinaBuild:" + gradle.isChinaBuild)
 
 boolean isDebugBuild() {
     def taskNames = gradle.startParameter.taskNames.toString()
-    return taskNames != null &&Pattern.compile("(Debug)|((a|i)(D|P)(C|U)D)").matcher(taskNames).find()
+
+    def matcher = Pattern.
+        compile("(assemble|bundle|generate)(Development|Production)(China|Us)(\\w+)").
+        matcher(taskNames)
+    if (matcher.find())
+        return matcher.group(4).equals("Debug")
+
+    matcher = Pattern.compile("(a|i)(D|P)(C|U)(D|R)").matcher(taskNames)
+    if (matcher.find())
+        return matcher.group(4).equals("D")
+
+    // 对于taskNames为空(比如在AS点sync)或为其他值(比如dependencies)的情况，默认返回true
+    return true
+
+    return taskNames != null && Pattern.compile("(Debug)|((a|i)(D|P)(C|U)D)").matcher(taskNames).find()
 }
 
 boolean isDevelopmentBuild() {
     def taskNames = gradle.startParameter.taskNames.toString()
-    return taskNames != null &&Pattern.compile("(Development)|((a|i)D(C|U)(D|R))").matcher(taskNames).find()
+
+    def matcher = Pattern.
+        compile("(assemble|bundle|generate)(\\w+)(China|Us)(Debug|Release)").
+        matcher(taskNames)
+    if (matcher.find())
+        return matcher.group(2).equals("Development")
+
+    matcher = Pattern.compile("(a|i)(D|P)(C|U)(D|R)").matcher(taskNames)
+    if (matcher.find())
+        return matcher.group(2).equals("D")
+
+    // 对于taskNames为空(比如在AS点sync)或为其他值(比如dependencies)的情况，默认返回true
+    return true
 }
 
 boolean isChinaBuild() {
     def taskNames = gradle.startParameter.taskNames.toString()
-    return taskNames != null &&Pattern.compile("(China)|((a|i)(D|P)C(D|R))").matcher(taskNames).find()
+
+    def matcher = Pattern.
+        compile("(assemble|bundle|generate)(Development|Production)(\\w+)(Debug|Release)").
+        matcher(taskNames)
+    if (matcher.find())
+        return matcher.group(3).equals("China")
+
+    matcher = Pattern.compile("(a|i)(D|P)(C|U)(D|R)").matcher(taskNames)
+    if (matcher.find())
+        return matcher.group(3).equals("C")
+
+    // 对于taskNames为空(比如在AS点sync)或为其他值(比如dependencies)的情况，默认返回true
+    return true
 }
 
 println("<<<<<<apply build_task_info.gradle end")
