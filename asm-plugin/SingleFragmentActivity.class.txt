@@ -1,6 +1,6 @@
 //
 // Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
+// (powered by FernFlower decompiler)
 //
 
 package com.omottec.demoapp.activity;
@@ -20,7 +20,6 @@ import com.omottec.demoapp.hook.ReplaceResFactory2;
 import com.omottec.demoapp.hook.ResManager;
 import com.omottec.logger.Logger;
 
-// app/build/intermediates/transforms/JavassistPlugin/developmentChina/debug/com/omottec/demoapp/activity/SingleFragmentActivity.class
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     private ProxyResources mProxyRes;
     private Resources mAppRes;
@@ -31,7 +30,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 
     public void onCreate(Bundle savedInstanceState) {
-        Log.i("Javassist", "=====  onCreate begin===");
         Log.i("ASM", "-------> onCreate : " + this.getClass().getSimpleName());
         Logger.i("replace_res", "activity:" + this + ", BaseContext:" + this.getBaseContext() + ", ApplicationContext:" + this.getApplicationContext());
         LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -42,8 +40,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         this.onCreate();
-        Object var4 = null;
-        Log.i("Javassist", "=====  onCreate end===");
     }
 
     private void onCreate() {

@@ -1,4 +1,4 @@
-package com.github.omottec.lifecycle;
+package com.github.omottec.asm;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;

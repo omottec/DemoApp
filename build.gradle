@@ -14,7 +14,8 @@ buildscript {
         classpath ImmediateDeps.GREENDAO_CLASSPATH
         classpath ImmediateDeps.ASPECTJ_CLASSPATH
         classpath ImmediateDeps.KOTLIN_CLASSPATH
-        classpath ImmediateDeps.OMOTTEC_PLUGIN_CLASSPATH
+        classpath ImmediateDeps.OMOTTEC_ASM_CLASSPATH
+        classpath ImmediateDeps.OMOTTEC_JAVASSIST_CLASSPATH
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

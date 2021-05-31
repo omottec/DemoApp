@@ -35,12 +35,11 @@ import org.gradle.api.Project;
 import org.jetbrains.annotations.NotNull;
 
 public class JavassistPlugin extends Transform implements Plugin<Project> {
-    private Project project;
     private AppExtension appExtension;
-    private String appcompatClasspath;
 
     @Override
     public void apply(@NotNull Project target) {
+        System.out.println("JavassistPlugin 1.1.13 apply " + target);
         appExtension = target.getExtensions().getByType(AppExtension.class);
         appExtension.registerTransform(this);
     }
@@ -77,6 +76,7 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
             provider.deleteAll();
 
         try {
+            System.out.println("appExtension.getBootClasspath:" + appExtension.getBootClasspath());
             ClassPool.getDefault().appendClassPath(appExtension.getBootClasspath().get(0).getAbsolutePath());
             Collection<TransformInput> inputs = transformInvocation.getInputs();
             for (TransformInput ti : inputs) {
@@ -121,9 +121,6 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
             String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
             if (jarName.endsWith(".jar"))
                 jarName = jarName.substring(0, jarName.length() - 4);
-
-            if (jarInput.getName().startsWith("androidx.appcompat:appcompat"))
-                appcompatClasspath = jarInput.getFile().getAbsolutePath();
 
             JarFile jarFile = new JarFile(file);
             Enumeration enumeration = jarFile.entries();

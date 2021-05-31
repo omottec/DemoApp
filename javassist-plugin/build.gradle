@@ -1,0 +1,28 @@
+import com.omottec.demoapp.dependency.AarDeps
+
+apply from: rootProject.file('gradles/gradle_plugin_common.gradle')
+apply from: rootProject.file('gradles/publish_plugin_to_mvncentral.gradle')
+
+dependencies {
+    implementation AarDeps.JAVASSIST
+}
+
+ext {
+    GROUP_ID = "com.github.omottec"
+    ARTIFACT_ID = 'javassist-plugin'
+    VERSION = '1.1.13'
+    POM_DESCRIPTION = 'gradle plugin with javassist'
+    POM_URL = 'https://github.com/omottec/DemoApp/tree/dev/gradle-plugin'
+    POM_SCM_CONNECTION = 'scm:git:github.com:omottec/DemoApp.git'
+    POM_SCM_DEVELOPER_CONNECTION = 'scm:git:ssh://github.com:omottec/DemoApp.git'
+    POM_SCM_URL = 'https://github.com/omottec/DemoApp/tree/dev/gradle-plugin'
+}
+
+gradlePlugin {
+    plugins {
+        javassit {
+            id = 'com.github.omottec.javassist'
+            implementationClass = 'com.github.omottec.javassist.JavassistPlugin'
+        }
+    }
+}

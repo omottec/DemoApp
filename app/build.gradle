@@ -7,7 +7,6 @@ apply plugin: ImmediateDeps.GREENDAO_PLUGIN
 apply plugin: ImmediateDeps.ASPECTJ_PLUGIN
 
 apply plugin: ImmediateDeps.OMOTTEC_ASM_PLUGIN
-apply plugin: ImmediateDeps.OMOTTEC_HELLO_PLUGIN
 apply plugin: ImmediateDeps.OMOTTEC_JAVASSIST_PLUGIN
 
 apply plugin: com.omottec.demoapp.BuildSrcPlugin

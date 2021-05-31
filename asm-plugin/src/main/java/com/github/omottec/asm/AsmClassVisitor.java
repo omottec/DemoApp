@@ -1,4 +1,4 @@
-package com.github.omottec.lifecycle;
+package com.github.omottec.asm;
 
 import com.github.omottec.Target;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class AsmClassVisitor extends ClassVisitor {
                       String signature,
                       String superName,
                       String[] interfaces) {
-        System.out.println(new StringBuilder("LifecycleClassVisitor.visit version:").append(version)
+        System.out.println(new StringBuilder("AsmClassVisitor.visit version:").append(version)
             .append(", access:").append(access)
             .append(", name:").append(name)
             .append(", signature:").append(signature)
@@ -37,7 +37,7 @@ public class AsmClassVisitor extends ClassVisitor {
                                      String descriptor,
                                      String signature,
                                      String[] exceptions) {
-        System.out.println(new StringBuilder("LifecycleClassVisitor.visitMethod ")
+        System.out.println(new StringBuilder("AsmClassVisitor.visitMethod ")
             .append(" access:").append(access)
             .append(", name:").append(name)
             .append(", descriptor:").append(descriptor)
@@ -58,7 +58,7 @@ public class AsmClassVisitor extends ClassVisitor {
 
     @Override
     public void visitEnd() {
-        System.out.println("LifecycleClassVisitor.visitEnd");
+        System.out.println("AsmClassVisitor.visitEnd");
         super.visitEnd();
     }
 }

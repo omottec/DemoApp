@@ -1,4 +1,4 @@
-package com.github.omottec.lifecycle;
+package com.github.omottec.asm;
 
 import com.android.build.api.transform.DirectoryInput;
 import com.android.build.api.transform.Format;
@@ -37,7 +37,7 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
 
     @Override
     public void apply(Project target) {
-        System.out.println("AsmPlugin apply " + target);
+        System.out.println("AsmPlugin 1.1.13 apply " + target);
         AppExtension android = target.getExtensions().getByType(AppExtension.class);
         android.registerTransform(this);
     }
