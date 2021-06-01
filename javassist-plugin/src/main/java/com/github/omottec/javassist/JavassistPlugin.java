@@ -36,10 +36,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class JavassistPlugin extends Transform implements Plugin<Project> {
     private AppExtension appExtension;
+    private boolean incremental;
 
     @Override
     public void apply(@NotNull Project target) {
-        System.out.println("JavassistPlugin 1.1.13 apply " + target);
+        System.out.println("JavassistPlugin 1.1.14 apply " + target);
         appExtension = target.getExtensions().getByType(AppExtension.class);
         appExtension.registerTransform(this);
     }
@@ -61,7 +62,7 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
 
     @Override
     public boolean isIncremental() {
-        return false;
+        return true;
     }
 
     @Override
@@ -70,9 +71,11 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
         System.out.println("*************************>JavassistPlugin.transform begin");
         long startTime = System.currentTimeMillis();
 
+        incremental = transformInvocation.isIncremental();
+        System.out.println("incremental:" + incremental);
+
         TransformOutputProvider provider = transformInvocation.getOutputProvider();
-        // delete old output
-        if (provider != null)
+        if (!incremental)
             provider.deleteAll();
 
         try {
@@ -100,7 +103,7 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
             classPool.appendClassPath(di.getFile().getAbsolutePath());
             File dest = provider.getContentLocation(di.getName(), di.getContentTypes(), di.getScopes(),
                     Format.DIRECTORY);
-            FileUtils.copyFile(di.getFile(), dest);
+            FileUtils.copyDirectory(di.getFile(), dest);
         } catch (NotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -114,29 +117,67 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
         System.out.println("jarInput:" + jarInput);
 
         String jarName = jarInput.getName();
+        if (jarName.endsWith(".jar"))
+            jarName = jarName.substring(0, jarName.length() - 4);
+
+        File file = jarInput.getFile();
+        String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
+
+        File dest = outputProvider.getContentLocation(jarName + md5Name,
+            jarInput.getContentTypes(), jarInput.getScopes(), Format.JAR);
+        System.out.println("dest:" + dest + ", exists:" + dest.exists());
+
+        if (incremental) {
+            switch (jarInput.getStatus()) {
+                case NOTCHANGED:
+                    break;
+                case ADDED:
+                case CHANGED:
+                    foreachJar(jarInput, dest);
+                    break;
+                case REMOVED:
+                    deleteDest(dest);
+                    break;
+            }
+        } else {
+            foreachJar(jarInput, dest);
+        }
+        System.out.println("<*********** JavassistPlugin.handleJarInput end");
+    }
+
+    private void deleteDest(File dest) {
+        try {
+            FileUtils.deleteIfExists(dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void foreachJar(JarInput jarInput, File dest) {
         File file = jarInput.getFile();
         try {
-            ClassPool.getDefault().appendClassPath(file.getAbsolutePath());
-
-            String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
-            if (jarName.endsWith(".jar"))
-                jarName = jarName.substring(0, jarName.length() - 4);
-
             JarFile jarFile = new JarFile(file);
             Enumeration enumeration = jarFile.entries();
-            File tmpFile = new File(file.getParent() + File.separator + "classes_temp.jar");
-            if (tmpFile.exists())
-                tmpFile.delete();
 
+            if (!enumeration.hasMoreElements()) {
+                FileUtils.copyFile(file, dest);
+                return;
+            }
+
+            ClassPool.getDefault().appendClassPath(file.getAbsolutePath());
+
+            File tmpFile = new File(file.getParent() + File.separator + "classes_temp.jar");
+            FileUtils.deleteIfExists(tmpFile);
             JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(tmpFile));
+
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = (JarEntry) enumeration.nextElement();
+                InputStream inputStream = jarFile.getInputStream(jarEntry);
                 String entryName = jarEntry.getName();
                 ZipEntry zipEntry = new ZipEntry(entryName);
-                InputStream inputStream = jarFile.getInputStream(jarEntry);
-                //插桩class
                 System.out.println("entryName:" + entryName);
                 if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
+                    //插桩class
                     jarOutputStream.putNextEntry(zipEntry);
                     ClassPool classPool = ClassPool.getDefault();
                     CtClass ctClass = classPool.get(Target.CLASS_NAME.replace("/", "."));
@@ -158,14 +199,16 @@ public class JavassistPlugin extends Transform implements Plugin<Project> {
             }
             jarOutputStream.close();
             jarFile.close();
-            File dest = outputProvider.getContentLocation(jarName + md5Name,
-                jarInput.getContentTypes(), jarInput.getScopes(), Format.JAR);
-            System.out.println("dest:" + dest);
+
             FileUtils.copyFile(tmpFile, dest);
             tmpFile.delete();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("<*********** JavassistPlugin.handleJarInput end");
+    }
+
+    @Override
+    public boolean isCacheable() {
+        return true;
     }
 }

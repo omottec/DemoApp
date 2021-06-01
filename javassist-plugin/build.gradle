@@ -10,7 +10,7 @@ dependencies {
 ext {
     GROUP_ID = "com.github.omottec"
     ARTIFACT_ID = 'javassist-plugin'
-    VERSION = '1.1.13'
+    VERSION = '1.1.14'
     POM_DESCRIPTION = 'gradle plugin with javassist'
     POM_URL = 'https://github.com/omottec/DemoApp/tree/dev/gradle-plugin'
     POM_SCM_CONNECTION = 'scm:git:github.com:omottec/DemoApp.git'
@@ -26,3 +26,6 @@ gradlePlugin {
         }
     }
 }
+
+//./gradlew :javassist-plugin:publishReleasePublicationToMavenLocal
+//./gradlew :javassist-plugin:publishReleasePublicationToMavenCentralRepository

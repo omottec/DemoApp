@@ -38,7 +38,7 @@ public final class ImmediateDeps {
     // classpath "group:module:version"
     public static final String OMOTTEC_ASM_CLASSPATH = "com.github.omottec:asm-plugin:1.1.16";
     public static final String OMOTTEC_ASM_PLUGIN = "com.github.omottec.asm";
-    public static final String OMOTTEC_JAVASSIST_CLASSPATH = "com.github.omottec:javassist-plugin:1.1.13";
+    public static final String OMOTTEC_JAVASSIST_CLASSPATH = "com.github.omottec:javassist-plugin:1.1.14";
     public static final String OMOTTEC_JAVASSIST_PLUGIN = "com.github.omottec.javassist";
 
     public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:4.1.0";
