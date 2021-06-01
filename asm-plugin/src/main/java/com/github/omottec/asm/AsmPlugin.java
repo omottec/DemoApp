@@ -35,9 +35,11 @@ import org.objectweb.asm.Opcodes;
 
 public class AsmPlugin extends Transform implements Plugin<Project> {
 
+    private boolean mIncremental;
+
     @Override
     public void apply(Project target) {
-        System.out.println("AsmPlugin 1.1.13 apply " + target);
+        System.out.println("AsmPlugin 1.1.16 apply " + target);
         AppExtension android = target.getExtensions().getByType(AppExtension.class);
         android.registerTransform(this);
     }
@@ -59,7 +61,7 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
 
     @Override
     public boolean isIncremental() {
-        return false;
+        return true;
     }
 
     @Override
@@ -68,10 +70,12 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
         System.out.println("===================>AsmPlugin.transform begin");
         long startTime = System.currentTimeMillis();
 
+        mIncremental = transformInvocation.isIncremental();
+        System.out.println("mIncremental:" + mIncremental);
         TransformOutputProvider provider = transformInvocation.getOutputProvider();
-        // delete old output
-        if (provider != null)
+        if (!mIncremental) {
             provider.deleteAll();
+        }
         Collection<TransformInput> inputs = transformInvocation.getInputs();
         for (TransformInput ti : inputs) {
             for (DirectoryInput di : ti.getDirectoryInputs())
@@ -90,34 +94,70 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
 
     }
 
-    private void handleJarInput(JarInput jarInput, TransformOutputProvider outputProvider) {
+    private void handleJarInput(JarInput jarInput, TransformOutputProvider provider) {
         System.out.println("==========> AsmPlugin.handleJarInput begin");
         System.out.println("jarInput:" + jarInput);
 
         String jarName = jarInput.getName();
-        File file = jarInput.getFile();
-        if (!file.getAbsolutePath().endsWith(".jar")) return;
-
-        String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
         if (jarName.endsWith(".jar"))
             jarName = jarName.substring(0, jarName.length() - 4);
 
+        File file = jarInput.getFile();
+        String md5Name = DigestUtils.md5Hex(file.getAbsolutePath());
+
+        File dest = provider.getContentLocation(jarName + md5Name,
+            jarInput.getContentTypes(), jarInput.getScopes(), Format.JAR);
+        System.out.println("dest:" + dest + ", exists:" + dest.exists());
+
+        if (mIncremental) {
+            switch (jarInput.getStatus()) {
+                case NOTCHANGED:
+                    break;
+                case ADDED:
+                case CHANGED:
+                    foreachJar(jarInput, dest);
+                    break;
+                case REMOVED:
+                    deleteDest(dest);
+                    break;
+            }
+        } else {
+            foreachJar(jarInput, dest);
+        }
+        System.out.println("<========== AsmPlugin.handleJarInput end");
+    }
+
+    private void deleteDest(File dest) {
+        try {
+            FileUtils.deleteIfExists(dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void foreachJar(JarInput jarInput, File dest) {
+        File file = jarInput.getFile();
         try {
             JarFile jarFile = new JarFile(file);
             Enumeration enumeration = jarFile.entries();
-            File tmpFile = new File(file.getParent() + File.separator + "classes_temp.jar");
-            if (tmpFile.exists())
-                tmpFile.delete();
 
+            if (!enumeration.hasMoreElements()) {
+                FileUtils.copyFile(file, dest);
+                return;
+            }
+
+            File tmpFile = new File(file.getParent() + File.separator + "classes_temp.jar");
+            FileUtils.deleteIfExists(tmpFile);
             JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(tmpFile));
+
             while (enumeration.hasMoreElements()) {
                 JarEntry jarEntry = (JarEntry) enumeration.nextElement();
                 String entryName = jarEntry.getName();
                 ZipEntry zipEntry = new ZipEntry(entryName);
                 InputStream inputStream = jarFile.getInputStream(jarEntry);
-                //插桩class
                 System.out.println("entryName:" + entryName);
                 if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
+                    //插桩class
                     jarOutputStream.putNextEntry(zipEntry);
                     ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
@@ -134,14 +174,16 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
             }
             jarOutputStream.close();
             jarFile.close();
-            File dest = outputProvider.getContentLocation(jarName + md5Name,
-                jarInput.getContentTypes(), jarInput.getScopes(), Format.JAR);
-            System.out.println("dest:" + dest);
             FileUtils.copyFile(tmpFile, dest);
             tmpFile.delete();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("<========== AsmPlugin.handleJarInput end");
+    }
+
+    @Override
+    public boolean isCacheable() {
+        return true;
     }
 }
+
