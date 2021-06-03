@@ -5,7 +5,7 @@ public final class ImmediateDeps {
     public static final int MIN_SDK_VERSION = 21;
     public static final int TARGET_SDK_VERSION = 25;
     public static final int COMPILE_SDK_VERSION = 29;
-    public static final String BUILD_TOOLS_VERSION = "29.0.2";
+    public static final String BUILD_TOOLS_VERSION = "30.0.2";
 
     public static final String ANDROID_APP_PLUGIN = "com.android.application";
     public static final String ANDROID_LIB_PLUGIN = "com.android.library";
