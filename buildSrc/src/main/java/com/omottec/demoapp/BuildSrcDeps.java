@@ -2,6 +2,8 @@ package com.omottec.demoapp;
 
 public final class BuildSrcDeps {
 
+    public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:4.2.1";
+
     public static final int MIN_SDK_VERSION = 21;
     public static final int TARGET_SDK_VERSION = 25;
     public static final int COMPILE_SDK_VERSION = 29;
@@ -13,12 +15,12 @@ public final class BuildSrcDeps {
     public static final String JAVA_LIB_PLUGIN = "java-library";
     public static final String JAVA_PLUGIN = "java";
     public static final String GROOVY_PLUGIN = "groovy";
-    public static final String MAVEN_PLUGIN = "maven";
     public static final String JAVA_GRADLE_PLUGIN = "java-gradle-plugin";
+
+    public static final String MAVEN_PLUGIN = "maven";
     public static final String MAVEN_PUBLISH_PLUGIN = "maven-publish";
     public static final String MAVEN_SIGNING_PLUGIN = "signing";
 
-    // have classpath
     public static final String GRADLE_PLUGIN_REPO = "https://plugins.gradle.org/m2/";
     public static final String GRADLE_PLUGIN_PUBLISH_PLUGIN_CLASSPATH = "com.gradle.publish:plugin-publish-plugin:0.14.0";
     public static final String GRADLE_PLUGIN_PUBLISH_PLUGIN_ID = "com.gradle.plugin-publish";
@@ -41,5 +43,4 @@ public final class BuildSrcDeps {
     public static final String OMOTTEC_JAVASSIST_CLASSPATH = "com.github.omottec:javassist-plugin:1.1.14";
     public static final String OMOTTEC_JAVASSIST_PLUGIN = "com.github.omottec.javassist";
 
-    public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:4.2.1";
 }
