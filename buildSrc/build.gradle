@@ -1,16 +1,2 @@
-apply plugin: "java-gradle-plugin"
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-    google()
-}
-
-dependencies {
-    implementation gradleApi()
-    implementation 'com.android.tools.build:gradle:4.2.1'
-}
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
