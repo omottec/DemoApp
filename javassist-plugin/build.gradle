@@ -1,10 +1,10 @@
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.dependency.CompositeBuildDeps
 
 apply from: rootProject.file('gradles/gradle_plugin_common.gradle')
 apply from: rootProject.file('gradles/publish_plugin_to_mvncentral.gradle')
 
 dependencies {
-    implementation AarDeps.JAVASSIST
+    implementation CompositeBuildDeps.JAVASSIST
 }
 
 ext {

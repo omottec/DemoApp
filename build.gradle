@@ -1,4 +1,4 @@
-import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.BuildSrcDeps
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -10,12 +10,12 @@ buildscript {
         google()
     }
     dependencies {
-        classpath ImmediateDeps.AGP_CLASSPATH
-        classpath ImmediateDeps.GREENDAO_CLASSPATH
-        classpath ImmediateDeps.ASPECTJ_CLASSPATH
-        classpath ImmediateDeps.KOTLIN_CLASSPATH
-        classpath ImmediateDeps.OMOTTEC_ASM_CLASSPATH
-        classpath ImmediateDeps.OMOTTEC_JAVASSIST_CLASSPATH
+        classpath BuildSrcDeps.AGP_CLASSPATH
+        classpath BuildSrcDeps.GREENDAO_CLASSPATH
+        classpath BuildSrcDeps.ASPECTJ_CLASSPATH
+        classpath BuildSrcDeps.KOTLIN_CLASSPATH
+        classpath BuildSrcDeps.OMOTTEC_ASM_CLASSPATH
+        classpath BuildSrcDeps.OMOTTEC_JAVASSIST_CLASSPATH
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

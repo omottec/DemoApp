@@ -1,12 +1,12 @@
-import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.BuildSrcDeps
 
 android {
-    compileSdkVersion ImmediateDeps.COMPILE_SDK_VERSION
-    buildToolsVersion ImmediateDeps.BUILD_TOOLS_VERSION
+    compileSdkVersion BuildSrcDeps.COMPILE_SDK_VERSION
+    buildToolsVersion BuildSrcDeps.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion ImmediateDeps.MIN_SDK_VERSION
-        targetSdkVersion ImmediateDeps.TARGET_SDK_VERSION
+        minSdkVersion BuildSrcDeps.MIN_SDK_VERSION
+        targetSdkVersion BuildSrcDeps.TARGET_SDK_VERSION
     }
 
     buildTypes {

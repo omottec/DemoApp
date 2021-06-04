@@ -1,6 +1,6 @@
-import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.BuildSrcDeps
 
-apply plugin: ImmediateDeps.JAVA_LIB_PLUGIN
+apply plugin: BuildSrcDeps.JAVA_LIB_PLUGIN
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8

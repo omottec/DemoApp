@@ -1,11 +1,11 @@
-import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.BuildSrcDeps
 
-apply plugin: ImmediateDeps.JAVA_GRADLE_PLUGIN
-apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
+apply plugin: BuildSrcDeps.JAVA_GRADLE_PLUGIN
+apply plugin: BuildSrcDeps.MAVEN_PUBLISH_PLUGIN
 
 dependencies {
     implementation gradleApi()
-    implementation ImmediateDeps.AGP_CLASSPATH
+    implementation BuildSrcDeps.AGP_CLASSPATH
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8

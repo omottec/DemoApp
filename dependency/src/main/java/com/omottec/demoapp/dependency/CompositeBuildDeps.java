@@ -3,7 +3,7 @@ package com.omottec.demoapp.dependency;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
-public final class AarDeps implements Plugin<Project> {
+public final class CompositeBuildDeps implements Plugin<Project> {
     @Override
     public void apply(Project target) {
 

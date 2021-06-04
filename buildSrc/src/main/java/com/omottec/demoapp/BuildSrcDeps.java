@@ -1,6 +1,6 @@
 package com.omottec.demoapp;
 
-public final class ImmediateDeps {
+public final class BuildSrcDeps {
 
     public static final int MIN_SDK_VERSION = 21;
     public static final int TARGET_SDK_VERSION = 25;

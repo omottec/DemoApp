@@ -1,7 +1,7 @@
-import com.omottec.demoapp.ImmediateDeps
+import com.omottec.demoapp.BuildSrcDeps
 
-apply plugin: ImmediateDeps.MAVEN_PUBLISH_PLUGIN
-apply plugin: ImmediateDeps.MAVEN_SIGNING_PLUGIN
+apply plugin: BuildSrcDeps.MAVEN_PUBLISH_PLUGIN
+apply plugin: BuildSrcDeps.MAVEN_SIGNING_PLUGIN
 
 task sourcesJar(type: Jar) {
     archiveClassifier = 'sources'

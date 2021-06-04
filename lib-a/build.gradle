@@ -1,7 +1,7 @@
-import com.omottec.demoapp.ImmediateDeps
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.BuildSrcDeps
+import com.omottec.demoapp.dependency.CompositeBuildDeps
 
-apply plugin: ImmediateDeps.ANDROID_LIB_PLUGIN
+apply plugin: BuildSrcDeps.ANDROID_LIB_PLUGIN
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 
 println("gradle.allComponents:" + gradle.allComponents)
@@ -9,5 +9,5 @@ println("gradle.allComponents:" + gradle.allComponents)
 dependencies {
     implementation project(':lib-b')
 //    api project(':lib-b')
-    implementation AarDeps.ANNOTATION
+    implementation CompositeBuildDeps.ANNOTATION
 }

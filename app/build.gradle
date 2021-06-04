@@ -1,13 +1,13 @@
-import com.omottec.demoapp.ImmediateDeps
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.BuildSrcDeps
+import com.omottec.demoapp.dependency.CompositeBuildDeps
 
-apply plugin: ImmediateDeps.ANDROID_APP_PLUGIN
-apply plugin: ImmediateDeps.KOTLIN_PLUGIN_ID
-apply plugin: ImmediateDeps.GREENDAO_PLUGIN
-apply plugin: ImmediateDeps.ASPECTJ_PLUGIN
+apply plugin: BuildSrcDeps.ANDROID_APP_PLUGIN
+apply plugin: BuildSrcDeps.KOTLIN_PLUGIN_ID
+apply plugin: BuildSrcDeps.GREENDAO_PLUGIN
+apply plugin: BuildSrcDeps.ASPECTJ_PLUGIN
 
-apply plugin: ImmediateDeps.OMOTTEC_ASM_PLUGIN
-apply plugin: ImmediateDeps.OMOTTEC_JAVASSIST_PLUGIN
+apply plugin: BuildSrcDeps.OMOTTEC_ASM_PLUGIN
+apply plugin: BuildSrcDeps.OMOTTEC_JAVASSIST_PLUGIN
 
 apply plugin: com.omottec.demoapp.BuildSrcPlugin
 
@@ -145,32 +145,32 @@ aspectjx {
         implementation project(':lib-a')
 
 //        implementation project(':logger')
-        implementation AarDeps.LOGGER
+        implementation CompositeBuildDeps.LOGGER
 
-        implementation AarDeps.MULTIDEX
-        implementation AarDeps.MATERIAL
-        implementation AarDeps.APPCOMPAT
-        implementation AarDeps.CARDVIEW
-        implementation AarDeps.LEGACY_SUPPORT_V4
+        implementation CompositeBuildDeps.MULTIDEX
+        implementation CompositeBuildDeps.MATERIAL
+        implementation CompositeBuildDeps.APPCOMPAT
+        implementation CompositeBuildDeps.CARDVIEW
+        implementation CompositeBuildDeps.LEGACY_SUPPORT_V4
 
         //    implementation AarDeps.MCXIAOKE_VOLLEY
         //    implementation AarDeps.ANDROID_VOLLEY
-        implementation AarDeps.GSON
-        implementation AarDeps.OKHTTP3
-        implementation AarDeps.RETROFIT2_RETROFIT
-        implementation AarDeps.RETROFIT2_CONVERTER
-        implementation AarDeps.RETROFIT2_ADAPTER
+        implementation CompositeBuildDeps.GSON
+        implementation CompositeBuildDeps.OKHTTP3
+        implementation CompositeBuildDeps.RETROFIT2_RETROFIT
+        implementation CompositeBuildDeps.RETROFIT2_CONVERTER
+        implementation CompositeBuildDeps.RETROFIT2_ADAPTER
 
-        implementation AarDeps.FRESCO_FRESCO
-        implementation AarDeps.FRESCO_IMAGEPIPELINE
-        implementation AarDeps.GLIDE_AAR
-        annotationProcessor AarDeps.GLIDE_ANNOTATION_PROCESSOR
+        implementation CompositeBuildDeps.FRESCO_FRESCO
+        implementation CompositeBuildDeps.FRESCO_IMAGEPIPELINE
+        implementation CompositeBuildDeps.GLIDE_AAR
+        annotationProcessor CompositeBuildDeps.GLIDE_ANNOTATION_PROCESSOR
 
-        implementation AarDeps.RXJAVA
-        implementation AarDeps.RXANDROID
-        implementation AarDeps.RXLIFECYCLE
-        implementation AarDeps.RXLIFECYCLE_COMPONENTS
-        implementation AarDeps.RXPERMISSIONS
+        implementation CompositeBuildDeps.RXJAVA
+        implementation CompositeBuildDeps.RXANDROID
+        implementation CompositeBuildDeps.RXLIFECYCLE
+        implementation CompositeBuildDeps.RXLIFECYCLE_COMPONENTS
+        implementation CompositeBuildDeps.RXPERMISSIONS
 
         //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
         //    implementation AarDeps.RXJAVA2
@@ -178,19 +178,19 @@ aspectjx {
         //    implementation AarDeps.RXLIFECYCLE2_ANDROID
         //    implementation AarDeps.RXLIFECYCLE2_COMPONENTS
 
-        implementation ImmediateDeps.GREENDAO_AAR
+        implementation BuildSrcDeps.GREENDAO_AAR
 
-        debugImplementation AarDeps.LEAKCANARY_ANDROID
-        releaseImplementation AarDeps.LEAKCANARY_ANDROID_NO_OP
+        debugImplementation CompositeBuildDeps.LEAKCANARY_ANDROID
+        releaseImplementation CompositeBuildDeps.LEAKCANARY_ANDROID_NO_OP
 
         implementation project(':apt-api')
         annotationProcessor project(':apt-processor')
 
 //        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-        implementation AarDeps.EPIC
-        implementation ImmediateDeps.KOTLIN_AAR
-        implementation ImmediateDeps.ASPECTJ_AAR
+        implementation CompositeBuildDeps.EPIC
+        implementation BuildSrcDeps.KOTLIN_AAR
+        implementation BuildSrcDeps.ASPECTJ_AAR
 
         configurations.all { Configuration configuration ->
             configuration.resolutionStrategy.dependencySubstitution {

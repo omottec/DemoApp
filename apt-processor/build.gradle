@@ -1,11 +1,11 @@
-import com.omottec.demoapp.dependency.AarDeps
+import com.omottec.demoapp.dependency.CompositeBuildDeps
 
 apply from: rootProject.file('gradles/java_lib_common.gradle')
 
 
 dependencies {
     implementation project(':apt-api')
-    implementation AarDeps.AUTO_SERVICE
-    annotationProcessor AarDeps.AUTO_SERVICE
-    implementation AarDeps.JAVAPOET
+    implementation CompositeBuildDeps.AUTO_SERVICE
+    annotationProcessor CompositeBuildDeps.AUTO_SERVICE
+    implementation CompositeBuildDeps.JAVAPOET
 }
