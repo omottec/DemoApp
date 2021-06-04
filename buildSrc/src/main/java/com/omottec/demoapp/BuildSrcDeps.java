@@ -1,5 +1,6 @@
 package com.omottec.demoapp;
 
+// https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources
 public final class BuildSrcDeps {
 
     public static final String AGP_CLASSPATH = "com.android.tools.build:gradle:4.2.1";

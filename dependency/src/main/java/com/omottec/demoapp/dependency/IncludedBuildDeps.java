@@ -3,6 +3,7 @@ package com.omottec.demoapp.dependency;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
+// https://docs.gradle.org/current/userguide/composite_builds.html
 public final class IncludedBuildDeps implements Plugin<Project> {
     @Override
     public void apply(Project target) {
