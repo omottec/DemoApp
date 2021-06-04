@@ -52,7 +52,7 @@ public final class IncludedBuildDeps implements Plugin<Project> {
     public static final String LEAKCANARY_ANDROID = "com.squareup.leakcanary:leakcanary-android:1.5";
     public static final String LEAKCANARY_ANDROID_NO_OP = "com.squareup.leakcanary:leakcanary-android-no-op:1.5";
 
-    public static final String AUTO_SERVICE = "com.google.auto.service:auto-service:1.0-rc4";
+    public static final String AUTO_SERVICE = "com.google.auto.service:auto-service:1.0-rc7";
 
     public static final String EPIC = "me.weishu:epic:0.11.0";
 
