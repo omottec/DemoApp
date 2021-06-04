@@ -136,81 +136,82 @@ android {
 
 aspectjx {
     include 'com.omottec.demoapp.aspectj'
-    dependencies {
-        implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-        //    implementation 'com.android.tools.build:gradle:3.6.1'
+}
 
-        testImplementation 'junit:junit:4.12'
-        implementation project(':PullToRefresh')
-        implementation project(':service')
-        implementation project(':account')
-        implementation project(':lib-a')
+dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    //    implementation 'com.android.tools.build:gradle:3.6.1'
+
+    testImplementation 'junit:junit:4.12'
+    implementation project(':PullToRefresh')
+    implementation project(':service')
+    implementation project(':account')
+    implementation project(':lib-a')
 
 //        implementation project(':logger')
-        implementation IncludedBuildDeps.LOGGER
+    implementation IncludedBuildDeps.LOGGER
 
-        implementation IncludedBuildDeps.MULTIDEX
-        implementation IncludedBuildDeps.MATERIAL
-        implementation IncludedBuildDeps.APPCOMPAT
-        implementation IncludedBuildDeps.CARDVIEW
-        implementation IncludedBuildDeps.LEGACY_SUPPORT_V4
+    implementation IncludedBuildDeps.MULTIDEX
+    implementation IncludedBuildDeps.MATERIAL
+    implementation IncludedBuildDeps.APPCOMPAT
+    implementation IncludedBuildDeps.CARDVIEW
+    implementation IncludedBuildDeps.LEGACY_SUPPORT_V4
 
-        //    implementation AarDeps.MCXIAOKE_VOLLEY
-        //    implementation AarDeps.ANDROID_VOLLEY
-        implementation IncludedBuildDeps.GSON
-        implementation IncludedBuildDeps.OKHTTP3
-        implementation IncludedBuildDeps.RETROFIT2_RETROFIT
-        implementation IncludedBuildDeps.RETROFIT2_CONVERTER
-        implementation IncludedBuildDeps.RETROFIT2_ADAPTER
+    //    implementation AarDeps.MCXIAOKE_VOLLEY
+    //    implementation AarDeps.ANDROID_VOLLEY
+    implementation IncludedBuildDeps.GSON
+    implementation IncludedBuildDeps.OKHTTP3
+    implementation IncludedBuildDeps.RETROFIT2_RETROFIT
+    implementation IncludedBuildDeps.RETROFIT2_CONVERTER
+    implementation IncludedBuildDeps.RETROFIT2_ADAPTER
 
-        implementation IncludedBuildDeps.FRESCO_FRESCO
-        implementation IncludedBuildDeps.FRESCO_IMAGEPIPELINE
-        implementation IncludedBuildDeps.GLIDE_AAR
-        annotationProcessor IncludedBuildDeps.GLIDE_ANNOTATION_PROCESSOR
+    implementation IncludedBuildDeps.FRESCO_FRESCO
+    implementation IncludedBuildDeps.FRESCO_IMAGEPIPELINE
+    implementation IncludedBuildDeps.GLIDE_AAR
+    annotationProcessor IncludedBuildDeps.GLIDE_ANNOTATION_PROCESSOR
 
-        implementation IncludedBuildDeps.RXJAVA
-        implementation IncludedBuildDeps.RXANDROID
-        implementation IncludedBuildDeps.RXLIFECYCLE
-        implementation IncludedBuildDeps.RXLIFECYCLE_COMPONENTS
-        implementation IncludedBuildDeps.RXPERMISSIONS
+    implementation IncludedBuildDeps.RXJAVA
+    implementation IncludedBuildDeps.RXANDROID
+    implementation IncludedBuildDeps.RXLIFECYCLE
+    implementation IncludedBuildDeps.RXLIFECYCLE_COMPONENTS
+    implementation IncludedBuildDeps.RXPERMISSIONS
 
-        //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
-        //    implementation AarDeps.RXJAVA2
-        //    implementation AarDeps.RXLIFECYCLE2
-        //    implementation AarDeps.RXLIFECYCLE2_ANDROID
-        //    implementation AarDeps.RXLIFECYCLE2_COMPONENTS
+    //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
+    //    implementation AarDeps.RXJAVA2
+    //    implementation AarDeps.RXLIFECYCLE2
+    //    implementation AarDeps.RXLIFECYCLE2_ANDROID
+    //    implementation AarDeps.RXLIFECYCLE2_COMPONENTS
 
-        implementation BuildSrcDeps.GREENDAO_AAR
+    implementation BuildSrcDeps.GREENDAO_AAR
 
-        debugImplementation IncludedBuildDeps.LEAKCANARY_ANDROID
-        releaseImplementation IncludedBuildDeps.LEAKCANARY_ANDROID_NO_OP
+    debugImplementation IncludedBuildDeps.LEAKCANARY_ANDROID
+    releaseImplementation IncludedBuildDeps.LEAKCANARY_ANDROID_NO_OP
 
-        implementation project(':apt-api')
-        annotationProcessor project(':apt-processor')
+    implementation project(':apt-api')
+    annotationProcessor project(':apt-processor')
 
 //        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-        implementation IncludedBuildDeps.EPIC
-        implementation BuildSrcDeps.KOTLIN_AAR
-        implementation BuildSrcDeps.ASPECTJ_AAR
+    implementation IncludedBuildDeps.EPIC
+    implementation BuildSrcDeps.KOTLIN_AAR
+    implementation BuildSrcDeps.ASPECTJ_AAR
 
-        configurations.all { Configuration configuration ->
-            configuration.resolutionStrategy.dependencySubstitution {
+    configurations.all { Configuration configuration ->
+        configuration.resolutionStrategy.dependencySubstitution {
 //                substitute module('com.github.omottec:logger') with project(':logger')
-                all { DependencySubstitution substitution ->
-                    println("DependencySubstitution.requested:" + substitution.requested.toString())
-                    println("DependencySubstitution.requested:" + substitution.requested.class)
+            all { DependencySubstitution substitution ->
+                println("DependencySubstitution.requested:" + substitution.requested.toString())
+                println("DependencySubstitution.requested:" + substitution.requested.class)
 //                    if (substitution.requested.toString().contains("com.github.omottec:logger"))
 //                        substitution.useTarget project(':logger')
-                }
             }
+        }
 
-            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-                println("DependencyResolveDetails.requested:" + details.requested.toString())
-                println("DependencyResolveDetails.requested:" + details.requested.class)
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            println("DependencyResolveDetails.requested:" + details.requested.toString())
+            println("DependencyResolveDetails.requested:" + details.requested.class)
 //                if (details.requested.toString().contains("com.github.omottec:logger"))
 //                    details.useVersion("0.1.5")
-            }
         }
     }
 }
