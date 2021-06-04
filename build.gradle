@@ -23,8 +23,10 @@ buildscript {
 }
 
 plugins {
-    id 'com.omottec.demoapp.plugin'
+    id 'com.omottec.demoapp.dependency'
 }
+
+println("<<<<<< DemoApp build.gradle after buildscript and plugins")
 
 allprojects {
     repositories {
@@ -39,3 +41,5 @@ task clean(type: Delete) {
 }
 
 apply from: rootProject.file('gradles/build_monitor.gradle')
+
+println("<<<<<< DemoApp build.gradle end")

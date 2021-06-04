@@ -1,5 +1,5 @@
 import com.omottec.demoapp.BuildSrcDeps
-import com.omottec.demoapp.dependency.CompositeBuildDeps
+import com.omottec.demoapp.dependency.IncludedBuildDeps
 
 apply plugin: BuildSrcDeps.ANDROID_LIB_PLUGIN
 apply plugin: BuildSrcDeps.MAVEN_PUBLISH_PLUGIN
@@ -19,5 +19,5 @@ ext {
 }
 
 dependencies {
-    implementation CompositeBuildDeps.GSON
+    implementation IncludedBuildDeps.GSON
 }

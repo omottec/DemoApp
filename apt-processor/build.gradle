@@ -1,11 +1,11 @@
-import com.omottec.demoapp.dependency.CompositeBuildDeps
+import com.omottec.demoapp.dependency.IncludedBuildDeps
 
 apply from: rootProject.file('gradles/java_lib_common.gradle')
 
 
 dependencies {
     implementation project(':apt-api')
-    implementation CompositeBuildDeps.AUTO_SERVICE
-    annotationProcessor CompositeBuildDeps.AUTO_SERVICE
-    implementation CompositeBuildDeps.JAVAPOET
+    implementation IncludedBuildDeps.AUTO_SERVICE
+    annotationProcessor IncludedBuildDeps.AUTO_SERVICE
+    implementation IncludedBuildDeps.JAVAPOET
 }

@@ -1,2 +1,6 @@
+println(">>>>>> buildSrc build.gradle begin")
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+println("<<<<<< buildSrc build.gradle end")

@@ -1,10 +1,14 @@
+println(">>>>>> dependency build.gradle begin")
+
 apply plugin: 'java-gradle-plugin'
 
 gradlePlugin {
     plugins {
-        version {
-            id = 'com.omottec.demoapp.plugin'
-            implementationClass = 'com.omottec.demoapp.dependency.CompositeBuildDeps'
+        dependencyPlugin {
+            id = 'com.omottec.demoapp.dependency'
+            implementationClass = 'com.omottec.demoapp.dependency.IncludedBuildDeps'
         }
     }
 }
+
+println("<<<<<< dependency build.gradle end")

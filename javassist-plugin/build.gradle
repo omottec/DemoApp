@@ -1,10 +1,10 @@
-import com.omottec.demoapp.dependency.CompositeBuildDeps
+import com.omottec.demoapp.dependency.IncludedBuildDeps
 
 apply from: rootProject.file('gradles/gradle_plugin_common.gradle')
 apply from: rootProject.file('gradles/publish_plugin_to_mvncentral.gradle')
 
 dependencies {
-    implementation CompositeBuildDeps.JAVASSIST
+    implementation IncludedBuildDeps.JAVASSIST
 }
 
 ext {

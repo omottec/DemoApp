@@ -1,5 +1,7 @@
+println(">>>>>> :app build.gradle begin")
+
 import com.omottec.demoapp.BuildSrcDeps
-import com.omottec.demoapp.dependency.CompositeBuildDeps
+import com.omottec.demoapp.dependency.IncludedBuildDeps
 
 apply plugin: BuildSrcDeps.ANDROID_APP_PLUGIN
 apply plugin: BuildSrcDeps.KOTLIN_PLUGIN_ID
@@ -145,32 +147,32 @@ aspectjx {
         implementation project(':lib-a')
 
 //        implementation project(':logger')
-        implementation CompositeBuildDeps.LOGGER
+        implementation IncludedBuildDeps.LOGGER
 
-        implementation CompositeBuildDeps.MULTIDEX
-        implementation CompositeBuildDeps.MATERIAL
-        implementation CompositeBuildDeps.APPCOMPAT
-        implementation CompositeBuildDeps.CARDVIEW
-        implementation CompositeBuildDeps.LEGACY_SUPPORT_V4
+        implementation IncludedBuildDeps.MULTIDEX
+        implementation IncludedBuildDeps.MATERIAL
+        implementation IncludedBuildDeps.APPCOMPAT
+        implementation IncludedBuildDeps.CARDVIEW
+        implementation IncludedBuildDeps.LEGACY_SUPPORT_V4
 
         //    implementation AarDeps.MCXIAOKE_VOLLEY
         //    implementation AarDeps.ANDROID_VOLLEY
-        implementation CompositeBuildDeps.GSON
-        implementation CompositeBuildDeps.OKHTTP3
-        implementation CompositeBuildDeps.RETROFIT2_RETROFIT
-        implementation CompositeBuildDeps.RETROFIT2_CONVERTER
-        implementation CompositeBuildDeps.RETROFIT2_ADAPTER
+        implementation IncludedBuildDeps.GSON
+        implementation IncludedBuildDeps.OKHTTP3
+        implementation IncludedBuildDeps.RETROFIT2_RETROFIT
+        implementation IncludedBuildDeps.RETROFIT2_CONVERTER
+        implementation IncludedBuildDeps.RETROFIT2_ADAPTER
 
-        implementation CompositeBuildDeps.FRESCO_FRESCO
-        implementation CompositeBuildDeps.FRESCO_IMAGEPIPELINE
-        implementation CompositeBuildDeps.GLIDE_AAR
-        annotationProcessor CompositeBuildDeps.GLIDE_ANNOTATION_PROCESSOR
+        implementation IncludedBuildDeps.FRESCO_FRESCO
+        implementation IncludedBuildDeps.FRESCO_IMAGEPIPELINE
+        implementation IncludedBuildDeps.GLIDE_AAR
+        annotationProcessor IncludedBuildDeps.GLIDE_ANNOTATION_PROCESSOR
 
-        implementation CompositeBuildDeps.RXJAVA
-        implementation CompositeBuildDeps.RXANDROID
-        implementation CompositeBuildDeps.RXLIFECYCLE
-        implementation CompositeBuildDeps.RXLIFECYCLE_COMPONENTS
-        implementation CompositeBuildDeps.RXPERMISSIONS
+        implementation IncludedBuildDeps.RXJAVA
+        implementation IncludedBuildDeps.RXANDROID
+        implementation IncludedBuildDeps.RXLIFECYCLE
+        implementation IncludedBuildDeps.RXLIFECYCLE_COMPONENTS
+        implementation IncludedBuildDeps.RXPERMISSIONS
 
         //    implementation AarDeps.RXLIFECYCLE2_ANDROID_LIFECYCLE
         //    implementation AarDeps.RXJAVA2
@@ -180,15 +182,15 @@ aspectjx {
 
         implementation BuildSrcDeps.GREENDAO_AAR
 
-        debugImplementation CompositeBuildDeps.LEAKCANARY_ANDROID
-        releaseImplementation CompositeBuildDeps.LEAKCANARY_ANDROID_NO_OP
+        debugImplementation IncludedBuildDeps.LEAKCANARY_ANDROID
+        releaseImplementation IncludedBuildDeps.LEAKCANARY_ANDROID_NO_OP
 
         implementation project(':apt-api')
         annotationProcessor project(':apt-processor')
 
 //        annotationProcessor AarDeps.AUTO_SERVICE_ANNOTATION_PROCESSOR
 
-        implementation CompositeBuildDeps.EPIC
+        implementation IncludedBuildDeps.EPIC
         implementation BuildSrcDeps.KOTLIN_AAR
         implementation BuildSrcDeps.ASPECTJ_AAR
 
@@ -213,3 +215,4 @@ aspectjx {
     }
 }
 
+println("<<<<<< :app build.gradle end")

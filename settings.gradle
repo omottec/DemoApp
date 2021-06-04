@@ -1,9 +1,10 @@
+println(">>>>>> DemoApp settings.gradle begin")
+
 apply from: 'gradles/build_task_info.gradle'
 apply from: 'gradles/build_env_info.gradle'
 apply from: 'gradles/biz_config.gradle'
 apply from: 'gradles/test.gradle'
 
-includeBuild 'dependency'
 include ':asm-plugin'
 include ':javassist-plugin'
 include ':logger'
@@ -11,3 +12,6 @@ include ':lib-a'
 include ':lib-b'
 include ':app', ':account', ':service', ':apt-api', ':apt-processor'
 include ':PullToRefresh'
+includeBuild 'dependency'
+
+println("<<<<<< DemoApp settings.gradle end")
