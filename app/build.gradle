@@ -1,7 +1,5 @@
 println(">>>>>> :app build.gradle begin")
 
-import com.omottec.demoapp.BuildSrcDeps
-
 apply plugin: BuildSrcDeps.ANDROID_APP_PLUGIN
 apply plugin: BuildSrcDeps.KOTLIN_PLUGIN_ID
 apply plugin: BuildSrcDeps.GREENDAO_PLUGIN
@@ -10,7 +8,7 @@ apply plugin: BuildSrcDeps.ASPECTJ_PLUGIN
 apply plugin: BuildSrcDeps.OMOTTEC_ASM_PLUGIN
 apply plugin: BuildSrcDeps.OMOTTEC_JAVASSIST_PLUGIN
 
-apply plugin: com.omottec.demoapp.BuildSrcPlugin
+apply plugin: BuildSrcPlugin
 
 println("in :app:build.gradle gradle plugin:" + gradle.plugin + ", gradle.plugin1:" + gradle.plugin1)
 

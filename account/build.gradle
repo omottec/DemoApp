@@ -1,5 +1,3 @@
-import com.omottec.demoapp.BuildSrcDeps
-
 apply plugin: BuildSrcDeps.ANDROID_LIB_PLUGIN
 apply from: rootProject.file('gradles/android_lib_common.gradle')
 

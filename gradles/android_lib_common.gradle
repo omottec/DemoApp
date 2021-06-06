@@ -1,5 +1,3 @@
-import com.omottec.demoapp.BuildSrcDeps
-
 android {
     compileSdkVersion BuildSrcDeps.COMPILE_SDK_VERSION
     buildToolsVersion BuildSrcDeps.BUILD_TOOLS_VERSION

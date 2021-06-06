@@ -1,5 +1,3 @@
-import com.omottec.demoapp.BuildSrcDeps
-
 apply plugin: BuildSrcDeps.JAVA_GRADLE_PLUGIN
 apply plugin: BuildSrcDeps.MAVEN_PUBLISH_PLUGIN
 
