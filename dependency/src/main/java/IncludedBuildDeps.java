@@ -1,5 +1,3 @@
-package com.omottec.demoapp.dependency;
-
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 

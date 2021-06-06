@@ -6,7 +6,7 @@ gradlePlugin {
     plugins {
         dependencyPlugin {
             id = 'com.omottec.demoapp.dependency'
-            implementationClass = 'com.omottec.demoapp.dependency.IncludedBuildDeps'
+            implementationClass = 'IncludedBuildDeps'
         }
     }
 }

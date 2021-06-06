@@ -1,7 +1,6 @@
 println(">>>>>> :app build.gradle begin")
 
 import com.omottec.demoapp.BuildSrcDeps
-import com.omottec.demoapp.dependency.IncludedBuildDeps
 
 apply plugin: BuildSrcDeps.ANDROID_APP_PLUGIN
 apply plugin: BuildSrcDeps.KOTLIN_PLUGIN_ID

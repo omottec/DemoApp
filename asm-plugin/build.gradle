@@ -1,5 +1,3 @@
-import com.omottec.demoapp.dependency.IncludedBuildDeps
-
 apply from: rootProject.file('gradles/gradle_plugin_common.gradle')
 apply from: rootProject.file('gradles/publish_plugin_to_mvncentral.gradle')
 
