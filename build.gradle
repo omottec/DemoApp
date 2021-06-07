@@ -24,7 +24,7 @@ plugins {
     id 'com.omottec.demoapp.dependency'
 }
 
-println("<<<<<< DemoApp build.gradle after buildscript and plugins")
+println(">>>>>> DemoApp build.gradle after buildscript and plugins")
 
 allprojects {
     repositories {
