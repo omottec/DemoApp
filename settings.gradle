@@ -1,5 +1,17 @@
 println(">>>>>> DemoApp settings.gradle begin")
 
+//buildscript {
+//    repositories {
+//        jcenter()
+//        mavenLocal()
+//        mavenCentral()
+//        google()
+//    }
+//    dependencies {
+//        classpath "com.android.tools.build:gradle:4.2.1"
+//    }
+//}
+
 apply from: 'gradles/build_task_info.gradle'
 apply from: 'gradles/build_env_info.gradle'
 apply from: 'gradles/biz_config.gradle'
@@ -13,5 +25,16 @@ include ':lib-b'
 include ':app', ':account', ':service', ':apt-api', ':apt-processor'
 include ':PullToRefresh'
 includeBuild 'dependency'
+
+def classLoader = getClass().getClassLoader()
+while (classLoader != null) {
+    println("classLoader:" + classLoader + ", class:" + classLoader.getClass())
+    if (classLoader instanceof URLClassLoader) {
+        URLClassLoader urlClassLoader = classLoader
+        for (URL url : urlClassLoader.getURLs())
+            println("url:" + url)
+    }
+    classLoader = classLoader.getParent()
+}
 
 println("<<<<<< DemoApp settings.gradle end")
