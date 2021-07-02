@@ -9,7 +9,7 @@ dependencies {
 ext {
     GROUP_ID = "com.github.omottec"
     ARTIFACT_ID = 'asm-plugin'
-    VERSION = '1.1.16'
+    VERSION = '1.1.18-SNAPSHOT'
     POM_DESCRIPTION = 'gradle plugin with asm'
     POM_URL = 'https://github.com/omottec/DemoApp/tree/dev/gradle-plugin'
     POM_SCM_CONNECTION = 'scm:git:github.com:omottec/DemoApp.git'

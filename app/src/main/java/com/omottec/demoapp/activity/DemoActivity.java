@@ -3,6 +3,7 @@ package com.omottec.demoapp.activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import androidx.fragment.app.Fragment;
+import com.omottec.demoapp.lang.LangFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
 
@@ -93,7 +94,6 @@ public class DemoActivity extends SingleFragmentActivity {
         //return new IDataFragment();
         //return new PowerOnOffFragment();
         //return new AspectJFragment();
-        return new AsmFragment();
 
         //return new JobFragment();
         //return new ThreadPoolFragment();
@@ -103,7 +103,7 @@ public class DemoActivity extends SingleFragmentActivity {
         //return new KtFragment();
 
         // Lang
-        //return new LangFragment();
+        return new LangFragment();
 
         // IO
         //return new FileFragment();

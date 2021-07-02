@@ -11,7 +11,7 @@ import com.omottec.demoapp.R
 
 class KtFragment : Fragment() {
     private lateinit var mTv: TextView
-    var name: String? = "qbb"
+    var name: String = "qbb"
     val TAG = "KtFragment";
 
     override fun onCreateView(inflater: LayoutInflater,

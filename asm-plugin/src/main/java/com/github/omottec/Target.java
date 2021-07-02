@@ -8,4 +8,6 @@ public final class Target {
     public static final String CLASS_NAME = "com/omottec/demoapp/activity/SingleFragmentActivity";
     //    public static final String CLASS_NAME_WITH_SUFFIX = "androidx.fragment.app.FragmentActivity.class";
 //    public static final String CLASS_NAME = "androidx.fragment.app.FragmentActivity";
+
+    public static final String ASM_COMPUTER_CLASS = "com/omottec/demoapp/asm/AsmComputer.class";
 }

@@ -6,6 +6,7 @@ public class AsmComputer {
     public static final String TAG = "AsmComputer";
 
     public void start() {
+        //long startTime = System.currentTimeMillis();
         Log.d(TAG, "start");
     }
 

@@ -157,7 +157,6 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
                 InputStream inputStream = jarFile.getInputStream(jarEntry);
                 System.out.println("entryName:" + entryName);
                 if (Target.CLASS_NAME_WITH_SUFFIX.equals(entryName)) {
-                    //插桩class
                     jarOutputStream.putNextEntry(zipEntry);
                     ClassReader classReader = new ClassReader(IOUtils.toByteArray(inputStream));
                     ClassWriter classWriter = new ClassWriter(classReader, ClassWriter.COMPUTE_MAXS);
@@ -166,6 +165,14 @@ public class AsmPlugin extends Transform implements Plugin<Project> {
                     classReader.accept(cv, ClassReader.EXPAND_FRAMES);
                     byte[] code = classWriter.toByteArray();
                     jarOutputStream.write(code);
+                } else if (Target.ASM_COMPUTER_CLASS.equals(entryName)) {
+                    jarOutputStream.putNextEntry(zipEntry);
+                    ClassReader cr = new ClassReader(IOUtils.toByteArray(inputStream));
+                    ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS);
+                    AsmComputerVisitor cv =
+                        new AsmComputerVisitor(Opcodes.ASM7, cw);
+                    cr.accept(cv, ClassReader.EXPAND_FRAMES);
+                    jarOutputStream.write(cw.toByteArray());
                 } else {
                     jarOutputStream.putNextEntry(zipEntry);
                     jarOutputStream.write(IOUtils.toByteArray(inputStream));
