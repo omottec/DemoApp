@@ -78,7 +78,7 @@ public class MyApplication extends MultiDexApplication {
         }
         super.attachBaseContext(base);
         Logger.appendCallInfo(true);
-        ResTracker.getInstance().hookLoadRes();
+        //ResTracker.getInstance().hookLoadRes();
         Log.d(Tag.APP_PROCESS, this + " attachBaseContext");
         ProcessUtils.testApi(this);
         Log.d(Tag.APP_PROCESS, "mIsMainProcess before call:" + mIsMainProcess);

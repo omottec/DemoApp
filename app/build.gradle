@@ -192,6 +192,8 @@ dependencies {
     implementation IncludedBuildDeps.EPIC
     implementation BuildSrcDeps.KOTLIN_AAR
     implementation BuildSrcDeps.ASPECTJ_AAR
+    implementation IncludedBuildDeps.ASM_AAR
+    implementation IncludedBuildDeps.ASM_COMMON_AAR
 
     configurations.all { Configuration configuration ->
         configuration.resolutionStrategy.dependencySubstitution {

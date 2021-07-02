@@ -1,22 +1,10 @@
 package com.omottec.demoapp.activity;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import androidx.fragment.app.Fragment;
-import com.omottec.demoapp.Tag;
-import com.omottec.demoapp.cpu.CpuFragment;
-import com.omottec.demoapp.fragment.FileFragment;
-import com.omottec.demoapp.fragment.ReplaceResFragment;
-import com.omottec.demoapp.hook.ProxyResources;
-import com.omottec.demoapp.hook.ResManager;
-import com.omottec.demoapp.kt.KtFragment;
-import com.omottec.demoapp.lang.LangFragment;
 import com.omottec.demoapp.utils.TimeLogger;
 import com.omottec.demoapp.utils.UiUtils;
-import com.omottec.logger.Logger;
 
 //import com.appsee.Appsee;
 
@@ -28,12 +16,12 @@ public class DemoActivity extends SingleFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         TimeLogger.methodStart();
-        LayoutInflater inflater = getLayoutInflater();
-        Logger.i(Tag.REPLACE_RES, "before super.onCreate " + Logger.getInflaterInfo(inflater));
+        //LayoutInflater inflater = getLayoutInflater();
+        //Logger.i(Tag.REPLACE_RES, "before super.onCreate " + Logger.getInflaterInfo(inflater));
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater1 = getLayoutInflater();
-        Logger.i(Tag.REPLACE_RES, "after super.onCreate " + Logger.getInflaterInfo(inflater1));
-        Logger.i(Tag.REPLACE_RES, "getResources:" + getResources());
+        //LayoutInflater inflater1 = getLayoutInflater();
+        //Logger.i(Tag.REPLACE_RES, "after super.onCreate " + Logger.getInflaterInfo(inflater1));
+        //Logger.i(Tag.REPLACE_RES, "getResources:" + getResources());
         //        Appsee.start("c0a22dc0a69a4b8e84de241c5bfc1442");
         TimeLogger.methodEnd();
     }
@@ -55,71 +43,71 @@ public class DemoActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-//        return new ScaleTypeFragment();
-//        return new StorageFragment();
-//        return new GetImeiFragment();
-//        return new CardViewFragment();
+        //return new ScaleTypeFragment();
+        //return new StorageFragment();
+        //return new GetImeiFragment();
+        //return new CardViewFragment();
 
-//        perf
-//        return new MemoryFragment();
-//        return new MemoryInfoFragment();
-//        return new AshmemClientFragment();
-//        return new ProfiloFragment();
-//        return new DumpHeapFragment();
-//        return new StackSizeFragment();
-//        return new AnrFragment();
-//        return new MultiProcessFragment();
-//        return new LooperFragment();
-//        return new BitmapFragment();
-//        return new CpuFragment();
-//        return new GpuFragment();
-//        return new YellowScreenFragment();
-//        return new ReplaceResFragment();
+        //perf
+        //return new MemoryFragment();
+        //return new MemoryInfoFragment();
+        //return new AshmemClientFragment();
+        //return new ProfiloFragment();
+        //return new DumpHeapFragment();
+        //return new StackSizeFragment();
+        //return new AnrFragment();
+        //return new MultiProcessFragment();
+        //return new LooperFragment();
+        //return new BitmapFragment();
+        //return new CpuFragment();
+        //return new GpuFragment();
+        //return new YellowScreenFragment();
+        //return new ReplaceResFragment();
 
 
-//        return new NotificationFragment();
-//        return new PtrPicRecyclerFragment();
-//        return new PositionFragment();
-//        return new FrescoFragment();
-//        return new WeightFragment();
-//        return new MultiPartStatusFragment();
-//        return new RouterFragment();
-//        return new ScreenSizeFragment();
-//        return new ReuseFragment();
-//        return new SpiFragment();
-//        return new LogFragment();
-//        return new RootFragment();
-//        return new PropFragment();
-//        return new RxJavaFragment();
-//        return new LogTagFragment();
+        //return new NotificationFragment();
+        //return new PtrPicRecyclerFragment();
+        //return new PositionFragment();
+        //return new FrescoFragment();
+        //return new WeightFragment();
+        //return new MultiPartStatusFragment();
+        //return new RouterFragment();
+        //return new ScreenSizeFragment();
+        //return new ReuseFragment();
+        //return new SpiFragment();
+        //return new LogFragment();
+        //return new RootFragment();
+        //return new PropFragment();
+        //return new RxJavaFragment();
+        //return new LogTagFragment();
 
         // Net
-//        return new UrlConnectionFragment();
-//        return new SocketFragment();
-//        return new OkhttpFragment();
-//        return new RetrofitFragment();
-//        return new NetFragment();
+        //return new UrlConnectionFragment();
+        //return new SocketFragment();
+        //return new OkhttpFragment();
+        //return new RetrofitFragment();
+        //return new NetFragment();
 
-//        return new GsonFragment();
+        //return new GsonFragment();
 
-//        return new IDataFragment();
-//        return new PowerOnOffFragment();
-//        return new AspectJFragment();
+        //return new IDataFragment();
+        //return new PowerOnOffFragment();
+        //return new AspectJFragment();
+        return new AsmFragment();
 
-
-//        return new JobFragment();
-//        return new ThreadPoolFragment();
+        //return new JobFragment();
+        //return new ThreadPoolFragment();
 
         //return new ApiFragment();
 
         //return new KtFragment();
 
+        // Lang
+        //return new LangFragment();
 
         // IO
         //return new FileFragment();
 
-        // Lang
-        return new LangFragment();
     }
 
     @Override

@@ -24,14 +24,14 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Logger.i(Tag.REPLACE_RES, "activity:" + this
-            + ", BaseContext:" + getBaseContext()
-            + ", ApplicationContext:" + getApplicationContext());
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        Logger.i(Tag.REPLACE_RES, "Activity layoutInflater:" + Logger.getInflaterInfo(layoutInflater));
-        if (layoutInflater.getFactory2() == null) {
-            LayoutInflaterCompat.setFactory2(layoutInflater, new ReplaceResFactory2(getDelegate()));
-        }
+        //Logger.i(Tag.REPLACE_RES, "activity:" + this
+        //    + ", BaseContext:" + getBaseContext()
+        //    + ", ApplicationContext:" + getApplicationContext());
+        //LayoutInflater layoutInflater = LayoutInflater.from(this);
+        //Logger.i(Tag.REPLACE_RES, "Activity layoutInflater:" + Logger.getInflaterInfo(layoutInflater));
+        //if (layoutInflater.getFactory2() == null) {
+        //    LayoutInflaterCompat.setFactory2(layoutInflater, new ReplaceResFactory2(getDelegate()));
+        //}
         super.onCreate(savedInstanceState);
         onCreate();
 //        onCreateV1();
@@ -39,8 +39,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     private void onCreate() {
         setContentView(R.layout.activity_fragment);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        Logger.i(Tag.REPLACE_RES, Logger.getInflaterInfo(layoutInflater));
+        //LayoutInflater layoutInflater = LayoutInflater.from(this);
+        //Logger.i(Tag.REPLACE_RES, Logger.getInflaterInfo(layoutInflater));
 
         //setContentView(LayoutInflater.from(this).inflate(R.layout.activity_fragment, null));
         FragmentManager manager = getSupportFragmentManager();
@@ -62,29 +62,29 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                 .commit();
     }
 
-    @Override
-    public Resources getResources() {
-        if (mProxyRes == null) {
-            mAppRes = super.getResources();
-            Logger.i(Tag.REPLACE_RES, "getResources appResources:" + mAppRes);
-            LoadedApkInfo loadedApkInfo = ResManager.getInstance().getLoadedApkInfo();
-            //try {
-            //    AssetManager assets = mAppRes.getAssets();
-            //    Method addAssetPath = assets.getClass().getDeclaredMethod("addAssetPath", String.class);
-            //    addAssetPath.setAccessible(true);
-            //    addAssetPath.invoke(assets, loadedApkInfo.apkPath);
-            //    mProxyRes = new ProxyResources(assets, mAppRes, loadedApkInfo);
-            //} catch (Exception e) {
-            //    Logger.e(Tag.REPLACE_RES, e);
-            //    mProxyRes = new ProxyResources(mAppRes, loadedApkInfo);
-            //}
-
-            mProxyRes = new ProxyResources(mAppRes, loadedApkInfo);
-            Logger.i(Tag.REPLACE_RES, "getResources mProxyRes:" + mProxyRes);
-        }
-        return mProxyRes;
-        //return ResManager.getInstance().getProxyRes();
-    }
+    //@Override
+    //public Resources getResources() {
+    //    if (mProxyRes == null) {
+    //        mAppRes = super.getResources();
+    //        Logger.i(Tag.REPLACE_RES, "getResources appResources:" + mAppRes);
+    //        LoadedApkInfo loadedApkInfo = ResManager.getInstance().getLoadedApkInfo();
+    //        //try {
+    //        //    AssetManager assets = mAppRes.getAssets();
+    //        //    Method addAssetPath = assets.getClass().getDeclaredMethod("addAssetPath", String.class);
+    //        //    addAssetPath.setAccessible(true);
+    //        //    addAssetPath.invoke(assets, loadedApkInfo.apkPath);
+    //        //    mProxyRes = new ProxyResources(assets, mAppRes, loadedApkInfo);
+    //        //} catch (Exception e) {
+    //        //    Logger.e(Tag.REPLACE_RES, e);
+    //        //    mProxyRes = new ProxyResources(mAppRes, loadedApkInfo);
+    //        //}
+    //
+    //        mProxyRes = new ProxyResources(mAppRes, loadedApkInfo);
+    //        Logger.i(Tag.REPLACE_RES, "getResources mProxyRes:" + mProxyRes);
+    //    }
+    //    return mProxyRes;
+    //    //return ResManager.getInstance().getProxyRes();
+    //}
 
     public Resources getAppRes() {
         return mAppRes;
