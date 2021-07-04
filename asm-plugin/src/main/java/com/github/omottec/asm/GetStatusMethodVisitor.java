@@ -5,35 +5,28 @@ import org.objectweb.asm.Opcodes;
 
 import static org.objectweb.asm.Opcodes.INVOKESTATIC;
 import static org.objectweb.asm.Opcodes.POP;
-import static org.objectweb.asm.Opcodes.RETURN;
 
-public class StartMethodVisitor extends MethodVisitor {
-    public StartMethodVisitor(int api) {
+public class GetStatusMethodVisitor extends MethodVisitor {
+    public GetStatusMethodVisitor(int api) {
         super(api);
     }
 
-    public StartMethodVisitor(int api, MethodVisitor methodVisitor) {
+    public GetStatusMethodVisitor(int api, MethodVisitor methodVisitor) {
         super(api, methodVisitor);
     }
 
     @Override
     public void visitCode() {
-        System.out.println("StartMethodVisitor#visitCode");
-        mv.visitLdcInsn("AsmComputer");
-        mv.visitLdcInsn("before start");
-        mv.visitMethodInsn(INVOKESTATIC, "android/util/Log", "d",
-            "(Ljava/lang/String;Ljava/lang/String;)I", false);
-        mv.visitInsn(POP);
-
+        System.out.println("GetStatusMethodVisitor.visitCode");
         super.visitCode();
     }
 
     @Override
     public void visitInsn(int opcode) {
-        System.out.println("StartMethodVisitor#visitInsn opcode:" + opcode);
-        if (opcode == RETURN) {
+        System.out.println("GetStatusMethodVisitor.visitInsn");
+        if (opcode == Opcodes.IRETURN) {
             mv.visitLdcInsn("AsmComputer");
-            mv.visitLdcInsn("after start");
+            mv.visitLdcInsn("before return from getStatus");
             mv.visitMethodInsn(INVOKESTATIC, "android/util/Log", "d",
                 "(Ljava/lang/String;Ljava/lang/String;)I", false);
             mv.visitInsn(POP);
@@ -43,7 +36,7 @@ public class StartMethodVisitor extends MethodVisitor {
 
     @Override
     public void visitEnd() {
-        System.out.println("StartMethodVisitor#visitEnd");
+        System.out.println("GetStatusMethodVisitor.visitEnd");
         super.visitEnd();
     }
 }

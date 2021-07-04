@@ -6,12 +6,14 @@ public class AsmComputer {
     public static final String TAG = "AsmComputer";
 
     public void start() {
-        //long startTime = System.currentTimeMillis();
+        //Log.d(TAG, "before start");
         Log.d(TAG, "start");
+        //Log.d(TAG, "after start");
     }
 
     public int getStatus() {
         Log.d(TAG, "getStatus");
+        //Log.d(TAG, "before return from getStatus");
         return 1;
     }
 

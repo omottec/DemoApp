@@ -49,10 +49,12 @@ public class AsmComputerVisitor extends ClassVisitor {
             .append(", exceptions:").append(Arrays.toString(exceptions))
             .toString());
         MethodVisitor mv =
-            super.visitMethod(access, name, descriptor, signature, exceptions);
-        //if (name.equals("start")) {
-        //    return new StartMethodVisitor(Opcodes.ASM7, mv);
-        //}
+            cv.visitMethod(access, name, descriptor, signature, exceptions);
+        if (name.equals("start")) {
+            return new StartMethodVisitor(Opcodes.ASM7, mv);
+        } else if (name.equals("getStatus")) {
+            return new GetStatusMethodVisitor(Opcodes.ASM7, mv);
+        }
         return mv;
     }
 
