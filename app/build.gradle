@@ -127,6 +127,7 @@ android {
     variantFilter { variant ->
         println("variant.name:" + variant.name)
         println("variant.flavors.name:" + variant.flavors.name)
+        println("variant.flavors*.name:" + variant.flavors*.name)
         println("variant.buildType.name:" + variant.buildType.name)
     }
 }
